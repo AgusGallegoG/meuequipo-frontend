@@ -1,0 +1,13 @@
+{
+  "core": {
+    "admin": {
+      "login": {
+        "title": "Iniciar sesión no panel de administrador",
+        "button": "Iniciar sesión",
+        "username": "Nome de usuario",
+        "password": "Contrasinal"
+      }
+    },
+    "layout": {}
+  }
+}

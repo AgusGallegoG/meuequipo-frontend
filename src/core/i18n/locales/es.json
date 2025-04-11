@@ -1,0 +1,11 @@
+{
+  "core": {
+    "admin": {
+      "login": {
+        "title": "Iniciar sesión en el panel de administrador",
+        "button": "Iniciar sesión"
+      }
+    },
+    "layout": {}
+  }
+}

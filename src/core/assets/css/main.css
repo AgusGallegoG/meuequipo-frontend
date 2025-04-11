@@ -1,0 +1,65 @@
+/* Estilos propios */
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+
+  height: 100%;
+  margin: 0;
+
+  /* bgImage */
+  background: linear-gradient(
+      var(--background-transparent-color),
+      var(--background-transparent-color)
+    ),
+    url('@/core/assets/images/bg/background-image_v3.jpeg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+#base-header {
+  padding: 2vh;
+  /* border-bottom: 1px solid #5d5454; */
+  height: var(--header-height);
+  background-color: var(--background-transparent-color);
+
+  #base-header-logo #base-header-logo-img {
+    object-fit: contain;
+  }
+
+  #base-header-name {
+    font-size: 3rem;
+    a {
+      color: var(--white);
+      text-decoration: none !important;
+    }
+  }
+}
+
+#base-prefooter {
+  flex: 1;
+  background-color: var(--background-transparent-color);
+}
+
+#base-footer {
+  flex: 1;
+  background-color: #171717;
+}
+
+.page-content {
+  width: 100%;
+  margin-top: 1rem;
+  /* max-height: calc(150vh - var(--header-height));
+  overflow: auto; Add this to prevent .page-content from expanding due to children 
+  display: flex;  Ensure children can be constrained */
+  display: flex;
+  flex-direction: column;
+  min-height: 60vh;
+  z-index: 0;
+}
+
+.mx--5 {
+  margin-right: -5rem;
+  margin-left: -5rem;
+}

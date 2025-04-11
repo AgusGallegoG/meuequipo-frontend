@@ -1,0 +1,12 @@
+/* RESET DE ESTILOS PARA PRIMEVUE */
+
+.p-component {
+  font-family: var(--font-family);
+  font-size: var(--font-size);
+}
+
+.p-menubar {
+  justify-content: center;
+  position: relative;
+  z-index: 1001; /*? Permitimos que se visualice sempre os desplegables do menú */
+}

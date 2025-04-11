@@ -1,0 +1,12 @@
+/* Variables globales */
+
+:root {
+  --font-family: 'Lexend', sans-serif;
+  --font-size: 14px;
+
+  --white: #ffffff;
+
+  --header-height: 15vh;
+
+  --background-transparent-color: rgba(0, 0, 0, 0.6);
+}
