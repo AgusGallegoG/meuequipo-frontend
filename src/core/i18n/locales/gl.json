@@ -1,13 +1,29 @@
 {
   "core": {
-    "admin": {
-      "login": {
-        "title": "Iniciar sesión no panel de administrador",
-        "button": "Iniciar sesión",
-        "username": "Nome de usuario",
-        "password": "Contrasinal"
-      }
+    "satates": {
+      "loading": "Cargando...",
+      "quering": "Consultando...",
+      "loginin": "Iniciando sesión...",
+      "adding": "Engadindo...",
+      "deleting": "Borrando..."
     },
-    "layout": {}
-  }
+    "messages": {
+      "success": {
+        "login": "Iniciou sesión correctamente."
+      },
+      "error": {
+        "login": "Non se puido inciar sesión."
+      }
+    }
+  },
+  "admin": {
+    "login": {
+      "title": "Iniciar sesión no panel de administrador",
+      "button": "Iniciar sesión",
+      "username": "Nome de usuario",
+      "password": "Contrasinal",
+      "toast_name": "Inicio de sesión"
+    }
+  },
+  "layout": {}
 }

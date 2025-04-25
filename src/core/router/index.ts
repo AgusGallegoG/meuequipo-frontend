@@ -1,4 +1,7 @@
+import { useAuthStore } from '@/auth/store/authStore';
+import Cookies from 'js-cookie';
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
+import { UtilBase } from '@/core/utilities/UtilBase';
 
 declare module 'vue-router' {
   interface RouteMeta {
@@ -65,10 +68,11 @@ const router = createRouter({
 });
 
 router.beforeEach((to, from, next) => {
-  // Comprobamos si necesitamos autorización en la vista a la que accedemos
-  // si no esta logueado, se redirige a la vista de login
-  // const isAuthenticated = !!localStorage.getItem('authToken'); // Example auth check
-  const isAuthenticated = false;
+  const authStore = useAuthStore();
+
+  const token = Cookies.get('token');
+  const storeToken = authStore.getToken;
+  const isAuthenticated = UtilBase.exist(token) && token === storeToken;
 
   if (to.meta.requiresAuth && !isAuthenticated) {
     next('/administracion/login'); // Redirect to login if not authenticated

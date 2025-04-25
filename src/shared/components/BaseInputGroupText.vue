@@ -1,11 +1,12 @@
 <script setup lang="ts">
 import { InputGroup, InputGroupAddon, FloatLabel, InputText, Password } from 'primevue';
 
+const model = defineModel<string>();
+
 interface Props {
   class?: string;
   icon?: string;
   id?: string;
-  modelValue: string;
   label?: string;
   password?: boolean;
 }
@@ -24,10 +25,10 @@ const props = withDefaults(defineProps<Props>(), {
         <Password
           v-if="props.password"
           :id="'over_label_' + props.id"
-          v-model="props.modelValue"
+          v-model="model"
           :feedback="false"
           toggleMask />
-        <InputText v-else :id="'over_label_' + props.id" v-model="props.modelValue" />
+        <InputText v-else :id="'over_label_' + props.id" v-model="model" />
         <label :for="'over_label_' + props.id" v-if="props.label">{{ props.label }}</label>
       </FloatLabel>
     </InputGroup>
