@@ -5,6 +5,7 @@
     "dev": "vite",
     "local": "vite --host --mode development",
     "build": "vue-tsc --noEmit && vite build --mode production",
+    "build:local": "vite build --mode local",
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build --force",

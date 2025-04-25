@@ -1,0 +1,6 @@
+{
+  "completeName": "Agustin Gallego Gomez",
+  "email": "agus.verin7@gmail.com",
+  "token": "jwttokendefault",
+  "authorities": ["ROLE_ADMIN"]
+}
