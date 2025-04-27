@@ -15,7 +15,7 @@ const props = defineProps<Props>();
     <div class="row align-items-center">
       <!-- Logo -->
       <div id="base-header-logo" class="col-md-2 col-sm-1">
-        <RouterLink to="/">
+        <RouterLink :to="props.isAdminLayout ? '/administracion/dashboard' : '/'">
           <img
             id="base-header-logo-img"
             src="@/core/assets/images/logos/logo_xuven_56-80.png"

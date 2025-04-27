@@ -19,12 +19,12 @@ const routes: RouteRecordRaw[] = [
     children: [
       {
         path: '',
-        name: 'inicio',
+        name: 'Inicio',
         component: () => import('@/core/views/base/HomeView.vue'),
       },
       {
         path: 'about',
-        name: 'about',
+        name: 'About',
         component: () => import('@/core/views/base/AboutView.vue'),
       },
       // aqui van las rutas de los hijos
@@ -32,14 +32,14 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/administracion',
-    name: 'admin',
+    name: 'Admin',
     meta: { requiresAuth: true }, // Protect this route
     redirect: '/administracion/dashboard',
     component: () => import('@/core/layout/BaseLayout.vue'),
     children: [
       {
         path: 'dashboard',
-        name: 'dashboard',
+        name: 'Dashboard',
         component: () => import('@/core/views/admin/DashboardView.vue'),
       },
       // aqui van las rutas de los hijos
@@ -47,7 +47,7 @@ const routes: RouteRecordRaw[] = [
   },
   {
     path: '/administracion/login',
-    name: 'admin-login',
+    name: 'AdminLogin',
     component: () => import('@/core/views/admin/BaseLoginAdministration.vue'), // Login page without BaseLayout
   },
   //Add here routers from other modules {path/name/component/meta}
@@ -75,15 +75,17 @@ router.beforeEach((to, from, next) => {
   const isAuthenticated = UtilBase.exist(token) && token === storeToken;
 
   if (to.meta.requiresAuth && !isAuthenticated) {
-    next('/administracion/login'); // Redirect to login if not authenticated
-  } else if (to.name === 'admin-login' && isAuthenticated) {
-    next('/administracion/dashboard'); // Prevent logged-in users from seeing login
+    next({ name: 'AdminLogin' }); // Redirect to login if not authenticated
+  } else if (to.name === 'AdminLogin' && isAuthenticated) {
+    next({ name: 'Dashboard' }); // Prevent logged-in users from seeing login
   } else {
     next();
   }
 });
 
 router.afterEach((to, from) => {
+  window.scrollTo(0, 0); //volvemos al top de la pagina
+
   const isDescendant = (to, from) => {
     return to.meta?.parent?.name === from.name;
   };
