@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { Card, Divider, Button } from 'primevue';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import { useAuthStore } from '@/auth/store/authStore';
@@ -18,14 +18,18 @@ const error = ref<boolean>(false);
 
 const form = ref<LoginRequest>(defaultLoginRequest);
 
+onMounted(() => {
+  form.value = { ...defaultLoginRequest };
+});
+
 async function doLogin() {
   debugger;
   const login = await refetch(form.value);
   authStore.setData(login);
 
-  // Si el login no es el default
+  // Si el usuario logueado no es el default
   if (!UtilBase.isDefault(login, userDefault)) {
-    router.push('/administracion');
+    router.push({ name: 'Dashboard' });
   } else {
     error.value = true; // Setear error -> mostrar mensaje de error de nombre / contraseña no válidos
   }

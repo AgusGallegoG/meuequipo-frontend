@@ -5,7 +5,7 @@ import { createPublicationListFromResponsePublicationList } from '../services/pu
 import api from '@/core/network';
 import type { AxiosResponse } from 'axios';
 import { UtilBase } from '@/core/utilities/UtilBase';
-import { buildPaginationParams } from '@/core/infrastructure/service/paginationParams';
+// import { buildPaginationParams } from '@/core/infrastructure/service/paginationParams';
 
 async function Api(isInicio: boolean): Promise<ResponsePublicationList> {
   const response = await api.get<boolean, AxiosResponse<ResponsePublicationList>>('/blog/all', {

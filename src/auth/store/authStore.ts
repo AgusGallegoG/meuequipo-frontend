@@ -18,7 +18,7 @@ export const useAuthStore = defineStore('auth', {
     getUsername: (state) => state.data.completeName,
     getEmail: (state) => state.data.email,
     getToken: (state) => state.data.token,
-    hasRole: (state) => (role: Roles) => state.data.authorities.includes(role) ?? false,
+    hasRole: (state) => (role: Roles) => state.data.authorities.includes(role),
   },
 
   actions: {
@@ -33,6 +33,7 @@ export const useAuthStore = defineStore('auth', {
       this.data.completeName = '';
       this.data.email = '';
       this.data.authorities = [];
+      this.data.token = '';
     },
   },
   persist: true,

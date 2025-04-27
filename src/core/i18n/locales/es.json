@@ -14,6 +14,9 @@
       "error": {
         "login": "No se pudo inciar sesión."
       }
+    },
+    "header_menu": {
+      "logout": "Cerrar sesión"
     }
   },
   "admin": {
