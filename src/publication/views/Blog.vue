@@ -9,7 +9,6 @@ const { loading, refetch: getBlogContents } = useGetBlogContents();
 const data = ref<Publication[]>([]);
 
 onMounted(async () => {
-  debugger;
   await getInitialData();
 });
 
@@ -20,11 +19,19 @@ async function getInitialData() {
 <!-- THIS COMPONENT IS SET TO BE A LIST OF NEWS -->
 
 <template>
-  <Skeleton v-if="loading" :shape="'rectangle'" :height="'50vh'" :width="'75vw'"></Skeleton>
-  <div class="publication-container" v-for="publication in data" :key="publication.id">
-    <PublicationView :publication="publication" />
+  <div>
+    <Skeleton
+      v-if="loading"
+      :shape="'rectangle'"
+      :height="'50vh'"
+      :width="'75vw'"
+      class="publication-container-skeleton"></Skeleton>
+    <div class="publication-container" v-for="publication in data" :key="publication.id">
+      <PublicationView :publication="publication" />
+    </div>
   </div>
 </template>
+
 <style lang="css">
 .publication-container {
   min-height: 100%;

@@ -9,27 +9,37 @@ import { computed } from 'vue';
 const route = useRoute();
 
 const isAdminLayout = computed(() => route.meta.requiresAuth);
+
+const transitionName = computed(() => route.meta.transition || 'fade');
 </script>
 <template>
-  <!-- MAIN HEADER -->
-  <BaseHeader :is-admin-layout="isAdminLayout" />
+  <div class="layout-wrapper">
+    <!-- MAIN HEADER -->
+    <BaseHeader :is-admin-layout="isAdminLayout" />
 
-  <!-- MAIN CONTENTS-->
-  <div class="main-container">
-    <!-- menu left-->
-    <main id="main-content" role="main">
-      <section id="router-page" class="page">
-        <!-- baseBreadcrumb-->
-        <BaseMenubar v-if="!isAdminLayout" />
+    <!-- MAIN CONTENTS-->
+    <div class="main-container">
+      <!-- menu left-->
+      <main id="main-content" role="main">
+        <section id="router-page" class="page">
+          <!-- baseBreadcrumb-->
+          <BaseMenubar v-if="!isAdminLayout" />
 
-        <div class="page-content">
-          <section id="page-map"><RouterView /></section>
-        </div>
-      </section>
-    </main>
+          <div class="page-content">
+            <section id="page-map">
+              <RouterView v-slot="{ Component }">
+                <Transition :name="transitionName" mode="out-in">
+                  <component :is="Component" />
+                </Transition>
+              </RouterView>
+            </section>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <BasePreFooter />
+    <!-- MAIN FOOTER -->
+    <BaseFooter />
   </div>
-
-  <BasePreFooter />
-  <!-- MAIN FOOTER -->
-  <BaseFooter />
 </template>

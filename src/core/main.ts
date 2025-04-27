@@ -1,5 +1,6 @@
 import '@/core/assets/css/variables.css';
 import '@/core/assets/css/scrollbar.css';
+import '@/core/assets/css/animations.css';
 import '@/core/assets/css/main.css';
 import '@/core/assets/css/reset.css';
 import 'primeicons/primeicons.css';
@@ -7,14 +8,12 @@ import 'primeicons/primeicons.css';
 import gl from '@/core/i18n/locales/gl.json';
 import es from '@/core/i18n/locales/es.json';
 
-import {
-  BadgeDirective,
-  Tooltip,
-  Ripple,
-  ToastService,
-  ConfirmationService,
-  AnimateOnScroll,
-} from 'primevue';
+import BadgeDirective from 'primevue/badgedirective';
+import Tooltip from 'primevue/tooltip';
+import Ripple from 'primevue/ripple';
+import ToastService from 'primevue/toastservice';
+import ConfirmationService from 'primevue/confirmationservice';
+import AnimateOnScroll from 'primevue/animateonscroll';
 import PrimeVue from 'primevue/config';
 import Aura from '@primeuix/themes/aura';
 
