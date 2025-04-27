@@ -18,6 +18,13 @@ body {
   background-attachment: fixed;
 }
 
+.layout-wrapper {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column; /* Para que header, contenido y footer se apilen verticalmente */
+}
+
 #base-header {
   padding: 2vh;
   /* border-bottom: 1px solid #5d5454; */

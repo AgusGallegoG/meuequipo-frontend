@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { Menubar } from 'primevue';
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 // const { t } = useI18n();
+const router = useRouter();
 
 const items = ref([
   {
@@ -72,6 +74,13 @@ const items = ref([
         ],
       },
     ],
+  },
+  {
+    label: 'Sobre nós',
+    icon: 'pi pi-palette',
+    command: () => {
+      router.push({ name: 'About' });
+    },
   },
   {
     label: 'Inscripcións',

@@ -66,7 +66,7 @@ function viewEntirePublication() {
     </template>
     <template #content>
       <div class="w-100 mx-5 my-0">
-        <P> {{ props.publication.body }} </P>
+        <p>{{ props.publication.body }}</p>
       </div>
     </template>
     <template #footer>
