@@ -1,6 +1,6 @@
 {
   "core": {
-    "satates": {
+    "states": {
       "loading": "Cargando...",
       "quering": "Consultando...",
       "loginin": "Iniciando sesión...",
@@ -9,7 +9,7 @@
     },
     "messages": {
       "success": {
-        "login": "Se inicó sesión correctamente."
+        "login": "Se inició sesión correctamente."
       },
       "error": {
         "login": "No se pudo inciar sesión."
@@ -17,6 +17,16 @@
     },
     "header_menu": {
       "logout": "Cerrar sesión"
+    }
+  },
+  "toast": {
+    "title": {
+      "error": "Error."
+    },
+    "messages": {
+      "errors": {
+        "fetch_error": "Error al cargar datos de: {0}"
+      }
     }
   },
   "admin": {

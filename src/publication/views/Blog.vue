@@ -44,5 +44,6 @@ async function getInitialData() {
 .publication-container-skeleton {
   min-height: 100%;
   padding-bottom: 2rem;
+  left: 25vh;
 }
 </style>
