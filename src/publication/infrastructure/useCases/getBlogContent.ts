@@ -17,6 +17,7 @@ async function Api(isInicio: boolean): Promise<ResponsePublicationList> {
 
 async function InMemory(): Promise<ResponsePublicationList> {
   await UtilBase.wait(500);
+  // throw new Error('Error por mis pelotas');
   return responsepublication;
 }
 
