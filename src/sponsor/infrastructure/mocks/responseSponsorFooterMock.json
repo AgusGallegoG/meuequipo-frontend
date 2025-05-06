@@ -1,0 +1,40 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "logo": "https://th.bing.com/th/id/OIP.SImAKAkFQrPhMm40VVJH1gAAAA?w=184&h=114&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+      "name": "Crego e monaguillo",
+      "url": ""
+    },
+    {
+      "id": 2,
+      "logo": "https://th.bing.com/th/id/OIP.mVy_rIIhQlk_SVP_-xbsLAHaDw?w=315&h=177&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+      "name": "D.O Monterrei",
+      "url": ""
+    },
+    {
+      "id": 3,
+      "logo": "https://th.bing.com/th/id/OIP.HNMABB-WpG_UH7vw9hfP4gAAAA?w=152&h=176&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+      "name": "Socitransa",
+      "url": ""
+    },
+    {
+      "id": 4,
+      "logo": "https://th.bing.com/th/id/OIP.VLJ8cwouNL7kemKMp1L7mAHaCZ?w=336&h=113&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+      "name": "Gadis",
+      "url": ""
+    },
+    {
+      "id": 5,
+      "logo": "https://th.bing.com/th/id/OIP.vIsk9tDZcq6hLNJ6zQZjkgAAAA?w=127&h=150&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+      "name": "Concello de Verín",
+      "url": ""
+    },
+    {
+      "id": 6,
+      "logo": "https://th.bing.com/th/id/OIP.xpMRyUJntOtDiXbNGL6dMAHaDV?w=336&h=157&c=7&r=0&o=5&dpr=1.3&pid=1.7",
+      "name": "FEGABA",
+      "url": ""
+    }
+  ]
+}
