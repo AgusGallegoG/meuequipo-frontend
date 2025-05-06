@@ -38,5 +38,9 @@
       "toast_name": "Inicio de sesión"
     }
   },
-  "layout": {}
+  "layout": {
+    "prefooter": {
+      "patro": "PATROCINADORES:"
+    }
+  }
 }
