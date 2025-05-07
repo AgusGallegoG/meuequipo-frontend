@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import PublicationView from '@/publication/components/PublicationCard.vue';
 import { onMounted, ref } from 'vue';
-import { useGetBlogContents } from '../application/useGetBlogContent';
-import type { Publication } from '../domain/Publication';
+import { useGetBlogContents } from '@/publication/application/useGetBlogContent';
+import type { Publication } from '@/publication/domain/Publication';
 import Skeleton from 'primevue/skeleton';
 
 const { loading, refetch: getBlogContents } = useGetBlogContents();
@@ -16,7 +16,6 @@ async function getInitialData() {
   data.value = await getBlogContents(true);
 }
 </script>
-<!-- THIS COMPONENT IS SET TO BE A LIST OF NEWS -->
 
 <template>
   <div>

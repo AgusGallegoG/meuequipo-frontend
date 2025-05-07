@@ -1,10 +1,10 @@
 import { UtilBase } from '@/core/utilities/UtilBase';
 import type { Sponsor } from '@/sponsor/domain/Sponsor';
-import type { ResponseSponsorFooterList } from '../models/responses/ResponseSponsorFooter';
+import type { ResponseSponsorFooterList } from '@/sponsor/infrastructure/models/responses/ResponseSponsorFooter';
 import responsesponsorfooter from '@/sponsor/infrastructure/mocks/responseSponsorFooterMock.json';
 import type { AxiosResponse } from 'axios';
 import api from '@/core/network';
-import { createSponsorFooterListFromResponseSponsorFooterList } from '../services/sponsorsService';
+import { createSponsorFooterListFromResponseSponsorFooterList } from '@/sponsor/infrastructure/services/sponsorsService';
 
 async function Api(): Promise<ResponseSponsorFooterList> {
   const response = await api.get<null, AxiosResponse<ResponseSponsorFooterList>>('/sponsors/all');

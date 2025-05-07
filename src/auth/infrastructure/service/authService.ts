@@ -1,4 +1,4 @@
-import { type LoginResponse } from '@/auth/domain/LoginResponse';
+import { type LoginResponse } from '@/auth/infrastructure/models/responses/LoginResponse';
 import type { User } from '@/auth/domain/User';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import Cookies from 'js-cookie';

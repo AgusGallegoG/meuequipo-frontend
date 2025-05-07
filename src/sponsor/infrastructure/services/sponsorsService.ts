@@ -2,7 +2,7 @@ import type { Sponsor } from '@/sponsor/domain/Sponsor';
 import type {
   ResponseSponsorFooterList,
   ResponseSponsorFooter,
-} from '../models/responses/ResponseSponsorFooter';
+} from '@/sponsor/infrastructure/models/responses/ResponseSponsorFooter';
 
 function mapResponseSponsorFooterListToSponsor(responseSpo: ResponseSponsorFooter): Sponsor {
   return {

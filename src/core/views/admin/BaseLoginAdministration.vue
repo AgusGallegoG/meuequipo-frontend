@@ -4,7 +4,10 @@ import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import { useAuthStore } from '@/auth/store/authStore';
-import { defaultLoginRequest, type LoginRequest } from '@/auth/domain/LoginRequest';
+import {
+  defaultLoginRequest,
+  type LoginRequest,
+} from '@/auth/infrastructure/models/requests/LoginRequest';
 import { useLogin } from '@/auth/application/useLogin';
 import { userDefault } from '@/auth/domain/User';
 import { useRouter } from 'vue-router';
@@ -12,7 +15,7 @@ import { UtilBase } from '@/core/utilities/UtilBase';
 
 const { t } = useI18n();
 const authStore = useAuthStore();
-const { loading, refetch } = useLogin();
+const { loading, refetch: executeLogin } = useLogin();
 const router = useRouter();
 const error = ref<boolean>(false);
 
@@ -23,8 +26,7 @@ onMounted(() => {
 });
 
 async function doLogin() {
-  debugger;
-  const login = await refetch(form.value);
+  const login = await executeLogin(form.value);
   authStore.setData(login);
 
   // Si el usuario logueado no es el default

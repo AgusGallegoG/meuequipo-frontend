@@ -1,9 +1,10 @@
 import { useMeToast } from '@/core/hooks/useMeToast';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { LoginRequest } from '@/auth/domain/LoginRequest';
+import type { LoginRequest } from '@/auth/infrastructure/models/requests/LoginRequest';
 import { login } from '@/auth/infrastructure/useCases/login';
-import { userDefault } from '../domain/LoginResponse';
+import { userDefault } from '@/auth/infrastructure/models/responses/LoginResponse';
+import { withLoading } from '@/shared/utils/withLoading';
 
 export function useLogin() {
   const loading = ref(false);
@@ -13,7 +14,7 @@ export function useLogin() {
   async function refetch(request: LoginRequest) {
     try {
       loading.value = true;
-      const data = await login(request);
+      const data = await withLoading(async () => login(request)); // await login(request);
       showToast({
         title: t('admin.login.toast_name'),
         message: t('core.messages.success.login'),

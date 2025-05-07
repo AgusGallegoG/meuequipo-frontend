@@ -1,7 +1,7 @@
 import type { Publication } from '@/publication/domain/Publication';
 import responsepublication from '@/publication/infrastructure/mocks/responsePublicationMock.json';
-import type { ResponsePublicationList } from '../models/responses/ResponsePublicationList';
-import { createPublicationListFromResponsePublicationList } from '../services/publicationService';
+import type { ResponsePublicationList } from '@/publication/infrastructure/models/responses/ResponsePublicationList';
+import { createPublicationListFromResponsePublicationList } from '@/publication/infrastructure/services/publicationService';
 import api from '@/core/network';
 import type { AxiosResponse } from 'axios';
 import { UtilBase } from '@/core/utilities/UtilBase';
@@ -17,7 +17,7 @@ async function Api(isInicio: boolean): Promise<ResponsePublicationList> {
 
 async function InMemory(): Promise<ResponsePublicationList> {
   await UtilBase.wait(500);
-  // throw new Error('Error por mis pelotas');
+  // throw new Error('Error de prueba');
   return responsepublication;
 }
 

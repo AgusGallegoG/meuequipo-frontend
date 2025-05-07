@@ -1,5 +1,7 @@
 <script setup lang="ts">
-import { Card, Button, Carousel } from 'primevue';
+import Card from 'primevue/card';
+import Button from 'primevue/button';
+import Carousel from 'primevue/carousel';
 import type { Publication } from '@/publication/domain/Publication';
 import { ref } from 'vue';
 

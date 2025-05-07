@@ -1,5 +1,5 @@
-import type { LoginRequest } from '@/auth/domain/LoginRequest';
-import type { LoginResponse } from '@/auth/domain/LoginResponse';
+import type { LoginRequest } from '@/auth/infrastructure/models/requests/LoginRequest';
+import type { LoginResponse } from '@/auth/infrastructure/models/responses/LoginResponse';
 import responseLogin from '@/auth/infrastructure/mocks/responseLogin.json';
 import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';

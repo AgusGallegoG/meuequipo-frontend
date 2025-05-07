@@ -1,5 +1,9 @@
 <script setup lang="ts">
-import { InputGroup, InputGroupAddon, FloatLabel, InputText, Password } from 'primevue';
+import InputGroup from 'primevue/inputgroup';
+import InputGroupAddon from 'primevue/inputgroupaddon';
+import FloatLabel from 'primevue/floatlabel';
+import InputText from 'primevue/inputtext';
+import Password from 'primevue/password';
 
 const model = defineModel<string>();
 
