@@ -1,14 +1,14 @@
 <script lang="ts" setup>
-import { useToastStore } from '@/core/store/toast';
 import { useMeToast } from '@/core/hooks/useMeToast';
-import { RouterView } from 'vue-router';
-import { useI18n } from 'vue-i18n';
-import Toast from 'primevue/toast';
-import { watch, onMounted, onUnmounted } from 'vue';
-import { usePrimeVue } from 'primevue';
 import { es } from '@/core/i18n/primeVue/es.json';
 import { gl } from '@/core/i18n/primeVue/gl.json';
+import { useToastStore } from '@/core/store/toast';
 import BasePageLoader from '@/shared/components/BasePageLoader.vue';
+import { usePrimeVue } from 'primevue';
+import Toast from 'primevue/toast';
+import { onMounted, onUnmounted, watch } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { RouterView } from 'vue-router';
 
 const { t, locale } = useI18n();
 const primevue = usePrimeVue();

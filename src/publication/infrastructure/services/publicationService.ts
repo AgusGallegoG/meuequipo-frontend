@@ -1,10 +1,10 @@
 import type { Publication } from '@/publication/domain/Publication';
+import type { Image } from '@/shared/dominio/Image';
+import type { ResponseImage } from '@/shared/infrastructure/models/ResponseImage';
 import type {
   ResponsePublication,
   ResponsePublicationList,
 } from '../models/responses/ResponsePublicationList';
-import type { ResponseImage } from '@/shared/infrastructure/models/ResponseImage';
-import type { Image } from '@/shared/dominio/Image';
 
 // Función para mapear un único ResponseImage a Image
 function mapResponseImageToImage(responseImage: ResponseImage): Image {

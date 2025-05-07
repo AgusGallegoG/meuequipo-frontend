@@ -1,5 +1,5 @@
-import { defineStore } from 'pinia';
 import { type Core, defaultCore } from '@/core/dominio/Core';
+import { defineStore } from 'pinia';
 
 export const useCoreStore = defineStore('core', {
   state: () => {

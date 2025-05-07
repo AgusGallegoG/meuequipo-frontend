@@ -1,15 +1,15 @@
+import type { User } from '@/auth/domain/User';
+import responseLogin from '@/auth/infrastructure/mocks/responseLogin.json';
 import type { LoginRequest } from '@/auth/infrastructure/models/requests/LoginRequest';
 import type { LoginResponse } from '@/auth/infrastructure/models/responses/LoginResponse';
-import responseLogin from '@/auth/infrastructure/mocks/responseLogin.json';
-import api from '@/core/network';
-import { UtilBase } from '@/core/utilities/UtilBase';
-import type { AxiosResponse } from 'axios';
 import {
   createUserFromResponse,
   removeAuthTokenCookie,
   setAuthTokenCookie,
 } from '@/auth/infrastructure/service/authService';
-import type { User } from '@/auth/domain/User';
+import api from '@/core/network';
+import { UtilBase } from '@/core/utilities/UtilBase';
+import type { AxiosResponse } from 'axios';
 
 async function Api(data: LoginRequest): Promise<LoginResponse> {
   const response = await api.post<LoginRequest, AxiosResponse<LoginResponse>>('/auth/login', data);

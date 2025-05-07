@@ -1,6 +1,6 @@
-import { useRouter } from 'vue-router';
-import { useAuthStore } from '@/auth/store/authStore';
 import { removeAuthTokenCookie } from '@/auth/infrastructure/service/authService';
+import { useAuthStore } from '@/auth/store/authStore';
+import { useRouter } from 'vue-router';
 
 export function useLogout() {
   const authStore = useAuthStore();

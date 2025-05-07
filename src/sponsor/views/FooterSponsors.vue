@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { useI18n } from 'vue-i18n';
+import { useGetAllSponsors } from '@/sponsor/application/useGetAllSponsors';
 import SponsorItem from '@/sponsor/components/SponsorItem.vue';
 import type { Sponsor } from '@/sponsor/domain/Sponsor';
 import { onMounted, ref } from 'vue';
-import { useGetAllSponsors } from '@/sponsor/application/useGetAllSponsors';
+import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 

@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import BaseHeader from '@/core/layout/components/BaseHeader.vue';
 import BaseFooter from '@/core/layout/components/BaseFooter.vue';
+import BaseHeader from '@/core/layout/components/BaseHeader.vue';
 import BaseMenubar from '@/core/layout/components/BaseMenuBar.vue';
 import BasePreFooter from '@/core/layout/components/BasePreFooter.vue';
-import { useRoute } from 'vue-router';
 import { computed } from 'vue';
+import { useRoute } from 'vue-router';
 
 const route = useRoute();
 

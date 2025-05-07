@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import PublicationView from '@/publication/components/PublicationCard.vue';
-import { onMounted, ref } from 'vue';
 import { useGetBlogContents } from '@/publication/application/useGetBlogContent';
+import PublicationView from '@/publication/components/PublicationCard.vue';
 import type { Publication } from '@/publication/domain/Publication';
 import Skeleton from 'primevue/skeleton';
+import { onMounted, ref } from 'vue';
 
 const { loading, refetch: getBlogContents } = useGetBlogContents();
 const data = ref<Publication[]>([]);

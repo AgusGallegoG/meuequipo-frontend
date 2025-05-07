@@ -1,10 +1,10 @@
+import type { LoginRequest } from '@/auth/infrastructure/models/requests/LoginRequest';
+import { userDefault } from '@/auth/infrastructure/models/responses/LoginResponse';
+import { login } from '@/auth/infrastructure/useCases/login';
 import { useMeToast } from '@/core/hooks/useMeToast';
+import { withLoading } from '@/shared/utils/withLoading';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import type { LoginRequest } from '@/auth/infrastructure/models/requests/LoginRequest';
-import { login } from '@/auth/infrastructure/useCases/login';
-import { userDefault } from '@/auth/infrastructure/models/responses/LoginResponse';
-import { withLoading } from '@/shared/utils/withLoading';
 
 export function useLogin() {
   const loading = ref(false);

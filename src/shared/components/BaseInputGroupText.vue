@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import FloatLabel from 'primevue/floatlabel';
 import InputGroup from 'primevue/inputgroup';
 import InputGroupAddon from 'primevue/inputgroupaddon';
-import FloatLabel from 'primevue/floatlabel';
 import InputText from 'primevue/inputtext';
 import Password from 'primevue/password';
 

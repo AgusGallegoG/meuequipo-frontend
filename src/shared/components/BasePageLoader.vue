@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ProgressSpinner from 'primevue/progressspinner';
 import { usePageLoaderStore } from '@/shared/store/pageLoaderStore';
+import ProgressSpinner from 'primevue/progressspinner';
 import { computed } from 'vue';
 
 const pageLoadeStore = usePageLoaderStore();

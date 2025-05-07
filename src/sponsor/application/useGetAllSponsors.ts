@@ -1,8 +1,8 @@
 import { Roles } from '@/auth/domain/Roles';
 import { useAuthStore } from '@/auth/store/authStore';
 import { useMeToast } from '@/core/hooks/useMeToast';
+import { getAllSponsors } from '@/sponsor/infrastructure/useCases/getAllSponsors';
 import { useI18n } from 'vue-i18n';
-import { getAllSponsors } from '../infrastructure/useCases/getAllSponsors';
 
 export function useGetAllSponsors() {
   const { t } = useI18n();

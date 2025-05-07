@@ -1,17 +1,17 @@
 <script setup lang="ts">
-import { Card, Divider, Button } from 'primevue';
-import { onMounted, ref } from 'vue';
-import { useI18n } from 'vue-i18n';
-import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
-import { useAuthStore } from '@/auth/store/authStore';
+import { useLogin } from '@/auth/application/useLogin';
+import { userDefault } from '@/auth/domain/User';
 import {
   defaultLoginRequest,
   type LoginRequest,
 } from '@/auth/infrastructure/models/requests/LoginRequest';
-import { useLogin } from '@/auth/application/useLogin';
-import { userDefault } from '@/auth/domain/User';
-import { useRouter } from 'vue-router';
+import { useAuthStore } from '@/auth/store/authStore';
 import { UtilBase } from '@/core/utilities/UtilBase';
+import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
+import { Button, Card, Divider } from 'primevue';
+import { onMounted, ref } from 'vue';
+import { useI18n } from 'vue-i18n';
+import { useRouter } from 'vue-router';
 
 const { t } = useI18n();
 const authStore = useAuthStore();

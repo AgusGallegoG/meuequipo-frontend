@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import Card from 'primevue/card';
-import Button from 'primevue/button';
-import Carousel from 'primevue/carousel';
 import type { Publication } from '@/publication/domain/Publication';
+import Button from 'primevue/button';
+import Card from 'primevue/card';
+import Carousel from 'primevue/carousel';
 import { ref } from 'vue';
 
 interface Props {

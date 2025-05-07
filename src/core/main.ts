@@ -1,30 +1,30 @@
-import '@/core/assets/css/variables.css';
-import '@/core/assets/css/scrollbar.css';
 import '@/core/assets/css/animations.css';
 import '@/core/assets/css/main.css';
 import '@/core/assets/css/reset.css';
+import '@/core/assets/css/scrollbar.css';
+import '@/core/assets/css/variables.css';
 import 'primeicons/primeicons.css';
 
-import gl from '@/core/i18n/locales/gl.json';
 import es from '@/core/i18n/locales/es.json';
+import gl from '@/core/i18n/locales/gl.json';
 
+import Aura from '@primeuix/themes/aura';
+import AnimateOnScroll from 'primevue/animateonscroll';
 import BadgeDirective from 'primevue/badgedirective';
-import Tooltip from 'primevue/tooltip';
+import PrimeVue from 'primevue/config';
+import ConfirmationService from 'primevue/confirmationservice';
 import Ripple from 'primevue/ripple';
 import ToastService from 'primevue/toastservice';
-import ConfirmationService from 'primevue/confirmationservice';
-import AnimateOnScroll from 'primevue/animateonscroll';
-import PrimeVue from 'primevue/config';
-import Aura from '@primeuix/themes/aura';
+import Tooltip from 'primevue/tooltip';
 
-import { createApp } from 'vue';
-import { createI18n } from 'vue-i18n';
 import { createPinia } from 'pinia';
 import piniaPluginPersistedState from 'pinia-plugin-persistedstate';
+import { createApp } from 'vue';
+import { createI18n } from 'vue-i18n';
 
+import App from '@/core/App.vue';
 import Layout from '@/core/layout/BaseLayout.vue';
 import router from '@/core/router';
-import App from '@/core/App.vue';
 import { definePreset } from '@primeuix/themes';
 
 const app = createApp(App);

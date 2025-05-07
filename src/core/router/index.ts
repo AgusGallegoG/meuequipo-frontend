@@ -1,7 +1,7 @@
 import { useAuthStore } from '@/auth/store/authStore';
+import { UtilBase } from '@/core/utilities/UtilBase';
 import Cookies from 'js-cookie';
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
-import { UtilBase } from '@/core/utilities/UtilBase';
 
 declare module 'vue-router' {
   interface RouteMeta {
