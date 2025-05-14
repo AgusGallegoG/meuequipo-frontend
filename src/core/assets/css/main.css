@@ -54,6 +54,10 @@ body {
 #base-footer {
   flex: 1;
   background-color: #171717;
+
+  a:hover {
+    opacity: 0.7;
+  }
 }
 
 .page-content {

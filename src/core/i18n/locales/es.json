@@ -41,6 +41,11 @@
   "layout": {
     "prefooter": {
       "patro": "PATROCINADORES:"
+    },
+    "footer": {
+      "socials": "Redes sociales:",
+      "contact": "Información de contacto:",
+      "location": "Ubicación:"
     }
   }
 }

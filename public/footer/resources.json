@@ -1,0 +1,43 @@
+{
+  "direction": [
+    {
+      "text": "Pabellón Municipal\nRúa Irmáns Moreno, 13\n32600, Verín, Ourense, España",
+      "ref": "https://maps.app.goo.gl/GBsL3AtEEr9zTakW9"
+    }
+  ],
+  "socials": [
+    {
+      "text": "IG",
+      "ref": "https://www.instagram.com/cbxverin/"
+    },
+    {
+      "text": "FB",
+      "ref": "https://www.facebook.com/cb.xuventudeverin/"
+    },
+    {
+      "text": "TIK",
+      "ref": "https://www.tiktok.com/@cbxuventudeverin"
+    }
+  ],
+  "contact": [
+    {
+      "text": "636 57 35 45",
+      "ref": "+34636573545",
+      "type": "tel:"
+    },
+    {
+      "text": "609 38 86 68",
+      "ref": "+34609388668",
+      "type": "tel:"
+    },
+    {
+      "text": "cbxuventudeverin@hotmail.com",
+      "ref": "cbxuventudeverin@hotmail.com",
+      "type": "mailto:"
+    }
+  ],
+  "reserved": {
+    "text": "© 2025 Club Baloncesto Xuventude Verín. All rights reserved.",
+    "ref": "4"
+  }
+}
