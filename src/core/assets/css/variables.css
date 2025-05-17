@@ -6,7 +6,8 @@
 
   --white: #ffffff;
 
-  --header-height: 15vh;
+  --max-header-height: 15dvh;
+  --min-header-height: 10dvh;
 
   --background-transparent-color: rgba(0, 0, 0, 0.6);
 }

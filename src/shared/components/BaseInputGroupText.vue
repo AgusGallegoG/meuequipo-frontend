@@ -20,7 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
 });
 </script>
 <template>
-  <div :class="props.class" class="py-3 py-md-3 py-lg-3">
+  <div :class="[props.class, 'py-3', 'py-md-3', 'py-lg-3']">
     <InputGroup>
       <InputGroupAddon>
         <i :class="props.icon"></i>
@@ -29,10 +29,11 @@ const props = withDefaults(defineProps<Props>(), {
         <Password
           v-if="props.password"
           :id="'over_label_' + props.id"
+          class="w-100"
           v-model="model"
           :feedback="false"
           toggleMask />
-        <InputText v-else :id="'over_label_' + props.id" v-model="model" />
+        <InputText v-else :id="'over_label_' + props.id" v-model="model" class="w-100" />
         <label :for="'over_label_' + props.id" v-if="props.label">{{ props.label }}</label>
       </FloatLabel>
     </InputGroup>

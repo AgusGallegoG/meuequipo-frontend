@@ -28,9 +28,9 @@ body {
 }
 
 #base-header {
-  padding: 2vh;
+  padding: clamp(1.5vh, 2vw, 2vh);
   /* border-bottom: 1px solid #5d5454; */
-  height: var(--header-height);
+  height: clamp(var(--min-header-height, 2vw, --max-header-height));
   background-color: var(--background-transparent-color);
 
   #base-header-logo #base-header-logo-img {
@@ -38,7 +38,7 @@ body {
   }
 
   #base-header-name {
-    font-size: 3rem;
+    font-size: clamp(1.75rem, 2.5vw, 3rem);
     a {
       color: var(--white);
       text-decoration: none !important;
