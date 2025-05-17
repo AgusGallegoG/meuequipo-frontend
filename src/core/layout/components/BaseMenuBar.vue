@@ -90,7 +90,7 @@ const items = ref([
 </script>
 
 <template>
-  <div class="pb-0 pt-0">
+  <div class="py-0">
     <Menubar :model="items"></Menubar>
   </div>
 </template>

@@ -13,8 +13,8 @@ const message = computed(() => pageLoadeStore.getMessage);
     <div class="loader-content">
       <ProgressSpinner
         style="width: 70px; height: 70px"
-        strokeWidth="8"
-        animationDuration=".5s"
+        strokeWidth="3"
+        animationDuration="2s"
         aria-label="Custom ProgressSpinner" />
       <p class="loader-message">{{ message }}</p>
     </div>
@@ -27,7 +27,6 @@ const message = computed(() => pageLoadeStore.getMessage);
   inset: 0;
   z-index: 9999;
   background: rgba(55, 44, 44, 0.738);
-  backdrop-filter: blur(4px);
   display: flex;
   align-items: center;
   justify-content: center;
