@@ -2,9 +2,9 @@
 import { useLogout } from '@/auth/application/useLogout';
 import { useAuthStore } from '@/auth/store/authStore';
 import { Avatar } from 'primevue';
+import Menu from 'primevue/menu';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
-import Menu from 'primevue/menu';
 
 const authStore = useAuthStore();
 const { t } = useI18n();
@@ -37,11 +37,12 @@ function toggleMenu(event: MouseEvent) {
 <template>
   <div
     id="base-user-logged"
-    class="d-flex flex-row-reverse align-items-center justify-content-lg-around">
-    <div id="base-user-logged-name" class="d-flex">
+    class="d-flex align-content-center justify-content-end gap-2 flex-nowrap">
+    <div id="base-user-logged-name" class="d-none d-xl-flex align-items-center me-2 text-nowrap">
       <span> {{ authStore.getUsername }} </span>
     </div>
-    <Avatar icon="pi pi-user" class="" size="large" shape="circle" @click="toggleMenu" />
+    <Avatar icon="pi pi-user" size="large" shape="circle" @click="toggleMenu" />
     <Menu ref="menu" :model="menuItems" popup></Menu>
   </div>
 </template>
+<style lang="css" scoped></style>
