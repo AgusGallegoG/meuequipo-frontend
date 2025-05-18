@@ -3,7 +3,7 @@ body {
   font-family: var(--font-family);
   font-size: var(--font-size);
 
-  line-height: 1.5;
+  line-height: var(--line-height);
 
   height: 100%;
   margin: 0;
@@ -63,6 +63,7 @@ body {
 .page-content {
   width: 100%;
   margin-top: 1rem;
+  margin-bottom: 1rem;
   /* max-height: calc(150vh - var(--header-height));
   overflow: auto; Add this to prevent .page-content from expanding due to children 
   display: flex;  Ensure children can be constrained */

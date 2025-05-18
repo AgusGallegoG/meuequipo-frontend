@@ -35,7 +35,28 @@
       "button": "Iniciar sesión",
       "username": "Nombre de usuario",
       "password": "Contraseña",
-      "toast_name": "Inicio de sesión"
+      "toast_name": "Inicio de sesión",
+      "go_main": "← Volver a la página principal"
+    },
+    "dashboard": {
+      "modules_titles": {
+        "season": "Gestión de temporadas",
+        "team": "Gestión de equipos",
+        "news": "Gestión del blog",
+        "calendar": "Gestión del calendario",
+        "signings": "Gestión de las inscripciones",
+        "sponsors": "Gestión de patrocinadores",
+        "users": "Gestión de usuarios"
+      },
+      "modules_desc": {
+        "season": "Permite adminstrar la temporada activa, así como crear nuevas",
+        "team": "Permite realizar gestiones sobre los equipos y categoriías del club",
+        "news": "Permite crear, eliminar y administrar el blog",
+        "calendar": "Permite añadir nuevos partidos, eventos y gestionar los existentes",
+        "signings": "Permite la gestión del formulario de inscripciones, y administrarlas",
+        "sponsors": "Permite gestionar los patrocinadores del club",
+        "users": "Permite gestionar los usuarios del aplicativo"
+      }
     }
   },
   "layout": {

@@ -65,6 +65,12 @@ async function doLogin() {
             <Button raised :label="t('admin.login.button')" @click="doLogin()" :loading="loading" />
           </div>
         </div>
+
+        <div class="text-center mt-2">
+          <RouterLink to="/" class="text-light text-decoration-none">
+            <small> {{ t('admin.login.go_main') }}</small>
+          </RouterLink>
+        </div>
       </template>
     </Card>
   </div>
