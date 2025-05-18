@@ -22,7 +22,7 @@ function goTo(url: string) {
 </script>
 
 <template>
-  <div class="col-12 col-sm-6 col-md-4 col-xl-3">
+  <div class="col-12 col-sm-6 col-md-4">
     <Card class="overflow-hidden">
       <template #header v-if="icon">
         <div class="d-flex justify-content-center align-items-center py-3">

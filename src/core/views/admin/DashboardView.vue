@@ -1,16 +1,11 @@
 <script setup lang="ts">
 import BaseDashboardCard from '@/core/layout/components/AdminDashboard/BaseDashboardCard.vue';
+import SeasonAdminSelector from '@/season/components/SeasonAdminSelector.vue';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 
 const modules = [
-  {
-    title: 'admin.dashboard.modules_titles.season',
-    description: 'admin.dashboard.modules_desc.season',
-    goToModule: 'SeasonAdmin',
-    icon: 'pi pi-database',
-  },
   {
     title: 'admin.dashboard.modules_titles.team',
     description: 'admin.dashboard.modules_desc.team',
@@ -50,13 +45,19 @@ const modules = [
 ];
 </script>
 <template>
-  <div id="admin-dashboard" class="row gx-4 gy-4 justify-content-center w-75 mx-auto my-auto">
-    <BaseDashboardCard
-      v-for="(module, index) in modules"
-      :key="index"
-      :title="t(module.title)"
-      :description="t(module.description)"
-      :go-to-url="module.goToModule"
-      :icon="module.icon"></BaseDashboardCard>
+  <div>
+    <div id="admin-season" class="w-75 mx-auto my-4 row justify-content-center">
+      <SeasonAdminSelector />
+    </div>
+
+    <div id="admin-dashboard" class="row gx-4 gy-4 justify-content-center w-75 mx-auto my-auto">
+      <BaseDashboardCard
+        v-for="(module, index) in modules"
+        :key="index"
+        :title="t(module.title)"
+        :description="t(module.description)"
+        :go-to-url="module.goToModule"
+        :icon="module.icon"></BaseDashboardCard>
+    </div>
   </div>
 </template>
