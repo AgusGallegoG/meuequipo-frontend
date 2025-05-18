@@ -35,7 +35,28 @@
       "button": "Iniciar sesión",
       "username": "Nome de usuario",
       "password": "Contrasinal",
-      "toast_name": "Inicio de sesión"
+      "toast_name": "Inicio de sesión",
+      "go_main": "← Volver á páxina principal"
+    },
+    "dashboard": {
+      "modules_titles": {
+        "season": "Xestión de tempadas",
+        "team": "Xestión de equipos",
+        "news": "Xestión do blog",
+        "calendar": "Xestión do calendario",
+        "signings": "Xestión das inscripcións",
+        "sponsors": "Xestión de patrocinadores",
+        "users": "Xestión de usuarios"
+      },
+      "modules_desc": {
+        "season": "Permite adminstrar a tempada activa, así como crear novas",
+        "team": "Permite realizar xestións sobre os equipos e categorias do club",
+        "news": "Permite crear, eliminar e administrar as novas do blog",
+        "calendar": "Permite engadir novos partidos, eventos e xestionar os existentes",
+        "signings": "Permite a xestión do formulario de inscripcions, e administralas",
+        "sponsors": "Permite xestionar os patrocinadores do club",
+        "users": "Permite xestionar os usuarios do aplicativo"
+      }
     }
   },
   "layout": {
