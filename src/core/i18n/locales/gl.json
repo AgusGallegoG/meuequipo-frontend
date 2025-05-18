@@ -1,5 +1,10 @@
 {
   "core": {
+    "actions": {
+      "save": "Gardar",
+      "create": "Crear",
+      "cancel": "Cancelar"
+    },
     "states": {
       "loading": "Cargando...",
       "quering": "Consultando...",
@@ -24,8 +29,14 @@
       "error": "Erro"
     },
     "messages": {
+      "success": {
+        "create_success": "Creouse correctamente: {0}",
+        "update_success": "Actualizouse correctamente {0}"
+      },
       "errors": {
-        "fetch_error": "Erro ao cargar datos de: {0}"
+        "create_error": "Erro ao crear {0}",
+        "fetch_error": "Erro ao cargar datos de: {0}",
+        "update_error": "Erro actualizando {0}"
       }
     }
   },
@@ -56,6 +67,19 @@
         "signings": "Permite a xestión do formulario de inscripcions, e administralas",
         "sponsors": "Permite xestionar os patrocinadores do club",
         "users": "Permite xestionar os usuarios do aplicativo"
+      },
+      "season": {
+        "title": "Tempada",
+        "title_active": "Tempada activa",
+        "add": "Engadir",
+        "not_found": "No se atopou unha tempada activa",
+        "active": "¡Activa!",
+        "modal": {
+          "title": "Engadir nova tempada",
+          "startDate": "Inicio",
+          "endDate": "Fin",
+          "active": "¿Activa?"
+        }
       }
     }
   },
@@ -66,7 +90,7 @@
     "footer": {
       "socials": "Redes sociais:",
       "contact": "Información de contacto:",
-      "location": "Ubicación:"
+      "location": "Onde estamos:"
     }
   }
 }

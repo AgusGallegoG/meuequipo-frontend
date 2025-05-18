@@ -4,11 +4,10 @@ import type { Publication } from '@/publication/domain/Publication';
 import responsepublication from '@/publication/infrastructure/mocks/responsePublicationMock.json';
 import type { ResponsePublicationList } from '@/publication/infrastructure/models/responses/ResponsePublicationList';
 import { createPublicationListFromResponsePublicationList } from '@/publication/infrastructure/services/publicationService';
-import type { AxiosResponse } from 'axios';
 // import { buildPaginationParams } from '@/core/infrastructure/service/paginationParams';
 
 async function Api(isInicio: boolean): Promise<ResponsePublicationList> {
-  const response = await api.get<boolean, AxiosResponse<ResponsePublicationList>>('/blog/all', {
+  const response = await api.get<ResponsePublicationList>('/blog/all', {
     params: { isInicio },
   });
 
