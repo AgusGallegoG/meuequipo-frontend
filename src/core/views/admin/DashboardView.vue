@@ -42,6 +42,18 @@ const modules = [
     goToModule: 'UserAdmin',
     icon: 'pi pi-user',
   },
+  {
+    title: 'admin.dashboard.modules_titles.category',
+    description: 'admin.dashboard.modules_desc.category',
+    goToModule: 'CategoryAdmin',
+    icon: 'pi pi-tags',
+  },
+  {
+    title: 'admin.dashboard.modules_titles.rivals',
+    description: 'admin.dashboard.modules_desc.rivals',
+    goToModule: 'RivalsAdmin',
+    icon: 'pi pi-address-book',
+  },
 ];
 </script>
 <template>

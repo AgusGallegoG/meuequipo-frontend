@@ -57,7 +57,9 @@
         "calendar": "Xestión do calendario",
         "signings": "Xestión das inscripcións",
         "sponsors": "Xestión de patrocinadores",
-        "users": "Xestión de usuarios"
+        "users": "Xestión de usuarios",
+        "category": "Xestión de categorías",
+        "rivals": "Xestión de outros clubes"
       },
       "modules_desc": {
         "season": "Permite adminstrar a tempada activa, así como crear novas",
@@ -66,7 +68,9 @@
         "calendar": "Permite engadir novos partidos, eventos e xestionar os existentes",
         "signings": "Permite a xestión do formulario de inscripcions, e administralas",
         "sponsors": "Permite xestionar os patrocinadores do club",
-        "users": "Permite xestionar os usuarios do aplicativo"
+        "users": "Permite xestionar os usuarios do aplicativo",
+        "category": "Permite xestionar as categorias que existen no clube e no aplicativo",
+        "rivals": "Permite engadir/eliminar clubes rivais"
       },
       "season": {
         "title": "Tempada",

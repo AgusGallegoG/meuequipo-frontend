@@ -52,7 +52,8 @@ function goTo(url: string) {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  display: block;
+  display: flex;
+  justify-content: center;
 }
 
 .card-description {
