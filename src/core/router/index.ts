@@ -74,7 +74,10 @@ router.beforeEach((to, from, next) => {
   const storeToken = authStore.getToken;
   const isAuthenticated = UtilBase.exist(token) && token === storeToken;
 
-  if (to.meta.requiresAuth && !isAuthenticated) {
+  const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
+  // Nos aseguramos que cualquier ruta cuyo padre sea admin se considere que necesita auth
+
+  if (requiresAuth && !isAuthenticated) {
     next({ name: 'AdminLogin' }); // Redirect to login if not authenticated
   } else if (to.name === 'AdminLogin' && isAuthenticated) {
     next({ name: 'Dashboard' }); // Prevent logged-in users from seeing login
