@@ -1,5 +1,13 @@
 import { useAuthStore } from '@/auth/store/authStore';
+import { calendarRouterAdmin } from '@/calendar/router/calendar.routes';
+import { categoryRouterAdmin } from '@/category/router/category.routes';
 import { UtilBase } from '@/core/utilities/UtilBase';
+import { publicationRouterAdmin } from '@/publication/router/publication.routes';
+import { rivalsRouterAdmin } from '@/rivals/router/rivals.routes';
+import { signinRouterAdmin } from '@/signin/router/signin.routes';
+import { sponsorRouterAdmin } from '@/sponsor/router/sponsor.routes';
+import { teamRouterAdmin } from '@/team/router/team.routes';
+import { userRouterAdmin } from '@/user/router/user.routes';
 import Cookies from 'js-cookie';
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
 
@@ -43,6 +51,14 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/core/views/admin/DashboardView.vue'),
       },
       // aqui van las rutas de los hijos
+      ...sponsorRouterAdmin,
+      ...teamRouterAdmin,
+      ...publicationRouterAdmin,
+      ...calendarRouterAdmin,
+      ...signinRouterAdmin,
+      ...rivalsRouterAdmin,
+      ...categoryRouterAdmin,
+      ...userRouterAdmin,
     ],
   },
   {

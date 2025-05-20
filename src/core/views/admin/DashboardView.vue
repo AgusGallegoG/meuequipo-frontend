@@ -7,18 +7,21 @@ const { t } = useI18n();
 
 const modules = [
   {
+    //
     title: 'admin.dashboard.modules_titles.team',
     description: 'admin.dashboard.modules_desc.team',
     goToModule: 'TeamAdmin',
     icon: 'pi pi-users',
   },
   {
+    //
     title: 'admin.dashboard.modules_titles.news',
     description: 'admin.dashboard.modules_desc.news',
     goToModule: 'BlogAdmin',
     icon: 'pi pi-sparkles',
   },
   {
+    //
     title: 'admin.dashboard.modules_titles.calendar',
     description: 'admin.dashboard.modules_desc.calendar',
     goToModule: 'CalendarAdmin',
@@ -27,7 +30,7 @@ const modules = [
   {
     title: 'admin.dashboard.modules_titles.signings',
     description: 'admin.dashboard.modules_desc.signings',
-    goToModule: 'SigningAdmin',
+    goToModule: 'SigninAdmin',
     icon: 'pi pi-file-plus',
   },
   {
