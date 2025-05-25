@@ -10,8 +10,7 @@
       "quering": "Consultando...",
       "loginin": "Iniciando sesión...",
       "adding": "Añadiendo...",
-      "deleting": "Borrando...",
-      "no_results": "No hay resultados"
+      "deleting": "Borrando..."
     },
     "messages": {
       "success": {
@@ -96,19 +95,6 @@
       "socials": "Redes sociales:",
       "contact": "Información de contacto:",
       "location": "Dónde estamos:"
-    }
-  },
-  "users": {
-    "title": "Usuarios",
-    "table_title": "Usuarios de la aplicacion",
-    "form_title_new": "Crear usuario",
-    "form_title_edit": "Editar usuario",
-    "fields": {
-      "name": "Nombre",
-      "surnames": "Apellidos",
-      "email": "Email",
-      "active": "Activo",
-      "not_active": "No activo"
     }
   }
 }

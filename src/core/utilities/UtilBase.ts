@@ -1,8 +1,4 @@
 export class UtilBase {
-  static isObjectEmpty(obj: any): boolean {
-    return obj && typeof obj === 'object' && Object.keys(obj).length === 0;
-  }
-
   public static isDefined<T>(value: T): boolean {
     return typeof value !== 'undefined';
   }
