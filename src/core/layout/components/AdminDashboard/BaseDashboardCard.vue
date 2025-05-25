@@ -38,7 +38,6 @@ function goTo(url: string) {
       <template #footer>
         <Button
           class="w-100"
-          :label="t('')"
           icon="pi pi-arrow-up-right"
           icon-pos="right"
           @click="goTo(goToUrl)"></Button>

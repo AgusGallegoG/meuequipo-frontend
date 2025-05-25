@@ -1,5 +1,10 @@
 {
   "core": {
+    "buttons": {
+      "clear": "Limpar",
+      "cancel": "Cancelar",
+      "save": "Gardar"
+    },
     "actions": {
       "save": "Gardar",
       "create": "Crear",
@@ -10,7 +15,8 @@
       "quering": "Consultando...",
       "loginin": "Iniciando sesión...",
       "adding": "Engadindo...",
-      "deleting": "Borrando..."
+      "deleting": "Borrando...",
+      "no_results": "Non hai resultados"
     },
     "messages": {
       "success": {
@@ -31,12 +37,14 @@
     "messages": {
       "success": {
         "create_success": "Creouse correctamente: {0}",
-        "update_success": "Actualizouse correctamente {0}"
+        "update_success": "Actualizouse correctamente {0}",
+        "save_success": "Gardouse correctamente {0}"
       },
       "errors": {
         "create_error": "Erro ao crear {0}",
         "fetch_error": "Erro ao cargar datos de: {0}",
-        "update_error": "Erro actualizando {0}"
+        "update_error": "Erro actualizando {0}",
+        "save_error": "Erro gardando {0}"
       }
     }
   },
@@ -95,6 +103,22 @@
       "socials": "Redes sociais:",
       "contact": "Información de contacto:",
       "location": "Onde estamos:"
+    }
+  },
+  "users": {
+    "title": "Usuario",
+    "table_title": "Usuarios da aplicación",
+    "form_title_new": "Crear usuario",
+    "form_title_edit": "Editar usuario",
+    "fields": {
+      "name": "Nome",
+      "surnames": "Apelidos",
+      "email": "Email",
+      "active": "Activo",
+      "not_active": "Non activo"
+    },
+    "error": {
+      "mail": "Email incorrecto"
     }
   }
 }

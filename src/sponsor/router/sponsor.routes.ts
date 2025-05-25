@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router';
 
 export const sponsorRouterAdmin: RouteRecordRaw[] = [
   {
-    path: 'patrocinadores',
+    path: 'dashboard/patrocinadores',
     name: 'SponsorAdmin',
     component: () => import('@/sponsor/views/SponsorAdmin.vue'),
   },

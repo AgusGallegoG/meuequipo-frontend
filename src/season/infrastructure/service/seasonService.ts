@@ -17,8 +17,8 @@ export function createSeasonListFromResponseSeasonList(response: ResponseSeasonL
 
 export function createRequestNewSeasonFromSeasonForm(newSeason: SeasonForm): RequestNewSeason {
   return {
-    startDate: newSeason.startDate.toISOString(),
-    endDate: newSeason.endDate.toISOString(),
+    startDate: newSeason.startDate ? newSeason.startDate.toISOString() : '',
+    endDate: newSeason.endDate ? newSeason.endDate.toISOString() : '',
     active: newSeason.active,
   };
 }

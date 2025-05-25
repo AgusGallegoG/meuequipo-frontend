@@ -1,5 +1,6 @@
 import vue from '@vitejs/plugin-vue';
 import autoprefixer from 'autoprefixer';
+import AutoImport from 'unplugin-auto-import/vite';
 import { fileURLToPath, URL } from 'url';
 import { defineConfig } from 'vite';
 
@@ -17,7 +18,13 @@ export default defineConfig(({ mode }) => ({
     __VUE_I18N_LEGACY_API__: false,
     __INTLFY_PROD_DEVTOOLS__: false,
   },
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    AutoImport({
+      imports: ['vue'],
+      dts: 'src/auto-imports.d.ts',
+    }),
+  ],
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),
