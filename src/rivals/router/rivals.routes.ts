@@ -2,7 +2,7 @@ import type { RouteRecordRaw } from 'vue-router';
 
 export const rivalsRouterAdmin: RouteRecordRaw[] = [
   {
-    path: 'outrosequipos',
+    path: 'dashboard/outrosequipos',
     name: 'RivalsAdmin',
     component: () => import('@/rivals/views/RivalsAdmin.vue'),
   },
