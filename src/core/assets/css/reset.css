@@ -3,6 +3,10 @@
 .p-component {
   font-family: var(--font-family);
   font-size: var(--font-size);
+
+  .p-tag {
+    font-size: 0.8rem;
+  }
 }
 
 .p-menubar {
