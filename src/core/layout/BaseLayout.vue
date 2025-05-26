@@ -5,17 +5,18 @@ import BaseMenubar from '@/core/layout/components/BaseMenuBar.vue';
 import BasePreFooter from '@/core/layout/components/BasePreFooter.vue';
 import { computed } from 'vue';
 import { useRoute } from 'vue-router';
+import BaseAdminBreadcrumb from './components/AdminDashboard/BaseAdminBreadcrumb.vue';
 
 const route = useRoute();
 
-const isAdminLayout = computed(() => route.meta.requiresAuth);
+const isAdminLayout = computed(() => route.meta.requiresAuth ?? false);
 
 const transitionName = computed(() => route.meta.transition || 'fade');
 </script>
 <template>
   <div class="layout-wrapper">
     <!-- MAIN HEADER -->
-    <BaseHeader :is-admin-layout="isAdminLayout" />
+    <BaseHeader :isAdminLayout="isAdminLayout" />
 
     <!-- MAIN CONTENTS-->
     <div class="main-container">
@@ -24,6 +25,7 @@ const transitionName = computed(() => route.meta.transition || 'fade');
         <section id="router-page" class="page">
           <!-- baseBreadcrumb-->
           <BaseMenubar v-if="!isAdminLayout" />
+          <BaseAdminBreadcrumb v-else />
 
           <div class="page-content">
             <section id="page-map">

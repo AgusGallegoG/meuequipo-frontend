@@ -49,6 +49,16 @@
     }
   },
   "admin": {
+    "breadcrumbs": {
+      "rivals": "Rivais",
+      "signin": "Inscripcións",
+      "calendar": "Calendario",
+      "blog": "Blog",
+      "team": "Equipos",
+      "sponsors": "Patrocinadores",
+      "category": "Categorías",
+      "user": "Usuarios"
+    },
     "login": {
       "title": "Iniciar sesión no panel de administrador",
       "button": "Iniciar sesión",
