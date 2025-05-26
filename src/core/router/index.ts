@@ -15,7 +15,8 @@ declare module 'vue-router' {
   interface RouteMeta {
     parent?: { path: string; name: string };
     transition?: string;
-    requiresAuth: boolean;
+    requiresAuth?: boolean;
+    breadcrumbLabel?: string;
   }
 }
 
@@ -41,13 +42,14 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/administracion',
     name: 'Admin',
-    meta: { requiresAuth: true }, // Protect this route
+    meta: { requiresAuth: true, breadcrumbLabel: 'Inicio' }, // Protect this route
     redirect: '/administracion/dashboard',
     component: () => import('@/core/layout/BaseLayout.vue'),
     children: [
       {
         path: 'dashboard',
         name: 'Dashboard',
+        meta: { requiresAuth: true, breadcrumbLabel: 'Dashboard' },
         component: () => import('@/core/views/admin/DashboardView.vue'),
       },
       // aqui van las rutas de los hijos
