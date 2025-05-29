@@ -10,12 +10,14 @@ interface Props {
   showTime?: boolean;
   showIcon?: boolean;
   dateFormat?: string;
+  view?: string;
   class?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   showTime: false,
   showIcon: true,
+  view: '',
   dateFormat: 'dd/mm/yy',
 });
 </script>
@@ -27,6 +29,7 @@ const props = withDefaults(defineProps<Props>(), {
         :id="'over_label_' + props.id"
         class="w-100"
         v-model="model"
+        :view="view"
         :showTime="showTime"
         :showIcon="showIcon"
         :dateFormat="dateFormat"></DatePicker>

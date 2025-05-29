@@ -25,7 +25,7 @@ export const useUserAdminStore = defineStore('userAdmin', {
 
   actions: {
     setTableData(data: UserTable) {
-      this.data.table = data;
+      this.data.table = { ...data };
     },
     setSort(field: string, direction: number) {
       if (this.data.tableFilters) {

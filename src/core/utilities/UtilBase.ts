@@ -36,6 +36,10 @@ export class UtilBase {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  public static getYear(date: Date): string {
+    return date.getFullYear().toString();
+  }
+
   private static convertBase64ToBlob(base64: string, filename: string, type: string) {
     const byteString = window.atob(base64);
     const ab = new ArrayBuffer(byteString.length);
