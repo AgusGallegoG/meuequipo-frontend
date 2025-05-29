@@ -63,13 +63,11 @@ async function onSubmitForm() {
 
         <BaseInputGroupText
           :label="t('users.fields.surnames')"
-          v-model="user.surnames"
-          class="row"></BaseInputGroupText>
+          v-model="user.surnames"></BaseInputGroupText>
 
         <BaseInputGroupText
           :label="t('users.fields.email')"
           v-model="user.email"
-          class="row"
           :error="!isValidMail"
           :textError="t('users.error.mail')"></BaseInputGroupText>
 

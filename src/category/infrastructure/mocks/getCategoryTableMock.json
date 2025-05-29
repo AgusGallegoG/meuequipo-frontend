@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Junior",
+      "yearInit": "2011-01-01T00:00:00.000Z",
+      "yearEnd": "2009-12-31T23:59:59.999Z",
+      "active": true
+    },
+    {
+      "id": 2,
+      "name": "Senior",
+      "yearInit": "2007-06-15T00:00:00.000Z",
+      "yearEnd": null,
+      "active": true
+    },
+    {
+      "id": 3,
+      "name": "Cadete",
+      "yearInit": "2009-03-10T00:00:00.000Z",
+      "yearEnd": "2007-03-10T00:00:00.000Z",
+      "active": false
+    }
+  ]
+}

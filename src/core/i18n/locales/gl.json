@@ -130,5 +130,18 @@
     "error": {
       "mail": "Email incorrecto"
     }
+  },
+  "categories": {
+    "title": "Categoría",
+    "table_title": "Categorías da aplicación",
+    "form_title_new": "Crear categoría",
+    "form_title_edit": "Editar categoría",
+    "fields": {
+      "name": "Nome",
+      "year_init": "Ano desde",
+      "year_end": "Ano ata",
+      "active": "Activa",
+      "not_active": "Non activa"
+    }
   }
 }
