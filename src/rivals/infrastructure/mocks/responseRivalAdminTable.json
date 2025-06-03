@@ -1,0 +1,59 @@
+{
+  "content": [
+    {
+      "logo": {
+        "imageB64": "https://th.bing.com/th/id/OIP.y0HAuP1Smm2byhaU7KHB4gHaHa?w=180&h=180&c=7&r=0&o=5&pid=1.7",
+        "imageName": "Real Madrid"
+      },
+      "name": "Real Madrid",
+      "responsible": "Florentino Perez",
+      "tlf": "678765432",
+      "id": 2
+    },
+    {
+      "logo": {
+        "imageB64": "https://th.bing.com/th/id/OIP.Y7USsAPSu4RjUuTBDLbU2QHaHd?w=169&h=180&c=7&r=0&o=5&pid=1.7",
+        "imageName": "Barcelona"
+      },
+      "name": "Barcelona",
+      "responsible": "Joan Laporta",
+      "tlf": "754121365",
+      "id": 3
+    },
+    {
+      "logo": {
+        "imageB64": "https://th.bing.com/th/id/OIP.1Z2i7BnX1FIcpzqZkR5DZgHaHa?w=175&h=180&c=7&r=0&o=5&pid=1.7",
+        "imageName": "Celta"
+      },
+      "name": "Celta de Vigo",
+      "tlf": "623162843",
+      "responsible": "Marian Mouriño",
+      "id": 4
+    }
+  ],
+  "totalElements": 50,
+  "totalPages": 5,
+  "size": 10,
+  "number": 0,
+  "first": true,
+  "last": false,
+  "numberOfElements": 3,
+  "empty": false,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "pageable": {
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 0,
+    "pageSize": 10,
+    "pageNumber": 0,
+    "paged": true,
+    "unpaged": false
+  }
+}
