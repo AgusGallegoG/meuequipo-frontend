@@ -48,6 +48,11 @@
       }
     }
   },
+  "shared": {
+    "dropdowns": {
+      "categories": "Categorias"
+    }
+  },
   "admin": {
     "breadcrumbs": {
       "rivals": "Rivais",
@@ -142,6 +147,21 @@
       "year_end": "Ano ata",
       "active": "Activa",
       "not_active": "Non activa"
+    }
+  },
+  "rivals": {
+    "title": "Rival",
+    "table_title": "Equipos rivais na aplicación",
+    "form_title_new": "Crear novo equipo rival",
+    "form_title_edit": "Editar equipo rival",
+    "fields": {
+      "name": "Nome",
+      "logo": "Escudo",
+      "new_logo": "Novo logo",
+      "actual_logo": "Logo actual",
+      "responsible": "Responsable",
+      "email": "Email",
+      "tlf": "Telefono"
     }
   }
 }

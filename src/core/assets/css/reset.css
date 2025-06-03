@@ -14,3 +14,13 @@
   position: relative;
   z-index: 1001; /*? Permitimos que se visualice sempre os desplegables do menú */
 }
+
+.p-multiselect {
+  height: 2.25rem !important;
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+  line-height: var(--line-height) !important;
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
