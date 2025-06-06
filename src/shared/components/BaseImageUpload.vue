@@ -7,11 +7,13 @@ async function onFileSelect() {
 }
 </script>
 <template>
-  <FileUpload
-    mode="basic"
-    @select="onFileSelect"
-    customUpload
-    auto
-    severity="secondary"
-    class="p-button-outlined" />
+  <div class="py-3">
+    <FileUpload
+      mode="basic"
+      @select="onFileSelect"
+      customUpload
+      auto
+      severity="secondary"
+      class="p-button-outlined" />
+  </div>
 </template>

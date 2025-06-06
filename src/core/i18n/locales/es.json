@@ -119,6 +119,48 @@
       "email": "Email",
       "active": "Activo",
       "not_active": "No activo"
+    },
+    "error": {
+      "mail": "Email incorrecto"
+    }
+  },
+  "categories": {
+    "title": "Categoría",
+    "table_title": "Categorías de la aplicación",
+    "form_title_new": "Crear categoría",
+    "form_title_edit": "Editar categoría",
+    "fields": {
+      "name": "Nombre",
+      "year_init": "Año desde",
+      "year_end": "Año hasta",
+      "active": "Activa",
+      "not_active": "No activa"
+    }
+  },
+  "rivals": {
+    "title": "Rival",
+    "table_title": "Equipos rivales en la aplicación",
+    "form_title_new": "Crear nuevo equipo rival",
+    "form_title_edit": "Editar equipo rival",
+    "fields": {
+      "name": "Nombre",
+      "logo": "Escudo",
+      "new_logo": "Nuevo logo",
+      "actual_logo": "Logo actual",
+      "responsible": "Responsable",
+      "email": "Email",
+      "tlf": "Telefono"
+    }
+  },
+  "sponsors": {
+    "title": "Patrocinador",
+    "table_title": "Patrocinadores en la aplicación",
+    "form_title_new": "Crear nuevo patrocinador",
+    "form_title_edit": "Editar patrocinador",
+    "fields": {
+      "name": "nombre",
+      "logo": "Logo",
+      "url": "Enlace a la web"
     }
   }
 }

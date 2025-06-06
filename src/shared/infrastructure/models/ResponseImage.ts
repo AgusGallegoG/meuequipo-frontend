@@ -1,4 +1,4 @@
 export type ResponseImage = {
-  imageB64: string;
-  imageName: string;
+  name: string;
+  url: string;
 };

@@ -7,7 +7,6 @@ import type { ResponseRivalItem } from '../models/responses/ResponseRivalTable';
 export function mapPageableResponseToRivalsTable(
   response: PageableResponse<ResponseRivalItem>
 ): RivalTable {
-  debugger;
   return {
     content: mapResponseRivalItem(response.content),
     totalRecords: response.totalElements,
@@ -18,8 +17,8 @@ function mapResponseRivalItem(content: ResponseRivalItem[]): RivalItem[] {
     return {
       id: item.id,
       logo: {
-        name: item.logo.imageName,
-        url: item.logo.imageB64,
+        name: item.logo.name,
+        url: item.logo.url,
       },
       name: item.name,
       tlf: item.tlf,
@@ -50,7 +49,7 @@ export function mapResponseRivalToRival(response: ResponseRival): Rival {
     id: response.id,
     categories: response.categories,
     email: response.email,
-    logo: response.logo ? { name: response.logo.imageName, url: response.logo.imageB64 } : null,
+    logo: response.logo ? { name: response.logo.url, url: response.logo.name } : null,
     name: response.name,
     responsible: response.responsible,
     tlf: response.tlf,

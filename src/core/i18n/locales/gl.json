@@ -59,8 +59,8 @@
       "signin": "Inscripcións",
       "calendar": "Calendario",
       "blog": "Blog",
-      "team": "Equipos",
-      "sponsors": "Patrocinadores",
+      "teams": "Equipos",
+      "sponsor": "Patrocinadores",
       "category": "Categorías",
       "user": "Usuarios"
     },
@@ -162,6 +162,17 @@
       "responsible": "Responsable",
       "email": "Email",
       "tlf": "Telefono"
+    }
+  },
+  "sponsors": {
+    "title": "Patrocinador",
+    "table_title": "Patrocinadores na aplicación",
+    "form_title_new": "Crear novo patrocinador",
+    "form_title_edit": "Editar patrocinador",
+    "fields": {
+      "name": "Nome",
+      "logo": "Logo",
+      "url": "Enlace á web"
     }
   }
 }

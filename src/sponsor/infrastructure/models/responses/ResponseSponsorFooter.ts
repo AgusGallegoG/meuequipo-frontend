@@ -1,10 +1,12 @@
+import type { ResponseImage } from '@/shared/infrastructure/models/ResponseImage';
+
 export type ResponseSponsorFooterList = {
-  content: ResponseSponsorFooter[];
+  content: ResponseSponsor[];
 };
 
-export type ResponseSponsorFooter = {
+export type ResponseSponsor = {
   id: number;
   name: string;
-  logo: string;
+  logo: ResponseImage | null;
   url: string;
 };
