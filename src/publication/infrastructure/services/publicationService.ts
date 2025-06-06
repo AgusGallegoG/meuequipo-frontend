@@ -1,5 +1,6 @@
 import type { Publication } from '@/publication/domain/Publication';
 import type { Image } from '@/shared/dominio/Image';
+import type { ImageView } from '@/shared/dominio/ImageView';
 import type { ResponseImage } from '@/shared/infrastructure/models/ResponseImage';
 import type {
   ResponsePublication,
@@ -7,15 +8,15 @@ import type {
 } from '../models/responses/ResponsePublicationList';
 
 // Función para mapear un único ResponseImage a Image
-function mapResponseImageToImage(responseImage: ResponseImage): Image {
+function mapResponseImageToImage(responseImage: ResponseImage): ImageView {
   return {
-    imageB64: responseImage.imageB64,
-    imageName: responseImage.imageName,
+    name: responseImage.name,
+    url: responseImage.url,
   };
 }
 
 // Función para mapear un array de ResponseImage a un array de Image
-function mapResponseImagesToImages(responseImages: ResponseImage[]): Image[] {
+function mapResponseImagesToImages(responseImages: ResponseImage[]): ImageView[] {
   return responseImages.map(mapResponseImageToImage);
 }
 

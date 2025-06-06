@@ -30,6 +30,15 @@ watch(
   }
 );
 
+watch(
+  () => rivalAdminStore.getEditionRival,
+  (newVal) => {
+    if (!newVal) {
+      selectedRival.value = null;
+    }
+  }
+);
+
 async function doGetRivalDetails(id: number) {
   rivalAdminStore.setSelectedToEdit(await getRivalDetails(id));
 }
@@ -102,5 +111,6 @@ async function onPage(event: DataTablePageEvent) {
 .rival-admin-table-logo {
   max-height: 75px;
   object-fit: contain;
+  aspect-ratio: 1/1;
 }
 </style>

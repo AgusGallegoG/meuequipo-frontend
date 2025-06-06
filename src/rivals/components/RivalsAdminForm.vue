@@ -2,7 +2,7 @@
 import BaseImageUpload from '@/shared/components/BaseImageUpload.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import CategoryMultiSelect from '@/shared/components/CategoryMultiSelect.vue';
-import { type ImageUpload } from '@/shared/dominio/ImageUpload';
+import Button from 'primevue/button';
 import Card from 'primevue/card';
 import { useI18n } from 'vue-i18n';
 import { useSaveRival } from '../application/useSaveRival';

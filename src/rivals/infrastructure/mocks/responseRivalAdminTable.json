@@ -2,8 +2,8 @@
   "content": [
     {
       "logo": {
-        "imageB64": "https://th.bing.com/th/id/OIP.y0HAuP1Smm2byhaU7KHB4gHaHa?w=180&h=180&c=7&r=0&o=5&pid=1.7",
-        "imageName": "Real Madrid"
+        "url": "https://th.bing.com/th/id/OIP.y0HAuP1Smm2byhaU7KHB4gHaHa?w=180&h=180&c=7&r=0&o=5&pid=1.7",
+        "name": "Real Madrid"
       },
       "name": "Real Madrid",
       "responsible": "Florentino Perez",
@@ -12,8 +12,8 @@
     },
     {
       "logo": {
-        "imageB64": "https://th.bing.com/th/id/OIP.Y7USsAPSu4RjUuTBDLbU2QHaHd?w=169&h=180&c=7&r=0&o=5&pid=1.7",
-        "imageName": "Barcelona"
+        "url": "https://th.bing.com/th/id/OIP.Y7USsAPSu4RjUuTBDLbU2QHaHd?w=169&h=180&c=7&r=0&o=5&pid=1.7",
+        "name": "Barcelona"
       },
       "name": "Barcelona",
       "responsible": "Joan Laporta",
@@ -22,8 +22,8 @@
     },
     {
       "logo": {
-        "imageB64": "https://th.bing.com/th/id/OIP.1Z2i7BnX1FIcpzqZkR5DZgHaHa?w=175&h=180&c=7&r=0&o=5&pid=1.7",
-        "imageName": "Celta"
+        "url": "https://th.bing.com/th/id/OIP.1Z2i7BnX1FIcpzqZkR5DZgHaHa?w=175&h=180&c=7&r=0&o=5&pid=1.7",
+        "name": "Celta"
       },
       "name": "Celta de Vigo",
       "tlf": "623162843",

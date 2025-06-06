@@ -4,7 +4,7 @@ export const sponsorRouterAdmin: RouteRecordRaw[] = [
   {
     path: 'dashboard/patrocinadores',
     name: 'SponsorAdmin',
-    meta: { breadcrumbLabel: 'breadcrumbs.sponsor' },
+    meta: { breadcrumbLabel: 'admin.breadcrumbs.sponsor' },
     component: () => import('@/sponsor/views/SponsorAdmin.vue'),
   },
 ];
