@@ -1,9 +1,17 @@
 {
   "core": {
+    "editor": {
+      "bold": "Negriña",
+      "italic": "Cursiva",
+      "underline": "Subliñado",
+      "list": "Listado"
+    },
+    "image": "Imaxe",
     "buttons": {
       "clear": "Limpar",
       "cancel": "Cancelar",
-      "save": "Gardar"
+      "save": "Gardar",
+      "add": "Engadir"
     },
     "actions": {
       "save": "Gardar",
@@ -44,7 +52,8 @@
         "create_error": "Erro ao crear {0}",
         "fetch_error": "Erro ao cargar datos de: {0}",
         "update_error": "Erro actualizando {0}",
-        "save_error": "Erro gardando {0}"
+        "save_error": "Erro gardando {0}",
+        "upload_error": "Erro subindo {0}"
       }
     }
   },
@@ -55,6 +64,8 @@
   },
   "admin": {
     "breadcrumbs": {
+      "inicio": "Inicio",
+      "dashboard": "Dashboard",
       "rivals": "Rivais",
       "signin": "Inscripcións",
       "calendar": "Calendario",
@@ -173,6 +184,19 @@
       "name": "Nome",
       "logo": "Logo",
       "url": "Enlace á web"
+    }
+  },
+  "blog": {
+    "title": "Blog",
+    "table_title": "Publicacións na aplicación",
+    "form_title_new": "Crear nova publicación",
+    "form_title_edit": "Editar publicación",
+    "fields": {
+      "title": "Título",
+      "body": "Contido",
+      "images": "Imaxes",
+      "creation_date": "Data de creación",
+      "no_images": "Sen imaxes"
     }
   }
 }

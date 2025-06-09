@@ -13,7 +13,7 @@ async function Api(): Promise<ResponseSponsorFooterList> {
 
 async function InMemory(): Promise<ResponseSponsorFooterList> {
   await UtilBase.wait(500);
-  return responsesponsorfooter;
+  return responsesponsorfooter as ResponseSponsorFooterList;
 }
 
 export async function getAllSponsors(): Promise<Sponsor[]> {

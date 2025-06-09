@@ -5,5 +5,13 @@ export type Publication = {
   title: string;
   body: string;
   creationDate: string;
-  images: ImageView[];
+  images: ImageView[] | null;
+};
+
+export const defaultPublication: Publication = {
+  body: '',
+  title: '',
+  creationDate: '',
+  images: null,
+  id: -1,
 };

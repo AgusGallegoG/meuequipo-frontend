@@ -1,5 +1,6 @@
 import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
 import type { Rival, RivalItem, RivalTable } from '@/rivals/domain/RivalTable';
+import { mapImageViewToRequestImage } from '@/shared/infrastructure/service/imageService';
 import type { RequestSaveRival } from '../models/requests/RequestSaveRival';
 import type { ResponseRival } from '../models/responses/ResponseRival';
 import type { ResponseRivalItem } from '../models/responses/ResponseRivalTable';
@@ -19,6 +20,7 @@ function mapResponseRivalItem(content: ResponseRivalItem[]): RivalItem[] {
       logo: {
         name: item.logo.name,
         url: item.logo.url,
+        id: item.logo.id,
       },
       name: item.name,
       tlf: item.tlf,
@@ -31,12 +33,7 @@ export function mapRivalToRequestSaveRival(rival: Rival): RequestSaveRival {
   return {
     id: rival.id === -1 ? null : rival.id,
     email: rival.email,
-    logo: rival.logo
-      ? {
-          name: rival.logo.name,
-          url: rival.logo.url,
-        }
-      : null,
+    logo: rival.logo ? mapImageViewToRequestImage(rival.logo) : null,
     name: rival.name,
     responsible: rival.responsible,
     tlf: rival.tlf,
@@ -49,7 +46,9 @@ export function mapResponseRivalToRival(response: ResponseRival): Rival {
     id: response.id,
     categories: response.categories,
     email: response.email,
-    logo: response.logo ? { name: response.logo.url, url: response.logo.name } : null,
+    logo: response.logo
+      ? { name: response.logo.url, url: response.logo.name, id: response.logo.id }
+      : null,
     name: response.name,
     responsible: response.responsible,
     tlf: response.tlf,

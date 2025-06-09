@@ -1,0 +1,49 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "title": "Primeira publicacion",
+      "body": "Priemira pubicacion da aplicacion para indicare o seu inicio",
+      "creationDate": "02/04/2025 19:45",
+      "images": [
+        {
+          "id": 1,
+          "url": "https://imgs.search.brave.com/rrMX4Erg-KNSkC6jihjZPdeztNkoqg4u54dgBcCtgJM/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTEy/NzI0NTQyMS9lcy9m/b3RvL21hbm9zLWRl/LW11amVyLXBpZGll/bmRvLWxhLWJlbmRp/Y2klQzMlQjNuLWRl/LWRpb3Mtc29icmUt/Zm9uZG8tcHVlc3Rh/LWRlLXNvbC5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9Y3Zy/MnZHY296VTYyQ1dp/MjIxQXhtV3AwQlVL/bXAxS0Q5eXB4WGVV/Y3dWRT0",
+          "name": "example"
+        }
+      ]
+    },
+    {
+      "id": 2,
+      "title": "Segunda publicacion",
+      "body": "Segubnda pubicacion de proba",
+      "creationDate": "02/04/2025 19:45",
+      "images": []
+    }
+  ],
+  "totalElements": 50,
+  "totalPages": 5,
+  "size": 10,
+  "number": 0,
+  "first": true,
+  "last": false,
+  "numberOfElements": 3,
+  "empty": false,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "pageable": {
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 0,
+    "pageSize": 10,
+    "pageNumber": 0,
+    "paged": true,
+    "unpaged": false
+  }
+}
