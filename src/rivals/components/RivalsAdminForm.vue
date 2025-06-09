@@ -4,6 +4,7 @@ import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import CategoryMultiSelect from '@/shared/components/CategoryMultiSelect.vue';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
+import Image from 'primevue/image';
 import { useI18n } from 'vue-i18n';
 import { useSaveRival } from '../application/useSaveRival';
 import { defaultRival, type Rival } from '../domain/RivalTable';
@@ -54,8 +55,8 @@ async function onSubmitForm() {
     <template #content>
       <div class="container g-3">
         <div class="row">
-          <img v-if="rival.logo" />
-          <BaseImageUpload v-else></BaseImageUpload>
+          <!-- <Image v-if="rival.logo" :src="rival.logo.url" :alt="rival.logo.name" /> -->
+          <BaseImageUpload :label="t('rivals.fields.logo')" v-model="rival.logo"></BaseImageUpload>
         </div>
         <div class="row">
           <!--name-->

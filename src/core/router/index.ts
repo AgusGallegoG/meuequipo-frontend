@@ -42,14 +42,14 @@ const routes: RouteRecordRaw[] = [
   {
     path: '/administracion',
     name: 'Admin',
-    meta: { requiresAuth: true, breadcrumbLabel: 'Inicio' }, // Protect this route
+    meta: { requiresAuth: true, breadcrumbLabel: 'admin.breadcrumbs.inicio' }, // Protect this route
     redirect: '/administracion/dashboard',
     component: () => import('@/core/layout/BaseLayout.vue'),
     children: [
       {
         path: 'dashboard',
         name: 'Dashboard',
-        meta: { requiresAuth: true, breadcrumbLabel: 'Dashboard' },
+        meta: { requiresAuth: true, breadcrumbLabel: 'admin.breadcrumbs.dashboard' },
         component: () => import('@/core/views/admin/DashboardView.vue'),
       },
       // aqui van las rutas de los hijos

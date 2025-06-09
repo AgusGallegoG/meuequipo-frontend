@@ -23,7 +23,7 @@ async function InMemory(): Promise<ResponsePublicationList> {
 export async function getBlogContent(isInicio: boolean): Promise<Publication[]> {
   try {
     const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(isInicio);
-    return createPublicationListFromResponsePublicationList(response);
+    return createPublicationListFromResponsePublicationList(response.content);
   } catch (error) {
     throw new Error('Error obteniendo los datos de la pantalla de inicio');
   }

@@ -9,5 +9,5 @@ export type ResponsePublication = {
   title: string;
   body: string;
   creationDate: string;
-  images: ResponseImage[];
+  images: ResponseImage[] | null;
 };

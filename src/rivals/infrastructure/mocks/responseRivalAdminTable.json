@@ -2,6 +2,7 @@
   "content": [
     {
       "logo": {
+        "id": 1,
         "url": "https://th.bing.com/th/id/OIP.y0HAuP1Smm2byhaU7KHB4gHaHa?w=180&h=180&c=7&r=0&o=5&pid=1.7",
         "name": "Real Madrid"
       },
@@ -12,6 +13,7 @@
     },
     {
       "logo": {
+        "id": 1,
         "url": "https://th.bing.com/th/id/OIP.Y7USsAPSu4RjUuTBDLbU2QHaHd?w=169&h=180&c=7&r=0&o=5&pid=1.7",
         "name": "Barcelona"
       },
@@ -22,6 +24,7 @@
     },
     {
       "logo": {
+        "id": 1,
         "url": "https://th.bing.com/th/id/OIP.1Z2i7BnX1FIcpzqZkR5DZgHaHa?w=175&h=180&c=7&r=0&o=5&pid=1.7",
         "name": "Celta"
       },

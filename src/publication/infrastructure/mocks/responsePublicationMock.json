@@ -7,11 +7,13 @@
       "creationDate": "02/04/2025 18:45",
       "images": [
         {
+          "id": 1,
           "url": "",
           "name": "hotelBudapest"
         },
         {
-          "url":"",
+          "id": 1,
+          "url": "",
           "name": "Amancio"
         }
       ]

@@ -8,7 +8,7 @@ import Image from 'primevue/image';
 
 const { loading: loading, refetch: saveImage } = useSaveImage();
 
-const model = defineModel<ImageView | null>();
+const model = defineModel<ImageView[] | null>();
 
 interface Props {
   label: string;
@@ -17,28 +17,40 @@ interface Props {
 const props = defineProps<Props>();
 
 const emit = defineEmits<{
-  (e: 'update:modelValue', value: ImageView | null): void;
+  (e: 'update:modelValue', value: ImageView[] | null): void;
 }>();
 
 async function customUploadHandler(event: FileUploadUploaderEvent) {
-  const image: ImageUpload = { file: event.files[0] };
-  const response = await saveImage(image);
-  response ? emit('update:modelValue', response) : emit('update:modelValue', null);
+  const aux = event.files;
+  const files: File[] = Array.isArray(aux) ? aux : [aux];
+
+  for (const file of files) {
+    const image: ImageUpload = { file };
+
+    const response = await saveImage(image);
+    if (response) {
+      const actual = model.value ?? [];
+      emit('update:modelValue', [...actual, response]);
+    }
+  }
 }
 
-function deleteImage() {
-  emit('update:modelValue', null);
+function deleteImage(index: number) {
+  const copy = [...(model.value ?? [])];
+  copy.splice(index, 1);
+  emit('update:modelValue', copy.length ? copy : null);
 }
 </script>
 <template>
   <div class="py-3">
-    <div v-if="model" class="position-relative mb-3 d-inline-block">
-      <Image :src="model.url" :alt="model.name" id="preview-image" />
-      <Button severity="secondary" @click="deleteImage" icon="pi pi-times"></Button>
+    <div v-if="model" class="position-relative mb-3 overflow-x-scroll w-100 text-nowrap">
+      <div v-for="(image, index) in model" key="id" class="d-inline-block mx-2">
+        <Image :src="image.url" :alt="image.name" id="preview-image" />
+        <Button severity="secondary" @click="deleteImage(index)" icon="pi pi-times"></Button>
+      </div>
     </div>
     <FileUpload
-      v-else
-      :multiple="false"
+      :multiple="true"
       mode="basic"
       accept="image/*"
       @uploader="customUploadHandler"
@@ -52,7 +64,7 @@ function deleteImage() {
 </template>
 <style>
 #preview-image {
-  max-height: 100px;
+  max-height: 125px;
   object-fit: contain;
   aspect-ratio: 1/1;
 }

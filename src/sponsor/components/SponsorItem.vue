@@ -14,6 +14,7 @@ defineProps<Props>();
   <div class="sponsor-item text-center mb-4 px-2">
     <a :href="url" target="_blank" rel="noopener noreferrer" class="d-inline-block p-3 rounded">
       <img
+        :id="'team-logo-' + logo.id"
         v-if="logo"
         :src="logo.url"
         :alt="name"

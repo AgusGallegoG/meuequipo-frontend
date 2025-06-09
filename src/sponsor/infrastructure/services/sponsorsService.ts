@@ -1,4 +1,5 @@
 import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
+import { mapImageViewToRequestImage } from '@/shared/infrastructure/service/imageService';
 import type { Sponsor } from '@/sponsor/domain/Sponsor';
 import type { SponsorTable } from '@/sponsor/domain/SponsorTable';
 import type {
@@ -14,6 +15,7 @@ function mapResponseSponsorFooterListToSponsor(responseSpo: ResponseSponsor): Sp
       ? {
           name: responseSpo.logo.name,
           url: responseSpo.logo.url,
+          id: responseSpo.logo.id,
         }
       : null,
     name: responseSpo.name,
@@ -30,7 +32,7 @@ export function createSponsorFooterListFromResponseSponsorFooterList(
 export function mapSponsorToRequestSaveSponsor(sponsor: Sponsor): RequestSaveSponsor {
   return {
     id: sponsor.id === -1 ? null : sponsor.id,
-    logo: sponsor.logo ? { name: sponsor.logo.name, url: sponsor.logo.url } : null,
+    logo: sponsor.logo ? mapImageViewToRequestImage(sponsor.logo) : null,
     name: sponsor.name,
     url: sponsor.url,
   };

@@ -52,8 +52,10 @@ async function onSubmitForm() {
     <template #content>
       <div class="container g-3">
         <div class="row">
-          <img v-if="sponsor.logo" />
-          <BaseImageUpload v-else></BaseImageUpload>
+          <!-- <img v-if="sponsor.logo" /> -->
+          <BaseImageUpload
+            :label="t('sponsors.fields.logo')"
+            v-model="sponsor.logo"></BaseImageUpload>
         </div>
         <div class="row">
           <BaseInputGroupText

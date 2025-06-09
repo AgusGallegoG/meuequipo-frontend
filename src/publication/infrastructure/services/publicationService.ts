@@ -1,7 +1,11 @@
+import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
+import type { BlogAdminTable } from '@/publication/domain/BlogAdminTable';
 import type { Publication } from '@/publication/domain/Publication';
 import type { Image } from '@/shared/dominio/Image';
 import type { ImageView } from '@/shared/dominio/ImageView';
 import type { ResponseImage } from '@/shared/infrastructure/models/ResponseImage';
+import { mapImageViewToRequestImage } from '@/shared/infrastructure/service/imageService';
+import type { RequestSavePublication } from '../models/requests/RequestSavePublication';
 import type {
   ResponsePublication,
   ResponsePublicationList,
@@ -10,6 +14,7 @@ import type {
 // Función para mapear un único ResponseImage a Image
 function mapResponseImageToImage(responseImage: ResponseImage): ImageView {
   return {
+    id: responseImage.id,
     name: responseImage.name,
     url: responseImage.url,
   };
@@ -27,13 +32,37 @@ function mapResponsePublicationToPublication(responsePub: ResponsePublication): 
     title: responsePub.title,
     body: responsePub.body,
     creationDate: responsePub.creationDate,
-    images: mapResponseImagesToImages(responsePub.images),
+    images: responsePub.images ? mapResponseImagesToImages(responsePub.images) : null,
   };
 }
 
 // Función para mapear un ResponsePublicationList a un array de Publication
 export function createPublicationListFromResponsePublicationList(
-  response: ResponsePublicationList
+  response: ResponsePublication[]
 ): Publication[] {
-  return response.content.map(mapResponsePublicationToPublication);
+  return response.map(mapResponsePublicationToPublication);
+}
+
+export function mapPageableResponseToBlogAdminTable(
+  response: PageableResponse<ResponsePublication>
+): BlogAdminTable {
+  return {
+    content: createPublicationListFromResponsePublicationList(response.content),
+    totalRecords: response.totalElements,
+  };
+}
+
+export function createRequestSavePublicationFromPublication(
+  pub: Publication
+): RequestSavePublication {
+  return {
+    id: pub.id === -1 ? null : pub.id,
+    body: pub.body,
+    title: pub.title,
+    images: pub.images
+      ? pub.images.map((i) => {
+          return mapImageViewToRequestImage(i);
+        })
+      : null,
+  };
 }
