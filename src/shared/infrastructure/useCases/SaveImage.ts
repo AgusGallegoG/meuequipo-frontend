@@ -2,7 +2,7 @@ import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import type { ImageUpload } from '@/shared/dominio/ImageUpload';
 import type { ImageView } from '@/shared/dominio/ImageView';
-import type { ResponseImage } from '../models/ResponseImage';
+import type { ResponseImage } from '../models/responses/ResponseImage';
 import { mapResponseImageToImageView } from '../service/imageService';
 
 async function Api(image: ImageUpload): Promise<ResponseImage> {

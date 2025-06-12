@@ -1,27 +1,27 @@
 import { useMeToast } from '@/core/hooks/useMeToast';
 import { withLoading } from '@/shared/utils/withLoading';
+import { defaultSignin } from '@/signin/domain/Signin';
+import { getSigninDetails } from '@/signin/infrastructure/useCases/getSigninDetails';
 import { useI18n } from 'vue-i18n';
-import { defaultRival } from '../domain/RivalTable';
-import { getRivalDetails } from '../infrastructure/useCases/getRivalDetails';
 
-export function useGetRivalDetails() {
+export function useGetSigninDetails() {
   const loading = ref<boolean>(false);
   const { t } = useI18n();
   const { showToast } = useMeToast();
 
-  async function refetch(rivlaId: number) {
+  async function refetch(signinId: number) {
     loading.value = true;
     try {
       return await withLoading(async () => {
-        return await getRivalDetails(rivlaId);
+        return await getSigninDetails(signinId);
       });
     } catch (error) {
       showToast({
-        title: t('rivals.title'),
-        message: t('toast.messages.errors.fetch_errors', [t('rivals.title').toLowerCase()]),
+        title: t('signing.title'),
+        message: t('toast.messages.errors.fetch_errors', [t('signing.title').toLowerCase()]),
         severity: 'error',
       });
-      return defaultRival;
+      return defaultSignin;
     } finally {
       loading.value = false;
     }

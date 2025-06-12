@@ -1,9 +1,16 @@
 <script setup lang="ts">
 import BaseDashboardCard from '@/core/layout/components/AdminDashboard/BaseDashboardCard.vue';
 import SeasonAdminSelector from '@/season/components/SeasonAdminSelector.vue';
+import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
+
+const sharedEnumStore = useSharedEnumsStore();
+
+onMounted(async () => {
+  await sharedEnumStore.fetchAll();
+});
 
 const modules = [
   {

@@ -1,0 +1,20 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "Iniciada"
+    },
+    {
+      "id": 2,
+      "name": "Entregada, pendente de pago"
+    },
+    {
+      "id": 3,
+      "name": "Pagada"
+    },
+    {
+      "id": 4,
+      "name": "Finalizada"
+    }
+  ]
+}

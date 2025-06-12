@@ -21,9 +21,9 @@ const rows = computed(() => rivalAdminStore.getRows);
 
 watch(
   () => selectedRival.value,
-  () => {
+  async () => {
     if (selectedRival.value) {
-      doGetRivalDetails(selectedRival.value.id);
+      await doGetRivalDetails(selectedRival.value.id);
     } else {
       rivalAdminStore.clearSelectedToEdit();
     }

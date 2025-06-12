@@ -1,16 +1,17 @@
 <script setup lang="ts">
 import BaseImageUpload from '@/shared/components/BaseImageUpload.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
-import CategoryMultiSelect from '@/shared/components/CategoryMultiSelect.vue';
+import CategoryMultiSelect from '@/shared/components/BaseMultiSelect.vue';
+import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
-import Image from 'primevue/image';
 import { useI18n } from 'vue-i18n';
 import { useSaveRival } from '../application/useSaveRival';
 import { defaultRival, type Rival } from '../domain/RivalTable';
 import { useRivalsAdminStore } from '../store/rivalsStore';
 
 const rivalAdminStore = useRivalsAdminStore();
+const sharedEnumsStore = useSharedEnumsStore();
 const { t } = useI18n();
 const { refetch: saveRival, loading } = useSaveRival();
 
@@ -89,7 +90,9 @@ async function onSubmitForm() {
         <div class="row">
           <CategoryMultiSelect
             id="category-rivals"
-            v-model="rival.categories"></CategoryMultiSelect>
+            v-model="rival.categories"
+            :options="sharedEnumsStore.getCategories"
+            :label="t('shred.dropdowns.categories')"></CategoryMultiSelect>
         </div>
       </div>
     </template>

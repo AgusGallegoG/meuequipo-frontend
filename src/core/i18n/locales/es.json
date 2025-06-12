@@ -55,6 +55,13 @@
       }
     }
   },
+  "shared": {
+    "dropdowns": {
+      "categories": "Categorías",
+      "sex": "Sexo",
+      "signin_state": "Estado de la inscripción"
+    }
+  },
   "admin": {
     "breadcrumbs": {
       "inicio": "Inicio",
@@ -190,6 +197,26 @@
       "images": "Imagenes",
       "creation_date": "Fecha de creación",
       "no_images": "Sin imágenes"
+    }
+  },
+  "signin": {
+    "title": "Inscripción",
+    "table_title": "Inscripciones en la aplicación",
+    "form_title_new": "Crear nueva inscripción",
+    "form_title_edit": "Editar inscripciones",
+    "fields": {
+      "player_complete_name": "Nombre completo do xogador",
+      "parent_complete_name": "Nombre completo do pai/nai/titor",
+      "player_name": "Nombre del jugador",
+      "parent_name": "Nombre del padre/madre/tutor",
+      "player_surnames": "Apellidos do xogador",
+      "parent_surnames": "Apellidos do padre/madre/tutor",
+      "phone": "Teléfono",
+      "email": "Email",
+      "sex": "Sexo",
+      "state": "Estado",
+      "birth_date": "Fecha de nacimiento",
+      "category": "Categoría"
     }
   }
 }

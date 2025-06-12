@@ -30,6 +30,7 @@ export function useSavePublication() {
           ]),
           severity: 'success',
         });
+        return response;
       } else {
         throw Error();
       }

@@ -1,6 +1,6 @@
 import type { ImageView } from '@/shared/dominio/ImageView';
-import type { RequestImage } from '@/shared/infrastructure/models/RequestImage';
-import type { ResponseImage } from '@/shared/infrastructure/models/ResponseImage';
+import type { RequestImage } from '@/shared/infrastructure/models/requests/RequestImage';
+import type { ResponseImage } from '@/shared/infrastructure/models/responses/ResponseImage';
 
 export function mapResponseImageToImageView(resp: ResponseImage): ImageView {
   return {

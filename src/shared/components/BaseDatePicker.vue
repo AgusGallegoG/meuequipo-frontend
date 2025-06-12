@@ -17,7 +17,7 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   showTime: false,
   showIcon: true,
-  view: '',
+  view: 'date',
   dateFormat: 'dd/mm/yy',
 });
 </script>

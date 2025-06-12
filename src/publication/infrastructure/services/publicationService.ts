@@ -1,9 +1,8 @@
 import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
 import type { BlogAdminTable } from '@/publication/domain/BlogAdminTable';
 import type { Publication } from '@/publication/domain/Publication';
-import type { Image } from '@/shared/dominio/Image';
 import type { ImageView } from '@/shared/dominio/ImageView';
-import type { ResponseImage } from '@/shared/infrastructure/models/ResponseImage';
+import type { ResponseImage } from '@/shared/infrastructure/models/responses/ResponseImage';
 import { mapImageViewToRequestImage } from '@/shared/infrastructure/service/imageService';
 import type { RequestSavePublication } from '../models/requests/RequestSavePublication';
 import type {

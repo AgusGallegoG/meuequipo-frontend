@@ -1,4 +1,4 @@
-import type { ResponseImage } from '@/shared/infrastructure/models/ResponseImage';
+import type { ResponseImage } from '@/shared/infrastructure/models/responses/ResponseImage';
 
 export interface ResponseRivalItem {
   logo: ResponseImage;

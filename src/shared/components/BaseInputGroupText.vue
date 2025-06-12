@@ -14,11 +14,12 @@ interface Props {
   label?: string;
   password?: boolean;
   error?: boolean;
-  textError?: string;
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   password: false,
+  disabled: false,
 });
 </script>
 <template>
@@ -34,13 +35,15 @@ const props = withDefaults(defineProps<Props>(), {
           class="w-100"
           v-model="model"
           :feedback="false"
-          toggleMask />
+          toggleMask
+          :disabled="props.disabled" />
         <InputText
           v-else
           :id="'over_label_' + props.id"
           v-model="model"
-          :class="['w-100']"
-          :invalid="error && model !== ''" />
+          class="w-100"
+          :invalid="error && model !== ''"
+          :disabled="props.disabled" />
         <label :for="'over_label_' + props.id" v-if="props.label">{{ props.label }}</label>
       </FloatLabel>
     </InputGroup>

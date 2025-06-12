@@ -1,4 +1,4 @@
-import type { RequestImage } from '@/shared/infrastructure/models/RequestImage';
+import type { RequestImage } from '@/shared/infrastructure/models/requests/RequestImage';
 
 export interface RequestSaveSponsor {
   id: number | null;

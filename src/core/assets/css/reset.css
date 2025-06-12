@@ -24,3 +24,13 @@
   align-items: center !important;
   box-sizing: border-box !important;
 }
+
+.p-drawer-content .p-select {
+  height: 2.25rem !important;
+  padding-top: 0.25rem !important;
+  padding-bottom: 0.25rem !important;
+  line-height: var(--line-height) !important;
+  display: flex !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}

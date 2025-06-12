@@ -109,6 +109,7 @@ onMounted(async () => {
           <BaseDatePicker
             v-model="createSeasonForm.startDate"
             id="date-inicio"
+            view="month"
             date-format="mm/yy"
             :label="t('admin.dashboard.season.modal.startDate')"></BaseDatePicker>
         </div>
@@ -116,6 +117,7 @@ onMounted(async () => {
           <BaseDatePicker
             v-model="createSeasonForm.endDate"
             id="date-fin"
+            view="month"
             date-format="mm/yy"
             :label="t('admin.dashboard.season.modal.endDate')"></BaseDatePicker>
         </div>

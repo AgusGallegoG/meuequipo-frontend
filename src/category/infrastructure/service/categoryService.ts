@@ -1,6 +1,6 @@
 import type { CategoryItem, CategoryTable } from '@/category/domain/CategoryTable';
-import type { RequestSaveCategory } from '../models/request/RequestSaveCategory';
-import type { ResponseCategory } from '../models/response/ResponseCategoryTable';
+import type { RequestSaveCategory } from '@/category/infrastructure/models/request/RequestSaveCategory';
+import type { ResponseCategory } from '@/category/infrastructure/models/response/ResponseCategoryTable';
 
 export function createCategoryTableFromResponseCategoryList(
   response: ResponseCategory[]

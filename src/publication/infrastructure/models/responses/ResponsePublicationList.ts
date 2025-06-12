@@ -1,4 +1,4 @@
-import type { ResponseImage } from '@/shared/infrastructure/models/ResponseImage';
+import type { ResponseImage } from '@/shared/infrastructure/models/responses/ResponseImage';
 
 export type ResponsePublicationList = {
   content: ResponsePublication[];
