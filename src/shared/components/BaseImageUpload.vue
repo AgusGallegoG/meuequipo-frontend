@@ -32,9 +32,16 @@ function deleteImage() {
 </script>
 <template>
   <div class="py-3">
-    <div v-if="model" class="position-relative mb-3 d-inline-block">
-      <Image :src="model.url" :alt="model.name" id="preview-image" />
-      <Button severity="secondary" @click="deleteImage" icon="pi pi-times"></Button>
+    <div v-if="model" class="d-flex justify-content-center mb-3">
+      <div class="d-inline-block position-relative">
+        <Image :src="model.url" :alt="model.name" id="preview-image" loading="lazy" />
+        <Button
+          severity="secondary"
+          @click="deleteImage"
+          icon="pi pi-times"
+          class="position-absolute top-0"
+          style="z-index: 1"></Button>
+      </div>
     </div>
     <FileUpload
       v-else
@@ -52,7 +59,7 @@ function deleteImage() {
 </template>
 <style>
 #preview-image {
-  max-height: 100px;
+  max-height: 150px;
   object-fit: contain;
   aspect-ratio: 1/1;
 }

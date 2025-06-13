@@ -92,7 +92,7 @@ async function onSubmitForm() {
             id="category-rivals"
             v-model="rival.categories"
             :options="sharedEnumsStore.getCategories"
-            :label="t('shred.dropdowns.categories')"></CategoryMultiSelect>
+            :label="t('shared.dropdowns.categories')"></CategoryMultiSelect>
         </div>
       </div>
     </template>

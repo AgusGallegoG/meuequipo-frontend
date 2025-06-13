@@ -1,10 +1,10 @@
 import type { Pageable } from '@/core/dominio/Pageable';
 import { useMeToast } from '@/core/hooks/useMeToast';
-import { defaultSigninTable } from '@/signin/domain/SigninTable';
-import { getSigninAdminTable } from '@/signin/infrastructure/useCases/getSigninAdminTable';
 import { useI18n } from 'vue-i18n';
+import { defaultTeamTable } from '../domain/TeamTable';
+import { getTeamAdminTable } from '../infrastructure/useCases/getTeamAdminTable';
 
-export function useGetSigninAdminTable() {
+export function useGetTeamAdminTable() {
   const loading = ref<boolean>(false);
   const { showToast } = useMeToast();
   const { t } = useI18n();
@@ -13,14 +13,14 @@ export function useGetSigninAdminTable() {
     loading.value = true;
 
     try {
-      return await getSigninAdminTable(filters);
+      return await getTeamAdminTable(filters);
     } catch (error) {
       showToast({
         title: t('toast.title.error'),
-        message: t('toast.messages.errors.fetch_error', [t('signin.title')]),
+        message: t('toast.messages.errors.fetch_error', [t('teams.title')]),
         severity: 'warn',
       });
-      return defaultSigninTable;
+      return defaultTeamTable;
     } finally {
       loading.value = false;
     }

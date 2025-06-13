@@ -44,9 +44,14 @@ function deleteImage(index: number) {
 <template>
   <div class="py-3">
     <div v-if="model" class="position-relative mb-3 overflow-x-scroll w-100 text-nowrap">
-      <div v-for="(image, index) in model" key="id" class="d-inline-block mx-2">
+      <div v-for="(image, index) in model" key="id" class="d-inline-block mx-5 position-relative">
         <Image :src="image.url" :alt="image.name" id="preview-image" />
-        <Button severity="secondary" @click="deleteImage(index)" icon="pi pi-times"></Button>
+        <Button
+          severity="secondary"
+          @click="deleteImage(index)"
+          icon="pi pi-times"
+          class="position-absolute top-0"
+          style="z-index: 1"></Button>
       </div>
     </div>
     <FileUpload

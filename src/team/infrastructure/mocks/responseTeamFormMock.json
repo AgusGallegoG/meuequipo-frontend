@@ -1,0 +1,47 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "Augas de sousas Xuventude Verin",
+      "category": 1,
+      "trainer": "Payo, Mikel",
+      "teamImage": null,
+      "trainerContact": "678349765, payo.mikel@gmail.com",
+      "players": [1, 2, 3]
+    },
+    {
+      "id": 2,
+      "name": "Augas de sousas Xuventude Verin (Fem)",
+      "category": 3,
+      "trainer": "Juan, Erik",
+      "teamImage": null,
+      "trainerContact": "678989765, juan.erik@gmail.com",
+      "players": [3]
+    }
+  ],
+  "totalElements": 50,
+  "totalPages": 5,
+  "size": 10,
+  "number": 0,
+  "first": true,
+  "last": false,
+  "numberOfElements": 3,
+  "empty": false,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "pageable": {
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 0,
+    "pageSize": 10,
+    "pageNumber": 0,
+    "paged": true,
+    "unpaged": false
+  }
+}

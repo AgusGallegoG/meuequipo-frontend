@@ -1,22 +1,22 @@
 import { pageableDefault, type Pageable } from '@/core/dominio/Pageable';
 import { UtilBase } from '@/core/utilities/UtilBase';
-import type { Signin } from '../domain/Signin';
-import { defaultSigninTable, type SigninTable } from '../domain/SigninTable';
+import type { TeamForm } from '@/team/domain/Team';
+import { defaultTeamTable, type TeamTable } from '@/team/domain/TeamTable';
 
-export const useSigninAdminStore = defineStore('signinAdmin', {
+export const useTeamAdminStore = defineStore('teamAdmin', {
   state: () => {
     return {
       data: {
-        table: <SigninTable>{ ...defaultSigninTable },
+        table: <TeamTable>{ ...defaultTeamTable },
         tableFilters: <Pageable>{ ...pageableDefault },
-        selectedToEdit: <Signin | null>null,
+        selectedToEdit: <TeamForm | null>null,
       },
     };
   },
 
   getters: {
     isEdition: (state) => state.data.selectedToEdit !== null,
-    getEditionSignin: (state) => state.data.selectedToEdit,
+    getEditionTeam: (state) => state.data.selectedToEdit,
     getTable: (state) => state.data.table.content,
     getTotalElements: (state) => state.data.table.totalRecords,
     getRows: (state) => state.data.tableFilters.rows,
@@ -24,7 +24,7 @@ export const useSigninAdminStore = defineStore('signinAdmin', {
   },
 
   actions: {
-    setTableData(data: SigninTable) {
+    setTableData(data: TeamTable) {
       this.data.table = { ...data };
     },
     setSort(field: string, direction: number) {
@@ -38,7 +38,7 @@ export const useSigninAdminStore = defineStore('signinAdmin', {
         this.data.tableFilters.page = page;
       }
     },
-    setSelectedToEdit(user: Signin) {
+    setSelectedToEdit(user: TeamForm) {
       this.data.selectedToEdit = user;
     },
     clearSelectedToEdit() {

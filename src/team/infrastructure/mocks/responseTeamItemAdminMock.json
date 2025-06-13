@@ -1,0 +1,43 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "Augas de sousas Xuventude Verin",
+      "category": 1,
+      "trainer": "Payo, Mikel",
+      "playerCount": 13
+    },
+    {
+      "id": 2,
+      "name": "Augas de sousas Xuventude Verin",
+      "category": 3,
+      "trainer": "Juan, Erik",
+      "playerCount": 8
+    }
+  ],
+  "totalElements": 50,
+  "totalPages": 5,
+  "size": 10,
+  "number": 0,
+  "first": true,
+  "last": false,
+  "numberOfElements": 3,
+  "empty": false,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "pageable": {
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 0,
+    "pageSize": 10,
+    "pageNumber": 0,
+    "paged": true,
+    "unpaged": false
+  }
+}
