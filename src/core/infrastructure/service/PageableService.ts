@@ -6,7 +6,7 @@ import {
   type RenameKeys,
 } from '../../dominio/Pageable';
 
-export function createPageParams(lazyParams: Pageable, keysMap: RenameKeys): FilterParams {
+export function createPageParams(lazyParams: Pageable, keysMap: RenameKeys = {}): FilterParams {
   const direction = lazyParams.sortOrder > 0 ? SortOrder.ASCENDING : SortOrder.DESCENDING;
 
   const mappedField =

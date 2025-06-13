@@ -222,5 +222,20 @@
       "birth_date": "Data de nacemento",
       "category": "Categoría"
     }
+  },
+  "teams": {
+    "title": "Equipo",
+    "table_title": "Equipos na aplicación",
+    "form_title_new": "Crear novo equipo",
+    "form_title_edit": "Editar equipo",
+    "fields": {
+      "name": "Nome",
+      "trainer": "Entrandor(es)",
+      "trainer_contact": "Contacto do entrenador",
+      "category": "Categoría",
+      "players": "Xogadores",
+      "player_count": "Número de xogadores",
+      "image": "Imaxe do equipo"
+    }
   }
 }
