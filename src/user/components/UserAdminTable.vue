@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { useGetUserAdminTable } from '@/user/application/useGetUserAdminTable';
+import UserAdminForm from '@/user/components/UserAdminForm.vue';
 import type { UserItem } from '@/user/domain/UserTable';
 import { useUserAdminStore } from '@/user/store/userAdminStore';
+import Button from 'primevue/button';
 import Card from 'primevue/card';
 import Column from 'primevue/column';
 import DataTable, { type DataTablePageEvent, type DataTableSortEvent } from 'primevue/datatable';
@@ -12,6 +14,7 @@ const userAdminStore = useUserAdminStore();
 const { t } = useI18n();
 const { refetch: getTable, loading: loadTable } = useGetUserAdminTable();
 
+const visible = ref<boolean>(false);
 const selectedUser = ref<UserItem | null>(null);
 
 const table = computed(() => userAdminStore.getTable);
@@ -27,6 +30,7 @@ watch(
   () => {
     if (selectedUser.value) {
       userAdminStore.setSelectedToEdit(selectedUser.value);
+      toggleVisible();
     } else {
       userAdminStore.clearSelectedToEdit();
     }
@@ -41,6 +45,10 @@ watch(
     }
   }
 );
+
+function toggleVisible() {
+  visible.value = !visible.value;
+}
 
 async function doFetchTableItems() {
   userAdminStore.setTableData(await getTable(userAdminStore.getFilters));
@@ -63,6 +71,7 @@ async function onPage(event: DataTablePageEvent) {
 }
 </script>
 <template>
+  <UserAdminForm v-model="visible"></UserAdminForm>
   <Card class="h-100">
     <template #content>
       <DataTable
@@ -84,7 +93,17 @@ async function onPage(event: DataTablePageEvent) {
         @page="onPage($event)">
         <template #empty>{{ t('core.states.no_results') }}</template>
         <template #header>
-          <h3 class="mb-2 mt-2">{{ t('users.table_title') }}</h3>
+          <div class="container g-3">
+            <div class="row row-cols-2">
+              <h3 class="mb-2 mt-2">{{ t('users.table_title') }}</h3>
+              <div class="col d-flex justify-content-end">
+                <Button
+                  :label="t('core.buttons.add')"
+                  icon="pi pi-plus"
+                  @click="toggleVisible()"></Button>
+              </div>
+            </div>
+          </div>
         </template>
         <Column field="name" :header="t('users.fields.name')" sortable></Column>
 

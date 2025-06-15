@@ -15,9 +15,12 @@ interface Props {
   class?: string;
   options: SelectModel[];
   label: string;
+  disabled?: boolean;
 }
 
-const props = withDefaults(defineProps<Props>(), {});
+const props = withDefaults(defineProps<Props>(), {
+  disabled: false,
+});
 </script>
 <template>
   <div :class="[props.class, 'py-3']">
@@ -29,6 +32,7 @@ const props = withDefaults(defineProps<Props>(), {});
         optionValue="id"
         optionLabel="name"
         filter
+        :disabled="props.disabled"
         class="w-100" />
       <label :for="'over_label' + (props.id ? props.id : '')">
         {{ props.label }}

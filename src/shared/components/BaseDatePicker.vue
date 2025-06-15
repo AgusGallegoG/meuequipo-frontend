@@ -12,11 +12,13 @@ interface Props {
   dateFormat?: string;
   view?: string;
   class?: string;
+  disabled?: boolean;
 }
 
 const props = withDefaults(defineProps<Props>(), {
   showTime: false,
   showIcon: true,
+  disabled: false,
   view: 'date',
   dateFormat: 'dd/mm/yy',
 });
@@ -24,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
 
 <template>
   <div :class="[props.class, 'py-3', 'py-md-3', 'py-lg-3']">
-    <FloatLabel>
+    <FloatLabel class="w-100">
       <DatePicker
         :id="'over_label_' + props.id"
         class="w-100"
@@ -33,6 +35,7 @@ const props = withDefaults(defineProps<Props>(), {
         :showTime="showTime"
         hourFormat="24"
         :showIcon="showIcon"
+        :disabled="props.disabled"
         :dateFormat="dateFormat"></DatePicker>
       <label :for="'over_label_' + props.id" v-if="props.label">{{ props.label }}</label>
     </FloatLabel>
