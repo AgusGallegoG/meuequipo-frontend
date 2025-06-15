@@ -100,7 +100,12 @@ function onSelectMatch(index: number) {
       </div>
     </template>
     <template #content>
-      <ProgressSpinner v-if="loading" style="width: 40px; height: 40px" strokeWidth="4" />
+      <div
+        v-if="loading"
+        class="h-50 d-flex align-content-center justify-content-center align-items-center"
+        style="min-height: 50vh">
+        <ProgressSpinner style="width: 40px; height: 40px" strokeWidth="4" />
+      </div>
       <div v-else>
         <div
           v-for="(match, index) in list"

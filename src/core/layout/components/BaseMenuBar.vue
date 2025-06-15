@@ -14,6 +14,9 @@ const items = ref([
   {
     label: 'Calendario',
     icon: 'pi pi-calendar',
+    command: () => {
+      router.push({ name: 'Calendar' });
+    },
   },
   {
     label: 'Equipos',

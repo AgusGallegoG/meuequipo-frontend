@@ -131,6 +131,9 @@
       "location": "Dónde estamos:"
     }
   },
+  "about_page": {
+    "title": "Sobre nosotros"
+  },
   "users": {
     "title": "Usuarios",
     "table_title": "Usuarios de la aplicacion",
@@ -236,7 +239,7 @@
   },
   "matches": {
     "title": "Partido",
-    "table_title": "Partidos en la aplicación",
+    "table_title": "Partidos",
     "form_title_new": "Crear nuevo partido",
     "form_title_edit": "Editar partido",
     "no_date": "Sin fecha",
