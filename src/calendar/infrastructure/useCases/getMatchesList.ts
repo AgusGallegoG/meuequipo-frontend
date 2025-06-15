@@ -7,8 +7,9 @@ import type { ResponseMatch } from '@/shared/infrastructure/models/responses/Res
 import { mapResponseMatchListToMatchList } from '@/shared/infrastructure/service/matchService';
 import type { RequestCalendarFilters } from '../models/RequestCalendarFilters';
 
-async function Api(filters: RequestCalendarFilters): Promise<ResponseMatch[]> {
-  const repsonse = await api.get<ResponseMatch[]>('/calendars', {
+async function Api(filters: RequestCalendarFilters, isAdmin: boolean): Promise<ResponseMatch[]> {
+  const url = isAdmin ? '/calendars/admin' : '/calendars';
+  const repsonse = await api.get<ResponseMatch[]>(url, {
     params: {
       filters,
     },
@@ -22,9 +23,9 @@ async function InMemory(): Promise<ResponseMatch[]> {
   return responseMatchListMock as ResponseMatch[];
 }
 
-async function getMatchesList(filters: RequestCalendarFilters): Promise<Match[]> {
+async function getMatchesList(filters: RequestCalendarFilters, isAdmin: boolean): Promise<Match[]> {
   try {
-    const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(filters);
+    const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(filters, isAdmin);
 
     return mapResponseMatchListToMatchList(response);
   } catch (error) {
