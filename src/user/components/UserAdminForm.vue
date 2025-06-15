@@ -5,8 +5,10 @@ import { useSaveUser } from '@/user/application/useSaveUser';
 import { type UserItem, defaultUserItem } from '@/user/domain/UserTable';
 import { useUserAdminStore } from '@/user/store/userAdminStore';
 import Button from 'primevue/button';
-import Card from 'primevue/card';
+import Drawer from 'primevue/drawer';
 import { useI18n } from 'vue-i18n';
+
+const visible = defineModel<boolean>();
 
 const { refetch: saveUser, loading } = useSaveUser();
 const userAdminStore = useUserAdminStore();
@@ -23,6 +25,12 @@ const isValidMail = computed(() => {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.value.email);
 });
 
+watch(visible, (newVal) => {
+  if (!newVal) {
+    resetForm();
+  }
+});
+
 watch(
   editionUser,
   (newVal) => {
@@ -37,6 +45,9 @@ watch(
 
 function resetForm() {
   user.value = { ...defaultUserItem };
+  if (isEdit.value === true) {
+    visible.value = false;
+  }
   userAdminStore.clearSelectedToEdit();
 }
 
@@ -46,32 +57,45 @@ async function onSubmitForm() {
   if (response) {
     userAdminStore.setTableData(response);
   }
+  visible.value = false;
 }
 </script>
 <template>
-  <Card class="h-100">
-    <template #title>
+  <Drawer
+    position="top"
+    v-model:visible="visible"
+    class="h-auto overflow-y-scroll"
+    style="max-height: 75% !important">
+    <template #header>
       <h3 class="mb-2 mt-2">
         {{ isEdit ? t('users.form_title_edit') : t('users.form_title_new') }}
       </h3>
     </template>
-    <template #content>
-      <div class="container g-3">
-        <BaseInputGroupText
-          :label="t('users.fields.name')"
-          v-model="user.name"></BaseInputGroupText>
+    <template #default>
+      <div class="container g-3 mt-2">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+          <BaseInputGroupText
+            class="col d-flex align-items-center"
+            :label="t('users.fields.name')"
+            v-model="user.name"></BaseInputGroupText>
 
-        <BaseInputGroupText
-          :label="t('users.fields.surnames')"
-          v-model="user.surnames"></BaseInputGroupText>
+          <BaseInputGroupText
+            class="col d-flex align-items-center"
+            :label="t('users.fields.surnames')"
+            v-model="user.surnames"></BaseInputGroupText>
 
-        <BaseInputGroupText
-          :label="t('users.fields.email')"
-          v-model="user.email"
-          :error="!isValidMail"
-          :textError="t('users.error.mail')"></BaseInputGroupText>
+          <BaseInputGroupText
+            class="col d-flex align-items-center"
+            :label="t('users.fields.email')"
+            v-model="user.email"
+            :error="!isValidMail"
+            :textError="t('users.error.mail')"></BaseInputGroupText>
 
-        <BaseCheckBox :label="t('users.fields.active')" v-model="user.active"></BaseCheckBox>
+          <BaseCheckBox
+            class="col d-flex align-items-center"
+            :label="t('users.fields.active')"
+            v-model="user.active"></BaseCheckBox>
+        </div>
       </div>
     </template>
     <template #footer>
@@ -82,7 +106,7 @@ async function onSubmitForm() {
           raised
           @click="resetForm()"
           :label="isEdit ? t('core.buttons.cancel') : t('core.buttons.clear')"
-          :icon="isEdit ? 'pi pi-eraser' : 'pi pi-times'"></Button>
+          :icon="isEdit ? 'pi pi-times' : 'pi pi-eraser'"></Button>
         <Button
           class="w-100"
           raised
@@ -93,5 +117,5 @@ async function onSubmitForm() {
           :loading="loading"></Button>
       </div>
     </template>
-  </Card>
+  </Drawer>
 </template>

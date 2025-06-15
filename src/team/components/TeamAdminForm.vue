@@ -24,7 +24,13 @@ const sharedEnumStore = useSharedEnumsStore();
 
 const isEdit = computed(() => teamAdminStore.isEdition);
 const editionForm = computed(() => teamAdminStore.getEditionTeam);
-const canSave = computed(() => true);
+const canSave = computed(() => {
+  return (
+    team.value.name.trim() !== '' &&
+    team.value.category !== null &&
+    team.value.trainer.trim() !== ''
+  );
+});
 const team = ref<TeamForm>({ ...defaultTeamForm });
 const players = ref<Select[]>([]);
 

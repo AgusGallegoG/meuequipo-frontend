@@ -20,7 +20,23 @@ const sharedEnumStore = useSharedEnumsStore();
 
 const isEdit = computed(() => singinAdminStore.isEdition);
 const editionSignin = computed(() => singinAdminStore.getEditionSignin);
-const canSave = computed(() => true); //definir logica de guardado
+const canSave = computed(() => {
+  const s = signin.value;
+  const p = s.player;
+
+  return (
+    s.parentName.trim() !== '' &&
+    s.parentSurnames.trim() !== '' &&
+    s.mail.trim() !== '' &&
+    s.phone.trim() !== '' &&
+    p &&
+    p.name.trim() !== '' &&
+    p.surnames.trim() !== '' &&
+    p.birthDate !== null &&
+    p.sex !== null &&
+    p.category !== null
+  );
+});
 const signin = ref<Signin>({ ...defaultSignin });
 
 watch(visible, (newVal) => {
@@ -31,14 +47,14 @@ watch(visible, (newVal) => {
 
 watch(editionSignin, (newVal) => {
   if (newVal) {
-    signin.value = { ...newVal };
+    signin.value = cloneSignin(newVal);
   } else {
-    signin.value = { ...defaultSignin };
+    signin.value = cloneSignin(defaultSignin);
   }
 });
 
 function resetForm() {
-  signin.value = { ...defaultSignin };
+  signin.value = cloneSignin(defaultSignin);
   if (isEdit.value === true) {
     visible.value = false;
   }
@@ -51,6 +67,25 @@ async function onSubmitForm() {
     singinAdminStore.setTableData(response);
   }
   visible.value = false;
+}
+
+function cloneSignin(original: Signin): Signin {
+  return {
+    id: original.id,
+    parentName: original.parentName,
+    parentSurnames: original.parentSurnames,
+    mail: original.mail,
+    phone: original.phone,
+    state: original.state,
+    player: {
+      id: original.player.id,
+      name: original.player.name,
+      surnames: original.player.surnames,
+      birthDate: original.player.birthDate ? new Date(original.player.birthDate) : null,
+      sex: original.player.sex,
+      category: original.player.category,
+    },
+  };
 }
 </script>
 <template>
@@ -84,9 +119,15 @@ async function onSubmitForm() {
             :label="t('signin.fields.phone')"
             :disabled="isEdit" />
           <BaseInputGroupText
-            class="col-12 col-md-8"
+            class="col-12 col-md-6"
             v-model="signin.mail"
             :label="t('signin.fields.email')"
+            :disabled="isEdit" />
+          <BaseSelect
+            class="col-12 col-md-2"
+            v-model="signin.player.category"
+            :options="sharedEnumStore.getCategories"
+            :label="t('signin.fields.category')"
             :disabled="isEdit" />
         </div>
         <!-- player name-surname -->
@@ -107,17 +148,19 @@ async function onSubmitForm() {
           <BaseDatePicker
             class="col-12 col-md-4"
             v-model="signin.player.birthDate"
-            :label="t('signin.fields.birth_date')" />
-          <BaseSelect
-            class="col-12 col-md-4"
-            v-model="signin.player.category"
-            :options="sharedEnumStore.getCategories"
-            :label="t('signin.fields.category')" />
+            :label="t('signin.fields.birth_date')"
+            :disabled="isEdit" />
           <BaseSelect
             class="col-12 col-md-4"
             v-model="signin.player.sex"
             :options="sharedEnumStore.getSexOptions"
-            :label="t('signin.fields.sex')" />
+            :label="t('signin.fields.sex')"
+            :disabled="isEdit" />
+          <BaseSelect
+            class="col-12 col-md-4"
+            v-model="signin.state"
+            :options="sharedEnumStore.getSigninStates"
+            :label="t('signin.fields.state')" />
         </div>
       </div>
     </template>

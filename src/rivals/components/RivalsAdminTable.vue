@@ -1,8 +1,10 @@
 <script setup lang="ts">
 import { useGetRivalDetails } from '@/rivals/application/useGetRivalDetails';
 import { useGetRivalsAdminTable } from '@/rivals/application/useGetRivalsAdminTable';
+import RivalsAdminForm from '@/rivals/components/RivalsAdminForm.vue';
 import { type RivalItem } from '@/rivals/domain/RivalTable';
 import { useRivalsAdminStore } from '@/rivals/store/rivalsStore';
+import Button from 'primevue/button';
 import Card from 'primevue/card';
 import Column from 'primevue/column';
 import DataTable, { type DataTablePageEvent, type DataTableSortEvent } from 'primevue/datatable';
@@ -13,17 +15,23 @@ const { t } = useI18n();
 const { refetch: getTableItems, loading } = useGetRivalsAdminTable();
 const { refetch: getRivalDetails } = useGetRivalDetails();
 
+const visible = ref<boolean>(false);
 const selectedRival = ref<RivalItem | null>(null);
 
 const table = computed(() => rivalAdminStore.getTable);
 const totalOfRecords = computed(() => rivalAdminStore.getTotalElements);
 const rows = computed(() => rivalAdminStore.getRows);
 
+onMounted(async () => {
+  await doFetchTableItems();
+});
+
 watch(
   () => selectedRival.value,
   async () => {
     if (selectedRival.value) {
       await doGetRivalDetails(selectedRival.value.id);
+      toggleVisible();
     } else {
       rivalAdminStore.clearSelectedToEdit();
     }
@@ -39,6 +47,10 @@ watch(
   }
 );
 
+function toggleVisible() {
+  visible.value = !visible.value;
+}
+
 async function doGetRivalDetails(id: number) {
   rivalAdminStore.setSelectedToEdit(await getRivalDetails(id));
 }
@@ -46,10 +58,6 @@ async function doGetRivalDetails(id: number) {
 async function doFetchTableItems() {
   rivalAdminStore.setTableData(await getTableItems(rivalAdminStore.getFilters));
 }
-
-onMounted(async () => {
-  await doFetchTableItems();
-});
 
 async function onSort(event: DataTableSortEvent) {
   const sortOrder = event.sortOrder;
@@ -68,6 +76,7 @@ async function onPage(event: DataTablePageEvent) {
 }
 </script>
 <template>
+  <RivalsAdminForm v-model="visible"></RivalsAdminForm>
   <Card class="h-100">
     <template #content>
       <DataTable
@@ -89,7 +98,17 @@ async function onPage(event: DataTablePageEvent) {
         @page="onPage($event)">
         <template #empty>{{ t('core.states.no_results') }}</template>
         <template #header>
-          <h3 class="mb-2 mt-2">{{ t('rivals.table_title') }}</h3>
+          <div class="container g-3">
+            <div class="row row-cols-2">
+              <h3 class="mb-2 mt-2 col">{{ t('rivals.table_title') }}</h3>
+              <div class="col d-flex justify-content-end">
+                <Button
+                  :label="t('core.buttons.add')"
+                  icon="pi pi-plus"
+                  @click="toggleVisible()"></Button>
+              </div>
+            </div>
+          </div>
         </template>
 
         <Column field="logo" :header="t('rivals.fields.logo')">
