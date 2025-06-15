@@ -218,5 +218,36 @@
       "birth_date": "Fecha de nacimiento",
       "category": "Categoría"
     }
+  },
+  "teams": {
+    "title": "Equipo",
+    "table_title": "Equipos del club en la aplicación",
+    "form_title_new": "Crear nuevo equipo",
+    "form_title_edit": "Editar equipo",
+    "fields": {
+      "name": "Nombre",
+      "trainer": "Entrandor(es)",
+      "trainer_contact": "Contacto del entrenador",
+      "category": "Categoría",
+      "players": "Jugadores",
+      "player_count": "Número de jugadores",
+      "image": "Imagen del equipo"
+    }
+  },
+  "matches": {
+    "title": "Partido",
+    "table_title": "Partidos en la aplicación",
+    "form_title_new": "Crear nuevo partido",
+    "form_title_edit": "Editar partido",
+    "no_date": "Sin fecha",
+    "fields": {
+      "local": "Local",
+      "visitor": "Visitante",
+      "category": "Categoría",
+      "location": "Localización",
+      "match_date": "Fecha del partido",
+      "state": "Estado",
+      "points": "Puntos"
+    }
   }
 }

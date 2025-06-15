@@ -68,7 +68,7 @@ const modules = [
 </script>
 <template>
   <div>
-    <div id="admin-season" class="w-75 mx-auto my-4 row justify-content-center">
+    <div id="admin-season" class="mx-auto my-4 row justify-content-center" style="width: 90%">
       <SeasonAdminSelector />
     </div>
 

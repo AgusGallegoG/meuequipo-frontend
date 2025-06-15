@@ -62,6 +62,13 @@
       "categories": "Categorías",
       "sex": "Sexo",
       "signin_state": "Estado da inscrición"
+    },
+    "enums": {
+      "sex": {
+        "male": "Masculino",
+        "female": "Feminino",
+        "mixed": "Mixto"
+      }
     }
   },
   "admin": {
@@ -225,7 +232,7 @@
   },
   "teams": {
     "title": "Equipo",
-    "table_title": "Equipos na aplicación",
+    "table_title": "Equipos do club na aplicación",
     "form_title_new": "Crear novo equipo",
     "form_title_edit": "Editar equipo",
     "fields": {
@@ -236,6 +243,24 @@
       "players": "Xogadores",
       "player_count": "Número de xogadores",
       "image": "Imaxe do equipo"
+    }
+  },
+  "matches": {
+    "title": "Encontro",
+    "table_title": "Encontros na aplicación",
+    "form_title_new": "Crear novo encontro",
+    "form_title_edit": "Editar encontro",
+    "no_date": "Sen data",
+    "fields": {
+      "local": "Equipo local",
+      "club_team": "Equipo do club",
+      "visitor": "Equipo visitante",
+      "category": "Categoría",
+      "location": "Localización",
+      "match_date": "Data do encontro",
+      "state": "Estado",
+      "points": "Puntos",
+      "team": "Equipo"
     }
   }
 }

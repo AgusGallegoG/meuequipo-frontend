@@ -1,27 +1,18 @@
 import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
 import type { BlogAdminTable } from '@/publication/domain/BlogAdminTable';
 import type { Publication } from '@/publication/domain/Publication';
+import type { RequestSavePublication } from '@/publication/infrastructure/models/requests/RequestSavePublication';
+import type { ResponsePublication } from '@/publication/infrastructure/models/responses/ResponsePublicationList';
 import type { ImageView } from '@/shared/dominio/ImageView';
 import type { ResponseImage } from '@/shared/infrastructure/models/responses/ResponseImage';
-import { mapImageViewToRequestImage } from '@/shared/infrastructure/service/imageService';
-import type { RequestSavePublication } from '../models/requests/RequestSavePublication';
-import type {
-  ResponsePublication,
-  ResponsePublicationList,
-} from '../models/responses/ResponsePublicationList';
-
-// Función para mapear un único ResponseImage a Image
-function mapResponseImageToImage(responseImage: ResponseImage): ImageView {
-  return {
-    id: responseImage.id,
-    name: responseImage.name,
-    url: responseImage.url,
-  };
-}
+import {
+  mapImageViewToRequestImage,
+  mapResponseImageToImageView,
+} from '@/shared/infrastructure/service/imageService';
 
 // Función para mapear un array de ResponseImage a un array de Image
 function mapResponseImagesToImages(responseImages: ResponseImage[]): ImageView[] {
-  return responseImages.map(mapResponseImageToImage);
+  return responseImages.map(mapResponseImageToImageView);
 }
 
 // Función para mapear un único ResponsePublication a Publication

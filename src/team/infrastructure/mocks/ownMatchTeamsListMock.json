@@ -1,0 +1,54 @@
+{
+  "content": [
+    {
+      "id": 40,
+      "name": "Osos Grises",
+      "logo": {
+        "name": "osos.png",
+        "url": "https://th.bing.com/th/id/OIP.7T1AGU7UEa8OZLT5-kkMRAHaHa?w=196&h=196&c=7&r=0&o=7&pid=1.7",
+        "id": 2001
+      },
+      "isOurTeam": true
+    },
+    {
+      "id": 41,
+      "name": "Zorros Rojos",
+      "logo": {
+        "name": "zorros.png",
+        "url": "https://th.bing.com/th/id/OIP.KAKOfFlQKAIy08jC2qAC7gHaHa?w=196&h=196&c=7&r=0&o=7&pid=1.7",
+        "id": 2002
+      },
+      "isOurTeam": true
+    },
+    {
+      "id": 42,
+      "name": "Ciervos del Alba",
+      "logo": {
+        "name": "ciervos.png",
+        "url": "https://th.bing.com/th/id/OIP.34u1tJdPIrqmc9l0AqxFYwHaHa?w=196&h=196&c=7&r=0&o=7&pid=1.7",
+        "id": 2003
+      },
+      "isOurTeam": true
+    },
+    {
+      "id": 43,
+      "name": "Nutrias del Río",
+      "logo": {
+        "name": "nutrias.png",
+        "url": "https://th.bing.com/th/id/OIP.WJvHObAQDL9Nbb7ghFx6pAHaHa?w=196&h=196&c=7&r=0&o=7&pid=1.7",
+        "id": 2004
+      },
+      "isOurTeam": true
+    },
+    {
+      "id": 44,
+      "name": "Búhos Nocturnos",
+      "logo": {
+        "name": "buhos.png",
+        "url": "https://th.bing.com/th/id/OIP.Z3F7AjmvYpPq9_zNYrtrUgHaHa?w=196&h=196&c=7&r=0&o=7&pid=1.7",
+        "id": 2005
+      },
+      "isOurTeam": true
+    }
+  ]
+}

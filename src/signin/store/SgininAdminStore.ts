@@ -38,8 +38,8 @@ export const useSigninAdminStore = defineStore('signinAdmin', {
         this.data.tableFilters.page = page;
       }
     },
-    setSelectedToEdit(user: Signin) {
-      this.data.selectedToEdit = user;
+    setSelectedToEdit(signin: Signin) {
+      this.data.selectedToEdit = signin;
     },
     clearSelectedToEdit() {
       this.data.selectedToEdit = null;

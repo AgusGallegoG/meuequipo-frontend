@@ -1,0 +1,54 @@
+{
+  "content": [
+    {
+      "id": 101,
+      "name": "Lobos del Norte",
+      "logo": {
+        "name": "lobos.png",
+        "url": "https://th.bing.com/th/id/OIP.BEZbwxJ7fOVMq4nLN-jjzgHaHa?w=196&h=196&c=7&r=0&o=7&pid=1.7&rm=3",
+        "id": 1001
+      },
+      "isOurTeam": false
+    },
+    {
+      "id": 102,
+      "name": "Tigres del Sur",
+      "logo": {
+        "name": "tigres.png",
+        "url": "https://imgs.search.brave.com/rcj2KIk8s0BDkYODx2o17BEVDY31qlcIsb722994xuA/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly90NC5m/dGNkbi5uZXQvanBn/LzA0LzQ0Lzc2LzEx/LzM2MF9GXzQ0NDc2/MTExOV9DUVBqWEZK/T2hWdjQxcXR5YWhP/V2RUSXI5TTdSSkl4/Ry5qcGc",
+        "id": 1002
+      },
+      "isOurTeam": false
+    },
+    {
+      "id": 103,
+      "name": "Águilas del Este",
+      "logo": {
+        "name": "aguilas.png",
+        "url": "https://imgs.search.brave.com/SOJ23U0J0KIQGWGUqPjbPxoPTWJx-VplR-7KEMHNkTo/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvMTMz/MDU3NTY3OC92ZWN0/b3IvYmFsZC1lYWds/ZS1ib2xkLWxpbmUt/c3R5bGUtbG9nby1t/YXJrLXRlbXBsYXRl/LW9yLWljb24tb2Yt/bWFqZXN0aWMtYmly/ZC1zaXR0aW5nLW9u/LWJyYW5jaC5qcGc_/cz02MTJ4NjEyJnc9/MCZrPTIwJmM9ckFT/YldJclIzZ1I3MFBv/ZFFxdWFuWUVNZVll/bE9oQ1dIdGhDcXVm/SEFCQT0",
+        "id": 1003
+      },
+      "isOurTeam": false
+    },
+    {
+      "id": 104,
+      "name": "Halcones del Oeste",
+      "logo": {
+        "name": "halcones.png",
+        "url": "https://imgs.search.brave.com/ltTc2ZFjcRjy3h_Y8KtPmAbpYFZ2cqPklyst_Xo8B3k/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5pc3RvY2twaG90/by5jb20vaWQvODU4/NzE2MTI0L3ZlY3Rv/ci9lYWdsZS1pY29u/LmpwZz9zPTYxMng2/MTImdz0wJms9MjAm/Yz01VmlvSWFFZExx/LXN2RVNvOXJVQnlO/NzBvSXFncEdQbWtM/QjFBRUdrdW9nPQ",
+        "id": 1004
+      },
+      "isOurTeam": false
+    },
+    {
+      "id": 105,
+      "name": "Pumas Centrales",
+      "logo": {
+        "name": "pumas.png",
+        "url": "https://imgs.search.brave.com/XmHjYRPLzI_O0AiyMxstwFxD2HinVxrP0QYbrzgBHtc/rs:fit:500:0:0:0/g:ce/aHR0cHM6Ly9yZXMu/Y2xvdWRpbmFyeS5j/b20vemVuYnVzaW5l/c3MvcV9hdXRvLHdf/MjgwL3YxL2xvZ2Fz/dGVyL2xvZ2FzdGVy/LTIwMTktMDItMDA4/NS10LXB1bWEtbG9n/by02LnBuZw",
+        "id": 1005
+      },
+      "isOurTeam": false
+    }
+  ]
+}
