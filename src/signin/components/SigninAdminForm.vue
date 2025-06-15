@@ -20,7 +20,7 @@ const sharedEnumStore = useSharedEnumsStore();
 
 const isEdit = computed(() => singinAdminStore.isEdition);
 const editionSignin = computed(() => singinAdminStore.getEditionSignin);
-const canSave = computed(() => true);
+const canSave = computed(() => true); //definir logica de guardado
 const signin = ref<Signin>({ ...defaultSignin });
 
 watch(visible, (newVal) => {

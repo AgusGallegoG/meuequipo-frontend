@@ -29,7 +29,6 @@ const props = withDefaults(defineProps<Props>(), {});
         optionValue="id"
         optionLabel="name"
         filter
-        :maxSelectedLabels="6"
         class="w-100" />
       <label :for="'over_label' + (props.id ? props.id : '')">
         {{ props.label }}

@@ -31,6 +31,7 @@ const props = withDefaults(defineProps<Props>(), {
         v-model="model"
         :view="view"
         :showTime="showTime"
+        hourFormat="24"
         :showIcon="showIcon"
         :dateFormat="dateFormat"></DatePicker>
       <label :for="'over_label_' + props.id" v-if="props.label">{{ props.label }}</label>

@@ -2,6 +2,7 @@ import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import type { Select } from '@/shared/dominio/Select';
 import categorySelectMock from '@/shared/infrastructure/mocks/categorySelectMock.json';
+import matchStatesMock from '@/shared/infrastructure/mocks/matchStatesMock.json';
 import sexOptionsMock from '@/shared/infrastructure/mocks/sexOptionsMock.json';
 import signinStatesMock from '@/shared/infrastructure/mocks/signinStatesMock.json';
 import { type ResponseSelect } from '../infrastructure/models/responses/ResponseSelect';
@@ -15,6 +16,7 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
         categories: <Select[]>[],
         sexOptions: <Select[]>[],
         signinStates: <Select[]>[],
+        matchStates: <Select[]>[],
       },
     };
   },
@@ -41,10 +43,8 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
         if (!sex) return '';
 
         const name = sex.name.toUpperCase();
-        console.log(name);
 
         if (name === 'MASCULINO') {
-          console.log('Severity: info');
           return 'info';
         }
         if (name === 'FEMENINO' || name === 'FEMININO') return 'warn';
@@ -55,7 +55,15 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
     getSigninStateName:
       (state) =>
       (id: number): string => {
-        const stateOp = state.data.signinStates.find((c) => (c.id = id));
+        const stateOp = state.data.signinStates.find((c) => c.id === id);
+        return stateOp ? stateOp.name : '';
+      },
+
+    getMatchStates: (state) => state.data.matchStates,
+    getMatchStatesName:
+      (state) =>
+      (id: number): string => {
+        const stateOp = state.data.matchStates.find((c) => c.id === id);
         return stateOp ? stateOp.name : '';
       },
   },
@@ -66,6 +74,7 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
       await this.fetchCategories();
       await this.fetchSexOptions();
       await this.fetchSigninStateOptions();
+      await this.fetchMatchStatesOptions();
     },
     async fetchCategories() {
       var res: Select[] = [];
@@ -85,7 +94,7 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
         await UtilBase.wait(100);
         res = sexOptionsMock.content as ResponseSelect[];
       } else {
-        const partial = await api.get<ResponseSelect[]>('/players/sex');
+        const partial = await api.get<ResponseSelect[]>('/enums/sex');
         res = partial.data;
       }
       this.data.sexOptions = res;
@@ -97,10 +106,22 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
         await UtilBase.wait(100);
         res = signinStatesMock.content as ResponseSelect[];
       } else {
-        const partial = await api.get<ResponseSelect[]>('/signin/states');
+        const partial = await api.get<ResponseSelect[]>('/enums/signinState');
         res = partial.data;
       }
       this.data.signinStates = res;
+    },
+
+    async fetchMatchStatesOptions() {
+      var res: Select[] = [];
+      if (UtilBase.checkEnvironment()) {
+        await UtilBase.wait(100);
+        res = matchStatesMock.content as ResponseSelect[];
+      } else {
+        const partial = await api.get<ResponseSelect[]>('/enums/matchStates');
+        res = partial.data;
+      }
+      this.data.matchStates = res;
     },
   },
 });

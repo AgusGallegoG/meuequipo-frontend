@@ -1,0 +1,81 @@
+[
+  {
+    "id": 1,
+    "localTeam": {
+      "id": 101,
+      "name": "Lobos del Norte",
+      "logo": {
+        "name": "lobos.png",
+        "url": "https://th.bing.com/th/id/OIP.BEZbwxJ7fOVMq4nLN-jjzgHaHa?w=196&h=196&c=7&r=0&o=7&pid=1.7&rm=3",
+        "id": 1001
+      },
+      "isOurTeam": true
+    },
+    "localPoints": 78,
+    "visitorTeam": {
+      "id": 102,
+      "name": "Tigres del Sur",
+      "logo": {
+        "name": "tigres.png",
+        "url": "https://th.bing.com/th/id/OIP.DonDMu3wK2iDQtbvivlHNgHaIE?w=178&h=194&c=7&r=0&o=7&pid=1.7&rm=3",
+        "id": 1002
+      },
+      "isOurTeam": false
+    },
+    "visitorPoints": 65,
+    "category": 1,
+    "matchDate": "2025-06-20T18:30:00",
+    "location": "Polideportivo Central",
+    "state": 3
+  },
+  {
+    "id": 2,
+    "localTeam": {
+      "id": 103,
+      "name": "Águilas de Oriente",
+      "logo": {
+        "name": "aguilas.png",
+        "url": "https://th.bing.com/th/id/OIP.xLXzLPo7xi6U-0dRHWIOVAHaHa?w=188&h=187&c=7&r=0&o=7&pid=1.7&rm=3",
+        "id": 1003
+      },
+      "isOurTeam": false
+    },
+    "localPoints": null,
+    "visitorTeam": {
+      "id": 104,
+      "name": "Cóndores del Oeste",
+      "logo": {
+        "name": "condores.png",
+        "url": "https://th.bing.com/th/id/OIP.AhJZQUAb68AY_3oi1vfSXwHaHa?w=172&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+        "id": 1004
+      },
+      "isOurTeam": true
+    },
+    "visitorPoints": null,
+    "category": 2,
+    "matchDate": "2025-06-22T12:00:00",
+    "location": "Gimnasio Municipal",
+    "state": 1
+  },
+  {
+    "id": 3,
+    "localTeam": {
+      "id": 105,
+      "name": "Halcones Rojos",
+      "logo": null,
+      "isOurTeam": true
+    },
+    "localPoints": 90,
+    "visitorTeam": {
+      "id": 106,
+      "name": "Panteras Negras",
+      "logo": null,
+      "isOurTeam": true
+    },
+    "visitorPoints": 92,
+    "category": 1,
+    "matchDate": "2025-06-15T20:00:00",
+    "location": "Estadio Arena Norte",
+    "state": 2
+  }
+]

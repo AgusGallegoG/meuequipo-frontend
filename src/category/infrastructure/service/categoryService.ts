@@ -1,6 +1,7 @@
 import type { CategoryItem, CategoryTable } from '@/category/domain/CategoryTable';
 import type { RequestSaveCategory } from '@/category/infrastructure/models/request/RequestSaveCategory';
 import type { ResponseCategory } from '@/category/infrastructure/models/response/ResponseCategoryTable';
+import { mapToLocaleDateString, parseBackendDate } from '@/core/utilities/UtilDate';
 
 export function createCategoryTableFromResponseCategoryList(
   response: ResponseCategory[]
@@ -16,8 +17,8 @@ function mapCategoryResponseListToCategoryItemList(response: ResponseCategory[])
       id: cat.id,
       active: cat.active,
       name: cat.name,
-      yearEnd: cat.yearEnd ? new Date(cat.yearEnd) : null,
-      yearInit: new Date(cat.yearInit),
+      yearInit: parseBackendDate(cat.yearInit),
+      yearEnd: cat.yearEnd ? parseBackendDate(cat.yearEnd) : null,
     };
   });
 }
@@ -28,8 +29,8 @@ export function createRequestSaveCategoryFromCategoryItem(
   return {
     id: category.id === -1 ? null : category.id,
     name: category.name,
-    yearInit: category.yearInit ? category.yearInit.toISOString() : '',
-    yearEnd: category.yearEnd ? category.yearEnd.toISOString() : null,
+    yearInit: category.yearInit ? mapToLocaleDateString(category.yearInit) : '',
+    yearEnd: category.yearEnd ? mapToLocaleDateString(category.yearEnd) : null,
     active: category.active,
   };
 }

@@ -1,3 +1,4 @@
+import { mapToLocaleDateString } from '@/core/utilities/UtilDate';
 import type { Season } from '@/season/domain/Season';
 import type { SeasonForm } from '@/season/domain/SeasonForm';
 import type { RequestNewSeason } from '../model/request/RequestNewSeason';
@@ -17,8 +18,8 @@ export function createSeasonListFromResponseSeasonList(response: ResponseSeasonL
 
 export function createRequestNewSeasonFromSeasonForm(newSeason: SeasonForm): RequestNewSeason {
   return {
-    startDate: newSeason.startDate ? newSeason.startDate.toISOString() : '',
-    endDate: newSeason.endDate ? newSeason.endDate.toISOString() : '',
+    startDate: newSeason.startDate ? mapToLocaleDateString(newSeason.startDate) : '',
+    endDate: newSeason.endDate ? mapToLocaleDateString(newSeason.endDate) : '',
     active: newSeason.active,
   };
 }
