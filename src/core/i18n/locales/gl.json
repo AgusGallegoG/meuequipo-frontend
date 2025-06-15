@@ -140,6 +140,9 @@
       "location": "Onde estamos:"
     }
   },
+  "about_page": {
+    "title": "Sobre nós"
+  },
   "users": {
     "title": "Usuario",
     "table_title": "Usuarios da aplicación",
@@ -247,7 +250,7 @@
   },
   "matches": {
     "title": "Encontro",
-    "table_title": "Encontros na aplicación",
+    "table_title": "Encontros",
     "form_title_new": "Crear novo encontro",
     "form_title_edit": "Editar encontro",
     "no_date": "Sen data",

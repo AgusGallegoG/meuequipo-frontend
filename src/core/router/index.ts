@@ -1,5 +1,5 @@
 import { useAuthStore } from '@/auth/store/authStore';
-import { calendarRouterAdmin } from '@/calendar/router/calendar.routes';
+import { calendarRouter, calendarRouterAdmin } from '@/calendar/router/calendar.routes';
 import { categoryRouterAdmin } from '@/category/router/category.routes';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import { publicationRouterAdmin } from '@/publication/router/publication.routes';
@@ -32,11 +32,12 @@ const routes: RouteRecordRaw[] = [
         component: () => import('@/core/views/base/HomeView.vue'),
       },
       {
-        path: 'about',
+        path: '/about',
         name: 'About',
         component: () => import('@/core/views/base/AboutView.vue'),
       },
       // aqui van las rutas de los hijos
+      ...calendarRouter,
     ],
   },
   {

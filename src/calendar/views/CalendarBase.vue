@@ -2,7 +2,7 @@
 import CalendarView from '@/calendar/components/CalendarView.vue';
 </script>
 <template>
-  <div>
+  <div id="base-module">
     <CalendarView :isAdmin="false" />
   </div>
 </template>

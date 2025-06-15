@@ -99,6 +99,27 @@ body {
   }
 }
 
+/* Clases para la vista de administracion de los distintos elementos de la web */
+#base-module {
+  width: 100vw;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  #base-module {
+    width: 75vw;
+  }
+}
+
+@media (min-width: 992px) {
+  #base-module {
+    width: 60vw;
+  }
+}
+
 /* Avatar styles */
 .avatar-responsive {
   width: 64px;

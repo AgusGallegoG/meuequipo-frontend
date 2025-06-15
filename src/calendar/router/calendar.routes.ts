@@ -8,3 +8,11 @@ export const calendarRouterAdmin: RouteRecordRaw[] = [
     component: () => import('@/calendar/views/CalendarAdmin.vue'),
   },
 ];
+
+export const calendarRouter: RouteRecordRaw[] = [
+  {
+    path: '/calendario',
+    name: 'Calendar',
+    component: () => import('@/calendar/views/CalendarBase.vue'),
+  },
+];
