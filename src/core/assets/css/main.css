@@ -38,7 +38,7 @@ body {
   }
 
   #base-header-name {
-    font-size: clamp(1.75rem, 2.5vw, 3rem);
+    font-size: clamp(1.5rem, 2.5vw, 3rem);
     a {
       color: var(--white);
       text-decoration: none !important;
@@ -97,6 +97,11 @@ body {
   #admin-module {
     width: 60vw;
   }
+}
+
+.img-fluid {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Clases para la vista de administracion de los distintos elementos de la web */

@@ -141,7 +141,13 @@
     }
   },
   "about_page": {
-    "title": "Sobre nós"
+    "title": "Sobre nós",
+    "q1": "Quen somos?",
+    "a1": "O <strong>CB Xuventude Verín</strong> é un club fundado na vila de Verín no ano <strong>2007</strong>. Dende a nosa fundación traballamos para devolver o baloncesto á nosa vila, formando novos xogadores ano tras ano.<br>A nosa misión é <strong>achegar o deporte aos máis pequenos, fomentar unha vida activa e crear un espazo divertido</strong> para quenes queiran vivir o <strong>baloncesto</strong> con paixón,",
+    "q2": "Valores e misión",
+    "a2": "Creemos que o baloncesto é mais que unha competición, é unha ferramenta para formar persoas. Os nosos valores son o <strong>compañeirismo</strong>, o <strong>respeto</strong> e a <strong>diversión</strong> por enriba do resultado.<br>Principalmente centramonos na formación de novos xogadores nas nosas <strong>categorías inferiores</strong>, onde os rapaces e rapazas poden evolucionar mediante o deporte, levando unha vida activa e saludable, aprendendo así, o valor do esforzo colectivo.",
+    "q3": "Os nosos obxectivos",
+    "a3": "Traballamos activamente para: <ul><li><strong>Fomentar a práctica do baloncesto</strong> dende idades temperás.</li><li><strong>Crear relacions de amizade</strong> cos compañeiros e compañeiras.</li><li><strong>Facer deporte e divertirse</strong> a partes iguais mediante o <strong>baloncesto</strong>.</li></ul>Creemos no baloncesto como un medio para <strong>crecer como persoas</strong>, e ese é o obxectivo que buscamos día a día."
   },
   "users": {
     "title": "Usuario",

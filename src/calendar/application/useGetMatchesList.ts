@@ -15,7 +15,10 @@ export function useGetMatchesList() {
   async function refetch(filters: CalendarFilter) {
     loading.value = true;
     try {
-      return await getMatchesList(mapCalendarFiltersToRequestCalendarFilters(filters));
+      return await getMatchesList(
+        mapCalendarFiltersToRequestCalendarFilters(filters),
+        authStore.hasRole(Roles.ADMIN)
+      );
     } catch (error) {
       if (authStore.hasRole(Roles.ADMIN)) {
         showToast({
