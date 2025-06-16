@@ -4,7 +4,7 @@ import { categoryRouterAdmin } from '@/category/router/category.routes';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import { publicationRouterAdmin } from '@/publication/router/publication.routes';
 import { rivalsRouterAdmin } from '@/rivals/router/rivals.routes';
-import { signinRouterAdmin } from '@/signin/router/signin.routes';
+import { signinRouter, signinRouterAdmin } from '@/signin/router/signin.routes';
 import { sponsorRouterAdmin } from '@/sponsor/router/sponsor.routes';
 import { teamRouter, teamRouterAdmin } from '@/team/router/team.routes';
 import { userRouterAdmin } from '@/user/router/user.routes';
@@ -39,6 +39,7 @@ const routes: RouteRecordRaw[] = [
       // aqui van las rutas de los hijos
       ...calendarRouter,
       ...teamRouter,
+      ...signinRouter,
     ],
   },
   {

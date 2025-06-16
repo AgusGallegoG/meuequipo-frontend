@@ -3,12 +3,12 @@ import BaseDatePicker from '@/shared/components/BaseDatePicker.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import BaseSelect from '@/shared/components/BaseSelect.vue';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
+import { useSaveSignin } from '@/signin/application/useSaveSignin';
 import { defaultSignin, type Signin } from '@/signin/domain/Signin';
 import { useSigninAdminStore } from '@/signin/store/SgininAdminStore';
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
 import { useI18n } from 'vue-i18n';
-import { useSaveSignin } from '../application/useSaveSignin';
 
 const { t } = useI18n();
 const { refetch: saveSignin, loading: loading } = useSaveSignin();
@@ -37,7 +37,7 @@ const canSave = computed(() => {
     p.category !== null
   );
 });
-const signin = ref<Signin>({ ...defaultSignin });
+const signin = ref<Signin>(cloneSignin(defaultSignin));
 
 watch(visible, (newVal) => {
   if (!newVal) {
@@ -153,7 +153,7 @@ function cloneSignin(original: Signin): Signin {
           <BaseSelect
             class="col-12 col-md-4"
             v-model="signin.player.sex"
-            :options="sharedEnumStore.getSexOptions"
+            :options="sharedEnumStore.getSexPlayersOptions"
             :label="t('signin.fields.sex')"
             :disabled="isEdit" />
           <BaseSelect

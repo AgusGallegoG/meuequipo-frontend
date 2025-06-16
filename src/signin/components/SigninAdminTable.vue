@@ -2,7 +2,7 @@
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import { useGetSigninAdminTable } from '@/signin/application/useGetSigninAdminTable';
 import { useGetSigninDetails } from '@/signin/application/useGetSigninDetails';
-import SigninAdminForm from '@/signin/components/SigninAdminForm.vue';
+import SigninAdminForm from '@/signin/components/forms/SigninAdminForm.vue';
 import type { SigninItem } from '@/signin/domain/SigninTable';
 import { useSigninAdminStore } from '@/signin/store/SgininAdminStore';
 import Button from 'primevue/button';
@@ -129,7 +129,8 @@ function onRowClick(event: DataTableRowClickEvent) {
         <Column
           field="playerCompleteName"
           :header="t('signin.fields.player_complete_name')"
-          style="width: 52.5%"></Column>
+          style="width: 52.5%">
+        </Column>
 
         <Column field="category" :header="t('signin.fields.category')" style="width: 15%">
           <template #body="slotProps">
@@ -155,8 +156,8 @@ function onRowClick(event: DataTableRowClickEvent) {
           </template>
           <template #body="slotProps">
             <Tag
-              :value="sharedEnumStore.getSexName(slotProps.data.sex)"
-              :severity="sharedEnumStore.getSexSeverity(slotProps.data.sex)" />
+              :value="sharedEnumStore.getSexPlayersName(slotProps.data.sex)"
+              :severity="sharedEnumStore.getSexPlayersSeverity(slotProps.data.sex)" />
           </template>
         </Column>
         <template #expansion="slotProps">

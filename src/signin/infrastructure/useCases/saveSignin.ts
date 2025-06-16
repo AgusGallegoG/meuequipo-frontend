@@ -17,7 +17,7 @@ async function Api(
   signin: RequestSignin,
   pageable: Pageable
 ): Promise<PageableResponse<ResponseSigninItem>> {
-  const response = await api.post<PageableResponse<ResponseSigninItem>>('signin/admin', signin, {
+  const response = await api.post<PageableResponse<ResponseSigninItem>>('/signin/admin', signin, {
     params: createPageParams(pageable, keysMap),
   });
 

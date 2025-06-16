@@ -15,6 +15,7 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
       data: {
         categories: <Select[]>[],
         sexOptions: <Select[]>[],
+        sexPlayersOptions: <Select[]>[],
         signinStates: <Select[]>[],
         matchStates: <Select[]>[],
       },
@@ -39,7 +40,30 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
     getSexSeverity:
       (state) =>
       (id: number): string => {
-        const sex = state.data.sexOptions.find((c) => c.id === id);
+        const sex = state.data.sexPlayersOptions.find((c) => c.id === id);
+        if (!sex) return '';
+
+        const name = sex.name.toUpperCase();
+
+        if (name === 'MASCULINO') {
+          return 'info';
+        }
+        if (name === 'FEMENINO' || name === 'FEMININO') return 'warn';
+
+        return '';
+      },
+
+    getSexPlayersOptions: (state) => state.data.sexPlayersOptions,
+    getSexPlayersName:
+      (state) =>
+      (id: number): string => {
+        const sex = state.data.sexPlayersOptions.find((c) => c.id === id);
+        return sex ? sex.name : '';
+      },
+    getSexPlayersSeverity:
+      (state) =>
+      (id: number): string => {
+        const sex = state.data.sexPlayersOptions.find((c) => c.id === id);
         if (!sex) return '';
 
         const name = sex.name.toUpperCase();
@@ -75,6 +99,7 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
       await this.fetchSexOptions();
       await this.fetchSigninStateOptions();
       await this.fetchMatchStatesOptions();
+      await this.fetchSexPlayersOptions();
     },
     async fetchCategories() {
       var res: Select[] = [];
@@ -98,6 +123,18 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
         res = partial.data;
       }
       this.data.sexOptions = res;
+    },
+
+    async fetchSexPlayersOptions() {
+      var res: Select[] = [];
+      if (UtilBase.checkEnvironment()) {
+        await UtilBase.wait(100);
+        res = sexOptionsMock.content as ResponseSelect[];
+      } else {
+        const partial = await api.get<ResponseSelect[]>('/enums/sexPlayers');
+        res = partial.data;
+      }
+      this.data.sexPlayersOptions = res;
     },
 
     async fetchSigninStateOptions() {
