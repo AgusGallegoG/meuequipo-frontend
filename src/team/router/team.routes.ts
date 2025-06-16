@@ -8,3 +8,12 @@ export const teamRouterAdmin: RouteRecordRaw[] = [
     component: () => import('@/team/views/TeamAdmin.vue'),
   },
 ];
+
+export const teamRouter: RouteRecordRaw[] = [
+  {
+    path: '/equipo/:id',
+    name: 'TeamDetails',
+    props: true,
+    component: () => import('@/team/views/TeamDetails.vue'),
+  },
+];

@@ -82,7 +82,7 @@ function onSelectMatch(index: number) {
 </script>
 <template>
   <CalendarMatchAdminForm v-if="isAdmin" v-model="visible"></CalendarMatchAdminForm>
-  <Card class="h-100">
+  <Card :class="teamId ? 'h-50 everflow-y-scroll' : 'h-100'">
     <template #header>
       <div class="w-100 flex-column">
         <div class="d-flex justify-content-center">
@@ -90,27 +90,18 @@ function onSelectMatch(index: number) {
         </div>
 
         <div class="d-flex justify-content-center mb-3">
-          <Button
-            @click="toggleVisible"
-            :label="t('core.buttons.add')"
-            icon="pi pi-plus"
-            v-if="isAdmin"></Button>
+          <Button @click="toggleVisible" :label="t('core.buttons.add')" icon="pi pi-plus" v-if="isAdmin"></Button>
         </div>
-        <CalendarFilter v-if="props.teamId === null"></CalendarFilter>
+        <CalendarFilter></CalendarFilter>
       </div>
     </template>
     <template #content>
-      <div
-        v-if="loading"
-        class="h-50 d-flex align-content-center justify-content-center align-items-center"
+      <div v-if="loading" class="h-50 d-flex align-content-center justify-content-center align-items-center"
         style="min-height: 50vh">
         <ProgressSpinner style="width: 40px; height: 40px" strokeWidth="4" />
       </div>
       <div v-else>
-        <div
-          v-for="(match, index) in list"
-          :key="match.id"
-          class="d-flex justify-content-center"
+        <div v-for="(match, index) in list" :key="match.id" class="d-flex justify-content-center"
           @click="onSelectMatch(index)">
           <MatchItem :match="match" :style="isAdmin ? 'cursor: pointer' : ''"></MatchItem>
         </div>
