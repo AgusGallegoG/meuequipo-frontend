@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import BaseCheckBox from '@/shared/components/BaseCheckBox.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
+import { getValidationRegExp, Validations } from '@/shared/dominio/enums/Validations';
 import { useSaveUser } from '@/user/application/useSaveUser';
 import { type UserItem, defaultUserItem } from '@/user/domain/UserTable';
 import { useUserAdminStore } from '@/user/store/userAdminStore';
@@ -22,7 +23,7 @@ const canSave = computed(() => {
 });
 
 const isValidMail = computed(() => {
-  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.value.email);
+  return getValidationRegExp(Validations.EMAIL).test(user.value.email);
 });
 
 watch(visible, (newVal) => {
@@ -77,7 +78,8 @@ async function onSubmitForm() {
           <BaseInputGroupText
             class="col d-flex align-items-center"
             :label="t('users.fields.name')"
-            v-model="user.name"></BaseInputGroupText>
+            v-model="user.name">
+          </BaseInputGroupText>
 
           <BaseInputGroupText
             class="col d-flex align-items-center"
@@ -94,7 +96,8 @@ async function onSubmitForm() {
           <BaseCheckBox
             class="col d-flex align-items-center"
             :label="t('users.fields.active')"
-            v-model="user.active"></BaseCheckBox>
+            v-model="user.active">
+          </BaseCheckBox>
         </div>
       </div>
     </template>

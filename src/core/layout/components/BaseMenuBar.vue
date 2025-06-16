@@ -8,7 +8,7 @@ import { useRouter } from 'vue-router';
 
 const { t } = useI18n();
 const router = useRouter();
-const { refetch: getTeamItems, loading } = useGetTeamMenuItems();
+const { refetch: getTeamItems } = useGetTeamMenuItems();
 
 const teamsItems = ref<MenuItem>({
   label: t('core.menubar.label.teams'),
@@ -22,10 +22,10 @@ const teamsItems = ref<MenuItem>({
 
 const items = ref<MenuItem[]>([
   {
-    label: t('core.menubar.label.init'),
-    icon: t('core.menubar.icon.init'),
+    label: t('core.menubar.label.news'),
+    icon: t('core.menubar.icon.news'),
     command: () => {
-      router.push({ name: 'Inicio' });
+      router.push({ name: 'News' });
     },
   },
   {
