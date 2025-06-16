@@ -23,6 +23,7 @@ const { t } = useI18n();
                 class="img-fluid"
                 src="@/core/assets/images/logos/logo_xuven.png"
                 alt="CB Xuventude Verin Escudo"
+                name="CB Xuventude Verin Escudo"
                 style="max-width: 150px" />
             </div>
           </div>
