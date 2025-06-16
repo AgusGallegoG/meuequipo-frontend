@@ -1,9 +1,13 @@
 import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
+import router from '@/core/router';
+import type { ResponseSelect } from '@/shared/infrastructure/models/responses/ResponseSelect';
 import type { Team, TeamForm } from '@/team/domain/Team';
 import type { TeamItem, TeamTable } from '@/team/domain/TeamTable';
+import type { MenuItem } from 'primevue/menuitem';
 import type { RequestTeamForm } from '../models/requests/RequestTeamForm';
 import type { ResponseTeam, ResponseTeamForm } from '../models/responses/ResponseTeamForm';
 import type { ResponseTeamItem } from '../models/responses/ResponseTeamItem';
+import type { ResponseTeamMenuItem } from '../models/responses/ResponseTeamMenuItem';
 
 export function mapResponseTeamFormToTeamForm(resp: ResponseTeamForm): TeamForm {
   return {
@@ -57,5 +61,25 @@ export function mapPageableResponseToTeamTable(
   return {
     content: mapResponseTeamItemToTeamItem(response.content),
     totalRecords: response.totalElements,
+  };
+}
+
+export function mapResponseTeamMenuItemToMenuItemList(
+  response: ResponseTeamMenuItem[]
+): MenuItem[] {
+  return response.map((category) => {
+    return {
+      label: category.name,
+      items: category.teams.map(mapSelectToMenuItemTeamList),
+    };
+  });
+}
+
+function mapSelectToMenuItemTeamList(response: ResponseSelect): MenuItem {
+  return {
+    label: response.name,
+    command: () => {
+      router.push({ name: 'TeamDetails', params: { id: response.id } });
+    },
   };
 }

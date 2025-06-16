@@ -26,9 +26,7 @@ defineProps<Props>();
       <div class="container">
         <div class="row justify-content-center mb-3">
           <div class="col-auto">
-            <Tag
-              :value="match.category ? sharedEnumStore.getCategoryName(match.category) : ''"
-              severity="info"></Tag>
+            <Tag :value="match.category ? sharedEnumStore.getCategoryName(match.category) : ''" severity="info"></Tag>
           </div>
         </div>
       </div>
@@ -36,28 +34,22 @@ defineProps<Props>();
     <template #default>
       <div class="container">
         <div
-          class="d-flex flex-column flex-xl-row align-items-center justify-content-center gap-2 gap-xl-3 mb-3 text-center">
+          class="d-flex flex-column flex-xxl-row align-items-center justify-content-center gap-2 gap-xl-3 mb-3 text-center">
           <span class="m-2">{{ match.localTeam?.name }}</span>
-          <Avatar
-            class="m-2 avatar-responsive"
+          <Avatar class="m-2 avatar-responsive"
             :image="match.localTeam?.logo ? match.localTeam.logo.url : defaultShield"></Avatar>
           <div class="fw-bold fs-5 m-2">{{ match.localPoints ?? '' }}</div>
           <div class="fs-4 fw-bold m-2">-</div>
           <div class="fw-bold fs-5 m-2">{{ match.visitorPoints ?? '' }}</div>
-          <Avatar
-            class="m-2 avatar-responsive"
+          <Avatar class="m-2 avatar-responsive"
             :image="match.visitorTeam?.logo ? match.visitorTeam.logo.url : defaultShield"></Avatar>
           <span class="m-2">{{ match.visitorTeam?.name }}</span>
         </div>
 
         <div class="row">
           <div class="col-12 col-md-6 text-center mb-3">
-            <Tag
-              :icon="'pi pi-calendar'"
-              :value="
-                match.matchDate ? formatShowMatchDateTime(match.matchDate) : t('matches.no_date')
-              "
-              severity="secondary"></Tag>
+            <Tag :icon="'pi pi-calendar'" :value="match.matchDate ? formatShowMatchDateTime(match.matchDate) : t('matches.no_date')
+              " severity="secondary"></Tag>
           </div>
           <div class="col-12 col-md-6 text-center">
             <Tag :icon="'pi pi-map-marker'" :value="match.location" severity="secondary"></Tag>
@@ -69,10 +61,7 @@ defineProps<Props>();
       <div class="container">
         <div class="row justify-content-center mb-3">
           <div class="col-auto">
-            <Tag
-              v-if="match.state"
-              :value="sharedEnumStore.getMatchStatesName(match.state)"
-              severity="info"></Tag>
+            <Tag v-if="match.state" :value="sharedEnumStore.getMatchStatesName(match.state)" severity="info"></Tag>
           </div>
         </div>
       </div>

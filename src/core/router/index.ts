@@ -6,7 +6,7 @@ import { publicationRouterAdmin } from '@/publication/router/publication.routes'
 import { rivalsRouterAdmin } from '@/rivals/router/rivals.routes';
 import { signinRouterAdmin } from '@/signin/router/signin.routes';
 import { sponsorRouterAdmin } from '@/sponsor/router/sponsor.routes';
-import { teamRouterAdmin } from '@/team/router/team.routes';
+import { teamRouter, teamRouterAdmin } from '@/team/router/team.routes';
 import { userRouterAdmin } from '@/user/router/user.routes';
 import Cookies from 'js-cookie';
 import { createRouter, createWebHistory, type RouteRecordRaw } from 'vue-router';
@@ -38,6 +38,7 @@ const routes: RouteRecordRaw[] = [
       },
       // aqui van las rutas de los hijos
       ...calendarRouter,
+      ...teamRouter,
     ],
   },
   {

@@ -36,6 +36,23 @@
     },
     "header_menu": {
       "logout": "Pechar sesión"
+    },
+    "menubar": {
+      "label": {
+        "not_found": "Non dispoñible",
+        "init": "Inicio",
+        "calendar": "Calendario",
+        "teams": "Equipos",
+        "about": "Sobre nós",
+        "signin": "Inscripcións"
+      },
+      "icon": {
+        "init": "pi pi-home",
+        "calendar": "pi pi-calendar-clock",
+        "teams": "pi pi-users",
+        "about": "pi pi-question",
+        "signin": "pi pi-file-plus"
+      }
     }
   },
   "toast": {

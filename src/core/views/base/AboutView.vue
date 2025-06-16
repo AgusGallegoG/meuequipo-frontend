@@ -2,6 +2,8 @@
 import Card from 'primevue/card';
 import { useI18n } from 'vue-i18n';
 
+import baseLogo from '@/core/assets/images/logos/logo_xuven.png';
+
 const { t } = useI18n();
 </script>
 
@@ -21,7 +23,7 @@ const { t } = useI18n();
             <div class="col-12 col-xl-4 d-flex justify-content-center">
               <img
                 class="img-fluid"
-                src="@/core/assets/images/logos/logo_xuven.png"
+                :src="baseLogo"
                 alt="CB Xuventude Verin Escudo"
                 name="CB Xuventude Verin Escudo"
                 style="max-width: 150px" />

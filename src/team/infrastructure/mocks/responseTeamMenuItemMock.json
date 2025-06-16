@@ -1,0 +1,44 @@
+[
+  {
+    "id": 1,
+    "name": "Infantil",
+    "teams": [
+      {
+        "id": 101,
+        "name": "Masculino"
+      },
+      {
+        "id": 102,
+        "name": "Feminino"
+      }
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Cadete",
+    "teams": [
+      {
+        "id": 201,
+        "name": "Masculino"
+      },
+      {
+        "id": 202,
+        "name": "Feminino"
+      }
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Junior",
+    "teams": [
+      {
+        "id": 301,
+        "name": "Masculino"
+      },
+      {
+        "id": 302,
+        "name": "Feminino"
+      }
+    ]
+  }
+]
