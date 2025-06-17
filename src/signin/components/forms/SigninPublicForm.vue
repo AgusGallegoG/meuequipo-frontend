@@ -94,7 +94,7 @@ function cloneSignin(original: Signin): Signin {
   <Card class="h-100">
     <template #header>
       <div class="w-100">
-        <div class="d-flex justify-content-start px-3">
+        <div class="d-flex justify-content-start px-4 pt-2">
           <h2>{{ getTitle() }}</h2>
         </div>
       </div>
@@ -217,5 +217,7 @@ function cloneSignin(original: Signin): Signin {
 p {
   line-height: 2;
   text-align: justify;
+  font-size: 18px;
+  padding: 0 5rem;
 }
 </style>
