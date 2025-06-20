@@ -6,9 +6,15 @@ import ProgressSpinner from 'primevue/progressspinner';
 interface Props {
   loading: boolean;
   options: Select[];
+  sourceLabel: string;
+  targetLabel: string;
+  stepper?: boolean;
 }
-const props = defineProps<Props>();
+
 const model = defineModel<number[]>();
+const props = withDefaults(defineProps<Props>(), {
+  stepper: false,
+});
 
 const pickListValue = ref<[Select[], Select[]]>([[], []]);
 
@@ -42,9 +48,16 @@ watch(
       v-model="pickListValue"
       dataKey="id"
       :metaKeySelection="false"
-      scrollHeight="10rem"
+      :scrollHeight="stepper ? '20rem' : '10rem'"
       :showSourceControls="false"
       :showTargetControls="false">
+      <template #sourceheader>
+        <span class="fw-bold" style="color: var(--p-primary-color)">{{ props.sourceLabel }}</span>
+      </template>
+      <template #targetheader>
+        <span class="fw-bold" style="color: var(--p-primary-color)">{{ props.targetLabel }}</span>
+      </template>
+
       <template #option="{ option }">
         <div>{{ option.name }}</div>
       </template>

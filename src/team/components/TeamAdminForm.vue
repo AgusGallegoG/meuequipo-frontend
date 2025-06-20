@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useGetPlayersByCategory } from '@/shared/application/useGetPlayersByCategory';
+import { useGetFreePlayersByCategory } from '@/shared/application/useGetPlayersByCategory';
 import BaseImageUpload from '@/shared/components/BaseImageUpload.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import BasePickList from '@/shared/components/BasePickList.vue';
@@ -15,7 +15,7 @@ import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
 const { refetch: saveTeamForm, loading: loading } = useSaveTeamForm();
-const { refetch: getPlayers, loading: loadingPlayers } = useGetPlayersByCategory();
+const { refetch: getPlayers, loading: loadingPlayers } = useGetFreePlayersByCategory();
 
 const visible = defineModel<boolean>();
 
@@ -88,20 +88,6 @@ async function onSubmitForm() {
 
     <template #default>
       <div class="container g-3 pt-3">
-        <div class="row">
-          <div class="col-12 col-md-5 md:pt-5">
-            <BaseImageUpload
-              :label="t('teams.fields.image')"
-              v-model="team.teamImage"></BaseImageUpload>
-          </div>
-
-          <div class="col-12 col-md-7 md:py-5">
-            <BasePickList
-              v-model="team.players"
-              :options="players"
-              :loading="loadingPlayers"></BasePickList>
-          </div>
-        </div>
         <div class="row mt-3">
           <div class="col-12 col-md-6 md:mb-2">
             <BaseInputGroupText
@@ -110,10 +96,10 @@ async function onSubmitForm() {
               :label="t('teams.fields.name')" />
           </div>
           <div class="col-12 col-md-6 md:mb-2">
-            <BaseInputGroupText
-              class="col-12"
-              v-model="team.trainer"
-              :label="t('teams.fields.trainer')" />
+            <BaseSelect
+              v-model="team.category"
+              :options="sharedEnumStore.getCategories"
+              :label="t('teams.fields.category')" />
           </div>
         </div>
 
@@ -125,10 +111,27 @@ async function onSubmitForm() {
               :label="t('teams.fields.trainer_contact')" />
           </div>
           <div class="col-12 col-md-6 md:mb-2">
-            <BaseSelect
-              v-model="team.category"
-              :options="sharedEnumStore.getCategories"
-              :label="t('teams.fields.category')" />
+            <BaseInputGroupText
+              class="col-12"
+              v-model="team.trainer"
+              :label="t('teams.fields.trainer')" />
+          </div>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-12 col-lg-5 md:pt-5">
+            <BaseImageUpload
+              :label="t('teams.fields.image')"
+              v-model="team.teamImage"></BaseImageUpload>
+          </div>
+
+          <div class="col-12 col-lg-7 md:py-5">
+            <BasePickList
+              v-model="team.players"
+              :options="players"
+              :loading="loadingPlayers"
+              :sourceLabel="t('teams.fields.all_players')"
+              :targetLabel="t('teams.fields.team_players')"></BasePickList>
           </div>
         </div>
       </div>

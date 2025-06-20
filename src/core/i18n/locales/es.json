@@ -24,6 +24,7 @@
       "loginin": "Iniciando sesión...",
       "adding": "Añadiendo...",
       "deleting": "Borrando...",
+      "processing": "Procesando...",
       "no_results": "No hay resultados"
     },
     "messages": {
@@ -36,21 +37,41 @@
     },
     "header_menu": {
       "logout": "Cerrar sesión"
+    },
+    "menubar": {
+      "label": {
+        "not_found": "No disponible",
+        "news": "Novedades",
+        "calendar": "Calendario",
+        "teams": "Equipos",
+        "about": "Sobre nosotros",
+        "signin": "Inscripciones"
+      },
+      "icon": {
+        "news": "pi pi-sparkles",
+        "calendar": "pi pi-calendar-clock",
+        "teams": "pi pi-users",
+        "about": "pi pi-question",
+        "signin": "pi pi-file-plus"
+      }
     }
   },
   "toast": {
     "title": {
-      "error": "Error."
+      "error": "Error"
     },
     "messages": {
       "success": {
         "create_success": "Se creó correctamente: {0}",
-        "update_success": "Se actualizó correctamente {0}"
+        "update_success": "Se actualizó correctamente {0}",
+        "save_success": "Gardouse correctamente {0}"
       },
       "errors": {
         "create_error": "Error al crear {0}",
+        "signin_error": "Erro na inscripción",
         "fetch_error": "Error al cargar datos de: {0}",
         "update_error": "Error actualizando {0}",
+        "save_error": "Erroe guardando {0}",
         "upload_error": "Error subiendo {0}"
       }
     }
@@ -73,7 +94,8 @@
       "team": "Equipos",
       "sponsors": "Patrocinadores",
       "category": "Categorías",
-      "user": "Usuarios"
+      "user": "Usuarios",
+      "squad": "Convocatorias"
     },
     "login": {
       "title": "Iniciar sesión en el panel de administrador",
@@ -91,6 +113,7 @@
         "calendar": "Gestión del calendario",
         "signings": "Gestión de las inscripciones",
         "sponsors": "Gestión de patrocinadores",
+        "squads": "Gestión de convocatorias",
         "users": "Gestión de usuarios",
         "category": "Gestionar de categorias",
         "rivals": "Xestion de otros clubs"
@@ -102,6 +125,7 @@
         "calendar": "Permite añadir nuevos partidos, eventos y gestionar los existentes",
         "signings": "Permite la gestión del formulario de inscripciones, y administrarlas",
         "sponsors": "Permite gestionar los patrocinadores del club",
+        "squads": "Permite generar convocatorias para los partidos",
         "users": "Permite gestionar los usuarios del aplicativo",
         "category": "Permite xestionar as categorias que existen no clube e no aplicativo",
         "rivals": "Permite añadir/eliminar clubes rivales."
@@ -113,7 +137,7 @@
         "not_found": "No se encontró una temporada activa",
         "active": "¡Activa!",
         "modal": {
-          "title": "Añádir temporada",
+          "title": "Añadir temporada",
           "startDate": "Inicio",
           "endDate": "Fin",
           "active": "¿Activa?"
@@ -210,9 +234,15 @@
   },
   "signin": {
     "title": "Inscripción",
+    "season_connector": " para la ",
     "table_title": "Inscripciones en la aplicación",
     "form_title_new": "Crear nueva inscripción",
-    "form_title_edit": "Editar inscripciones",
+    "form_title_edit": "Editar inscripción",
+    "parent_info": "Información del padre/madre/tutor",
+    "player_info": "Información del jugador/a",
+    "contact_info": "Información de contacto",
+    "sign_other": "Inscribir otro jugador",
+    "go_back": "Volver a inicio",
     "fields": {
       "player_complete_name": "Nombre completo do xogador",
       "parent_complete_name": "Nombre completo do pai/nai/titor",
@@ -221,11 +251,18 @@
       "player_surnames": "Apellidos do xogador",
       "parent_surnames": "Apellidos do padre/madre/tutor",
       "phone": "Teléfono",
+      "phone_exp": "Teléfono: ",
       "email": "Email",
+      "email_exp": "Email: ",
       "sex": "Sexo",
       "state": "Estado",
       "birth_date": "Fecha de nacimiento",
       "category": "Categoría"
+    },
+    "success": {
+      "title": "Inscripción",
+      "message": "La solicitud se procesó correctamente. Revise a su bandeja de correo",
+      "panel": "La solicitud de inscripción de <strong>{0}</strong> se recibió correctamente y se generó un fichero para completar con los datos restantes.<br>Puede revisar su bandeja de entranda en el email: <strong>{1}</strong> donde recibirá en unos minutos un PDF que deberá ser entregado en el Pabellón de Deportes juto con una foto tamaño carné del jugador, así como un jusitificante del abono de la tasa de inscripción"
     }
   },
   "teams": {
@@ -239,8 +276,10 @@
       "trainer_contact": "Contacto del entrenador",
       "category": "Categoría",
       "players": "Jugadores",
+      "all_players": "Inscritos en la categoria",
+      "team_players": "Jugadores del equipo",
       "player_count": "Número de jugadores",
-      "image": "Imagen del equipo"
+      "image": "Imagen de equipo"
     }
   },
   "matches": {
@@ -251,12 +290,41 @@
     "no_date": "Sin fecha",
     "fields": {
       "local": "Local",
+      "club_team": "Equipo del club",
       "visitor": "Visitante",
       "category": "Categoría",
       "location": "Localización",
       "match_date": "Fecha del partido",
       "state": "Estado",
-      "points": "Puntos"
+      "points": "Puntos",
+      "team": "Equipo",
+      "view_squad": "Ver convocatoria"
     }
+  },
+  "squads": {
+    "title": "Convocatoria",
+    "stepper": {
+      "match": "Partido y equipo",
+      "players": "Jugadores convocados",
+      "notification": "Notificación"
+    },
+    "clean_selection": "Borrar selección",
+    "back": "Atrás",
+    "next": "Siguiente",
+    "fields": {
+      "category": "Categoría",
+      "team": "Equipo",
+      "match": "Partido",
+      "all_players": "Jugadores del equipo",
+      "squad_players": "Jugadores convocados",
+      "location": "Punto de reunión",
+      "date": "Fecha de reunión",
+      "send_mail": "Enviar notificación",
+      "notification": "Contenido del email"
+    },
+    "match_info": "Fecha del partido: {0} - Lugar: {1} - Rival: {2}",
+    "complete": "{completar}",
+    "confirm_no_send": "¿Seguro que quiere continuar? Esta acción no se podrá deshacer",
+    "confirm_send": "¿Seguro que quiere continuar? Se enviará un email a los datos de contacto de los jugadores y esta acción non se podrá deshacer"
   }
 }

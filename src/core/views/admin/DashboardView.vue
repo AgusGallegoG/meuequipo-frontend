@@ -35,22 +35,28 @@ const modules = [
     icon: 'pi pi-calendar-clock',
   },
   {
+    title: 'admin.dashboard.modules_titles.squads',
+    description: 'admin.dashboard.modules_desc.squads',
+    goToModule: 'SquadAdmin',
+    icon: 'pi pi-list-check',
+  },
+  {
     title: 'admin.dashboard.modules_titles.signings',
     description: 'admin.dashboard.modules_desc.signings',
     goToModule: 'SigninAdmin',
     icon: 'pi pi-file-plus',
   },
   {
-    title: 'admin.dashboard.modules_titles.sponsors',
-    description: 'admin.dashboard.modules_desc.sponsors',
-    goToModule: 'SponsorAdmin',
-    icon: 'pi pi-thumbs-up',
-  },
-  {
     title: 'admin.dashboard.modules_titles.users',
     description: 'admin.dashboard.modules_desc.users',
     goToModule: 'UserAdmin',
     icon: 'pi pi-user',
+  },
+  {
+    title: 'admin.dashboard.modules_titles.sponsors',
+    description: 'admin.dashboard.modules_desc.sponsors',
+    goToModule: 'SponsorAdmin',
+    icon: 'pi pi-thumbs-up',
   },
   {
     title: 'admin.dashboard.modules_titles.category',

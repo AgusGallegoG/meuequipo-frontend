@@ -1,4 +1,5 @@
 import type { ResponseImage } from '@/shared/infrastructure/models/responses/ResponseImage';
+import type { ResponseViewSquad } from '@/squad/infrastructure/models/responses/ResponseViewSquad';
 
 export interface ResponseMatch {
   id: number;
@@ -10,6 +11,7 @@ export interface ResponseMatch {
   matchDate: string;
   location: string;
   state: number;
+  squad?: ResponseViewSquad;
 }
 
 export interface ResponseMatchTeam {

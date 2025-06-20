@@ -9,6 +9,7 @@ import type {
   ResponseMatchTeam,
 } from '@/shared/infrastructure/models/responses/ResponseMatch';
 import { mapResponseImageToImageView } from '@/shared/infrastructure/service/imageService';
+import { mapResponseViewSquadToViewSquad } from '@/squad/infrastructure/services/squadService';
 
 export function mapResponseMatchToMatch(response: ResponseMatch): Match {
   return {
@@ -21,6 +22,7 @@ export function mapResponseMatchToMatch(response: ResponseMatch): Match {
     matchDate: parseBackendDate(response.matchDate),
     state: response.state,
     location: response.location,
+    squad: response.squad ? mapResponseViewSquadToViewSquad(response.squad) : null,
   };
 }
 

@@ -35,5 +35,5 @@ export function getFormattedWeekFromOffset(offset: number = 0): string {
 }
 
 export function formatShowMatchDateTime(date: Date): string {
-  return dayjs(date).format('DD/MM-YYYY HH:mm');
+  return dayjs(date).format('DD/MM/YYYY HH:mm');
 }

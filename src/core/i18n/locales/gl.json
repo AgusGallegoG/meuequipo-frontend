@@ -81,13 +81,6 @@
       "categories": "Categorías",
       "sex": "Sexo",
       "signin_state": "Estado da inscrición"
-    },
-    "enums": {
-      "sex": {
-        "male": "Masculino",
-        "female": "Feminino",
-        "mixed": "Mixto"
-      }
     }
   },
   "admin": {
@@ -101,7 +94,8 @@
       "teams": "Equipos",
       "sponsor": "Patrocinadores",
       "category": "Categorías",
-      "user": "Usuarios"
+      "user": "Usuarios",
+      "squad": "Convocatorias"
     },
     "login": {
       "title": "Iniciar sesión no panel de administrador",
@@ -119,6 +113,7 @@
         "calendar": "Xestión do calendario",
         "signings": "Xestión das inscripcións",
         "sponsors": "Xestión de patrocinadores",
+        "squads": "Xestión de convocatorias",
         "users": "Xestión de usuarios",
         "category": "Xestión de categorías",
         "rivals": "Xestión de outros clubes"
@@ -130,6 +125,7 @@
         "calendar": "Permite engadir novos partidos, eventos e xestionar os existentes",
         "signings": "Permite a xestión do formulario de inscripcions, e administralas",
         "sponsors": "Permite xestionar os patrocinadores do club",
+        "squads": "Permite xerar convocatorias para os partidos",
         "users": "Permite xestionar os usuarios do aplicativo",
         "category": "Permite xestionar as categorias que existen no clube e no aplicativo",
         "rivals": "Permite engadir/eliminar clubes rivais"
@@ -244,7 +240,7 @@
     "form_title_edit": "Editar inscripción",
     "parent_info": "Información do pai/nai/titor",
     "player_info": "Información do xogador/a",
-    "contact_info": "Información do contacto",
+    "contact_info": "Información de contacto",
     "sign_other": "Inscribir outro xogador",
     "go_back": "Volver a inicio",
     "fields": {
@@ -280,6 +276,8 @@
       "trainer_contact": "Contacto do entrenador",
       "category": "Categoría",
       "players": "Xogadores",
+      "all_players": "Inscritos na categoria",
+      "team_players": "Xogadores do equipo",
       "player_count": "Número de xogadores",
       "image": "Imaxe do equipo"
     }
@@ -299,7 +297,34 @@
       "match_date": "Data do encontro",
       "state": "Estado",
       "points": "Puntos",
-      "team": "Equipo"
+      "team": "Equipo",
+      "view_squad": "Ver convocatoria"
     }
+  },
+  "squads": {
+    "title": "Convocatoria",
+    "stepper": {
+      "match": "Partido e equipo",
+      "players": "Xogadores convocados",
+      "notification": "Notificación"
+    },
+    "clean_selection": "Borrar selección",
+    "back": "Atrás",
+    "next": "Seguinte",
+    "fields": {
+      "category": "Categoría",
+      "team": "Equipo",
+      "match": "Partido",
+      "all_players": "Xogadores do equipo",
+      "squad_players": "Xogadores convocados",
+      "location": "Punto de reunión",
+      "date": "Data de reunión",
+      "send_mail": "Enviar notificación",
+      "notification": "Contido do email"
+    },
+    "match_info": "Data do partido: {0} - Lugar: {1} - Rival: {2}",
+    "complete": "{completar}",
+    "confirm_no_send": "¿Seguro que quere continuar? Esta acción non se poderá desfacer",
+    "confirm_send": "¿Seguro que quere continuar? Enviarase un email aos datos de contacto dos xogadores e esta acción non se poderá desfacer"
   }
 }
