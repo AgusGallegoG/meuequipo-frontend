@@ -22,6 +22,13 @@ const teamsItems = ref<MenuItem>({
 
 const items = ref<MenuItem[]>([
   {
+    label: t('core.menubar.label.init'),
+    icon: t('core.menubar.icon.init'),
+    command: () => {
+      router.push({ name: 'Inicio' });
+    },
+  },
+  {
     label: t('core.menubar.label.news'),
     icon: t('core.menubar.icon.news'),
     command: () => {

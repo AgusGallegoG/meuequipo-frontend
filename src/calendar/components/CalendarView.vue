@@ -130,10 +130,7 @@ function onSelectMatch(index: number) {
           :key="match.id"
           class="d-flex justify-content-center"
           @click="onSelectMatch(index)">
-          <MatchItem
-            :match="match"
-            :showSquad="isAdmin && !isSquad"
-            :style="isAdmin ? 'cursor: pointer' : ''"></MatchItem>
+          <MatchItem :isAdmin="isAdmin" :match="match" :showSquad="isAdmin && !isSquad"></MatchItem>
         </div>
       </div>
     </template>

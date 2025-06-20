@@ -6,7 +6,7 @@ import TeamBasicData from '../components/TeamBasicData.vue';
 import { defaultTeamForm, type TeamForm } from '../domain/Team';
 
 interface Props {
-  id: number;
+  id: string;
 }
 
 const props = defineProps<Props>();
@@ -18,7 +18,7 @@ onMounted(async () => {
 });
 
 async function doGetTeamDetails() {
-  team.value = await refetch(props.id);
+  team.value = await refetch(+props.id);
 }
 </script>
 
@@ -28,7 +28,7 @@ async function doGetTeamDetails() {
       <Card class="h-100">
         <template #content>
           <TeamBasicData :team="team" class="pb-4" />
-          <CalendarView :isAdmin="false" :teamId="props.id" class="pt-4" />
+          <CalendarView :isAdmin="false" :teamId="+props.id" class="pt-4" />
         </template>
       </Card>
     </div>

@@ -6,10 +6,8 @@ import type { ResponsePublicationList } from '@/publication/infrastructure/model
 import { createPublicationListFromResponsePublicationList } from '@/publication/infrastructure/services/publicationService';
 // import { buildPaginationParams } from '@/core/infrastructure/service/paginationParams';
 
-async function Api(isInicio: boolean): Promise<ResponsePublicationList> {
-  const response = await api.get<ResponsePublicationList>('/blog/all', {
-    params: { isInicio },
-  });
+async function Api(): Promise<ResponsePublicationList> {
+  const response = await api.get<ResponsePublicationList>('/blog/all');
 
   return response.data;
 }
@@ -20,11 +18,13 @@ async function InMemory(): Promise<ResponsePublicationList> {
   return responsepublication;
 }
 
-export async function getBlogContent(isInicio: boolean): Promise<Publication[]> {
+async function getBlogInitContent(): Promise<Publication[]> {
   try {
-    const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(isInicio);
+    const response = UtilBase.checkEnvironment() ? await InMemory() : await Api();
     return createPublicationListFromResponsePublicationList(response.content);
   } catch (error) {
     throw new Error('Error obteniendo los datos de la pantalla de inicio');
   }
 }
+
+export { getBlogInitContent };

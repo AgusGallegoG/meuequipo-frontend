@@ -14,7 +14,7 @@ const props = defineProps<Props>();
   <header id="base-header" class="container-fluid">
     <div class="row align-items-center text-center h-100">
       <!-- Logo -->
-      <div id="base-header-logo" class="col-3 col-sm-2 col-md-3 text-start">
+      <div id="base-header-logo" class="col-2 col-sm-2 col-md-3 text-start">
         <RouterLink :to="props.isAdminLayout ? '/administracion/dashboard' : '/'">
           <img
             id="base-header-logo-img"
@@ -27,7 +27,7 @@ const props = defineProps<Props>();
       <!-- Name -->
       <div
         id="base-header-name"
-        class="col-6 col-sm-8 col-md-6 d-flex justify-content-center align-items-center">
+        class="col-8 col-sm-8 col-md-6 d-flex justify-content-center align-items-center">
         <RouterLink
           :to="props.isAdminLayout ? '/administracion/dashboard' : '/'"
           class="w-100 d-flex justify-content-center align-items-center">
@@ -38,7 +38,7 @@ const props = defineProps<Props>();
       <!-- User / Login -->
       <div
         id="base-header-user"
-        class="col-3 col-md-3 col-sm-2 text-end"
+        class="col-2 col-md-3 col-sm-2 text-end"
         v-if="props.isAdminLayout">
         <BaseUser />
       </div>

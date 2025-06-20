@@ -11,6 +11,7 @@ import { useI18n } from 'vue-i18n';
 
 interface Props {
   match: Match;
+  isAdmin: boolean;
   showSquad: boolean;
 }
 
@@ -34,7 +35,7 @@ function visibleSquad() {
     v-if="match.squad !== null"
     v-model="visible"
     :squad="match.squad"></SquadViewModal>
-  <Panel class="my-5" style="width: 90%">
+  <Panel class="my-5" style="width: 90%" :style="isAdmin ? 'cursor: pointer' : ''">
     <template #header>
       <div class="container">
         <div class="row justify-content-center mb-3">

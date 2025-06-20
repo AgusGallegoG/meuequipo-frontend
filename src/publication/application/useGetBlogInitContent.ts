@@ -1,20 +1,20 @@
 import { Roles } from '@/auth/domain/Roles';
 import { useAuthStore } from '@/auth/store/authStore';
 import { useMeToast } from '@/core/hooks/useMeToast';
-import { getBlogContent } from '@/publication/infrastructure/useCases/getBlogContent';
+import { getBlogInitContent } from '@/publication/infrastructure/useCases/getBlogContent';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
-export function useGetBlogContents() {
+export function useGetBlogInitContents() {
   const { t } = useI18n();
   const loading = ref(false);
   const { showToast } = useMeToast();
   const authStore = useAuthStore();
 
-  async function refetch(isInicio: boolean) {
+  async function refetch() {
     try {
       loading.value = true;
-      const data = await getBlogContent(isInicio);
+      const data = await getBlogInitContent();
       return data;
     } catch (Error) {
       if (authStore.hasRole(Roles.ADMIN)) {

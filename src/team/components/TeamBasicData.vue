@@ -63,7 +63,7 @@ onMounted(async () => {
             </div>
             <div class="col-12 col-md-6 col-lg-4 d-flex justify-content-center py-3">
               <img class="img-fluid" :src="team.teamImage ? team.teamImage.url : baseLogo"
-                style="max-height: 150px;"></img>
+                style="max-height: 150px;" loading="lazy"></img>
             </div>
           </div>
         </div>

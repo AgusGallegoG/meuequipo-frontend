@@ -2,7 +2,7 @@ import { useAuthStore } from '@/auth/store/authStore';
 import { calendarRouter, calendarRouterAdmin } from '@/calendar/router/calendar.routes';
 import { categoryRouterAdmin } from '@/category/router/category.routes';
 import { UtilBase } from '@/core/utilities/UtilBase';
-import { publicationRouterAdmin } from '@/publication/router/publication.routes';
+import { publicationRouter, publicationRouterAdmin } from '@/publication/router/publication.routes';
 import { rivalsRouterAdmin } from '@/rivals/router/rivals.routes';
 import { signinRouter, signinRouterAdmin } from '@/signin/router/signin.routes';
 import { sponsorRouterAdmin } from '@/sponsor/router/sponsor.routes';
@@ -41,6 +41,7 @@ const routes: RouteRecordRaw[] = [
       ...calendarRouter,
       ...teamRouter,
       ...signinRouter,
+      ...publicationRouter,
     ],
   },
   {

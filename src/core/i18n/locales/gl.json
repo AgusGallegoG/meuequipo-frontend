@@ -41,6 +41,7 @@
     "menubar": {
       "label": {
         "not_found": "Non dispoñible",
+        "init": "Inicio",
         "news": "Novidades",
         "calendar": "Calendario",
         "teams": "Equipos",
@@ -48,6 +49,7 @@
         "signin": "Inscripcións"
       },
       "icon": {
+        "init": "pi pi-home",
         "news": "pi pi-sparkles",
         "calendar": "pi pi-calendar-clock",
         "teams": "pi pi-users",
@@ -153,6 +155,9 @@
       "socials": "Redes sociais:",
       "contact": "Información de contacto:",
       "location": "Onde estamos:"
+    },
+    "init": {
+      "blog": "Últimas publicacións"
     }
   },
   "about_page": {

@@ -1,6 +1,6 @@
 import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
 import type { BlogAdminTable } from '@/publication/domain/BlogAdminTable';
-import type { Publication } from '@/publication/domain/Publication';
+import type { Publication, PublicationNews } from '@/publication/domain/Publication';
 import type { RequestSavePublication } from '@/publication/infrastructure/models/requests/RequestSavePublication';
 import type { ResponsePublication } from '@/publication/infrastructure/models/responses/ResponsePublicationList';
 import type { ImageView } from '@/shared/dominio/ImageView';
@@ -54,5 +54,14 @@ export function createRequestSavePublicationFromPublication(
           return mapImageViewToRequestImage(i);
         })
       : null,
+  };
+}
+
+export function mapResponsePageableToPublicationNews(
+  response: PageableResponse<ResponsePublication>
+): PublicationNews {
+  return {
+    content: createPublicationListFromResponsePublicationList(response.content),
+    totalRecords: response.totalElements,
   };
 }

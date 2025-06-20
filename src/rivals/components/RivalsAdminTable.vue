@@ -113,7 +113,7 @@ async function onPage(event: DataTablePageEvent) {
 
         <Column field="logo" :header="t('rivals.fields.logo')">
           <template #body="slotProps">
-            <img :src="slotProps.data.logo.url" class="rival-admin-table-logo" />
+            <img :src="slotProps.data.logo.url" class="rival-admin-table-logo" loading="lazy" />
           </template>
         </Column>
 

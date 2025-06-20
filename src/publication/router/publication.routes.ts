@@ -8,3 +8,11 @@ export const publicationRouterAdmin: RouteRecordRaw[] = [
     component: () => import('@/publication/views/BlogAdmin.vue'),
   },
 ];
+
+export const publicationRouter: RouteRecordRaw[] = [
+  {
+    path: 'novas',
+    name: 'News',
+    component: () => import('@/publication/views/BlogView.vue'),
+  },
+];

@@ -22,6 +22,7 @@ const { t } = useI18n();
             </div>
             <div class="col-12 col-xl-4 d-flex justify-content-center">
               <img
+                loading="lazy"
                 class="img-fluid"
                 :src="baseLogo"
                 alt="CB Xuventude Verin Escudo"
@@ -35,6 +36,7 @@ const { t } = useI18n();
           <div class="row align-items-center">
             <div class="col-12 col-xl-4 d-flex justify-content-center">
               <img
+                loading="lazy"
                 class="img-fluid"
                 src="https://th.bing.com/th/id/OIP.9uQeXJPOGm7x6d4fFhnXxAHaD4?w=315&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
                 alt="CB Xuventude Verin" />
@@ -56,6 +58,7 @@ const { t } = useI18n();
             <div class="col-12 col-xl-4 d-flex justify-content-center">
               <img
                 class="img-fluid"
+                loading="lazy"
                 src="https://th.bing.com/th/id/OIP.9uQeXJPOGm7x6d4fFhnXxAHaD4?w=315&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
                 alt="CB Xuventude Verin" />
             </div>
