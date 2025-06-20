@@ -113,6 +113,7 @@ function cloneMatch(match: Match): Match {
           logo: match.visitorTeam.logo ? { ...match.visitorTeam.logo } : null,
         }
       : null,
+    squad: null,
   };
 }
 </script>
