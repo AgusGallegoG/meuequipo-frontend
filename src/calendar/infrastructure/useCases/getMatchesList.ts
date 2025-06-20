@@ -7,11 +7,24 @@ import type { ResponseMatch } from '@/shared/infrastructure/models/responses/Res
 import { mapResponseMatchListToMatchList } from '@/shared/infrastructure/service/matchService';
 import type { RequestCalendarFilters } from '../models/RequestCalendarFilters';
 
-async function Api(filters: RequestCalendarFilters, isAdmin: boolean): Promise<ResponseMatch[]> {
+/**\
+ * ! FILTERS -> Filtrado por rango de fechas / equipo
+ * !isAdmin (True) -> Permite buscar todos los calendatios sin restriccion
+ *    ? Si isSquad (true), sólo se muestran los que NO tienen convocatorias
+ *    ? Si isSquad (false), se devuelven todos
+ * !isAdmin (False)-> Sólo permite la visualización de los partidos en estados publicos (definidos en back (Privado))
+ */
+
+async function Api(
+  filters: RequestCalendarFilters,
+  isAdmin: boolean,
+  isSquad: boolean
+): Promise<ResponseMatch[]> {
   const url = isAdmin ? '/calendars/admin' : '/calendars';
   const repsonse = await api.get<ResponseMatch[]>(url, {
     params: {
       filters,
+      isSquad: isSquad,
     },
   });
 
@@ -23,9 +36,15 @@ async function InMemory(): Promise<ResponseMatch[]> {
   return responseMatchListMock as ResponseMatch[];
 }
 
-async function getMatchesList(filters: RequestCalendarFilters, isAdmin: boolean): Promise<Match[]> {
+async function getMatchesList(
+  filters: RequestCalendarFilters,
+  isAdmin: boolean,
+  isSquad: boolean
+): Promise<Match[]> {
   try {
-    const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(filters, isAdmin);
+    const response = UtilBase.checkEnvironment()
+      ? await InMemory()
+      : await Api(filters, isAdmin, isSquad);
 
     return mapResponseMatchListToMatchList(response);
   } catch (error) {

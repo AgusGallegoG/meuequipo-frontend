@@ -74,4 +74,29 @@ export class UtilBase {
   public static checkEnvironment(mode = 'development'): boolean {
     return import.meta.env.MODE === mode;
   }
+
+  public static cloneVueProxy(proxy) {
+    const raw = toRaw(proxy);
+    return this.deepClone(raw);
+  }
+
+  static deepClone(obj) {
+    if (obj === null || typeof obj !== 'object') return obj;
+    if (obj instanceof Date) return new Date(obj);
+    if (obj instanceof Array) return obj.map(this.deepClone.bind(this));
+    if (obj instanceof File) {
+      return new File([obj], obj.name, {
+        type: obj.type,
+        lastModified: obj.lastModified,
+      });
+    }
+
+    const cloned = {};
+    for (const key in obj) {
+      if (obj.hasOwnProperty(key)) {
+        cloned[key] = this.deepClone(obj[key]);
+      }
+    }
+    return cloned;
+  }
 }

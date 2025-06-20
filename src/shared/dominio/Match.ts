@@ -1,4 +1,5 @@
 import type { ImageView } from '@/shared/dominio/ImageView';
+import type { ViewSquad } from '@/squad/domain/ViewSquad';
 
 export type Match = {
   id: number;
@@ -10,6 +11,7 @@ export type Match = {
   location: string;
   matchDate: Date | null;
   state: number | null;
+  squad: ViewSquad | null;
 };
 
 export type MatchTeam = {
@@ -36,4 +38,5 @@ export const defaultMatch: Match = {
   location: '',
   matchDate: null,
   state: null,
+  squad: null,
 };

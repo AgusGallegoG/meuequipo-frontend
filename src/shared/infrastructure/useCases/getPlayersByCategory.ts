@@ -5,7 +5,7 @@ import responsePlayersMock from '@/shared/infrastructure/mocks/responsePlayersMo
 import type { ResponseSelect } from '../models/responses/ResponseSelect';
 
 async function Api(categoryId: number): Promise<ResponseSelect[]> {
-  const response = await api.get<ResponseSelect[]>('/players', {
+  const response = await api.get<ResponseSelect[]>('/players/category', {
     params: {
       idCategory: categoryId,
     },
@@ -19,7 +19,7 @@ async function InMemory(): Promise<ResponseSelect[]> {
   return responsePlayersMock.content as ResponseSelect[];
 }
 
-async function getPlayersByCategory(categoryId: number): Promise<Select[]> {
+async function getFreePlayersByCategory(categoryId: number): Promise<Select[]> {
   try {
     const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(categoryId);
 
@@ -29,4 +29,4 @@ async function getPlayersByCategory(categoryId: number): Promise<Select[]> {
   }
 }
 
-export { getPlayersByCategory };
+export { getFreePlayersByCategory };

@@ -28,7 +28,7 @@ const { contacts } = defineProps<Props>();
           :href="item.type + item.ref"
           class="text-decoration-none text-reset d-flex align-items-center gap-2">
           <i :class="item.type === 'tel:' ? 'pi pi-phone' : 'pi pi-at'"></i>
-          <span>{{ item.text }}</span>
+          <span class="text-break">{{ item.text }}</span>
         </a>
       </div>
     </div>

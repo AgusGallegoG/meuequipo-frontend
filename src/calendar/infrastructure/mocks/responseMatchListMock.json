@@ -26,7 +26,45 @@
     "category": 1,
     "matchDate": "2025-06-20T18:30:00",
     "location": "Polideportivo Central",
-    "state": 3
+    "state": 3,
+    "squad": {
+      "date": "2025-06-20T18:30:00Z",
+      "location": "Polideportivo Central",
+      "players": [
+        {
+          "id": 1,
+          "name": "Carlos Rodríguez"
+        },
+        {
+          "id": 2,
+          "name": "Ana Gómez"
+        },
+        {
+          "id": 3,
+          "name": "Lucía Martínez"
+        },
+        {
+          "id": 4,
+          "name": "Marta Martínez"
+        },
+        {
+          "id": 5,
+          "name": "Arantxa Fernandez"
+        },
+        {
+          "id": 6,
+          "name": "Eva López"
+        },
+        {
+          "id": 7,
+          "name": "Antía Couso"
+        },
+        {
+          "id": 8,
+          "name": "Carmen Suarez"
+        }
+      ]
+    }
   },
   {
     "id": 2,

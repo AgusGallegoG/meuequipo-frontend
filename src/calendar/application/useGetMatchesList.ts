@@ -12,12 +12,13 @@ export function useGetMatchesList() {
   const { t } = useI18n();
   const { showToast } = useMeToast();
 
-  async function refetch(filters: CalendarFilter) {
+  async function refetch(filters: CalendarFilter, isSquad: boolean) {
     loading.value = true;
     try {
       return await getMatchesList(
         mapCalendarFiltersToRequestCalendarFilters(filters),
-        authStore.hasRole(Roles.ADMIN)
+        authStore.hasRole(Roles.ADMIN),
+        isSquad
       );
     } catch (error) {
       if (authStore.hasRole(Roles.ADMIN)) {
