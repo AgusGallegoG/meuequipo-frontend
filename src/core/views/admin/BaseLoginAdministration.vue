@@ -1,14 +1,11 @@
 <script setup lang="ts">
 import { useLogin } from '@/auth/application/useLogin';
-import { userDefault } from '@/auth/domain/User';
-import {
-  defaultLoginRequest,
-  type LoginRequest,
-} from '@/auth/infrastructure/models/requests/LoginRequest';
+import { defaultLoginForm, loginFormSchema } from '@/auth/domain/LoginForm';
 import { useAuthStore } from '@/auth/store/authStore';
-import { UtilBase } from '@/core/utilities/UtilBase';
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import { Button, Card, Divider } from 'primevue';
+import Message from 'primevue/message';
 import { onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useRouter } from 'vue-router';
@@ -17,23 +14,28 @@ const { t } = useI18n();
 const authStore = useAuthStore();
 const { loading, refetch: executeLogin } = useLogin();
 const router = useRouter();
-const error = ref<boolean>(false);
 
-const form = ref<LoginRequest>(defaultLoginRequest);
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  validate,
+} = useZodValidation(defaultLoginForm, loginFormSchema);
 
-onMounted(() => {
-  form.value = { ...defaultLoginRequest };
-});
+const loginError = ref<boolean>(false);
 
 async function doLogin() {
-  const login = await executeLogin(form.value);
-  authStore.setData(login);
+  submitted.value = true;
+  if (!validate()) return;
 
-  // Si el usuario logueado no es el default
-  if (!UtilBase.isDefault(login, userDefault)) {
+  const login = await executeLogin(form.value);
+
+  if (login) {
+    //Si tenemos login
+    authStore.setData(login);
     router.push({ name: 'Dashboard' });
   } else {
-    error.value = true; // Setear error -> mostrar mensaje de error de nombre / contraseña no válidos
+    loginError.value = true; // Setear error -> mostrar mensaje de error de nombre / contraseña no válidos
   }
 }
 </script>
@@ -48,14 +50,18 @@ async function doLogin() {
             :class="'row'"
             v-model="form.name"
             :label="t('admin.login.username')"
-            :icon="'pi pi-user'" />
+            :icon="'pi pi-user'"
+            :invalid="!!formErrors.name"
+            :errorMessage="formErrors.name ?? undefined" />
           <BaseInputGroupText
             :id="'username'"
             :class="'row'"
             v-model="form.password"
             :label="t('admin.login.password')"
             :icon="'pi pi-lock'"
-            :password="true" />
+            :password="true"
+            :invalid="!!formErrors.password"
+            :errorMessage="formErrors.password ?? undefined" />
         </div>
         <Divider />
       </template>
@@ -65,7 +71,9 @@ async function doLogin() {
             <Button raised :label="t('admin.login.button')" @click="doLogin()" :loading="loading" />
           </div>
         </div>
-
+        <Message v-if="loginError" severity="error" size="small" variant="simple">
+          {{ t('admin.login.login_err') }}
+        </Message>
         <div class="text-center mt-2">
           <RouterLink to="/" class="text-light text-decoration-none">
             <small> {{ t('admin.login.go_main') }}</small>
