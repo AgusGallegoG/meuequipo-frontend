@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { UtilBase } from '@/core/utilities/UtilBase';
 import BaseDatePicker from '@/shared/components/BaseDatePicker.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import BaseSelect from '@/shared/components/BaseSelect.vue';
@@ -37,7 +38,7 @@ const canSave = computed(() => {
     p.category !== null
   );
 });
-const signin = ref<Signin>(cloneSignin(defaultSignin));
+const signin = ref<Signin>(UtilBase.cloneVueProxy(defaultSignin));
 
 watch(visible, (newVal) => {
   if (!newVal) {
@@ -49,7 +50,7 @@ watch(editionSignin, (newVal) => {
   if (newVal) {
     signin.value = cloneSignin(newVal);
   } else {
-    signin.value = cloneSignin(defaultSignin);
+    signin.value = UtilBase.cloneVueProxy(defaultSignin);
   }
 });
 

@@ -105,6 +105,7 @@
       "username": "Nome de usuario",
       "password": "Contrasinal",
       "toast_name": "Inicio de sesión",
+      "login_err": "Usuario ou contrasinal incorrecto",
       "go_main": "← Volver á páxina principal"
     },
     "dashboard": {
@@ -331,5 +332,24 @@
     "complete": "{completar}",
     "confirm_no_send": "¿Seguro que quere continuar? Esta acción non se poderá desfacer",
     "confirm_send": "¿Seguro que quere continuar? Enviarase un email aos datos de contacto dos xogadores e esta acción non se poderá desfacer"
+  },
+  "loginvalidation": {
+    "name_mandatory": "Debe indicar nome de usuario",
+    "password_required": "Debe introducir contrasinal"
+  },
+  "playervalidation": {
+    "name_required": "O nome é obrigatorio",
+    "surnames_required": "Os apelidos son obrigatorios",
+    "date_required": "A data de nacemento é obrigratoria",
+    "sex_required": "Debe seleccionar un",
+    "category_required": "Debe seleccionar unha"
+  },
+  "signinvalidation": {
+    "name_required": "O nome é obrigatorio",
+    "surnmaes_required": "Os apelidos son obrigatorios",
+    "email_required": "O email é obrigatorio",
+    "email_invalid": "Debe introducir un email válido",
+    "phone_required": "O teléfono é obrigatorio",
+    "phone_invalid": "Debe introducir un telefono válido"
   }
 }

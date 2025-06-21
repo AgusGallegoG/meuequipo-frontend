@@ -5,13 +5,14 @@ import { useMeToast } from '@/core/hooks/useMeToast';
 import { withLoading } from '@/shared/utils/withLoading';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import type { LoginForm } from '../domain/LoginForm';
 
 export function useLogin() {
   const loading = ref(false);
   const { t } = useI18n();
   const { showToast } = useMeToast();
 
-  async function refetch(request: LoginRequest) {
+  async function refetch(request: LoginForm) {
     try {
       loading.value = true;
       const data = await withLoading(async () => login(request)); // await login(request);
@@ -27,7 +28,8 @@ export function useLogin() {
         message: t('core.messages.error.login'),
         severity: 'error',
       });
-      return userDefault;
+      return null;
+      // return userDefault;
     } finally {
       loading.value = false;
     }

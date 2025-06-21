@@ -19,6 +19,7 @@ async function Api(data: LoginRequest): Promise<LoginResponse> {
 async function InMemory(): Promise<LoginResponse> {
   await UtilBase.wait(2000);
   return responseLogin as LoginResponse;
+  // return {} as LoginResponse;
 }
 
 async function login(data: LoginRequest): Promise<User> {

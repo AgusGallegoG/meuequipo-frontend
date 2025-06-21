@@ -1,20 +1,19 @@
 <script setup lang="ts">
 import router from '@/core/router';
+import { UtilBase } from '@/core/utilities/UtilBase';
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import type { Season } from '@/season/domain/Season';
 import { getActiveSeason } from '@/season/infrastructure/useCases/getActiveSeason';
 import BaseDatePicker from '@/shared/components/BaseDatePicker.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
+import BasePhoneInput from '@/shared/components/BasePhoneInput.vue';
 import BaseSelect from '@/shared/components/BaseSelect.vue';
-import { getValidationRegExp, Validations } from '@/shared/dominio/enums/Validations';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import { useDoSigninPlayer } from '@/signin/application/useDoSigninPlayer';
-import { defaultSignin, type Signin } from '@/signin/domain/Signin';
+import { defaultSignin, signinPublicSchema, type Signin } from '@/signin/domain/Signin';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
 import { useI18n } from 'vue-i18n';
-
-const phonePattern: RegExp = getValidationRegExp(Validations.PHONE);
-const mailPattern: RegExp = getValidationRegExp(Validations.EMAIL);
 
 const sharedEnumStore = useSharedEnumsStore();
 const { t } = useI18n();
@@ -23,71 +22,41 @@ const { refetch: doSignin, loading } = useDoSigninPlayer();
 
 const activeSeason = ref<Season | null>();
 const sent = ref<boolean>(false);
-const signin = ref<Signin>(cloneSignin(defaultSignin));
-const canSave = computed(() => {
-  return (
-    signin.value.mail !== '' &&
-    validMail &&
-    signin.value.phone !== '' &&
-    validPhone &&
-    signin.value.parentName !== '' &&
-    signin.value.parentSurnames !== '' &&
-    signin.value.player.birthDate !== null &&
-    signin.value.player.category > -1 &&
-    signin.value.player.name !== '' &&
-    signin.value.player.sex > -1 &&
-    signin.value.player.surnames !== ''
-  );
+
+const title = computed(() => {
+  var result = t('signin.title');
+  if (activeSeason.value) {
+    result += t('signin.season_connector') + activeSeason.value?.name;
+  }
+  return result;
 });
 
-const validPhone = computed(() => {
-  return phonePattern.test(signin.value.phone);
-});
-
-const validMail = computed(() => {
-  return mailPattern.test(signin.value.mail);
-});
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  isFormValid,
+  validate,
+  reset,
+} = useZodValidation(defaultSignin, signinPublicSchema);
 
 onMounted(async () => {
   await sharedEnumStore.fetchAll();
   activeSeason.value = await getActiveSeason();
 });
 
-function getTitle() {
-  var result = t('signin.title');
-  if (activeSeason.value) {
-    result += t('signin.season_connector') + activeSeason.value?.name;
-  }
-  return result;
-}
-
 function resetForm() {
-  signin.value = cloneSignin(defaultSignin);
+  reset();
   sent.value = false;
 }
 
 async function onSubmitForm() {
-  await doSignin(signin.value);
-  sent.value = true;
-}
+  submitted.value = true;
 
-function cloneSignin(original: Signin): Signin {
-  return {
-    id: original.id,
-    parentName: original.parentName,
-    parentSurnames: original.parentSurnames,
-    mail: original.mail,
-    phone: original.phone,
-    state: original.state,
-    player: {
-      id: original.player.id,
-      name: original.player.name,
-      surnames: original.player.surnames,
-      birthDate: original.player.birthDate ? new Date(original.player.birthDate) : null,
-      sex: original.player.sex,
-      category: original.player.category,
-    },
-  };
+  if (!validate()) return;
+
+  await doSignin(form.value);
+  sent.value = true;
 }
 </script>
 <template>
@@ -95,7 +64,7 @@ function cloneSignin(original: Signin): Signin {
     <template #header>
       <div class="w-100">
         <div class="d-flex justify-content-start px-4 pt-2">
-          <h2>{{ getTitle() }}</h2>
+          <h2>{{ title }}</h2>
         </div>
       </div>
     </template>
@@ -108,12 +77,16 @@ function cloneSignin(original: Signin): Signin {
           </div>
           <BaseInputGroupText
             class="col-12 col-xl-5 mb-3"
-            v-model="signin.parentName"
-            :label="t('signin.fields.parent_name')" />
+            v-model="form.parentName"
+            :label="t('signin.fields.parent_name')"
+            :invalid="!!formErrors.parentName"
+            :errorMessage="formErrors.parentName ?? undefined" />
           <BaseInputGroupText
             class="col-12 col-xl-7 mb-3"
-            v-model="signin.parentSurnames"
-            :label="t('signin.fields.parent_surnames')" />
+            v-model="form.parentSurnames"
+            :label="t('signin.fields.parent_surnames')"
+            :invalid="!!formErrors.parentSurnames"
+            :errorMessage="formErrors.parentSurnames ?? undefined" />
         </div>
         <!-- player Info Section -->
         <div class="row mb-3">
@@ -122,42 +95,54 @@ function cloneSignin(original: Signin): Signin {
           </div>
           <BaseInputGroupText
             class="col-12 col-xl-5 mb-3"
-            v-model="signin.player.name"
-            :label="t('signin.fields.player_name')" />
+            v-model="form.player.name"
+            :label="t('signin.fields.player_name')"
+            :invalid="!!formErrors.player?.name"
+            :errorMessage="formErrors.player?.name ?? undefined" />
           <BaseInputGroupText
             class="col-12 col-xl-7 mb-3"
-            v-model="signin.player.surnames"
-            :label="t('signin.fields.player_surnames')" />
+            v-model="form.player.surnames"
+            :label="t('signin.fields.player_surnames')"
+            :invalid="!!formErrors.player?.surnames"
+            :errorMessage="formErrors.player?.surnames ?? undefined" />
           <BaseDatePicker
             class="col-12 col-xl-4 mb-3"
-            v-model="signin.player.birthDate"
-            :label="t('signin.fields.birth_date')" />
+            v-model="form.player.birthDate"
+            :label="t('signin.fields.birth_date')"
+            :invalid="!!formErrors.player?.birthDate"
+            :errorMessage="formErrors.player?.birthDate ?? undefined" />
           <BaseSelect
             class="col-12 col-xl-4 mb-3"
-            v-model="signin.player.sex"
+            v-model="form.player.sex"
             :options="sharedEnumStore.getSexOptions"
-            :label="t('signin.fields.sex')" />
+            :label="t('signin.fields.sex')"
+            :invalid="!!formErrors.player?.sex"
+            :errorMessage="formErrors.player?.sex ?? undefined" />
           <BaseSelect
             class="col-12 col-xl-4 mb-3"
-            v-model="signin.player.category"
+            v-model="form.player.category"
             :options="sharedEnumStore.getCategories"
-            :label="t('signin.fields.category')" />
+            :label="t('signin.fields.category')"
+            :invalid="!!formErrors.player?.category"
+            :errorMessage="formErrors.player?.category ?? undefined" />
         </div>
         <!-- contact-info-section -->
         <div class="row mb-3">
           <div class="col-12">
             <h3 class="fw-semibold pb-2 mb-3">{{ t('signin.contact_info') }}</h3>
           </div>
-          <BaseInputGroupText
+          <BasePhoneInput
             class="col-12 col-xl-5 mb-3"
-            v-model="signin.phone"
+            v-model="form.phone"
             :label="t('signin.fields.phone')"
-            :error="!validPhone" />
+            :invalid="!!formErrors.phone"
+            :errorMessage="formErrors.phone ?? undefined" />
           <BaseInputGroupText
             class="col-12 col-xl-7 mb-3"
-            v-model="signin.mail"
+            v-model="form.mail"
             :label="t('signin.fields.email')"
-            :error="!validMail" />
+            :invalid="!!formErrors.mail"
+            :errorMessage="formErrors.mail ?? undefined" />
         </div>
       </div>
       <div v-else>
@@ -166,8 +151,8 @@ function cloneSignin(original: Signin): Signin {
             <p
               v-html="
                 t('signin.success.panel', [
-                  signin.player.name + ' ' + signin.player.surnames,
-                  signin.mail,
+                  form.player.name + ' ' + form.player.surnames,
+                  form.mail,
                 ])
               "></p>
           </div>
@@ -189,7 +174,6 @@ function cloneSignin(original: Signin): Signin {
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
           icon="pi pi-save"
-          :disabled="!canSave"
           :loading="loading"></Button>
       </div>
       <div v-else class="d-flex flex-column flex-md-row justify-content-end gap-2 w-100">
@@ -205,8 +189,7 @@ function cloneSignin(original: Signin): Signin {
           raised
           :label="t('signin.go_back')"
           @click="router.push({ name: 'Inicio' })"
-          icon="pi pi-save"
-          :disabled="!canSave"
+          icon="pi pi-home"
           :loading="loading"></Button>
       </div>
     </template>
