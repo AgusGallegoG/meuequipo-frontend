@@ -165,6 +165,8 @@
     "title": "Sobre nós",
     "q1": "Quen somos?",
     "a1": "O <strong>CB Xuventude Verín</strong> é un club fundado na vila de Verín no ano <strong>2001</strong>. Dende o ano <strong>2009</strong> traballamos para devolver o baloncesto á nosa vila, formando novos xogadores ano tras ano.<br>A nosa misión é <strong>achegar o deporte aos máis pequenos, fomentar unha vida activa e crear un espazo divertido</strong> para quenes queiran vivir o <strong>baloncesto</strong> con paixón.",
+    "q_history": "A nosa historia",
+    "a_history": "<p>Nacimos uns anos despois de que o mítico clube da nosa vila, ''<strong>Cabreiroá Marpy Verín</strong>'' levase o nome da mesma ao longo do territorio nacional.<br> Anos despois xordeu no seno do clube o desexo por devolver o baloncesto á vila, e os seus integrantes; na maioría formados nas categorías inferiores daquel club, comezaron a desenvolver o proxecto actual do clube, xerando unha estrutura de categorías inferiores que, despois de tanto tempo, continúa na actualidade.</p>",
     "q2": "Valores e misión",
     "a2": "Creemos que o baloncesto é mais que unha competición, é unha ferramenta para formar persoas. Os nosos valores son o <strong>compañeirismo</strong>, o <strong>respeto</strong> e a <strong>diversión</strong> por enriba do resultado.<br>Principalmente centramonos na formación de novos xogadores nas nosas <strong>categorías inferiores</strong>, onde os rapaces e rapazas poden evolucionar mediante o deporte, levando unha vida activa e saludable, aprendendo así, o valor do esforzo colectivo.",
     "q3": "Os nosos obxectivos",
@@ -346,7 +348,7 @@
   },
   "signinvalidation": {
     "name_required": "O nome é obrigatorio",
-    "surnmaes_required": "Os apelidos son obrigatorios",
+    "surnames_required": "Os apelidos son obrigatorios",
     "email_required": "O email é obrigatorio",
     "email_invalid": "Debe introducir un email válido",
     "phone_required": "O teléfono é obrigatorio",

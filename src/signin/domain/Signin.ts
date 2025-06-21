@@ -25,7 +25,7 @@ export const defaultSignin: Signin = {
 export const signinPublicSchema = z.object({
   id: z.number(),
   parentName: z.string().min(1, { message: 'signinvalidation.name_required' }),
-  parentSurnames: z.string().min(1, { message: 'signinvalidation.surnmaes_required' }),
+  parentSurnames: z.string().min(1, { message: 'signinvalidation.surnames_required' }),
   mail: z
     .string()
     .min(1, { message: 'signinvalidation.email_required' })
