@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 export type UserTable = {
   content: UserItem[];
   totalRecords: number;
@@ -23,3 +25,14 @@ export const defaultUserItem: UserItem = {
   email: '',
   surnames: '',
 };
+
+export const userItemSchema = z.object({
+  id: z.number(),
+  name: z.string().min(1, { message: 'signinvalidation.name_required' }),
+  surnames: z.string().min(1, { message: 'signinvalidation.surnmaes_required' }),
+  email: z
+    .string()
+    .min(1, { message: 'signinvalidation.email_required' })
+    .email({ message: 'signinvalidation.email_invalid' }),
+  active: z.boolean(),
+}) satisfies z.ZodType<UserItem>;

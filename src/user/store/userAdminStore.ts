@@ -8,7 +8,7 @@ export const useUserAdminStore = defineStore('userAdmin', {
     return {
       data: {
         table: <UserTable>{ ...defaultUserTable },
-        tableFilters: <Pageable>{ ...pageableDefault },
+        tableFilters: <Pageable>UtilBase.cloneVueProxy(pageableDefault),
         selectedToEdit: <UserItem | null>null,
       },
     };

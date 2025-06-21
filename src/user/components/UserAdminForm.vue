@@ -1,9 +1,10 @@
 <script setup lang="ts">
+import { UtilBase } from '@/core/utilities/UtilBase';
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import BaseCheckBox from '@/shared/components/BaseCheckBox.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
-import { getValidationRegExp, Validations } from '@/shared/dominio/enums/Validations';
 import { useSaveUser } from '@/user/application/useSaveUser';
-import { type UserItem, defaultUserItem } from '@/user/domain/UserTable';
+import { type UserItem, defaultUserItem, userItemSchema } from '@/user/domain/UserTable';
 import { useUserAdminStore } from '@/user/store/userAdminStore';
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
@@ -16,15 +17,15 @@ const userAdminStore = useUserAdminStore();
 const { t } = useI18n();
 
 const isEdit = computed(() => userAdminStore.isEdition);
-const user = ref<UserItem>({ ...defaultUserItem });
 const editionUser = computed(() => userAdminStore.getEditionUser);
-const canSave = computed(() => {
-  return user.value.email !== '' && user.value.name !== '' && isValidMail.value;
-});
 
-const isValidMail = computed(() => {
-  return getValidationRegExp(Validations.EMAIL).test(user.value.email);
-});
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  validate,
+  reset,
+} = useZodValidation(defaultUserItem, userItemSchema);
 
 watch(visible, (newVal) => {
   if (!newVal) {
@@ -36,16 +37,16 @@ watch(
   editionUser,
   (newVal) => {
     if (newVal) {
-      user.value = { ...newVal };
+      form.value = { ...newVal };
     } else {
-      user.value = { ...defaultUserItem };
+      form.value = UtilBase.cloneVueProxy(defaultUserItem); //cuando se copia el default se copia el proxy no reactivo para asegurarse que todas las referencias estan bien
     }
   },
   { immediate: true }
 );
 
 function resetForm() {
-  user.value = { ...defaultUserItem };
+  reset();
   if (isEdit.value === true) {
     visible.value = false;
   }
@@ -53,8 +54,11 @@ function resetForm() {
 }
 
 async function onSubmitForm() {
+  submitted.value = true;
+
+  if (!validate()) return;
   //ExecuteQuery
-  const response = await saveUser(user.value);
+  const response = await saveUser(form.value);
   if (response) {
     userAdminStore.setTableData(response);
   }
@@ -78,25 +82,32 @@ async function onSubmitForm() {
           <BaseInputGroupText
             class="col d-flex align-items-center"
             :label="t('users.fields.name')"
-            v-model="user.name">
+            v-model="form.name"
+            :invalid="!!formErrors.name"
+            :errorMessage="formErrors.name ?? undefined">
           </BaseInputGroupText>
 
           <BaseInputGroupText
             class="col d-flex align-items-center"
             :label="t('users.fields.surnames')"
-            v-model="user.surnames"></BaseInputGroupText>
+            v-model="form.surnames"
+            :invalid="!!formErrors.surnames"
+            :errorMessage="formErrors.surnames ?? undefined">
+          </BaseInputGroupText>
 
           <BaseInputGroupText
             class="col d-flex align-items-center"
             :label="t('users.fields.email')"
-            v-model="user.email"
-            :error="!isValidMail"
-            :textError="t('users.error.mail')"></BaseInputGroupText>
+            v-model="form.email"
+            :textError="t('users.error.mail')"
+            :invalid="!!formErrors.email"
+            :errorMessage="formErrors.email ?? undefined">
+          </BaseInputGroupText>
 
           <BaseCheckBox
             class="col d-flex align-items-center"
             :label="t('users.fields.active')"
-            v-model="user.active">
+            v-model="form.active">
           </BaseCheckBox>
         </div>
       </div>
@@ -116,7 +127,6 @@ async function onSubmitForm() {
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
           icon="pi pi-save"
-          :disabled="!canSave"
           :loading="loading"></Button>
       </div>
     </template>
