@@ -5,6 +5,7 @@ import { useRivalsAdminStore } from '@/rivals/store/rivalsStore';
 import BaseImageUpload from '@/shared/components/BaseImageUpload.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import CategoryMultiSelect from '@/shared/components/BaseMultiSelect.vue';
+import BasePhoneInput from '@/shared/components/BasePhoneInput.vue';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
@@ -93,11 +94,11 @@ async function onSubmitForm() {
             v-model="rival.responsible"
             :label="t('rivals.fields.responsible')"></BaseInputGroupText>
 
-          <BaseInputGroupText
+          <BasePhoneInput
             class="col d-flex align-items-center"
             id="tlf-team"
             v-model="rival.tlf"
-            :label="t('rivals.fields.tlf')"></BaseInputGroupText>
+            :label="t('rivals.fields.tlf')"></BasePhoneInput>
 
           <BaseInputGroupText
             class="col d-flex align-items-center"

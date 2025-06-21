@@ -14,8 +14,8 @@ export function useSaveRival() {
   async function refetch(rival: Rival, filters: RivalFilters) {
     loading.value = true;
     try {
-      const response = await withLoading(async () =>
-        saveRival(mapRivalToRequestSaveRival(rival), filters)
+      const response = await withLoading(
+        async () => await saveRival(mapRivalToRequestSaveRival(rival), filters)
       );
       if (response.content.length > 0 && response.totalRecords) {
         showToast({

@@ -23,7 +23,7 @@ async function Api(
 }
 
 async function InMemory(): Promise<PageableResponse<ResponseRivalItem>> {
-  UtilBase.wait(500);
+  await UtilBase.wait(500);
   return responseRivalAdminTable as PageableResponse<ResponseRivalItem>;
 }
 async function saveRival(rival: RequestSaveRival, pageable: RivalFilters) {
