@@ -173,6 +173,7 @@ async function onSubmitForm() {
           raised
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
+          :disabled="submitted && !isFormValid"
           icon="pi pi-save"
           :loading="loading"></Button>
       </div>

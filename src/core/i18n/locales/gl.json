@@ -356,5 +356,8 @@
   },
   "categoryvalidation": {
     "end_date_later": "Debe ser posterior a ano desde"
+  },
+  "teamvalidation": {
+    "trainer_required": "É preciso engadir un entrenador"
   }
 }

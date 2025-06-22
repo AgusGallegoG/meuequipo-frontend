@@ -1,4 +1,5 @@
-import type { ImageView } from '@/shared/dominio/ImageView';
+import { imageViewSchema, type ImageView } from '@/shared/dominio/ImageView';
+import z from 'zod';
 
 export type Team = {
   id: number;
@@ -22,3 +23,22 @@ export const defaultTeamForm: TeamForm = {
   trainer: '',
   trainerContact: '',
 };
+
+export const teamFormSchema = z.object({
+  id: z.number(),
+  name: z.string().min(1, { message: 'signinvalidation.name_required' }),
+  category: z
+    .number()
+    .nonnegative({ message: 'playervalidation.category_required' })
+    .nullable()
+    .refine(
+      (data) => {
+        return data !== null;
+      },
+      { message: 'playervalidation.category_required' }
+    ),
+  trainer: z.string().min(1, { message: 'teamvalidation.trainer_required' }),
+  teamImage: imageViewSchema.nullable(),
+  trainerContact: z.string(),
+  players: z.array(z.number()),
+}) satisfies z.ZodType<TeamForm>;

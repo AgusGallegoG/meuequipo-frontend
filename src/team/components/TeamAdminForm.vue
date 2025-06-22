@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UtilBase } from '@/core/utilities/UtilBase';
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import { useGetFreePlayersByCategory } from '@/shared/application/useGetPlayersByCategory';
 import BaseImageUpload from '@/shared/components/BaseImageUpload.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
@@ -7,7 +9,7 @@ import BaseSelect from '@/shared/components/BaseSelect.vue';
 import type { Select } from '@/shared/dominio/Select';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import { useSaveTeamForm } from '@/team/application/useSaveTeamForm';
-import { defaultTeamForm, type TeamForm } from '@/team/domain/Team';
+import { defaultTeamForm, teamFormSchema, type TeamForm } from '@/team/domain/Team';
 import { useTeamAdminStore } from '@/team/store/teamAdminStore';
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
@@ -24,15 +26,16 @@ const sharedEnumStore = useSharedEnumsStore();
 
 const isEdit = computed(() => teamAdminStore.isEdition);
 const editionForm = computed(() => teamAdminStore.getEditionTeam);
-const canSave = computed(() => {
-  return (
-    team.value.name.trim() !== '' &&
-    team.value.category !== null &&
-    team.value.trainer.trim() !== ''
-  );
-});
-const team = ref<TeamForm>({ ...defaultTeamForm });
 const players = ref<Select[]>([]);
+
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  isFormValid,
+  validate,
+  reset,
+} = useZodValidation(defaultTeamForm, teamFormSchema);
 
 watch(visible, (newVal) => {
   if (!newVal) {
@@ -42,14 +45,14 @@ watch(visible, (newVal) => {
 
 watch(editionForm, (newVal) => {
   if (newVal) {
-    team.value = { ...newVal };
+    form.value = { ...newVal };
   } else {
-    team.value = { ...defaultTeamForm };
+    form.value = UtilBase.cloneVueProxy(defaultTeamForm);
   }
 });
 
 watch(
-  () => team.value.category,
+  () => form.value.category,
   async (newValue) => {
     if (newValue) {
       await doFetchPlayers();
@@ -58,20 +61,25 @@ watch(
 );
 
 function resetForm() {
-  team.value = { ...defaultTeamForm };
+  reset();
   if (isEdit.value === true) {
     visible.value = false;
   }
   teamAdminStore.clearSelectedToEdit();
 }
+
 async function doFetchPlayers() {
-  if (team.value.category !== null) {
-    players.value = await getPlayers(team.value.category);
+  if (form.value.category !== null) {
+    players.value = await getPlayers(form.value.category);
   }
 }
 
 async function onSubmitForm() {
-  const response = await saveTeamForm(team.value);
+  submitted.value = true;
+
+  if (!validate()) return;
+
+  const response = await saveTeamForm(form.value);
   if (response) {
     teamAdminStore.setTableData(response);
   }
@@ -88,46 +96,54 @@ async function onSubmitForm() {
 
     <template #default>
       <div class="container g-3 pt-3">
-        <div class="row mt-3">
+        <div class="row mt-3 align-items-start">
           <div class="col-12 col-md-6 md:mb-2">
             <BaseInputGroupText
               class="col-12"
-              v-model="team.name"
-              :label="t('teams.fields.name')" />
+              v-model="form.name"
+              :label="t('teams.fields.name')"
+              :invalid="!!formErrors.name"
+              :errorMessage="formErrors.name ?? undefined" />
           </div>
           <div class="col-12 col-md-6 md:mb-2">
             <BaseSelect
-              v-model="team.category"
+              v-model="form.category"
               :options="sharedEnumStore.getCategories"
-              :label="t('teams.fields.category')" />
+              :label="t('teams.fields.category')"
+              :invalid="!!formErrors.category"
+              :errorMessage="formErrors.category ?? undefined" />
           </div>
         </div>
 
-        <div class="row">
+        <div class="row align-items-start">
           <div class="col-12 col-md-6 md:mb-2">
             <BaseInputGroupText
               class="col-12"
-              v-model="team.trainerContact"
-              :label="t('teams.fields.trainer_contact')" />
+              v-model="form.trainer"
+              :label="t('teams.fields.trainer')"
+              :invalid="!!formErrors.trainer"
+              :errorMessage="formErrors.trainer ?? undefined" />
           </div>
           <div class="col-12 col-md-6 md:mb-2">
             <BaseInputGroupText
               class="col-12"
-              v-model="team.trainer"
-              :label="t('teams.fields.trainer')" />
+              v-model="form.trainerContact"
+              :label="t('teams.fields.trainer_contact')"
+              :invalid="!!formErrors.trainerContact"
+              :errorMessage="formErrors.trainerContact ?? undefined" />
           </div>
         </div>
 
-        <div class="row mt-3">
+        <div class="row mt-3 align-items-start">
           <div class="col-12 col-lg-5 md:pt-5">
             <BaseImageUpload
               :label="t('teams.fields.image')"
-              v-model="team.teamImage"></BaseImageUpload>
+              v-model="form.teamImage"></BaseImageUpload>
           </div>
 
           <div class="col-12 col-lg-7 md:py-5">
             <BasePickList
-              v-model="team.players"
+              v-model="form.players"
               :options="players"
               :loading="loadingPlayers"
               :sourceLabel="t('teams.fields.all_players')"
@@ -151,7 +167,7 @@ async function onSubmitForm() {
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
           icon="pi pi-save"
-          :disabled="!canSave"
+          :disabled="submitted && !isFormValid"
           :loading="loading"></Button>
       </div>
     </template>

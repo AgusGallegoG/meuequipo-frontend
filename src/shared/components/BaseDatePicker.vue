@@ -43,6 +43,7 @@ const props = withDefaults(defineProps<Props>(), {
           :showTime="showTime"
           hourFormat="24"
           :showIcon="showIcon"
+          :class="{ 'p-invalid': props.invalid }"
           :disabled="props.disabled"
           :dateFormat="dateFormat"></DatePicker>
         <label :for="'over_label_' + props.id" v-if="props.label">{{ props.label }}</label>

@@ -41,6 +41,7 @@ const props = withDefaults(defineProps<Props>(), {
           optionLabel="name"
           filter
           :disabled="props.disabled"
+          :class="{ 'p-invalid': props.invalid }"
           class="w-100" />
         <label :for="'over_label' + (props.id ? props.id : '')">
           {{ props.label }}

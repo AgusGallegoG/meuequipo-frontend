@@ -18,6 +18,7 @@ const router = useRouter();
 const {
   form,
   errors: formErrors,
+  isFormValid,
   submitted,
   validate,
 } = useZodValidation(defaultLoginForm, loginFormSchema);
@@ -68,7 +69,12 @@ async function doLogin() {
       <template #footer>
         <div class="container-fluid">
           <div class="row">
-            <Button raised :label="t('admin.login.button')" @click="doLogin()" :loading="loading" />
+            <Button
+              raised
+              :label="t('admin.login.button')"
+              @click="doLogin()"
+              :loading="loading"
+              :disabled="!isFormValid" />
           </div>
         </div>
         <Message v-if="loginError" severity="error" size="small" variant="simple">
