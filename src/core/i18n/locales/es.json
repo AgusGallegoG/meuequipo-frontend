@@ -374,5 +374,10 @@
     "date_required": "Debe indicar la fecha del partido",
     "team_required": "Debe escoger un equipo",
     "location_required": "Debe indicar a ubicación do encontro"
+  },
+  "seasonvalidation": {
+    "datestart_required": "Debe indicar la fecha de inicio de la temporada",
+    "dateend_required": "Debe indicar a data de fin de la temporada",
+    "end_date_later": "Debe ser posterior al inicio de la temporada"
   }
 }

@@ -371,8 +371,13 @@
   },
   "matchvalidation": {
     "state_required": "O estado é obrigatorio",
-    "date_required": "Ten que indicar a data do encontro ",
+    "date_required": "Ten que indicar a data do encontro",
     "team_required": "Ten que escoller un equipo",
     "location_required": "Ten que indicar a ubicación do encontro"
+  },
+  "seasonvalidation": {
+    "datestart_required": "Debe indicar a data de inicio da tempada",
+    "dateend_required": "Debe indicar a data de fin da tempada",
+    "end_date_later": "Debe ser posterior ao inicio da tempada"
   }
 }
