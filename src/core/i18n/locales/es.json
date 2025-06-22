@@ -224,7 +224,8 @@
     "fields": {
       "name": "nombre",
       "logo": "Logo",
-      "url": "Enlace a la web"
+      "url": "Enlace a la web",
+      "visit": "Visitar web"
     }
   },
   "blog": {
@@ -359,5 +360,8 @@
   },
   "teamvalidation": {
     "trainer_required": "Es necesario añadir un entrenador"
+  },
+  "sponsorvalidation": {
+    "url_invalid": "La url introducida no es válida"
   }
 }

@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import router from '@/core/router';
 import { useGetSponsorsAdminTable } from '@/sponsor/application/useGetSponsorsAdminTable';
 import SponsorAdminForm from '@/sponsor/components/SponsorAdminForm.vue';
 import type { Sponsor } from '@/sponsor/domain/Sponsor';
@@ -68,6 +69,10 @@ async function onPage(event: DataTablePageEvent) {
   sponsorAdminStore.setPage(event.page);
   await doFetchTableItems();
 }
+
+function goTo(url: string) {
+  window.open(url, '_blank');
+}
 </script>
 <template>
   <SponsorAdminForm v-model="visible"></SponsorAdminForm>
@@ -105,13 +110,28 @@ async function onPage(event: DataTablePageEvent) {
           </div>
         </template>
 
-        <Column field="logo" :header="t('sponsors.fields.logo')">
+        <Column field="logo" :header="t('sponsors.fields.logo')" style="width: 25%">
           <template #body="slotProps">
             <img :src="slotProps.data.logo.url" class="sponsor-admin-table-logo" loading="lazy" />
           </template>
         </Column>
 
-        <Column field="name" :header="t('sponsors.fields.name')" sortable></Column>
+        <Column
+          field="name"
+          :header="t('sponsors.fields.name')"
+          sortable
+          style="width: 55%"></Column>
+
+        <Column field="url" style="width: 20%">
+          <template #body="slotProps">
+            <Button
+              v-if="slotProps.data.url"
+              outlined
+              @click="goTo(slotProps.data.url)"
+              icon="pi pi-external-link"
+              :label="t('sponsors.fields.visit')"></Button>
+          </template>
+        </Column>
       </DataTable>
     </template>
   </Card>

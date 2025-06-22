@@ -1,8 +1,10 @@
 <script setup lang="ts">
+import { UtilBase } from '@/core/utilities/UtilBase';
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import BaseImageUpload from '@/shared/components/BaseImageUpload.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import { useSaveSponsor } from '@/sponsor/application/useSaveSponsor';
-import { defaultSponsor, type Sponsor } from '@/sponsor/domain/Sponsor';
+import { defaultSponsor, sponsorSchema, type Sponsor } from '@/sponsor/domain/Sponsor';
 import { useSponsorAdminStore } from '@/sponsor/store/SponsorAdminStore';
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
@@ -15,9 +17,16 @@ const { refetch: saveSponsor, loading } = useSaveSponsor();
 const sponsorAdminStore = useSponsorAdminStore();
 
 const isEdit = computed(() => sponsorAdminStore.isEdition);
-const sponsor = ref<Sponsor>({ ...defaultSponsor });
-const canSave = computed(() => sponsor.value.name !== '');
 const editionSponsor = computed(() => sponsorAdminStore.getEditionSponsor);
+
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  isFormValid,
+  validate,
+  reset,
+} = useZodValidation(defaultSponsor, sponsorSchema);
 
 watch(visible, (newVal) => {
   if (!newVal) {
@@ -29,16 +38,16 @@ watch(
   editionSponsor,
   (newVal) => {
     if (newVal) {
-      sponsor.value = { ...newVal };
+      form.value = { ...newVal };
     } else {
-      sponsor.value = { ...defaultSponsor };
+      form.value = UtilBase.cloneVueProxy(defaultSponsor);
     }
   },
   { immediate: true }
 );
 
 function resetForm() {
-  sponsor.value = { ...defaultSponsor };
+  reset();
   if (isEdit.value === true) {
     visible.value = false;
   }
@@ -46,8 +55,11 @@ function resetForm() {
 }
 
 async function onSubmitForm() {
+  submitted.value = true;
+
+  if (!validate()) return;
   //   ExecuteQuery
-  const response = await saveSponsor(sponsor.value);
+  const response = await saveSponsor(form.value);
   if (response) {
     sponsorAdminStore.setTableData(response);
   }
@@ -71,18 +83,22 @@ async function onSubmitForm() {
           <div class="col d-flex justify-content-center">
             <BaseImageUpload
               :label="t('sponsors.fields.logo')"
-              v-model="sponsor.logo"></BaseImageUpload>
+              v-model="form.logo"></BaseImageUpload>
           </div>
           <BaseInputGroupText
             class="col d-flex align-items-center"
             id="name-rival-team"
-            v-model="sponsor.name"
-            :label="t('sponsors.fields.name')"></BaseInputGroupText>
+            v-model="form.name"
+            :label="t('sponsors.fields.name')"
+            :invalid="!!formErrors.name"
+            :errorMessage="formErrors.name ?? undefined"></BaseInputGroupText>
           <BaseInputGroupText
             class="col d-flex align-items-center"
             id="url-rival-team"
-            v-model="sponsor.url"
-            :label="t('sponsors.fields.url')"></BaseInputGroupText>
+            v-model="form.url"
+            :label="t('sponsors.fields.url')"
+            :invalid="!!formErrors.url"
+            :errorMessage="formErrors.url ?? undefined"></BaseInputGroupText>
         </div>
       </div>
     </template>
@@ -101,7 +117,7 @@ async function onSubmitForm() {
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
           icon="pi pi-save"
-          :disabled="!canSave"
+          :disabled="submitted && !isFormValid"
           :loading="loading"></Button>
       </div>
     </template>
