@@ -356,6 +356,7 @@
     "phone_invalid": "Debe introducir un teléfono válido"
   },
   "categoryvalidation": {
+    "date_required": "Debe indicar el año de inicio de la categoría",
     "end_date_later": "Debe ser posterior a año desde"
   },
   "teamvalidation": {
@@ -367,5 +368,11 @@
   "publicationvalidation": {
     "title_required": "El título es obligatorio",
     "body_required": "El cuerpo de la publicación es obligatorio"
+  },
+  "matchvalidation": {
+    "state_required": "El estado es obligatorio",
+    "date_required": "Debe indicar la fecha del partido",
+    "team_required": "Debe escoger un equipo",
+    "location_required": "Debe indicar a ubicación do encontro"
   }
 }

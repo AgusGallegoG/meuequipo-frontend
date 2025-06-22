@@ -30,9 +30,9 @@ export const categoryItemSchema = z
     active: z.boolean(),
     name: z.string().min(1, { message: 'signinvalidation.name_required' }),
     yearInit: z
-      .date({ required_error: 'playervalidation.date_required' })
+      .date({ required_error: 'categoryvalidation.date_required' })
       .nullable()
-      .refine((val) => val !== null, { message: 'playervalidation.date_required' }),
+      .refine((val) => val !== null, { message: 'categoryvalidation.date_required' }),
     yearEnd: z.date().nullable(),
   })
   .refine(

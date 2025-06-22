@@ -1,5 +1,6 @@
-import type { ImageView } from '@/shared/dominio/ImageView';
-import type { ViewSquad } from '@/squad/domain/ViewSquad';
+import { imageViewSchema, type ImageView } from '@/shared/dominio/ImageView';
+import { viewSquadSchema, type ViewSquad } from '@/squad/domain/ViewSquad';
+import { z } from 'zod';
 
 export type Match = {
   id: number;
@@ -40,3 +41,43 @@ export const defaultMatch: Match = {
   state: null,
   squad: null,
 };
+
+const matchTeamSchema = z.object({
+  id: z.number(),
+  logo: imageViewSchema.nullable(),
+  name: z.string(),
+  isOurTeam: z.boolean(),
+}) satisfies z.ZodType<MatchTeam>;
+
+export const matchSchema = z.object({
+  id: z.number(),
+  category: z
+    .number()
+    .nonnegative({ message: 'playervalidation.category_required' })
+    .nullable()
+    .refine(
+      (data) => {
+        return data !== null;
+      },
+      { message: 'playervalidation.category_required' }
+    ),
+  localTeam: matchTeamSchema
+    .nullable()
+    .refine((v) => v !== null, { message: 'matchvalidation.team_required' }),
+  localPoints: z.number().nullable(),
+  visitorTeam: matchTeamSchema
+    .nullable()
+    .refine((v) => v !== null, { message: 'matchvalidation.team_required' }),
+  visitorPoints: z.number().nullable(),
+  location: z.string().min(1, { message: 'matchvalidation.location_required' }),
+  matchDate: z
+    .date()
+    .nullable()
+    .refine((v) => v !== null, { message: 'matchvalidation.date_required' }),
+  state: z
+    .number()
+    .nonnegative({ message: 'matchvalidation.state_required' })
+    .nullable()
+    .refine((v) => v !== null, { message: 'matchvalidation.state_required' }),
+  squad: viewSquadSchema.nullable(),
+}) satisfies z.ZodType<Match>;

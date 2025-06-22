@@ -22,4 +22,4 @@ export const sponsorSchema = z.object({
   url: z.string().refine((val) => val === '' || z.string().url().safeParse(val).success, {
     message: 'sponsorvalidation.url_invalid',
   }),
-});
+}) satisfies z.ZodType<Sponsor>;
