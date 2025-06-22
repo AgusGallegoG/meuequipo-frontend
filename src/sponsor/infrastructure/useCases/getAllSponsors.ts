@@ -2,24 +2,23 @@ import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import type { Sponsor } from '@/sponsor/domain/Sponsor';
 import responsesponsorfooter from '@/sponsor/infrastructure/mocks/responseSponsorFooterMock.json';
-import type { ResponseSponsorFooterList } from '@/sponsor/infrastructure/models/responses/ResponseSponsorFooter';
+import type { ResponseSponsor } from '@/sponsor/infrastructure/models/responses/ResponseSponsorFooter';
 import { createSponsorFooterListFromResponseSponsorFooterList } from '@/sponsor/infrastructure/services/sponsorsService';
-import type { AxiosResponse } from 'axios';
 
-async function Api(): Promise<ResponseSponsorFooterList> {
-  const response = await api.get<null, AxiosResponse<ResponseSponsorFooterList>>('/sponsors');
+async function Api(): Promise<ResponseSponsor[]> {
+  const response = await api.get<ResponseSponsor[]>('/sponsors');
   return response.data;
 }
 
-async function InMemory(): Promise<ResponseSponsorFooterList> {
+async function InMemory(): Promise<ResponseSponsor[]> {
   await UtilBase.wait(500);
-  return responsesponsorfooter as ResponseSponsorFooterList;
+  return responsesponsorfooter.content as ResponseSponsor[];
 }
 
 export async function getAllSponsors(): Promise<Sponsor[]> {
   try {
     const response = UtilBase.checkEnvironment() ? await InMemory() : await Api();
-    return createSponsorFooterListFromResponseSponsorFooterList(response.content);
+    return createSponsorFooterListFromResponseSponsorFooterList(response);
   } catch (error) {
     throw new Error(`Error recuperando os patrocinadores para a visualizacion no layout`);
   }
