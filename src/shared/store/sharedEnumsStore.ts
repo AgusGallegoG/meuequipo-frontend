@@ -49,6 +49,7 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
           return 'info';
         }
         if (name === 'FEMENINO' || name === 'FEMININO') return 'warn';
+        if (name === 'MIXTO') return 'success';
 
         return '';
       },
@@ -68,10 +69,10 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
 
         const name = sex.name.toUpperCase();
 
-        if (name === 'MASCULINO') {
+        if (name === 'HOME') {
           return 'info';
         }
-        if (name === 'FEMENINO' || name === 'FEMININO') return 'warn';
+        if (name === 'MULLER') return 'warn';
 
         return '';
       },
