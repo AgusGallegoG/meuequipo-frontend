@@ -7,6 +7,7 @@ import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 const authStore = useAuthStore();
+const router = useRouter();
 const { t } = useI18n();
 const { logout: doLogout } = useLogout();
 
@@ -18,6 +19,11 @@ const menuItems = ref([
   },
   {
     separator: true,
+  },
+  {
+    label: t('core.header_menu.changepass'),
+    icon: 'pi pi-key',
+    command: () => router.push({ name: 'PassChange' }),
   },
   {
     label: t('core.header_menu.logout'),

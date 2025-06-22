@@ -15,7 +15,7 @@ export function useLogin() {
   async function refetch(request: LoginForm) {
     try {
       loading.value = true;
-      const data = await withLoading(async () => login(request)); // await login(request);
+      const data = await withLoading(async () => await login(request)); // await login(request);
       showToast({
         title: t('admin.login.toast_name'),
         message: t('core.messages.success.login'),
