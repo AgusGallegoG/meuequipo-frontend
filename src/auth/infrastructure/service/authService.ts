@@ -1,7 +1,9 @@
-import { type LoginResponse } from '@/auth/infrastructure/models/responses/LoginResponse';
+import type { ChangePass } from '@/auth/domain/ChangePass';
 import type { User } from '@/auth/domain/User';
+import { type LoginResponse } from '@/auth/infrastructure/models/responses/LoginResponse';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import Cookies from 'js-cookie';
+import type { ChangePassRequest } from '../models/requests/ChangePassRequest';
 
 export function createUserFromResponse(response: LoginResponse): User {
   if (
@@ -36,4 +38,11 @@ export function setAuthTokenCookie(token: string) {
  */
 export function removeAuthTokenCookie() {
   Cookies.remove('token');
+}
+
+export function mapChangePassToRequestChangePass(change: ChangePass): ChangePassRequest {
+  return {
+    newPass: change.newPass,
+    oldPass: change.oldPass,
+  };
 }

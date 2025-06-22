@@ -11,7 +11,8 @@
       "clear": "Limpar",
       "cancel": "Cancelar",
       "save": "Gardar",
-      "add": "Engadir"
+      "add": "Engadir",
+      "back": "Voltar"
     },
     "actions": {
       "save": "Gardar",
@@ -29,14 +30,17 @@
     },
     "messages": {
       "success": {
-        "login": "Iniciou sesión correctamente."
+        "login": "Iniciou sesión correctamente.",
+        "changepass": "Cambiouse o contrasinal correctamente."
       },
       "error": {
-        "login": "Non se puido inciar sesión."
+        "login": "Non se puido inciar sesión.",
+        "changepass": "Oorreu un erro ao cambiar o contrasinal"
       }
     },
     "header_menu": {
-      "logout": "Pechar sesión"
+      "logout": "Pechar sesión",
+      "changepass": "Cambiar contrasinal"
     },
     "menubar": {
       "label": {
@@ -88,6 +92,7 @@
   "admin": {
     "breadcrumbs": {
       "inicio": "Inicio",
+      "changepass": "Cambio de contrsinal",
       "dashboard": "Dashboard",
       "rivals": "Rivais",
       "signin": "Inscripcións",
@@ -101,10 +106,15 @@
     },
     "login": {
       "title": "Iniciar sesión no panel de administrador",
+      "changepass": "Cambio de contraseña para: {0}",
       "button": "Iniciar sesión",
       "username": "Nome de usuario",
       "password": "Contrasinal",
+      "password_old": "Contrasinal actual",
+      "password_new": "Novo contrasinal",
+      "password_repeat": "Repita o novo contrasinal",
       "toast_name": "Inicio de sesión",
+      "changepass_name": "Cambio de contrasinal",
       "login_err": "Usuario ou contrasinal incorrecto",
       "go_main": "← Volver á páxina principal"
     },
@@ -379,5 +389,12 @@
     "datestart_required": "Debe indicar a data de inicio da tempada",
     "dateend_required": "Debe indicar a data de fin da tempada",
     "end_date_later": "Debe ser posterior ao inicio da tempada"
+  },
+  "changepassvalidation": {
+    "old_required": "Debe introducir o contrasinal actual",
+    "min_length": "O contrasinal debe ter un mínimo de 8 caracteres",
+    "format": "O contrasinal debe ter polo menos 1 maiúscula, 1 número, 1 minúscula",
+    "confirm_required": "volva a introducir o novo contrasinal",
+    "pass_missmatch": "Os contrasinais deben coincidir"
   }
 }

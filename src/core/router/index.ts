@@ -57,6 +57,12 @@ const routes: RouteRecordRaw[] = [
         meta: { requiresAuth: true, breadcrumbLabel: 'admin.breadcrumbs.dashboard' },
         component: () => import('@/core/views/admin/DashboardView.vue'),
       },
+      {
+        path: 'passwordchange',
+        name: 'PassChange',
+        meta: { requiresAuth: true, breadcrumbLabel: 'admin.breadcrumbs.changepass' },
+        component: () => import('@/core/views/admin/ChangePasswordView.vue'),
+      },
       // aqui van las rutas de los hijos
       ...sponsorRouterAdmin,
       ...teamRouterAdmin,

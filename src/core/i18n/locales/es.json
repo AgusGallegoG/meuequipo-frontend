@@ -11,7 +11,8 @@
       "clear": "Limpiar",
       "cancel": "Cancelar",
       "save": "Guardar",
-      "add": "Añadir"
+      "add": "Añadir",
+      "back": "Volver"
     },
     "actions": {
       "save": "Guardar",
@@ -29,14 +30,17 @@
     },
     "messages": {
       "success": {
-        "login": "Se inició sesión correctamente."
+        "login": "Se inició sesión correctamente.",
+        "changepass": "Se cambió la contraseña correctamente."
       },
       "error": {
-        "login": "No se pudo inciar sesión."
+        "login": "No se pudo inciar sesión.",
+        "changepass": "Ocurrió un errro al cambiar la contraseña"
       }
     },
     "header_menu": {
-      "logout": "Cerrar sesión"
+      "logout": "Cerrar sesión",
+      "changepass": "Cambiar contraseña"
     },
     "menubar": {
       "label": {
@@ -88,6 +92,7 @@
   "admin": {
     "breadcrumbs": {
       "inicio": "Inicio",
+      "changepass": "Cambio de contraseña",
       "dashboard": "Dashboard",
       "rivals": "Rivales",
       "signin": "Inscripciones",
@@ -101,10 +106,13 @@
     },
     "login": {
       "title": "Iniciar sesión en el panel de administrador",
+      "changepass": "Cambio de contrasinal para: {0}",
       "button": "Iniciar sesión",
       "username": "Nombre de usuario",
       "password": "Contraseña",
+      "password_repeat": "Repita la nueva contrasinal",
       "toast_name": "Inicio de sesión",
+      "changepass_name": "Cambio de contraseña",
       "login_err": "Usuario o contraseña incorrectos",
       "go_main": "← Volver a la página principal"
     },
@@ -379,5 +387,12 @@
     "datestart_required": "Debe indicar la fecha de inicio de la temporada",
     "dateend_required": "Debe indicar a data de fin de la temporada",
     "end_date_later": "Debe ser posterior al inicio de la temporada"
+  },
+  "changepassvalidation": {
+    "old_required": "Debe introducir la contraseñ actual",
+    "min_length": "la contraseña debe tener un mínimo de 8 caracteres",
+    "format": "La contaseñal debe tener por lo menos 1 mayúscula, 1 número, 1 minúscula",
+    "confirm_required": "Vuelva a introducir la nueva contraseña",
+    "pass_missmatch": "las contraseñas no coinciden"
   }
 }
