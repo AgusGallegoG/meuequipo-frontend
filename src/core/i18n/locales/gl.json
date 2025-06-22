@@ -363,5 +363,9 @@
   },
   "sponsorvalidation": {
     "url_invalid": "A url introducida non é válida"
+  },
+  "publicationvalidation": {
+    "title_required": "O título é obrigatorio",
+    "body_required": "O corpo da publicación é obrigatorio"
   }
 }

@@ -26,7 +26,7 @@ const props = withDefaults(defineProps<Props>(), {
 </script>
 <template>
   <div :class="[props.class, 'py-3', 'py-md-3', 'py-lg-3', 'responsive-inputnumber']">
-    <div class="inputnumber-container">
+    <div id="inputnumber-container" class="w-100">
       <InputGroup>
         <FloatLabel>
           <InputNumber

@@ -1,6 +1,12 @@
 <script setup lang="ts">
+import { UtilBase } from '@/core/utilities/UtilBase';
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import { useSavePublication } from '@/publication/application/useSavePublication';
-import { type Publication, defaultPublication } from '@/publication/domain/Publication';
+import {
+  type Publication,
+  defaultPublication,
+  publicationSchema,
+} from '@/publication/domain/Publication';
 import { useBlogAdminStore } from '@/publication/store/BlogAdminStore';
 import BaseEditor from '@/shared/components/BaseEditor.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
@@ -18,8 +24,15 @@ const blogStore = useBlogAdminStore();
 
 const isEdit = computed(() => blogStore.isEdition);
 const editionPublication = computed(() => blogStore.getEditionPublication);
-const canSave = computed(() => publication.value.title !== '' && publication.value.body !== '');
-const publication = ref<Publication>({ ...defaultPublication });
+
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  isFormValid,
+  validate,
+  reset,
+} = useZodValidation(defaultPublication, publicationSchema);
 
 watch(visible, (newVal) => {
   if (!newVal) {
@@ -29,14 +42,14 @@ watch(visible, (newVal) => {
 
 watch(editionPublication, (newVal) => {
   if (newVal) {
-    publication.value = { ...newVal };
+    form.value = { ...newVal };
   } else {
-    publication.value = { ...defaultPublication };
+    form.value = UtilBase.cloneVueProxy(defaultPublication);
   }
 });
 
 function resetForm() {
-  publication.value = { ...defaultPublication };
+  reset();
   if (isEdit.value === true) {
     visible.value = false;
   }
@@ -44,7 +57,10 @@ function resetForm() {
 }
 
 async function onSubmitForm() {
-  const response = await savePublication(publication.value);
+  submitted.value = true;
+
+  if (!validate()) return;
+  const response = await savePublication(form.value);
   if (response) {
     blogStore.setTableData(response);
   }
@@ -64,20 +80,24 @@ async function onSubmitForm() {
         <div class="row">
           <BaseInputGroupText
             id="publication-title"
-            v-model="publication.title"
-            :label="t('blog.fields.title')">
+            v-model="form.title"
+            :label="t('blog.fields.title')"
+            :invalid="!!formErrors.title"
+            :errorMessage="formErrors.title ?? undefined">
           </BaseInputGroupText>
         </div>
         <div class="row">
           <BaseEditor
             id="publication-body"
-            v-model="publication.body"
-            :label="t('blog.fields.body')"></BaseEditor>
+            v-model="form.body"
+            :label="t('blog.fields.body')"
+            :invalid="!!formErrors.body"
+            :errorMessage="formErrors.body ?? undefined"></BaseEditor>
         </div>
         <div class="row">
           <BaseMultipleImageUpload
             id="publication-images"
-            v-model="publication.images"
+            v-model="form.images"
             :label="t('blog.fields.images')"></BaseMultipleImageUpload>
         </div>
       </div>
@@ -97,7 +117,7 @@ async function onSubmitForm() {
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
           icon="pi pi-save"
-          :disabled="!canSave"
+          :disabled="submitted && !isFormValid"
           :loading="loading"></Button>
       </div>
     </template>

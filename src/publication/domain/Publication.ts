@@ -1,4 +1,5 @@
-import type { ImageView } from '@/shared/dominio/ImageView';
+import { imageViewSchema, type ImageView } from '@/shared/dominio/ImageView';
+import z from 'zod';
 
 export type PublicationNews = {
   content: Publication[];
@@ -25,3 +26,11 @@ export const defaultPublication: Publication = {
   images: null,
   id: -1,
 };
+
+export const publicationSchema = z.object({
+  id: z.number(),
+  title: z.string().min(1, { message: 'publicationvalidation.title_required' }),
+  body: z.string().min(1, { message: 'publicationvalidation.body_required' }),
+  creationDate: z.string(),
+  images: z.array(imageViewSchema).nullable(),
+}) satisfies z.ZodType<Publication>;

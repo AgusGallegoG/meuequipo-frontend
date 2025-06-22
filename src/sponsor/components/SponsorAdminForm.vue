@@ -79,7 +79,7 @@ async function onSubmitForm() {
     </template>
     <template #default>
       <div class="container g-3 mt-2">
-        <div class="row row-cols-1 row-cols-md-3">
+        <div class="row row-cols-1 row-cols-md-3 align-items-start">
           <div class="col d-flex justify-content-center">
             <BaseImageUpload
               :label="t('sponsors.fields.logo')"
