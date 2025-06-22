@@ -2,26 +2,25 @@ import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import type { Publication } from '@/publication/domain/Publication';
 import responsepublication from '@/publication/infrastructure/mocks/responsePublicationMock.json';
-import type { ResponsePublicationList } from '@/publication/infrastructure/models/responses/ResponsePublicationList';
+import type { ResponsePublication } from '@/publication/infrastructure/models/responses/ResponsePublicationList';
 import { createPublicationListFromResponsePublicationList } from '@/publication/infrastructure/services/publicationService';
-// import { buildPaginationParams } from '@/core/infrastructure/service/paginationParams';
 
-async function Api(): Promise<ResponsePublicationList> {
-  const response = await api.get<ResponsePublicationList>('/blog/init');
+async function Api(): Promise<ResponsePublication[]> {
+  const response = await api.get<ResponsePublication[]>('/blog/init');
 
   return response.data;
 }
 
-async function InMemory(): Promise<ResponsePublicationList> {
+async function InMemory(): Promise<ResponsePublication[]> {
   await UtilBase.wait(500);
   // throw new Error('Error de prueba');
-  return responsepublication;
+  return responsepublication.content as ResponsePublication[];
 }
 
 async function getBlogInitContent(): Promise<Publication[]> {
   try {
     const response = UtilBase.checkEnvironment() ? await InMemory() : await Api();
-    return createPublicationListFromResponsePublicationList(response.content);
+    return createPublicationListFromResponsePublicationList(response);
   } catch (error) {
     throw new Error('Error obteniendo los datos de la pantalla de inicio');
   }
