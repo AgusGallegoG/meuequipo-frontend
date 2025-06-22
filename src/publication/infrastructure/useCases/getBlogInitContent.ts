@@ -7,7 +7,7 @@ import { createPublicationListFromResponsePublicationList } from '@/publication/
 // import { buildPaginationParams } from '@/core/infrastructure/service/paginationParams';
 
 async function Api(): Promise<ResponsePublicationList> {
-  const response = await api.get<ResponsePublicationList>('/blog/all');
+  const response = await api.get<ResponsePublicationList>('/blog/init');
 
   return response.data;
 }
