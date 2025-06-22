@@ -71,7 +71,7 @@ async function onSubmitForm() {
     <template #content>
       <div class="container g-3 pt-3" v-if="!sent">
         <!-- Parent info section -->
-        <div class="row mb-3">
+        <div class="row mb-3 align-items-start">
           <div class="col-12">
             <h3 class="fw-semibold pb-2 mb-3">{{ t('signin.parent_info') }}</h3>
           </div>
@@ -89,7 +89,7 @@ async function onSubmitForm() {
             :errorMessage="formErrors.parentSurnames ?? undefined" />
         </div>
         <!-- player Info Section -->
-        <div class="row mb-3">
+        <div class="row mb-3 align-items-start">
           <div class="col-12">
             <h3 class="fw-semibold pb-2 mb-3">{{ t('signin.player_info') }}</h3>
           </div>
@@ -127,7 +127,7 @@ async function onSubmitForm() {
             :errorMessage="formErrors.player?.category ?? undefined" />
         </div>
         <!-- contact-info-section -->
-        <div class="row mb-3">
+        <div class="row mb-3 align-items-start">
           <div class="col-12">
             <h3 class="fw-semibold pb-2 mb-3">{{ t('signin.contact_info') }}</h3>
           </div>

@@ -78,7 +78,7 @@ async function onSubmitForm() {
     </template>
     <template #default>
       <div class="container g-3 mt-2">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 align-items-start">
           <BaseInputGroupText
             class="col d-flex align-items-center"
             :label="t('users.fields.name')"

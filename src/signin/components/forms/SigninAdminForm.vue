@@ -100,7 +100,7 @@ function cloneSignin(original: Signin): Signin {
     <template #default>
       <div class="container g-3 pt-3">
         <!-- Parent name-surname -->
-        <div class="row">
+        <div class="row align-items-start">
           <BaseInputGroupText
             class="col-12 col-md-4"
             v-model="signin.parentName"
@@ -113,7 +113,7 @@ function cloneSignin(original: Signin): Signin {
             :disabled="isEdit" />
         </div>
         <!-- Parent contact-info -->
-        <div class="row">
+        <div class="row align-items-start">
           <BaseInputGroupText
             class="col-12 col-md-4"
             v-model="signin.phone"
@@ -132,7 +132,7 @@ function cloneSignin(original: Signin): Signin {
             :disabled="isEdit" />
         </div>
         <!-- player name-surname -->
-        <div class="row">
+        <div class="row align-items-start">
           <BaseInputGroupText
             class="col-12 col-md-4"
             v-model="signin.player.name"
@@ -145,7 +145,7 @@ function cloneSignin(original: Signin): Signin {
             :disabled="isEdit" />
         </div>
         <!-- player birth-category-sex -->
-        <div class="row">
+        <div class="row align-items-start">
           <BaseDatePicker
             class="col-12 col-md-4"
             v-model="signin.player.birthDate"

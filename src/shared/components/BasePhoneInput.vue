@@ -36,13 +36,15 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 onMounted(() => {
-  const match = model.value?.match(/^(\+\d+)\s*(.*)$/);
-  if (match) {
-    const [_, dialCode, number] = match;
-    const found = country_phones.find((c) => c.dialCode === dialCode);
-    if (found) {
-      extension.value = found.dialCode;
-      localNumber.value = number;
+  if (!model.value) return;
+
+  const cleanValue = model.value.replace(/\s+/g, ''); // eliminamos todos los espacios
+
+  for (const country of country_phones) {
+    if (cleanValue.startsWith(country.dialCode)) {
+      extension.value = country.dialCode;
+      localNumber.value = cleanValue.slice(country.dialCode.length);
+      break;
     }
   }
 });

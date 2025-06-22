@@ -1,6 +1,8 @@
 <script setup lang="ts">
+import { UtilBase } from '@/core/utilities/UtilBase';
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import { useSaveRival } from '@/rivals/application/useSaveRival';
-import { defaultRival, type Rival } from '@/rivals/domain/RivalTable';
+import { defaultRival, rivalSchema, type Rival } from '@/rivals/domain/RivalTable';
 import { useRivalsAdminStore } from '@/rivals/store/rivalsStore';
 import BaseImageUpload from '@/shared/components/BaseImageUpload.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
@@ -19,11 +21,19 @@ const { t } = useI18n();
 const { refetch: saveRival, loading } = useSaveRival();
 
 const isEdit = computed(() => rivalAdminStore.isEdition);
-const rival = ref<Rival>({ ...defaultRival });
 const editionRival = computed(() => rivalAdminStore.getEditionRival);
-const canSave = computed(() => {
-  return rival.value.name !== '';
+
+onMounted(async () => {
+  await sharedEnumsStore.fetchAll();
 });
+
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  validate,
+  reset,
+} = useZodValidation(defaultRival, rivalSchema);
 
 watch(visible, (newVal) => {
   if (!newVal) {
@@ -35,16 +45,16 @@ watch(
   editionRival,
   (newVal) => {
     if (newVal) {
-      rival.value = { ...newVal };
+      form.value = { ...newVal };
     } else {
-      rival.value = { ...defaultRival };
+      form.value = UtilBase.cloneVueProxy(defaultRival);
     }
   },
   { immediate: true }
 );
 
 function resetForm() {
-  rival.value = { ...defaultRival };
+  reset();
   if (isEdit.value === true) {
     visible.value = false;
   }
@@ -52,7 +62,11 @@ function resetForm() {
 }
 
 async function onSubmitForm() {
-  const response = await saveRival(rival.value, rivalAdminStore.getFilters);
+  submitted.value = true;
+
+  if (!validate()) return;
+
+  const response = await saveRival(form.value, rivalAdminStore.getFilters);
   if (response) {
     rivalAdminStore.setTableData(response);
   }
@@ -72,45 +86,57 @@ async function onSubmitForm() {
     </template>
     <template #default>
       <div class="container g-3 mt-2">
-        <div class="row row-cols-1 row-cols-md-2">
+        <div class="row row-cols-1 row-cols-md-2 align-items-start">
           <!--name-->
           <BaseInputGroupText
             class="col d-flex align-items-center"
             id="name-rival-team"
-            v-model="rival.name"
-            :label="t('rivals.fields.name')"></BaseInputGroupText>
+            v-model="form.name"
+            :label="t('rivals.fields.name')"
+            :invalid="!!formErrors.name"
+            :errorMessage="formErrors.name ?? undefined"></BaseInputGroupText>
 
           <CategoryMultiSelect
             class="col d-flex align-items-center"
             id="category-rivals"
-            v-model="rival.categories"
+            v-model="form.categories"
             :options="sharedEnumsStore.getCategories"
-            :label="t('shared.dropdowns.categories')"></CategoryMultiSelect>
+            :label="t('shared.dropdowns.categories')"
+            :invalid="!!formErrors.categories"
+            :errorMessage="
+              Array.isArray(formErrors.categories)
+                ? (formErrors.categories[0] ?? undefined)
+                : formErrors.categories
+            "></CategoryMultiSelect>
         </div>
-        <div class="row row-cols-1 row-cols-md-3">
+        <div class="row row-cols-1 row-cols-md-3 align-items-start">
           <BaseInputGroupText
             class="col d-flex align-items-center"
             id="responsible-team"
-            v-model="rival.responsible"
-            :label="t('rivals.fields.responsible')"></BaseInputGroupText>
+            v-model="form.responsible"
+            :label="t('rivals.fields.responsible')"
+            :invalid="!!formErrors.responsible"
+            :errorMessage="formErrors.responsible ?? undefined"></BaseInputGroupText>
 
           <BasePhoneInput
             class="col d-flex align-items-center"
             id="tlf-team"
-            v-model="rival.tlf"
-            :label="t('rivals.fields.tlf')"></BasePhoneInput>
+            v-model="form.tlf"
+            :label="t('rivals.fields.tlf')"
+            :invalid="!!formErrors.tlf"
+            :errorMessage="formErrors.tlf ?? undefined"></BasePhoneInput>
 
           <BaseInputGroupText
             class="col d-flex align-items-center"
             id="mail-team"
-            v-model="rival.email"
-            :label="t('rivals.fields.email')"></BaseInputGroupText>
+            v-model="form.email"
+            :label="t('rivals.fields.email')"
+            :invalid="!!formErrors.email"
+            :errorMessage="formErrors.email ?? undefined"></BaseInputGroupText>
         </div>
         <div class="row row-cols-1">
           <div class="col d-flex justify-content-center">
-            <BaseImageUpload
-              :label="t('rivals.fields.logo')"
-              v-model="rival.logo"></BaseImageUpload>
+            <BaseImageUpload :label="t('rivals.fields.logo')" v-model="form.logo"></BaseImageUpload>
           </div>
         </div>
       </div>
@@ -130,7 +156,6 @@ async function onSubmitForm() {
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
           icon="pi pi-save"
-          :disabled="!canSave"
           :loading="loading"></Button>
       </div>
     </template>

@@ -7,7 +7,7 @@ export const useRivalsAdminStore = defineStore('rivalsAdmin', {
     return {
       data: {
         table: <RivalTable>{ ...defaultRivalTable },
-        tableFilters: <RivalFilters>{ ...defaultRivalFilters },
+        tableFilters: <RivalFilters>UtilBase.cloneVueProxy(defaultRivalFilters),
         selectedToEdit: <Rival | null>null,
       },
     };

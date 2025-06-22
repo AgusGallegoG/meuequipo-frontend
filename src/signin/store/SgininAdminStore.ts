@@ -8,7 +8,7 @@ export const useSigninAdminStore = defineStore('signinAdmin', {
     return {
       data: {
         table: <SigninTable>{ ...defaultSigninTable },
-        tableFilters: <Pageable>{ ...pageableDefault },
+        tableFilters: <Pageable>UtilBase.cloneVueProxy(pageableDefault),
         selectedToEdit: <Signin | null>null,
       },
     };
