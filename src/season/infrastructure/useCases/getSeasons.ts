@@ -2,16 +2,16 @@ import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import type { Season } from '@/season/domain/Season';
 import responseSeasonMock from '@/season/infrastructure/mocks/responseSeasonMock.json';
-import type { ResponseSeasonList } from '@/season/infrastructure/model/response/ResponseSeasonList';
+import type { ResponseSeason } from '@/season/infrastructure/model/response/ResponseSeasonList';
 import { createSeasonListFromResponseSeasonList } from '@/season/infrastructure/service/seasonService';
 
-async function InMemory(): Promise<ResponseSeasonList> {
+async function InMemory(): Promise<ResponseSeason[]> {
   await UtilBase.wait(750);
-  return responseSeasonMock as ResponseSeasonList;
+  return responseSeasonMock.content as ResponseSeason[];
 }
 
-async function Api(): Promise<ResponseSeasonList> {
-  const response = await api.get<ResponseSeasonList>('/season/all');
+async function Api(): Promise<ResponseSeason[]> {
+  const response = await api.get<ResponseSeason[]>('/season/all');
   return response.data;
 }
 

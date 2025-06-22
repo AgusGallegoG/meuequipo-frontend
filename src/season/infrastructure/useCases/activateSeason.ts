@@ -2,22 +2,22 @@ import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import type { Season } from '@/season/domain/Season';
 import responseSeasonMock from '@/season/infrastructure/mocks/responseSeasonMock.json';
-import type { ResponseSeasonList } from '@/season/infrastructure/model/response/ResponseSeasonList';
+import type { ResponseSeason } from '@/season/infrastructure/model/response/ResponseSeasonList';
 import { createSeasonListFromResponseSeasonList } from '@/season/infrastructure/service/seasonService';
 
-async function InMemory(newActive: Season): Promise<ResponseSeasonList> {
+async function InMemory(newActive: Season): Promise<ResponseSeason[]> {
   await UtilBase.wait(3000);
-  const allSeasons = responseSeasonMock as ResponseSeasonList;
+  const allSeasons = responseSeasonMock.content as ResponseSeason[];
   //Para simular o correcto funcionamento,
-  allSeasons.content.forEach((season) => {
+  allSeasons.forEach((season) => {
     season.active = season.id === newActive.id;
   });
 
   return allSeasons;
 }
 
-async function Api(newActive: Season): Promise<ResponseSeasonList> {
-  const response = await api.patch<ResponseSeasonList>('/season/' + newActive.id + '/activate');
+async function Api(newActive: Season): Promise<ResponseSeason[]> {
+  const response = await api.patch<ResponseSeason[]>('/season/' + newActive.id + '/activate');
   return response.data;
 }
 

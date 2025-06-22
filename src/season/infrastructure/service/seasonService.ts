@@ -12,8 +12,8 @@ export function mapResponseSeasonToSeason(responseSea: ResponseSeason): Season {
   };
 }
 
-export function createSeasonListFromResponseSeasonList(response: ResponseSeasonList): Season[] {
-  return response.content.map(mapResponseSeasonToSeason);
+export function createSeasonListFromResponseSeasonList(response: ResponseSeason[]): Season[] {
+  return response.map(mapResponseSeasonToSeason);
 }
 
 export function createRequestNewSeasonFromSeasonForm(newSeason: SeasonForm): RequestNewSeason {
