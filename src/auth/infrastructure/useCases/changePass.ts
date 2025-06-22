@@ -3,7 +3,7 @@ import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
 
 async function Api(data: ChangePassRequest): Promise<void> {
-  await api.put<void>('/auth/changepass', data);
+  await api.patch<void>('/auth/changepass', data);
 }
 
 async function InMemory(): Promise<void> {
