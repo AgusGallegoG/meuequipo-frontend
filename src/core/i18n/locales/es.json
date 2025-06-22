@@ -224,7 +224,8 @@
     "fields": {
       "name": "nombre",
       "logo": "Logo",
-      "url": "Enlace a la web"
+      "url": "Enlace a la web",
+      "visit": "Visitar web"
     }
   },
   "blog": {
@@ -353,5 +354,30 @@
     "email_invalid": "Debe introducir un correo electrónico válido",
     "phone_required": "El teléfono es obligatorio",
     "phone_invalid": "Debe introducir un teléfono válido"
+  },
+  "categoryvalidation": {
+    "date_required": "Debe indicar el año de inicio de la categoría",
+    "end_date_later": "Debe ser posterior a año desde"
+  },
+  "teamvalidation": {
+    "trainer_required": "Es necesario añadir un entrenador"
+  },
+  "sponsorvalidation": {
+    "url_invalid": "La url introducida no es válida"
+  },
+  "publicationvalidation": {
+    "title_required": "El título es obligatorio",
+    "body_required": "El cuerpo de la publicación es obligatorio"
+  },
+  "matchvalidation": {
+    "state_required": "El estado es obligatorio",
+    "date_required": "Debe indicar la fecha del partido",
+    "team_required": "Debe escoger un equipo",
+    "location_required": "Debe indicar a ubicación do encontro"
+  },
+  "seasonvalidation": {
+    "datestart_required": "Debe indicar la fecha de inicio de la temporada",
+    "dateend_required": "Debe indicar a data de fin de la temporada",
+    "end_date_later": "Debe ser posterior al inicio de la temporada"
   }
 }

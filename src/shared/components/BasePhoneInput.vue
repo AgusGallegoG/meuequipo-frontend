@@ -68,6 +68,7 @@ watch(model, (newVal) => {
           v-model="extension"
           :options="country_phones"
           style="min-width: 4rem; max-width: 4rem"
+          :disabled="props.disabled"
           option-label="flag"
           option-value="dialCode">
           <template #option="{ option }">

@@ -31,6 +31,7 @@ const {
   form,
   errors: formErrors,
   submitted,
+  isFormValid,
   validate,
   reset,
 } = useZodValidation(defaultRival, rivalSchema);
@@ -155,6 +156,7 @@ async function onSubmitForm() {
           raised
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
+          :disabled="!isFormValid"
           icon="pi pi-save"
           :loading="loading"></Button>
       </div>

@@ -1,18 +1,21 @@
 <script lang="ts" setup>
 import { useSaveMatch } from '@/calendar/application/useSaveMatch';
 import { useCalendarStore } from '@/calendar/store/calendarStore';
+import { UtilBase } from '@/core/utilities/UtilBase';
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import { useGetRivalMatchTeamsByCategory } from '@/rivals/application/useGetRivalMatchTeamsByCategory';
 import BaseCheckBox from '@/shared/components/BaseCheckBox.vue';
 import BaseDatePicker from '@/shared/components/BaseDatePicker.vue';
 import BaseInputGroupNumber from '@/shared/components/BaseInputGroupNumber.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import BaseSelect from '@/shared/components/BaseSelect.vue';
-import { defaultMatch, type Match, type MatchTeam } from '@/shared/dominio/Match';
+import { defaultMatch, matchSchema, type Match, type MatchTeam } from '@/shared/dominio/Match';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import { useGetOwnMatchTeamsByCategory } from '@/team/application/useGetOwnMatchTeamsByCategory';
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
 import FloatLabel from 'primevue/floatlabel';
+import Message from 'primevue/message';
 import Select from 'primevue/select';
 import { useI18n } from 'vue-i18n';
 
@@ -29,17 +32,16 @@ const sharedEnumStore = useSharedEnumsStore();
 const isEdit = computed(() => calendarStore.isEdition);
 const editionCalendar = computed(() => calendarStore.getEditionMatch);
 const loadingOptions = computed(() => loadingClubTeams || loadingRivalTeams);
-const canSave = computed(() => {
-  return (
-    match.value.localTeam !== null &&
-    match.value.visitorTeam !== null &&
-    match.value.category !== null &&
-    match.value.location.trim() !== '' &&
-    match.value.matchDate !== null &&
-    match.value.state !== null
-  );
-});
-const match = ref<Match>({ ...defaultMatch });
+
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  isFormValid,
+  validate,
+  reset,
+} = useZodValidation(defaultMatch, matchSchema);
+
 const localOurs = ref<boolean>(true); // por defecto nos marcamos como locales
 const visitorOurs = ref<boolean>(false);
 
@@ -54,28 +56,28 @@ watch(visible, (newVal) => {
 
 watch(editionCalendar, (newVal) => {
   if (newVal) {
-    match.value = cloneMatch(newVal);
-    localOurs.value = match.value.localTeam?.isOurTeam ?? false;
-    visitorOurs.value = match.value.visitorTeam?.isOurTeam ?? false;
+    form.value = cloneMatch(newVal);
+    localOurs.value = form.value.localTeam?.isOurTeam ?? false;
+    visitorOurs.value = form.value.visitorTeam?.isOurTeam ?? false;
   } else {
-    match.value = cloneMatch(defaultMatch);
+    form.value = UtilBase.cloneVueProxy(defaultMatch);
   }
 });
 
 watch(
-  () => match.value.category,
+  () => form.value.category,
   async (newVal, oldVal) => {
     if (newVal) {
       await fetchTeamsOptions(newVal);
       if (newVal !== oldVal) {
-        (match.value.localTeam = null), (match.value.visitorTeam = null);
+        (form.value.localTeam = null), (form.value.visitorTeam = null);
       }
     }
   }
 );
 
 function resetForm() {
-  match.value = cloneMatch(defaultMatch);
+  reset();
   if (isEdit.value === true) {
     visible.value = false;
   }
@@ -83,7 +85,10 @@ function resetForm() {
 }
 
 async function onSubmitForm() {
-  const response = await saveMatch(match.value);
+  submitted.value = true;
+
+  if (!validate()) return;
+  const response = await saveMatch(form.value);
   if (response) {
     calendarStore.setList(response);
   }
@@ -126,31 +131,39 @@ function cloneMatch(match: Match): Match {
     </template>
     <template #default>
       <div class="container g-3 pt-3">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4 g-3 align-items-start">
           <BaseSelect
             class="col"
-            v-model="match.category"
+            v-model="form.category"
             :options="sharedEnumStore.getCategories"
-            :label="t('matches.fields.category')" />
+            :label="t('matches.fields.category')"
+            :invalid="!!formErrors.category"
+            :errorMessage="formErrors.category ?? undefined" />
 
           <BaseDatePicker
             class="col"
-            v-model="match.matchDate"
+            v-model="form.matchDate"
             showTime
-            :label="t('matches.fields.match_date')" />
+            :label="t('matches.fields.match_date')"
+            :invalid="!!formErrors.matchDate"
+            :errorMessage="formErrors.matchDate ?? undefined" />
 
           <BaseInputGroupText
             class="col"
-            v-model="match.location"
-            :label="t('matches.fields.location')" />
+            v-model="form.location"
+            :label="t('matches.fields.location')"
+            :invalid="!!formErrors.location"
+            :errorMessage="formErrors.location ?? undefined" />
 
           <BaseSelect
             class="col"
-            v-model="match.state"
+            v-model="form.state"
             :options="sharedEnumStore.getMatchStates"
-            :label="t('matches.fields.state')" />
+            :label="t('matches.fields.state')"
+            :invalid="!!formErrors.state"
+            :errorMessage="formErrors.state ?? undefined" />
         </div>
-        <div class="row row-cols-1 row-cols-md-2 my-3">
+        <div class="row row-cols-1 row-cols-md-2 my-3 align-items-start">
           <div class="col">
             <div class="container g-3">
               <div class="row row-cols-1 text-center">
@@ -158,28 +171,39 @@ function cloneMatch(match: Match): Match {
                 <BaseCheckBox
                   v-model="localOurs"
                   :label="t('matches.fields.club_team')"></BaseCheckBox>
-
                 <div class="col">
                   <div class="py-3 mb-2">
-                    <FloatLabel class="w-100 md:w-80">
-                      <Select
-                        id="over_label_local"
-                        v-model="match.localTeam"
-                        :options="localOurs ? ourTeams : rivalTeams"
-                        optionLabel="name"
-                        :loading="loadingOptions.value"
-                        filter
-                        class="w-100" />
-                      <label for="over_label_local">
-                        {{ t('matches.fields.team') }}
-                      </label>
-                    </FloatLabel>
+                    <div id="team-container" class="w-100">
+                      <FloatLabel class="w-100 md:w-80">
+                        <Select
+                          id="over_label_local"
+                          v-model="form.localTeam"
+                          :options="localOurs ? ourTeams : rivalTeams"
+                          optionLabel="name"
+                          :loading="loadingOptions.value"
+                          :class="{ 'p-invalid': !!formErrors.localTeam }"
+                          filter
+                          class="w-100" />
+                        <label for="over_label_local">
+                          {{ t('matches.fields.team') }}
+                        </label>
+                      </FloatLabel>
+                      <Message
+                        v-if="formErrors.localTeam"
+                        severity="error"
+                        size="small"
+                        variant="simple">
+                        {{ t(formErrors.localTeam) }}
+                      </Message>
+                    </div>
                   </div>
                 </div>
                 <BaseInputGroupNumber
                   class="col mx-auto mb-2"
-                  v-model="match.localPoints"
-                  :label="t('matches.fields.points')"></BaseInputGroupNumber>
+                  v-model="form.localPoints"
+                  :label="t('matches.fields.points')"
+                  :invalid="!!formErrors.localPoints"
+                  :errorMessage="formErrors.localPoints ?? undefined"></BaseInputGroupNumber>
               </div>
             </div>
           </div>
@@ -192,25 +216,37 @@ function cloneMatch(match: Match): Match {
                   :label="t('matches.fields.club_team')"></BaseCheckBox>
                 <div class="col">
                   <div class="py-3 mb-2">
-                    <FloatLabel class="w-100 md:w-80">
-                      <Select
-                        id="over_label_visitor"
-                        v-model="match.visitorTeam"
-                        :options="visitorOurs ? ourTeams : rivalTeams"
-                        optionLabel="name"
-                        :loading="loadingOptions.value"
-                        filter
-                        class="w-100" />
-                      <label for="over_label_visitor">
-                        {{ t('matches.fields.team') }}
-                      </label>
-                    </FloatLabel>
+                    <div id="team-container" class="w-100">
+                      <FloatLabel class="w-100 md:w-80">
+                        <Select
+                          id="over_label_visitor"
+                          v-model="form.visitorTeam"
+                          :options="visitorOurs ? ourTeams : rivalTeams"
+                          optionLabel="name"
+                          :loading="loadingOptions.value"
+                          :class="{ 'p-invalid': !!formErrors.visitorTeam }"
+                          filter
+                          class="w-100" />
+                        <label for="over_label_visitor">
+                          {{ t('matches.fields.team') }}
+                        </label>
+                      </FloatLabel>
+                      <Message
+                        v-if="formErrors.visitorTeam"
+                        severity="error"
+                        size="small"
+                        variant="simple">
+                        {{ t(formErrors.visitorTeam) }}
+                      </Message>
+                    </div>
                   </div>
                 </div>
                 <BaseInputGroupNumber
                   class="col mx-auto mb-2"
-                  v-model="match.visitorPoints"
-                  :label="t('matches.fields.points')"></BaseInputGroupNumber>
+                  v-model="form.visitorPoints"
+                  :label="t('matches.fields.points')"
+                  :invalid="!!formErrors.visitorPoints"
+                  :errorMessage="formErrors.visitorPoints ?? undefined"></BaseInputGroupNumber>
               </div>
             </div>
           </div>
@@ -232,7 +268,7 @@ function cloneMatch(match: Match): Match {
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
           icon="pi pi-save"
-          :disabled="!canSave"
+          :disabled="submitted && !isFormValid"
           :loading="loading"></Button>
       </div>
     </template>

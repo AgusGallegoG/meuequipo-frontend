@@ -1,3 +1,5 @@
+import z from 'zod';
+
 export type CategoryTable = {
   content: CategoryItem[];
 };
@@ -21,3 +23,24 @@ export const defaultCategoryItem: CategoryItem = {
   yearEnd: null,
   yearInit: null,
 };
+
+export const categoryItemSchema = z
+  .object({
+    id: z.number(),
+    active: z.boolean(),
+    name: z.string().min(1, { message: 'signinvalidation.name_required' }),
+    yearInit: z
+      .date({ required_error: 'categoryvalidation.date_required' })
+      .nullable()
+      .refine((val) => val !== null, { message: 'categoryvalidation.date_required' }),
+    yearEnd: z.date().nullable(),
+  })
+  .refine(
+    (data) => {
+      return data.yearEnd === null || (data.yearInit !== null && data.yearEnd > data.yearInit);
+    },
+    {
+      path: ['yearEnd'],
+      message: 'categoryvalidation.end_date_later',
+    }
+  ) satisfies z.ZodType<CategoryItem>;

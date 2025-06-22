@@ -1,33 +1,37 @@
 <script setup lang="ts">
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import { useActivateSeason } from '@/season/application/useActivateSeason';
 import { useGetActiveSeason } from '@/season/application/useGetActiveSeason';
 import { useGetSeasons } from '@/season/application/useGetSeasons';
 import { emptySeason, type Season } from '@/season/domain/Season';
-import { emptySeasonForm, type SeasonForm } from '@/season/domain/SeasonForm';
+import { emptySeasonForm, seasonFormSchema, type SeasonForm } from '@/season/domain/SeasonForm';
 import BaseCheckBox from '@/shared/components/BaseCheckBox.vue';
 import BaseDatePicker from '@/shared/components/BaseDatePicker.vue';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import Select from 'primevue/select';
-import { computed, onMounted, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 import { useCreateSeason } from '../application/useCreateSeason';
 
 const { t } = useI18n();
 
-const options = ref<Season[]>([]);
-const selected = ref<Season>(emptySeason);
-const addDialog = ref<boolean>(false);
-const createSeasonForm = ref<SeasonForm>(emptySeasonForm);
-const canCreate = computed(() => {
-  const { startDate, endDate } = createSeasonForm.value;
-  return !!startDate && !!endDate && endDate > startDate;
-});
-
 const { refetch: loadSeasons, loading: loadingSeasons } = useGetSeasons();
 const { refetch: loadActive } = useGetActiveSeason();
 const { refetch: activateNew, loading: loadingChangeActive } = useActivateSeason();
 const { refetch: create, loading: createSeasonLoading } = useCreateSeason();
+
+const options = ref<Season[]>([]);
+const selected = ref<Season>(emptySeason);
+const addDialog = ref<boolean>(false);
+
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  isFormValid,
+  validate,
+  reset,
+} = useZodValidation(emptySeasonForm, seasonFormSchema);
 
 async function getAllSeasons() {
   options.value = await loadSeasons();
@@ -45,14 +49,18 @@ async function createSeason(form: SeasonForm) {
   options.value = await create(form);
 }
 
-function onAddDialog() {
-  createSeasonForm.value = { ...emptySeasonForm };
+function resetFormAndToogleVisible() {
+  reset();
   addDialog.value = !addDialog.value;
 }
 
-async function doCreateSeason() {
-  await createSeason(createSeasonForm.value);
-  onAddDialog();
+async function onSubmit() {
+  submitted.value = true;
+
+  if (!validate()) return;
+
+  await createSeason(form.value);
+  resetFormAndToogleVisible();
   await getActiveSeason();
 }
 
@@ -95,7 +103,7 @@ onMounted(async () => {
           icon="pi pi-plus"
           icon-pos="right"
           :label="t('admin.dashboard.season.add')"
-          @click="onAddDialog()"></Button>
+          @click="resetFormAndToogleVisible()"></Button>
       </template>
     </Select>
 
@@ -107,38 +115,42 @@ onMounted(async () => {
       <div class="row gy-2 px-1 py-2">
         <div class="col-12 col-md-5">
           <BaseDatePicker
-            v-model="createSeasonForm.startDate"
+            v-model="form.startDate"
             id="date-inicio"
             view="month"
             date-format="mm/yy"
-            :label="t('admin.dashboard.season.modal.startDate')"></BaseDatePicker>
+            :label="t('admin.dashboard.season.modal.startDate')"
+            :invalid="!!formErrors.startDate"
+            :errorMessage="formErrors.startDate ?? undefined"></BaseDatePicker>
         </div>
         <div class="col-12 col-md-5">
           <BaseDatePicker
-            v-model="createSeasonForm.endDate"
+            v-model="form.endDate"
             id="date-fin"
             view="month"
             date-format="mm/yy"
-            :label="t('admin.dashboard.season.modal.endDate')"></BaseDatePicker>
+            :label="t('admin.dashboard.season.modal.endDate')"
+            :invalid="!!formErrors.endDate"
+            :errorMessage="formErrors.endDate ?? undefined"></BaseDatePicker>
         </div>
         <div class="col-12 col-md-2">
           <BaseCheckBox
             id="activa"
-            v-model="createSeasonForm.active"
+            v-model="form.active"
             :label="t('admin.dashboard.season.modal.active')" />
         </div>
       </div>
       <template #footer>
         <div class="d-flex flex-column flex-md-row justify-content-end gap-2 w-100">
           <Button
-            @click="onAddDialog()"
+            @click="resetFormAndToogleVisible()"
             severity="secondary"
             icon="pi pi-times"
             :label="t('core.actions.cancel')"
             iconPos="right"></Button>
           <Button
-            @click="doCreateSeason()"
-            :disabled="!canCreate"
+            @click="onSubmit()"
+            :disabled="submitted && !isFormValid"
             :loading="createSeasonLoading"
             icon="pi pi-save"
             :label="t('core.actions.create')"
