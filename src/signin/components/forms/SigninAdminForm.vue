@@ -1,11 +1,13 @@
 <script setup lang="ts">
 import { UtilBase } from '@/core/utilities/UtilBase';
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import BaseDatePicker from '@/shared/components/BaseDatePicker.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
+import BasePhoneInput from '@/shared/components/BasePhoneInput.vue';
 import BaseSelect from '@/shared/components/BaseSelect.vue';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import { useSaveSignin } from '@/signin/application/useSaveSignin';
-import { defaultSignin, type Signin } from '@/signin/domain/Signin';
+import { defaultSignin, signinPublicSchema, type Signin } from '@/signin/domain/Signin';
 import { useSigninAdminStore } from '@/signin/store/SgininAdminStore';
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
@@ -21,24 +23,14 @@ const sharedEnumStore = useSharedEnumsStore();
 
 const isEdit = computed(() => singinAdminStore.isEdition);
 const editionSignin = computed(() => singinAdminStore.getEditionSignin);
-const canSave = computed(() => {
-  const s = signin.value;
-  const p = s.player;
-
-  return (
-    s.parentName.trim() !== '' &&
-    s.parentSurnames.trim() !== '' &&
-    s.mail.trim() !== '' &&
-    s.phone.trim() !== '' &&
-    p &&
-    p.name.trim() !== '' &&
-    p.surnames.trim() !== '' &&
-    p.birthDate !== null &&
-    p.sex !== null &&
-    p.category !== null
-  );
-});
-const signin = ref<Signin>(UtilBase.cloneVueProxy(defaultSignin));
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  isFormValid,
+  validate,
+  reset,
+} = useZodValidation(defaultSignin, signinPublicSchema);
 
 watch(visible, (newVal) => {
   if (!newVal) {
@@ -48,14 +40,14 @@ watch(visible, (newVal) => {
 
 watch(editionSignin, (newVal) => {
   if (newVal) {
-    signin.value = cloneSignin(newVal);
+    form.value = { ...newVal };
   } else {
-    signin.value = UtilBase.cloneVueProxy(defaultSignin);
+    form.value = UtilBase.cloneVueProxy(defaultSignin);
   }
 });
 
 function resetForm() {
-  signin.value = cloneSignin(defaultSignin);
+  reset();
   if (isEdit.value === true) {
     visible.value = false;
   }
@@ -63,7 +55,11 @@ function resetForm() {
 }
 
 async function onSubmitForm() {
-  const response = await saveSignin(signin.value);
+  submitted.value = true;
+
+  if (!validate()) return;
+
+  const response = await saveSignin(form.value);
   if (response) {
     singinAdminStore.setTableData(response);
   }
@@ -102,64 +98,79 @@ function cloneSignin(original: Signin): Signin {
         <!-- Parent name-surname -->
         <div class="row align-items-start">
           <BaseInputGroupText
-            class="col-12 col-md-4"
-            v-model="signin.parentName"
+            class="col-12 col-xl-5 mb-3"
+            v-model="form.parentName"
             :label="t('signin.fields.parent_name')"
-            :disabled="isEdit" />
+            :invalid="!!formErrors.parentName"
+            :disabled="isEdit"
+            :errorMessage="formErrors.parentName ?? undefined" />
           <BaseInputGroupText
-            class="col-12 col-md-8"
-            v-model="signin.parentSurnames"
+            class="col-12 col-xl-7 mb-3"
+            v-model="form.parentSurnames"
             :label="t('signin.fields.parent_surnames')"
-            :disabled="isEdit" />
+            :invalid="!!formErrors.parentSurnames"
+            :disabled="isEdit"
+            :errorMessage="formErrors.parentSurnames ?? undefined" />
         </div>
         <!-- Parent contact-info -->
         <div class="row align-items-start">
           <BaseInputGroupText
-            class="col-12 col-md-4"
-            v-model="signin.phone"
-            :label="t('signin.fields.phone')"
-            :disabled="isEdit" />
+            class="col-12 col-xl-5 mb-3"
+            v-model="form.player.name"
+            :label="t('signin.fields.player_name')"
+            :disabled="isEdit"
+            :invalid="!!formErrors.player?.name"
+            :errorMessage="formErrors.player?.name ?? undefined" />
           <BaseInputGroupText
-            class="col-12 col-md-6"
-            v-model="signin.mail"
-            :label="t('signin.fields.email')"
-            :disabled="isEdit" />
+            class="col-12 col-xl-7 mb-3"
+            v-model="form.player.surnames"
+            :label="t('signin.fields.player_surnames')"
+            :disabled="isEdit"
+            :invalid="!!formErrors.player?.surnames"
+            :errorMessage="formErrors.player?.surnames ?? undefined" />
+          <BaseDatePicker
+            class="col-12 col-xl-4 mb-3"
+            v-model="form.player.birthDate"
+            :label="t('signin.fields.birth_date')"
+            :disabled="isEdit"
+            :invalid="!!formErrors.player?.birthDate"
+            :errorMessage="formErrors.player?.birthDate ?? undefined" />
           <BaseSelect
-            class="col-12 col-md-2"
-            v-model="signin.player.category"
+            class="col-12 col-xl-4 mb-3"
+            v-model="form.player.sex"
+            :options="sharedEnumStore.getSexOptions"
+            :label="t('signin.fields.sex')"
+            :disabled="isEdit"
+            :invalid="!!formErrors.player?.sex"
+            :errorMessage="formErrors.player?.sex ?? undefined" />
+          <BaseSelect
+            class="col-12 col-xl-4 mb-3"
+            v-model="form.player.category"
             :options="sharedEnumStore.getCategories"
             :label="t('signin.fields.category')"
-            :disabled="isEdit" />
+            :disabled="isEdit"
+            :invalid="!!formErrors.player?.category"
+            :errorMessage="formErrors.player?.category ?? undefined" />
         </div>
         <!-- player name-surname -->
         <div class="row align-items-start">
+          <BasePhoneInput
+            class="col-12 col-xl-5 mb-3"
+            v-model="form.phone"
+            :label="t('signin.fields.phone')"
+            :disabled="isEdit"
+            :invalid="!!formErrors.phone"
+            :errorMessage="formErrors.phone ?? undefined" />
           <BaseInputGroupText
-            class="col-12 col-md-4"
-            v-model="signin.player.name"
-            :label="t('signin.fields.player_name')"
-            :disabled="isEdit" />
-          <BaseInputGroupText
-            class="col-12 col-md-8"
-            v-model="signin.player.surnames"
-            :label="t('signin.fields.player_surnames')"
-            :disabled="isEdit" />
-        </div>
-        <!-- player birth-category-sex -->
-        <div class="row align-items-start">
-          <BaseDatePicker
-            class="col-12 col-md-4"
-            v-model="signin.player.birthDate"
-            :label="t('signin.fields.birth_date')"
-            :disabled="isEdit" />
+            class="col-12 col-xl-7 mb-3"
+            v-model="form.mail"
+            :label="t('signin.fields.email')"
+            :disabled="isEdit"
+            :invalid="!!formErrors.mail"
+            :errorMessage="formErrors.mail ?? undefined" />
           <BaseSelect
-            class="col-12 col-md-4"
-            v-model="signin.player.sex"
-            :options="sharedEnumStore.getSexPlayersOptions"
-            :label="t('signin.fields.sex')"
-            :disabled="isEdit" />
-          <BaseSelect
-            class="col-12 col-md-4"
-            v-model="signin.state"
+            class="col-12 mb-3"
+            v-model="form.state"
             :options="sharedEnumStore.getSigninStates"
             :label="t('signin.fields.state')" />
         </div>
@@ -180,7 +191,7 @@ function cloneSignin(original: Signin): Signin {
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
           icon="pi pi-save"
-          :disabled="!canSave"
+          :disabled="submitted && !isFormValid"
           :loading="loading"></Button>
       </div>
     </template>
