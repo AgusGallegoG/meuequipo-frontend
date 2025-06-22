@@ -1,7 +1,7 @@
 import { Roles } from '@/auth/domain/Roles';
 import { useAuthStore } from '@/auth/store/authStore';
 import { useMeToast } from '@/core/hooks/useMeToast';
-import { getBlogInitContent } from '@/publication/infrastructure/useCases/getBlogContent';
+import { getBlogInitContent } from '@/publication/infrastructure/useCases/getBlogInitContent';
 import { ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
