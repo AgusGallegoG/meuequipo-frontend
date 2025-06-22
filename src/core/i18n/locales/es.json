@@ -353,5 +353,8 @@
     "email_invalid": "Debe introducir un correo electrónico válido",
     "phone_required": "El teléfono es obligatorio",
     "phone_invalid": "Debe introducir un teléfono válido"
+  },
+  "categoryvalidation": {
+    "end_date_later": "Debe ser posterior a año desde"
   }
 }

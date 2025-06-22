@@ -1,7 +1,13 @@
 <script setup lang="ts">
 import { useSaveCategories } from '@/category/application/useSaveCategories';
-import { type CategoryItem, defaultCategoryItem } from '@/category/domain/CategoryTable';
+import {
+  type CategoryItem,
+  categoryItemSchema,
+  defaultCategoryItem,
+} from '@/category/domain/CategoryTable';
 import { useCategoryStore } from '@/category/store/CategoryStore';
+import { UtilBase } from '@/core/utilities/UtilBase';
+import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import BaseCheckBox from '@/shared/components/BaseCheckBox.vue';
 import BaseDatePicker from '@/shared/components/BaseDatePicker.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
@@ -16,11 +22,16 @@ const { t } = useI18n();
 const { refetch: saveCategory, loading } = useSaveCategories();
 
 const isEdit = computed(() => categoryStore.isEdition);
-const category = ref<CategoryItem>({ ...defaultCategoryItem });
 const editionCategory = computed(() => categoryStore.getEditionCategory);
-const canSave = computed(() => {
-  return category.value.name !== '' && category.value.yearInit !== null;
-});
+
+const {
+  form,
+  errors: formErrors,
+  submitted,
+  isFormValid,
+  validate,
+  reset,
+} = useZodValidation(defaultCategoryItem, categoryItemSchema);
 
 watch(visible, (newVal) => {
   if (!newVal) {
@@ -32,16 +43,16 @@ watch(
   editionCategory,
   (newVal) => {
     if (newVal) {
-      category.value = { ...newVal };
+      form.value = { ...newVal };
     } else {
-      category.value = { ...defaultCategoryItem };
+      form.value = UtilBase.cloneVueProxy(defaultCategoryItem);
     }
   },
   { immediate: true }
 );
 
 function resetForm() {
-  category.value = { ...defaultCategoryItem };
+  reset();
   if (isEdit.value === true) {
     visible.value = false;
   }
@@ -49,7 +60,11 @@ function resetForm() {
 }
 
 async function onSubmitForm() {
-  const response = await saveCategory(category.value);
+  submitted.value = true;
+
+  if (!validate()) return;
+
+  const response = await saveCategory(form.value);
   if (response) {
     categoryStore.setTableData(response);
   }
@@ -69,27 +84,34 @@ async function onSubmitForm() {
     </template>
     <template #default>
       <div class="container g-3 mt-2">
-        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 align-items-start">
           <BaseInputGroupText
             class="col d-flex align-items-center"
             :label="t('categories.fields.name')"
-            v-model="category.name"></BaseInputGroupText>
+            v-model="form.name"
+            :invalid="!!formErrors.name"
+            :errorMessage="formErrors.name ?? undefined">
+          </BaseInputGroupText>
           <BaseDatePicker
             class="col d-flex align-items-center"
             :label="t('categories.fields.year_init')"
-            v-model="category.yearInit"
+            v-model="form.yearInit"
             dateFormat="yy"
-            view="year"></BaseDatePicker>
+            view="year"
+            :invalid="!!formErrors.yearInit"
+            :errorMessage="formErrors.yearInit ?? undefined"></BaseDatePicker>
           <BaseDatePicker
             class="col d-flex align-items-center"
             :label="t('categories.fields.year_end')"
-            v-model="category.yearEnd"
+            v-model="form.yearEnd"
             dateFormat="yy"
-            view="year"></BaseDatePicker>
+            view="year"
+            :invalid="!!formErrors.yearEnd"
+            :errorMessage="formErrors.yearEnd ?? undefined"></BaseDatePicker>
           <BaseCheckBox
             class="col d-flex align-items-center"
             :label="t('users.fields.active')"
-            v-model="category.active"></BaseCheckBox>
+            v-model="form.active"></BaseCheckBox>
         </div>
       </div>
     </template>
@@ -108,7 +130,6 @@ async function onSubmitForm() {
           :label="t('core.buttons.save')"
           @click="onSubmitForm()"
           icon="pi pi-save"
-          :disabled="!canSave"
           :loading="loading"></Button>
       </div>
     </template>
