@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import router from '@/core/router';
 import { useGetSponsorsAdminTable } from '@/sponsor/application/useGetSponsorsAdminTable';
 import SponsorAdminForm from '@/sponsor/components/SponsorAdminForm.vue';
 import type { Sponsor } from '@/sponsor/domain/Sponsor';
@@ -75,7 +74,7 @@ function goTo(url: string) {
 }
 </script>
 <template>
-  <SponsorAdminForm v-model="visible"></SponsorAdminForm>
+  <SponsorAdminForm v-model="visible" @saved="doFetchTableItems"></SponsorAdminForm>
   <Card class="h-100">
     <template #content>
       <DataTable

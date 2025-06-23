@@ -19,6 +19,8 @@ const sponsorAdminStore = useSponsorAdminStore();
 const isEdit = computed(() => sponsorAdminStore.isEdition);
 const editionSponsor = computed(() => sponsorAdminStore.getEditionSponsor);
 
+const emit = defineEmits<{ (e: 'saved'): void }>();
+
 const {
   form,
   errors: formErrors,
@@ -61,7 +63,7 @@ async function onSubmitForm() {
   //   ExecuteQuery
   const response = await saveSponsor(form.value);
   if (response) {
-    sponsorAdminStore.setTableData(response);
+    emit('saved');
   }
   visible.value = false;
 }

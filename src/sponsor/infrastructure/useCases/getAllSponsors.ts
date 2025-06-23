@@ -3,7 +3,7 @@ import { UtilBase } from '@/core/utilities/UtilBase';
 import type { Sponsor } from '@/sponsor/domain/Sponsor';
 import responsesponsorfooter from '@/sponsor/infrastructure/mocks/responseSponsorFooterMock.json';
 import type { ResponseSponsor } from '@/sponsor/infrastructure/models/responses/ResponseSponsorFooter';
-import { createSponsorFooterListFromResponseSponsorFooterList } from '@/sponsor/infrastructure/services/sponsorsService';
+import { createSponsorListFromResponseSponsorList } from '@/sponsor/infrastructure/services/sponsorsService';
 
 async function Api(): Promise<ResponseSponsor[]> {
   const response = await api.get<ResponseSponsor[]>('/sponsors/footer');
@@ -18,7 +18,7 @@ async function InMemory(): Promise<ResponseSponsor[]> {
 export async function getAllSponsors(): Promise<Sponsor[]> {
   try {
     const response = UtilBase.checkEnvironment() ? await InMemory() : await Api();
-    return createSponsorFooterListFromResponseSponsorFooterList(response);
+    return createSponsorListFromResponseSponsorList(response);
   } catch (error) {
     throw new Error(`Error recuperando os patrocinadores para a visualizacion no layout`);
   }
