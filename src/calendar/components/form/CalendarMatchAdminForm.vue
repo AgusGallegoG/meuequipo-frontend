@@ -33,6 +33,8 @@ const isEdit = computed(() => calendarStore.isEdition);
 const editionCalendar = computed(() => calendarStore.getEditionMatch);
 const loadingOptions = computed(() => loadingClubTeams || loadingRivalTeams);
 
+const emit = defineEmits<{ (e: 'saved'): void }>();
+
 const {
   form,
   errors: formErrors,
@@ -90,7 +92,7 @@ async function onSubmitForm() {
   if (!validate()) return;
   const response = await saveMatch(form.value);
   if (response) {
-    calendarStore.setList(response);
+    emit('saved');
   }
   visible.value = false;
 }
