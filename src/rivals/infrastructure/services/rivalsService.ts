@@ -14,19 +14,21 @@ export function mapPageableResponseToRivalsTable(
   };
 }
 function mapResponseRivalItem(content: ResponseRivalItem[]): RivalItem[] {
-  return content.map((item) => {
-    return {
-      id: item.id,
-      logo: {
-        name: item.logo.name,
-        url: item.logo.url,
-        id: item.logo.id,
-      },
-      name: item.name,
-      tlf: item.tlf,
-      responsible: item.responsible,
-    };
-  });
+  return content.map(mapResponseRivalItemToRivalItem);
+}
+
+export function mapResponseRivalItemToRivalItem(item: ResponseRivalItem): RivalItem {
+  return {
+    id: item.id,
+    logo: {
+      name: item.logo.name,
+      url: item.logo.url,
+      id: item.logo.id,
+    },
+    name: item.name,
+    tlf: item.tlf,
+    responsible: item.responsible,
+  };
 }
 
 export function mapRivalToRequestSaveRival(rival: Rival): RequestSaveRival {
