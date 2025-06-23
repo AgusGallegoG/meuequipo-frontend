@@ -54,7 +54,7 @@ async function doFetchTableItems() {
 </script>
 
 <template>
-  <CategoryAdminForm v-model="visible"></CategoryAdminForm>
+  <CategoryAdminForm v-model="visible" @saved="doFetchTableItems"></CategoryAdminForm>
   <Card class="h-100">
     <template #content>
       <DataTable
