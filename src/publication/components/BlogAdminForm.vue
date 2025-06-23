@@ -2,11 +2,7 @@
 import { UtilBase } from '@/core/utilities/UtilBase';
 import { useZodValidation } from '@/core/utilities/UtilZodValidations';
 import { useSavePublication } from '@/publication/application/useSavePublication';
-import {
-  type Publication,
-  defaultPublication,
-  publicationSchema,
-} from '@/publication/domain/Publication';
+import { defaultPublication, publicationSchema } from '@/publication/domain/Publication';
 import { useBlogAdminStore } from '@/publication/store/BlogAdminStore';
 import BaseEditor from '@/shared/components/BaseEditor.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
@@ -24,6 +20,8 @@ const blogStore = useBlogAdminStore();
 
 const isEdit = computed(() => blogStore.isEdition);
 const editionPublication = computed(() => blogStore.getEditionPublication);
+
+const emit = defineEmits<{ (e: 'saved'): void }>();
 
 const {
   form,
@@ -62,7 +60,7 @@ async function onSubmitForm() {
   if (!validate()) return;
   const response = await savePublication(form.value);
   if (response) {
-    blogStore.setTableData(response);
+    emit('saved');
   }
   visible.value = false;
 }

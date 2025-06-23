@@ -16,7 +16,7 @@ function mapResponseImagesToImages(responseImages: ResponseImage[]): ImageView[]
 }
 
 // Función para mapear un único ResponsePublication a Publication
-function mapResponsePublicationToPublication(responsePub: ResponsePublication): Publication {
+export function mapResponsePublicationToPublication(responsePub: ResponsePublication): Publication {
   return {
     id: responsePub.id,
     title: responsePub.title,
