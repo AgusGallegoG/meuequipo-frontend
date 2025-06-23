@@ -13,7 +13,7 @@ const keysMap = {
 };
 
 async function Api(pageParams: Pageable): Promise<PageableResponse<ResponseSponsor>> {
-  const response = await api.get<PageableResponse<ResponseSponsor>>('/sponsors/admin', {
+  const response = await api.get<PageableResponse<ResponseSponsor>>('/sponsors', {
     params: createPageParams(pageParams, keysMap),
   });
 

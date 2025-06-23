@@ -6,7 +6,7 @@ import type { ResponseSponsor } from '@/sponsor/infrastructure/models/responses/
 import { createSponsorFooterListFromResponseSponsorFooterList } from '@/sponsor/infrastructure/services/sponsorsService';
 
 async function Api(): Promise<ResponseSponsor[]> {
-  const response = await api.get<ResponseSponsor[]>('/sponsors');
+  const response = await api.get<ResponseSponsor[]>('/sponsors/footer');
   return response.data;
 }
 

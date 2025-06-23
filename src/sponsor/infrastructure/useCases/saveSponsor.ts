@@ -17,7 +17,7 @@ async function Api(
   request: RequestSaveSponsor,
   page: Pageable
 ): Promise<PageableResponse<ResponseSponsor>> {
-  const response = await api.post<PageableResponse<ResponseSponsor>>('sponsors', request, {
+  const response = await api.post<PageableResponse<ResponseSponsor>>('/sponsors', request, {
     params: createPageParams(page, keysMap),
   });
 
