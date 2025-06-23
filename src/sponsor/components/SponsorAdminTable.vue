@@ -21,6 +21,7 @@ const totalOfRecords = computed(() => sponsorAdminStore.getTotalElements);
 const rows = computed(() => sponsorAdminStore.getRows);
 
 onMounted(async () => {
+  sponsorAdminStore.cleanFilters();
   await doFetchTableItems();
 });
 

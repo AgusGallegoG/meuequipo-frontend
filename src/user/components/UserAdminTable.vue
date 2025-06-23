@@ -22,6 +22,7 @@ const totalOfRecords = computed(() => userAdminStore.getTotalElements);
 const rows = computed(() => userAdminStore.getRows);
 
 onMounted(async () => {
+  userAdminStore.cleanFilters();
   await doFetchTableItems();
 });
 
@@ -71,7 +72,7 @@ async function onPage(event: DataTablePageEvent) {
 }
 </script>
 <template>
-  <UserAdminForm v-model="visible"></UserAdminForm>
+  <UserAdminForm v-model="visible" @saved="doFetchTableItems"></UserAdminForm>
   <Card class="h-100">
     <template #content>
       <DataTable
