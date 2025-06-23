@@ -6,10 +6,6 @@ import type { RequestSaveSponsor } from '@/sponsor/infrastructure/models/request
 import type { ResponseSponsor } from '@/sponsor/infrastructure/models/responses/ResponseSponsorFooter';
 import { mapResponseSponsorToSponsor } from '@/sponsor/infrastructure/services/sponsorsService';
 
-const keysMap = {
-  name: 'name',
-};
-
 async function Api(request: RequestSaveSponsor): Promise<ResponseSponsor> {
   const response = await api.post<ResponseSponsor>('/sponsors', request);
 
