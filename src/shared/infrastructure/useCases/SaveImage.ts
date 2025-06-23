@@ -8,7 +8,7 @@ import { mapResponseImageToImageView } from '../service/imageService';
 async function Api(image: ImageUpload): Promise<ResponseImage> {
   const formData = new FormData();
   formData.append('file', image.file);
-  const response = await api.post<ResponseImage>('/images/single', formData, {
+  const response = await api.post<ResponseImage>('/images/save', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
