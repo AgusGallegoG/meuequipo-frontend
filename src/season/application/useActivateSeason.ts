@@ -14,15 +14,13 @@ export function useActivateSeason() {
     loading.value = true;
     try {
       const response = await withLoading(async () => await activateSeason(newActive));
-      if (response) {
-        showToast({
-          title: t('admin.dashboard.season.title'),
-          message: t('toast.messages.success.update_success', [
-            'a ' + t('admin.dashboard.season.title_active').toLowerCase(),
-          ]),
-          severity: 'success',
-        });
-      }
+      showToast({
+        title: t('admin.dashboard.season.title'),
+        message: t('toast.messages.success.update_success', [
+          'a ' + t('admin.dashboard.season.title_active').toLowerCase(),
+        ]),
+        severity: 'success',
+      });
       return response;
     } catch (error) {
       showToast({
@@ -32,7 +30,7 @@ export function useActivateSeason() {
         ]),
         severity: 'error',
       });
-      return [];
+      return null;
     } finally {
       loading.value = false;
     }
