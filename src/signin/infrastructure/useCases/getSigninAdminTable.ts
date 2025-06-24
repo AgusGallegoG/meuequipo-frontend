@@ -3,6 +3,7 @@ import type { PageableResponse } from '@/core/infrastructure/models/PageableResp
 import { createPageParams } from '@/core/infrastructure/service/PageableService';
 import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
+import type { SigninFilters } from '@/signin/domain/SigninFilters';
 import type { SigninTable } from '@/signin/domain/SigninTable';
 import responseSigninTableMock from '@/signin/infrastructure/mocks/responseSigninTableMock.json';
 import type { ResponseSigninItem } from '@/signin/infrastructure/models/responses/ResponseSigninItem';
@@ -12,9 +13,13 @@ const keysMap = {
   state: 'state',
 };
 
-async function Api(pageable: Pageable): Promise<PageableResponse<ResponseSigninItem>> {
+async function Api(filters: SigninFilters): Promise<PageableResponse<ResponseSigninItem>> {
   const response = await api.get<PageableResponse<ResponseSigninItem>>('signin/admin', {
-    params: createPageParams(pageable, keysMap),
+    params: {
+      ...createPageParams(filters.lazyParams, keysMap),
+      categoryId: filters.categoryId,
+      signinState: filters.signinState,
+    },
   });
 
   return response.data;
@@ -26,9 +31,9 @@ async function InMemory(): Promise<PageableResponse<ResponseSigninItem>> {
   return responseSigninTableMock as PageableResponse<ResponseSigninItem>;
 }
 
-async function getSigninAdminTable(pageable: Pageable): Promise<SigninTable> {
+async function getSigninAdminTable(filters: SigninFilters): Promise<SigninTable> {
   try {
-    const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(pageable);
+    const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(filters);
 
     return mapPageableResponseToSigninTable(response);
   } catch (error) {

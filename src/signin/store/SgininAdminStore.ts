@@ -1,6 +1,7 @@
 import { pageableDefault, type Pageable } from '@/core/dominio/Pageable';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import type { Signin } from '../domain/Signin';
+import { defaultSigninFilters, type SigninFilters } from '../domain/SigninFilters';
 import { defaultSigninTable, type SigninTable } from '../domain/SigninTable';
 
 export const useSigninAdminStore = defineStore('signinAdmin', {
@@ -8,7 +9,7 @@ export const useSigninAdminStore = defineStore('signinAdmin', {
     return {
       data: {
         table: <SigninTable>{ ...defaultSigninTable },
-        tableFilters: <Pageable>UtilBase.cloneVueProxy(pageableDefault),
+        tableFilters: <SigninFilters>UtilBase.cloneVueProxy(defaultSigninFilters),
         selectedToEdit: <Signin | null>null,
       },
     };
@@ -19,7 +20,7 @@ export const useSigninAdminStore = defineStore('signinAdmin', {
     getEditionSignin: (state) => state.data.selectedToEdit,
     getTable: (state) => state.data.table.content,
     getTotalElements: (state) => state.data.table.totalRecords,
-    getRows: (state) => state.data.tableFilters.rows,
+    getRows: (state) => state.data.tableFilters.lazyParams.rows,
     getFilters: (state) => state.data.tableFilters,
   },
 
@@ -29,13 +30,13 @@ export const useSigninAdminStore = defineStore('signinAdmin', {
     },
     setSort(field: string, direction: number) {
       if (this.data.tableFilters) {
-        this.data.tableFilters.sortField = UtilBase.isNullOrEmpty(field) ? [] : [field];
-        this.data.tableFilters.sortOrder = direction;
+        this.data.tableFilters.lazyParams.sortField = UtilBase.isNullOrEmpty(field) ? [] : [field];
+        this.data.tableFilters.lazyParams.sortOrder = direction;
       }
     },
     setPage(page: number) {
       if (this.data.tableFilters) {
-        this.data.tableFilters.page = page;
+        this.data.tableFilters.lazyParams.page = page;
       }
     },
     setSelectedToEdit(signin: Signin) {
@@ -46,9 +47,18 @@ export const useSigninAdminStore = defineStore('signinAdmin', {
     },
     clearSort() {
       if (this.data.tableFilters) {
-        this.data.tableFilters.sortField = null;
-        this.data.tableFilters.sortOrder = null;
+        this.data.tableFilters.lazyParams.sortField = null;
+        this.data.tableFilters.lazyParams.sortOrder = null;
       }
+    },
+    setCategory(categoryId: number | null) {
+      this.data.tableFilters.categoryId = categoryId;
+    },
+    setSigninState(signinState: number | null) {
+      this.data.tableFilters.signinState = signinState;
+    },
+    cleanFilters() {
+      this.data.tableFilters = UtilBase.cloneVueProxy(defaultSigninFilters);
     },
   },
 });

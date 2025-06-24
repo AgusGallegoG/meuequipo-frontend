@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { UtilBase } from '@/core/utilities/UtilBase';
+import BaseSelect from '@/shared/components/BaseSelect.vue';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import { useGetSigninAdminTable } from '@/signin/application/useGetSigninAdminTable';
 import { useGetSigninDetails } from '@/signin/application/useGetSigninDetails';
@@ -16,6 +18,7 @@ import type {
 import DataTable from 'primevue/datatable';
 import Tag from 'primevue/tag';
 import { useI18n } from 'vue-i18n';
+import { defaultSigninFilters, type SigninFilters } from '../domain/SigninFilters';
 
 const { t } = useI18n();
 const { refetch: getTableItems, loading } = useGetSigninAdminTable();
@@ -30,6 +33,7 @@ const table = computed(() => signinAdminStore.getTable);
 const totalOfRecords = computed(() => signinAdminStore.getTotalElements);
 const rows = computed(() => signinAdminStore.getRows);
 const expandedRows = ref<SigninItem[]>([]);
+const filters = ref<SigninFilters>({ ...defaultSigninFilters });
 
 onMounted(async () => {
   await doFetchTableItems();
@@ -62,6 +66,8 @@ function toggleVisible() {
 }
 
 async function doFetchTableItems() {
+  signinAdminStore.setCategory(filters.value.categoryId);
+  signinAdminStore.setSigninState(filters.value.signinState);
   signinAdminStore.setTableData(await getTableItems(signinAdminStore.getFilters));
 }
 
@@ -95,10 +101,42 @@ function onRowClick(event: DataTableRowClickEvent) {
   }
   return;
 }
+
+async function cleanFilters() {
+  filters.value = UtilBase.cloneVueProxy(defaultSigninFilters);
+  signinAdminStore.cleanFilters();
+  await doFetchTableItems();
+}
 </script>
 <template>
   <SigninAdminForm v-model="visible" @saved="doFetchTableItems" />
-  <Card class="h-100">
+  <Card class="h-25 my-3">
+    <template #content>
+      <div class="container">
+        <div class="row mt-3 align-items-center">
+          <BaseSelect
+            class="col-12 col-lg-5"
+            v-model="filters.categoryId"
+            :options="sharedEnumStore.getCategories"
+            :label="t('signin.fields.category')" />
+          <BaseSelect
+            class="col-12 col-lg-5"
+            v-model="filters.signinState"
+            :options="sharedEnumStore.getSigninStates"
+            :label="t('signin.fields.state')" />
+          <div class="col-12 col-lg-2">
+            <Button icon="pi pi-search" class="mx-2" @click="doFetchTableItems"></Button>
+            <Button
+              icon="pi pi-eraser"
+              severity="secondary"
+              class="mx-2"
+              @clic="cleanFilters"></Button>
+          </div>
+        </div>
+      </div>
+    </template>
+  </Card>
+  <Card class="h-75 my-3">
     <template #content>
       <DataTable
         id="signin-admin-table"
