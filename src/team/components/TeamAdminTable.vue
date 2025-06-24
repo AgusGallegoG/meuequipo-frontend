@@ -27,6 +27,7 @@ const totalOfRecords = computed(() => teamAdminStore.getTotalElements);
 const rows = computed(() => teamAdminStore.getRows);
 
 onMounted(async () => {
+  teamAdminStore.cleanFilters();
   await doFetchTableItems();
   await sharedEnumStore.fetchAll();
 });
@@ -81,7 +82,7 @@ async function onPage(event: DataTablePageEvent) {
 }
 </script>
 <template>
-  <TeamAdminForm v-model="visible" />
+  <TeamAdminForm v-model="visible" @saved="doFetchTableItems" />
   <Card class="h-100">
     <template #content>
       <DataTable

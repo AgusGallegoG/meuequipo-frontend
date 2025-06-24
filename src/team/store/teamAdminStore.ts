@@ -8,7 +8,7 @@ export const useTeamAdminStore = defineStore('teamAdmin', {
     return {
       data: {
         table: <TeamTable>{ ...defaultTeamTable },
-        tableFilters: <Pageable>{ ...pageableDefault },
+        tableFilters: <Pageable>UtilBase.cloneVueProxy(pageableDefault),
         selectedToEdit: <TeamForm | null>null,
       },
     };
@@ -49,6 +49,9 @@ export const useTeamAdminStore = defineStore('teamAdmin', {
         this.data.tableFilters.sortField = null;
         this.data.tableFilters.sortOrder = null;
       }
+    },
+    cleanFilters() {
+      this.data.tableFilters = UtilBase.cloneVueProxy(pageableDefault);
     },
   },
 });
