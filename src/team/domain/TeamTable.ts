@@ -6,6 +6,7 @@ export type TeamTable = {
 export type TeamItem = {
   id: number;
   name: string;
+  sex: number;
   category: number;
   trainer: string;
   playerCount: number;

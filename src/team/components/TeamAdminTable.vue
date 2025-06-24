@@ -109,12 +109,18 @@ async function onPage(event: DataTablePageEvent) {
           <h3 class="mb-2 mt-2">{{ t('teams.table_title') }}</h3>
         </template>
 
-        <Column field="name" :header="t('teams.fields.name')" style="width: 45%"></Column>
+        <Column field="name" :header="t('teams.fields.name')" style="width: 30%"></Column>
         <Column field="trainer" :header="t('teams.fields.trainer')" style="width: 20%"></Column>
         <Column
           field="playerCount"
           :header="t('teams.fields.player_count')"
           style="width: 20%"></Column>
+        <Column field="sex" :header="t('teams.fields.sex')" style="width: 15%">
+          <template #body="slotProps">
+            <Tag
+              :value="sharedEnumStore.getSexName(slotProps.data.sex)"
+              :severity="sharedEnumStore.getSexSeverity(slotProps.data.sex)" /> </template
+        ></Column>
         <Column field="category" style="width: 15%">
           <template #header>
             <Button

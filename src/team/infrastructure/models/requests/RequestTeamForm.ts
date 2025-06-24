@@ -4,6 +4,7 @@ export interface RequestTeamForm {
   id: number | null;
   name: string;
   category: number;
+  sex: number;
   trainer: string;
   trainerContact: string;
   teamImage: RequestImage | null;

@@ -2,16 +2,19 @@ import type { PageableResponse } from '@/core/infrastructure/models/PageableResp
 import router from '@/core/router';
 import type { ResponseSelect } from '@/shared/infrastructure/models/responses/ResponseSelect';
 import type { Team, TeamForm } from '@/team/domain/Team';
+import type { TeamPublic } from '@/team/domain/TeamPublic';
 import type { TeamItem, TeamTable } from '@/team/domain/TeamTable';
 import type { MenuItem } from 'primevue/menuitem';
 import type { RequestTeamForm } from '../models/requests/RequestTeamForm';
 import type { ResponseTeam, ResponseTeamForm } from '../models/responses/ResponseTeamForm';
 import type { ResponseTeamItem } from '../models/responses/ResponseTeamItem';
 import type { ResponseTeamMenuItem } from '../models/responses/ResponseTeamMenuItem';
+import type { ResponseTeamPublic } from '../models/responses/ResponseTeamPublic';
 
 export function mapResponseTeamFormToTeamForm(resp: ResponseTeamForm): TeamForm {
   return {
     category: resp.category,
+    sex: resp.sex,
     id: resp.id,
     name: resp.name,
     players: resp.players ?? [],
@@ -21,10 +24,21 @@ export function mapResponseTeamFormToTeamForm(resp: ResponseTeamForm): TeamForm 
   };
 }
 
+export function mapResponseTeamPublicToTeamPublic(resp: ResponseTeamPublic): TeamPublic {
+  return {
+    category: resp.category,
+    sex: resp.sex,
+    id: resp.id,
+    name: resp.name,
+    teamImage: resp.teamImage ? resp.teamImage : null,
+  };
+}
+
 export function mapResponseTeamToTeam(resp: ResponseTeam): Team {
   return {
     category: resp.category,
     id: resp.id,
+    sex: resp.sex,
     name: resp.name,
     teamImage: resp.teamImage ? resp.teamImage : null,
     trainer: resp.trainer,
@@ -35,6 +49,7 @@ export function mapTeamFormToRequestTeamForm(team: TeamForm): RequestTeamForm {
   return {
     id: team.id === -1 ? null : team.id,
     category: team.category ?? -1,
+    sex: team.sex ?? -1,
     name: team.name,
     players: team.players,
     teamImage: team.teamImage ?? null,
@@ -50,6 +65,7 @@ export function mapResponseTeamItemListToTeamItemList(item: ResponseTeamItem[]):
 export function mapResponseTeamItemToTeamItem(item: ResponseTeamItem): TeamItem {
   return {
     id: item.id,
+    sex: item.sex,
     category: item.category,
     name: item.name,
     playerCount: item.playerCount,

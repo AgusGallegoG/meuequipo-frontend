@@ -99,7 +99,7 @@ async function onSubmitForm() {
     <template #default>
       <div class="container g-3 pt-3">
         <div class="row mt-3 align-items-start">
-          <div class="col-12 col-md-6 md:mb-2">
+          <div class="col-12 col-md-4 md:mb-2">
             <BaseInputGroupText
               class="col-12"
               v-model="form.name"
@@ -107,13 +107,21 @@ async function onSubmitForm() {
               :invalid="!!formErrors.name"
               :errorMessage="formErrors.name ?? undefined" />
           </div>
-          <div class="col-12 col-md-6 md:mb-2">
+          <div class="col-12 col-md-4 md:mb-2">
             <BaseSelect
               v-model="form.category"
               :options="sharedEnumStore.getCategories"
               :label="t('teams.fields.category')"
               :invalid="!!formErrors.category"
               :errorMessage="formErrors.category ?? undefined" />
+          </div>
+          <div class="col-12 col-md-4 md:mb-2">
+            <BaseSelect
+              v-model="form.sex"
+              :options="sharedEnumStore.getSexOptions"
+              :label="t('teams.fields.sex')"
+              :invalid="!!formErrors.sex"
+              :errorMessage="formErrors.sex ?? undefined" />
           </div>
         </div>
 

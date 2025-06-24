@@ -1,17 +1,17 @@
 <script setup lang="ts">
 import CalendarView from '@/calendar/components/CalendarView.vue';
 import Card from 'primevue/card';
-import { useGetTeamFormDetails } from '../application/useGetTeamFormDetails';
+import { useGetTeamPublicData } from '../application/useGetTeamPublicData';
 import TeamBasicData from '../components/TeamBasicData.vue';
-import { defaultTeamForm, type TeamForm } from '../domain/Team';
+import { defaultTeamPublic, type TeamPublic } from '../domain/TeamPublic';
 
 interface Props {
   id: string;
 }
 
 const props = defineProps<Props>();
-const team = ref<TeamForm>({ ...defaultTeamForm });
-const { refetch } = useGetTeamFormDetails();
+const team = ref<TeamPublic>({ ...defaultTeamPublic });
+const { refetch } = useGetTeamPublicData();
 
 onMounted(async () => {
   await doGetTeamDetails();

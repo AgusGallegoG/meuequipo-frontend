@@ -5,6 +5,7 @@ export type Team = {
   id: number;
   name: string;
   category: number | null;
+  sex: number | null;
   trainer: string;
   teamImage: ImageView | null;
 };
@@ -17,6 +18,7 @@ export type TeamForm = Team & {
 export const defaultTeamForm: TeamForm = {
   id: -1,
   category: null,
+  sex: null,
   name: '',
   players: [],
   teamImage: null,
@@ -36,6 +38,16 @@ export const teamFormSchema = z.object({
         return data !== null;
       },
       { message: 'playervalidation.category_required' }
+    ),
+  sex: z
+    .number()
+    .nonnegative({ message: 'playervalidation.sex_required' })
+    .nullable()
+    .refine(
+      (data) => {
+        return data !== null;
+      },
+      { message: 'playervalidation.sex_required' }
     ),
   trainer: z.string().min(1, { message: 'teamvalidation.trainer_required' }),
   teamImage: imageViewSchema.nullable(),
