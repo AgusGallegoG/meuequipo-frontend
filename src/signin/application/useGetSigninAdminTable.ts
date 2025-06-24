@@ -1,5 +1,6 @@
 import type { Pageable } from '@/core/dominio/Pageable';
 import { useMeToast } from '@/core/hooks/useMeToast';
+import type { SigninFilters } from '@/signin/domain/SigninFilters';
 import { defaultSigninTable } from '@/signin/domain/SigninTable';
 import { getSigninAdminTable } from '@/signin/infrastructure/useCases/getSigninAdminTable';
 import { useI18n } from 'vue-i18n';
@@ -9,7 +10,7 @@ export function useGetSigninAdminTable() {
   const { showToast } = useMeToast();
   const { t } = useI18n();
 
-  async function refetch(filters: Pageable) {
+  async function refetch(filters: SigninFilters) {
     loading.value = true;
 
     try {
