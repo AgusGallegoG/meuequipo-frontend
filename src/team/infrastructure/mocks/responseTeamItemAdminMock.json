@@ -4,6 +4,7 @@
       "id": 1,
       "name": "Augas de sousas Xuventude Verin",
       "category": 1,
+      "sex": 2,
       "trainer": "Payo, Mikel",
       "playerCount": 13
     },
@@ -11,6 +12,7 @@
       "id": 2,
       "name": "Augas de sousas Xuventude Verin",
       "category": 3,
+      "sex": 1,
       "trainer": "Juan, Erik",
       "playerCount": 8
     }

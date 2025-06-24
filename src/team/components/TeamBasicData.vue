@@ -1,12 +1,12 @@
 <script setup lang="ts">
 import baseLogo from '@/core/assets/images/logos/logo_xuven.png';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
-import type { TeamForm } from '@/team/domain/Team';
 import Card from 'primevue/card';
 import { useI18n } from 'vue-i18n';
+import type { TeamPublic } from '../domain/TeamPublic';
 
 interface Props {
-  team: TeamForm;
+  team: TeamPublic;
 }
 
 const sharedEnumStore = useSharedEnumsStore();
@@ -34,18 +34,6 @@ onMounted(async () => {
             <div class="col-12 col-md-6 col-lg-8">
               <div class="row row-cols-1">
                 <div class="col py-3">
-                  <div class="row">
-                    <div class="fw-bold col-12 col-lg-6">{{ t('teams.fields.trainer') + ':' }}</div>
-                    <div class="col-12 col-xl-6 text-break">{{ team.trainer }}</div>
-                  </div>
-                </div>
-                <div class="col py-3">
-                  <div class="row ">
-                    <div class="fw-bold col-12 col-lg-6">{{ t('teams.fields.trainer_contact') + ':' }}</div>
-                    <div class="col-12 col-xl-6 text-break">{{ team.trainerContact }}</div>
-                  </div>
-                </div>
-                <div class="col py-3">
                   <div class="row ">
                     <div class="fw-bold col-12 col-lg-6">{{ t('teams.fields.category') + ':' }}</div>
                     <div class="col-12 col-xl-6 text-break">
@@ -55,8 +43,8 @@ onMounted(async () => {
                 </div>
                 <div class="col py-3">
                   <div class="row ">
-                    <div class="fw-bold col-12 col-lg-6">{{ t('teams.fields.players') + ':' }}</div>
-                    <div class="col-12 col-xl-6 text-break">{{ team.players.length }}</div>
+                    <div class="fw-bold col-12 col-lg-6">{{ t('teams.fields.sex') + ':' }}</div>
+                    <div class="col-12 col-xl-6 text-break">{{ team.sex ? sharedEnumStore.getSexName(team.sex) : '' }}</div>
                   </div>
                 </div>
               </div>
