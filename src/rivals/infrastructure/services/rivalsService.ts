@@ -20,14 +20,16 @@ function mapResponseRivalItem(content: ResponseRivalItem[]): RivalItem[] {
 export function mapResponseRivalItemToRivalItem(item: ResponseRivalItem): RivalItem {
   return {
     id: item.id,
-    logo: {
-      name: item.logo.name,
-      url: item.logo.url,
-      id: item.logo.id,
-    },
+    logo: item.logo
+      ? {
+          name: item.logo.name,
+          url: item.logo.url,
+          id: item.logo.id,
+        }
+      : null,
     name: item.name,
     tlf: item.tlf,
-    responsible: item.responsible,
+    responsible: item.responsible ?? '',
   };
 }
 
@@ -52,7 +54,7 @@ export function mapResponseRivalToRival(response: ResponseRival): Rival {
       ? { name: response.logo.url, url: response.logo.name, id: response.logo.id }
       : null,
     name: response.name,
-    responsible: response.responsible,
+    responsible: response.responsible ?? '',
     tlf: response.tlf,
   };
 }

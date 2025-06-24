@@ -4,7 +4,7 @@ export interface ResponseRival {
   id: number;
   logo: ResponseImage | null;
   name: string;
-  responsible: string;
+  responsible: string | null;
   email: string;
   tlf: string;
   categories: number[];
