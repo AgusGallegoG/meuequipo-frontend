@@ -14,10 +14,10 @@ export function mapResponseTeamFormToTeamForm(resp: ResponseTeamForm): TeamForm 
     category: resp.category,
     id: resp.id,
     name: resp.name,
-    players: resp.players,
+    players: resp.players ?? [],
     teamImage: resp.teamImage ? resp.teamImage : null,
     trainer: resp.trainer,
-    trainerContact: resp.trainerContact,
+    trainerContact: resp.trainerContact ?? '',
   };
 }
 

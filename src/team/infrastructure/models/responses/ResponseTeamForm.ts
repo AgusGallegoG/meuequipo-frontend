@@ -9,6 +9,6 @@ export interface ResponseTeam {
 }
 
 export interface ResponseTeamForm extends ResponseTeam {
-  trainerContact: string;
-  players: number[];
+  trainerContact: string | null;
+  players: number[] | null;
 }
