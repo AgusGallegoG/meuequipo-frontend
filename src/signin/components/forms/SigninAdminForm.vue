@@ -23,6 +23,9 @@ const sharedEnumStore = useSharedEnumsStore();
 
 const isEdit = computed(() => singinAdminStore.isEdition);
 const editionSignin = computed(() => singinAdminStore.getEditionSignin);
+
+const emit = defineEmits<{ (e: 'saved'): void }>();
+
 const {
   form,
   errors: formErrors,
@@ -61,7 +64,7 @@ async function onSubmitForm() {
 
   const response = await saveSignin(form.value);
   if (response) {
-    singinAdminStore.setTableData(response);
+    emit('saved');
   }
   visible.value = false;
 }

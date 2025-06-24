@@ -119,7 +119,7 @@ function cleanStep() {
       </div>
 
       <div class="col d-flex justify-content-center">
-        <MatchItem v-if="match" :match="match"></MatchItem>
+        <MatchItem v-if="match" :match="match" :isAdmin="false" :showSquad="false"></MatchItem>
       </div>
     </div>
     <div class="row">

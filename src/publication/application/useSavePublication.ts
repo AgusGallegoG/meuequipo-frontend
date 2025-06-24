@@ -16,11 +16,7 @@ export function useSavePublication() {
     loading.value = true;
     try {
       const response = await withLoading(
-        async () =>
-          await savePublication(
-            createRequestSavePublicationFromPublication(publication),
-            blogStore.getFilters
-          )
+        async () => await savePublication(createRequestSavePublicationFromPublication(publication))
       );
       if (response) {
         showToast({
