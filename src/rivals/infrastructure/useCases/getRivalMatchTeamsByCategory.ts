@@ -6,7 +6,7 @@ import type { ResponseMatchTeam } from '@/shared/infrastructure/models/responses
 import { mapResponseMatchTeamListToMatchTeamList } from '@/shared/infrastructure/service/matchService';
 
 async function Api(categoryId: number): Promise<ResponseMatchTeam[]> {
-  const response = await api.get<ResponseMatchTeam[]>('/rivals/matchTeam', {
+  const response = await api.get<ResponseMatchTeam[]>('/rivals/match-team', {
     params: { categoryId: categoryId },
   });
 

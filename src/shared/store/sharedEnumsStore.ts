@@ -108,7 +108,7 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
         await UtilBase.wait(100);
         res = categorySelectMock.content as ResponseSelect[];
       } else {
-        const partial = await api.get<ResponseSelect[]>('/category/dropdown');
+        const partial = await api.get<ResponseSelect[]>('/category/public/dropdown');
         res = partial.data;
       }
       this.data.categories = res;
