@@ -1,34 +1,29 @@
 import { useMeToast } from '@/core/hooks/useMeToast';
+import type { Rival } from '@/rivals/domain/RivalTable';
+import { mapRivalToRequestSaveRival } from '@/rivals/infrastructure/services/rivalsService';
+import { saveRival } from '@/rivals/infrastructure/useCases/saveRival';
 import { withLoading } from '@/shared/utils/withLoading';
 import { useI18n } from 'vue-i18n';
-import type { RivalFilters } from '../domain/RivalFilters';
-import type { Rival } from '../domain/RivalTable';
-import { mapRivalToRequestSaveRival } from '../infrastructure/services/rivalsService';
-import { saveRival } from '../infrastructure/useCases/saveRival';
 
 export function useSaveRival() {
   const loading = ref<boolean>(false);
   const { t } = useI18n();
   const { showToast } = useMeToast();
 
-  async function refetch(rival: Rival, filters: RivalFilters) {
+  async function refetch(rival: Rival) {
     loading.value = true;
     try {
       const response = await withLoading(
-        async () => await saveRival(mapRivalToRequestSaveRival(rival), filters)
+        async () => await saveRival(mapRivalToRequestSaveRival(rival))
       );
-      if (response.content.length > 0 && response.totalRecords) {
-        showToast({
-          title: t('rivals.title'),
-          message: t('toast.messages.success.save_success', [
-            ' o ' + t('rivals.title').toLowerCase(),
-          ]),
-          severity: 'success',
-        });
-        return response;
-      } else {
-        throw Error();
-      }
+      showToast({
+        title: t('rivals.title'),
+        message: t('toast.messages.success.save_success', [
+          ' o ' + t('rivals.title').toLowerCase(),
+        ]),
+        severity: 'success',
+      });
+      return response;
     } catch (error) {
       showToast({
         title: t('rivals.title'),

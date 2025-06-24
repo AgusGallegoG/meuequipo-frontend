@@ -8,7 +8,7 @@ export const useBlogAdminStore = defineStore('blogAdmin', {
     return {
       data: {
         table: <BlogAdminTable>{ ...defaultBlogAdminTable },
-        tableFilters: <Pageable>{ ...pageableDefault },
+        tableFilters: <Pageable>UtilBase.cloneVueProxy(pageableDefault),
         selectedToEdit: <Publication | null>null,
       },
     };
@@ -49,6 +49,9 @@ export const useBlogAdminStore = defineStore('blogAdmin', {
         this.data.tableFilters.sortField = null;
         this.data.tableFilters.sortOrder = null;
       }
+    },
+    cleanFilters() {
+      this.data.tableFilters = UtilBase.cloneVueProxy(pageableDefault);
     },
   },
 });

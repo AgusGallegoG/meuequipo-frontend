@@ -42,11 +42,18 @@ async function getActiveSeason() {
 }
 
 async function changeActiveSeason(newSeason: Season) {
-  options.value = await activateNew(newSeason);
+  const saved = await activateNew(newSeason);
+  if (saved) {
+    await getAllSeasons();
+    await getActiveSeason();
+  }
 }
 
 async function createSeason(form: SeasonForm) {
-  options.value = await create(form);
+  const saved = await create(form);
+  if (saved) {
+    await getAllSeasons();
+  }
 }
 
 function resetFormAndToogleVisible() {
@@ -60,8 +67,8 @@ async function onSubmit() {
   if (!validate()) return;
 
   await createSeason(form.value);
-  resetFormAndToogleVisible();
   await getActiveSeason();
+  resetFormAndToogleVisible();
 }
 
 onMounted(async () => {

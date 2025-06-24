@@ -19,6 +19,8 @@ const { t } = useI18n();
 const isEdit = computed(() => userAdminStore.isEdition);
 const editionUser = computed(() => userAdminStore.getEditionUser);
 
+const emit = defineEmits<{ (e: 'saved'): void }>();
+
 const {
   form,
   errors: formErrors,
@@ -61,7 +63,7 @@ async function onSubmitForm() {
   //ExecuteQuery
   const response = await saveUser(form.value);
   if (response) {
-    userAdminStore.setTableData(response);
+    emit('saved');
   }
   visible.value = false;
 }

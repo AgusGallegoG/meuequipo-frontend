@@ -37,23 +37,25 @@ export function mapPageableResponseToSigninTable(
   response: PageableResponse<ResponseSigninItem>
 ): SigninTable {
   return {
-    content: mapResponseSigninItemToSigninItem(response.content),
+    content: mapResponseSigninItemListToSigninItemList(response.content),
     totalRecords: response.totalElements,
   };
 }
 
-function mapResponseSigninItemToSigninItem(items: ResponseSigninItem[]): SigninItem[] {
-  return items.map((item) => {
-    return {
-      id: item.id,
-      category: item.category,
-      parentCompleteName: item.parentCompleteName,
-      state: item.state,
-      sex: item.sex,
+function mapResponseSigninItemListToSigninItemList(items: ResponseSigninItem[]): SigninItem[] {
+  return items.map(mapResponseSigninItemToSigninItem);
+}
 
-      playerCompleteName: item.playerCompleteName,
-      phone: item.phone,
-      email: item.email,
-    };
-  });
+export function mapResponseSigninItemToSigninItem(item: ResponseSigninItem): SigninItem {
+  return {
+    id: item.id,
+    category: item.category,
+    parentCompleteName: item.parentCompleteName,
+    state: item.state,
+    sex: item.sex,
+
+    playerCompleteName: item.playerCompleteName,
+    phone: item.phone,
+    email: item.email,
+  };
 }

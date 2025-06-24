@@ -99,7 +99,10 @@ function onSelectMatch(index: number) {
 }
 </script>
 <template>
-  <CalendarMatchAdminForm v-if="isAdmin" v-model="visible"></CalendarMatchAdminForm>
+  <CalendarMatchAdminForm
+    v-if="isAdmin"
+    v-model="visible"
+    @saved="doGetMatches"></CalendarMatchAdminForm>
   <Card :class="teamId ? 'h-50 everflow-y-scroll w-80' : 'h-100'">
     <template #header>
       <div class="w-100 flex-column">

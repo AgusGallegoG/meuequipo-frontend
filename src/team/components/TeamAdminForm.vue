@@ -28,6 +28,8 @@ const isEdit = computed(() => teamAdminStore.isEdition);
 const editionForm = computed(() => teamAdminStore.getEditionTeam);
 const players = ref<Select[]>([]);
 
+const emit = defineEmits<{ (e: 'saved'): void }>();
+
 const {
   form,
   errors: formErrors,
@@ -81,7 +83,7 @@ async function onSubmitForm() {
 
   const response = await saveTeamForm(form.value);
   if (response) {
-    teamAdminStore.setTableData(response);
+    emit('saved');
   }
   visible.value = false;
 }

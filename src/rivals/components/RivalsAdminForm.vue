@@ -23,6 +23,8 @@ const { refetch: saveRival, loading } = useSaveRival();
 const isEdit = computed(() => rivalAdminStore.isEdition);
 const editionRival = computed(() => rivalAdminStore.getEditionRival);
 
+const emit = defineEmits<{ (e: 'saved'): void }>();
+
 onMounted(async () => {
   await sharedEnumsStore.fetchAll();
 });
@@ -67,9 +69,9 @@ async function onSubmitForm() {
 
   if (!validate()) return;
 
-  const response = await saveRival(form.value, rivalAdminStore.getFilters);
+  const response = await saveRival(form.value);
   if (response) {
-    rivalAdminStore.setTableData(response);
+    emit('saved');
   }
   visible.value = false;
 }

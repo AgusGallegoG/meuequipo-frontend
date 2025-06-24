@@ -1,39 +1,27 @@
-import type { Pageable } from '@/core/dominio/Pageable';
-import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
-import { createPageParams } from '@/core/infrastructure/service/PageableService';
 import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
-import type { SponsorTable } from '@/sponsor/domain/SponsorTable';
+import type { Sponsor } from '@/sponsor/domain/Sponsor';
 import responseSponsorAdminMock from '@/sponsor/infrastructure/mocks/responseSponsorAdminMock.json';
 import type { RequestSaveSponsor } from '@/sponsor/infrastructure/models/requests/RequestSaveSponsor';
 import type { ResponseSponsor } from '@/sponsor/infrastructure/models/responses/ResponseSponsorFooter';
-import { mapPageableSponsorResponseToSponsorTable } from '../services/sponsorsService';
+import { mapResponseSponsorToSponsor } from '@/sponsor/infrastructure/services/sponsorsService';
 
-const keysMap = {
-  name: 'name',
-};
-
-async function Api(
-  request: RequestSaveSponsor,
-  page: Pageable
-): Promise<PageableResponse<ResponseSponsor>> {
-  const response = await api.post<PageableResponse<ResponseSponsor>>('/sponsors', request, {
-    params: createPageParams(page, keysMap),
-  });
+async function Api(request: RequestSaveSponsor): Promise<ResponseSponsor> {
+  const response = await api.post<ResponseSponsor>('/sponsors', request);
 
   return response.data;
 }
 
-async function InMemory(): Promise<PageableResponse<ResponseSponsor>> {
+async function InMemory(): Promise<ResponseSponsor> {
   await UtilBase.wait(500);
-  return responseSponsorAdminMock as PageableResponse<ResponseSponsor>;
+  return responseSponsorAdminMock.content[0] as ResponseSponsor;
 }
 
-async function saveSponsor(request: RequestSaveSponsor, page: Pageable): Promise<SponsorTable> {
+async function saveSponsor(request: RequestSaveSponsor): Promise<Sponsor> {
   try {
-    const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(request, page);
+    const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(request);
 
-    return mapPageableSponsorResponseToSponsorTable(response);
+    return mapResponseSponsorToSponsor(response);
   } catch (error) {
     throw new Error(`Error saving/updating sponsor`);
   }

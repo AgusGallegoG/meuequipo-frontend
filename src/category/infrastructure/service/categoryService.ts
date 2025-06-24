@@ -12,15 +12,17 @@ export function createCategoryTableFromResponseCategoryList(
 }
 
 function mapCategoryResponseListToCategoryItemList(response: ResponseCategory[]): CategoryItem[] {
-  return response.map((cat) => {
-    return {
-      id: cat.id,
-      active: cat.active,
-      name: cat.name,
-      yearInit: parseBackendDate(cat.yearInit),
-      yearEnd: cat.yearEnd ? parseBackendDate(cat.yearEnd) : null,
-    };
-  });
+  return response.map(createCategoryItemFromResponseCategory);
+}
+
+export function createCategoryItemFromResponseCategory(cat: ResponseCategory): CategoryItem {
+  return {
+    id: cat.id,
+    active: cat.active,
+    name: cat.name,
+    yearInit: parseBackendDate(cat.yearInit),
+    yearEnd: cat.yearEnd ? parseBackendDate(cat.yearEnd) : null,
+  };
 }
 
 export function createRequestSaveCategoryFromCategoryItem(

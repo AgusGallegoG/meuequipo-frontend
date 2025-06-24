@@ -23,6 +23,7 @@ const totalOfRecords = computed(() => rivalAdminStore.getTotalElements);
 const rows = computed(() => rivalAdminStore.getRows);
 
 onMounted(async () => {
+  rivalAdminStore.cleanFilters();
   await doFetchTableItems();
 });
 
@@ -76,7 +77,7 @@ async function onPage(event: DataTablePageEvent) {
 }
 </script>
 <template>
-  <RivalsAdminForm v-model="visible"></RivalsAdminForm>
+  <RivalsAdminForm v-model="visible" @saved="doFetchTableItems"></RivalsAdminForm>
   <Card class="h-100">
     <template #content>
       <DataTable

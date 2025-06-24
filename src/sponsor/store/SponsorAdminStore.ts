@@ -8,7 +8,7 @@ export const useSponsorAdminStore = defineStore('sponsorAdmin', {
     return {
       data: {
         table: <SponsorTable>{ ...defaultSponsorTable },
-        tableFilters: <Pageable>{ ...pageableDefault },
+        tableFilters: <Pageable>UtilBase.cloneVueProxy(pageableDefault),
         selectedToEdit: <Sponsor | null>null,
       },
     };
@@ -49,6 +49,9 @@ export const useSponsorAdminStore = defineStore('sponsorAdmin', {
         this.data.tableFilters.sortField = null;
         this.data.tableFilters.sortOrder = null;
       }
+    },
+    cleanFilters() {
+      this.data.tableFilters = UtilBase.cloneVueProxy(pageableDefault);
     },
   },
 });

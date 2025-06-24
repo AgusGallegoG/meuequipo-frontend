@@ -17,18 +17,14 @@ export function useCreateSeason() {
       const response = await withLoading(
         async () => await createSeason(createRequestNewSeasonFromSeasonForm(newSeason))
       );
-      if (response.length > 0) {
-        showToast({
-          title: t('admin.dashboard.season.title'),
-          message: t('toast.messages.success.create_success', [
-            t('admin.dashboard.season.title').toLowerCase(),
-          ]),
-          severity: 'success',
-        });
-        return response;
-      } else {
-        throw Error();
-      }
+      showToast({
+        title: t('admin.dashboard.season.title'),
+        message: t('toast.messages.success.create_success', [
+          t('admin.dashboard.season.title').toLowerCase(),
+        ]),
+        severity: 'success',
+      });
+      return response;
     } catch (error) {
       showToast({
         title: t('admin.dashboard.season.title'),
@@ -37,7 +33,7 @@ export function useCreateSeason() {
         ]),
         severity: 'error',
       });
-      return [];
+      return null;
     } finally {
       loading.value = false;
     }

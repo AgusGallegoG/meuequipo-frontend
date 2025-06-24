@@ -16,18 +16,14 @@ export function useSaveCategories() {
       const response = await withLoading(
         async () => await saveCategory(createRequestSaveCategoryFromCategoryItem(category))
       );
-      if (response.content.length > 0) {
-        showToast({
-          title: t('categories.title'),
-          message: t('toast.messages.success.save_success', [
-            ' a ' + t('categories.title').toLowerCase(),
-          ]),
-          severity: 'success',
-        });
-        return response;
-      } else {
-        throw Error();
-      }
+      showToast({
+        title: t('categories.title'),
+        message: t('toast.messages.success.save_success', [
+          ' a ' + t('categories.title').toLowerCase(),
+        ]),
+        severity: 'success',
+      });
+      return response;
     } catch (error) {
       showToast({
         title: t('categories.title'),

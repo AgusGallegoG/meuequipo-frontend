@@ -43,23 +43,25 @@ export function mapTeamFormToRequestTeamForm(team: TeamForm): RequestTeamForm {
   };
 }
 
-export function mapResponseTeamItemToTeamItem(item: ResponseTeamItem[]): TeamItem[] {
-  return item.map((item) => {
-    return {
-      id: item.id,
-      category: item.category,
-      name: item.name,
-      playerCount: item.playerCount,
-      trainer: item.trainer,
-    };
-  });
+export function mapResponseTeamItemListToTeamItemList(item: ResponseTeamItem[]): TeamItem[] {
+  return item.map(mapResponseTeamItemToTeamItem);
+}
+
+export function mapResponseTeamItemToTeamItem(item: ResponseTeamItem): TeamItem {
+  return {
+    id: item.id,
+    category: item.category,
+    name: item.name,
+    playerCount: item.playerCount,
+    trainer: item.trainer,
+  };
 }
 
 export function mapPageableResponseToTeamTable(
   response: PageableResponse<ResponseTeamItem>
 ): TeamTable {
   return {
-    content: mapResponseTeamItemToTeamItem(response.content),
+    content: mapResponseTeamItemListToTeamItemList(response.content),
     totalRecords: response.totalElements,
   };
 }

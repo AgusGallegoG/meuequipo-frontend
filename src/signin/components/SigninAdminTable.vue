@@ -97,7 +97,7 @@ function onRowClick(event: DataTableRowClickEvent) {
 }
 </script>
 <template>
-  <SigninAdminForm v-model="visible" />
+  <SigninAdminForm v-model="visible" @saved="doFetchTableItems" />
   <Card class="h-100">
     <template #content>
       <DataTable

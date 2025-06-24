@@ -24,6 +24,8 @@ const { refetch: saveCategory, loading } = useSaveCategories();
 const isEdit = computed(() => categoryStore.isEdition);
 const editionCategory = computed(() => categoryStore.getEditionCategory);
 
+const emit = defineEmits<{ (e: 'saved'): void }>();
+
 const {
   form,
   errors: formErrors,
@@ -66,7 +68,7 @@ async function onSubmitForm() {
 
   const response = await saveCategory(form.value);
   if (response) {
-    categoryStore.setTableData(response);
+    emit('saved');
   }
   visible.value = false;
 }

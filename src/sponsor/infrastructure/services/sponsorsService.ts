@@ -2,13 +2,10 @@ import type { PageableResponse } from '@/core/infrastructure/models/PageableResp
 import { mapImageViewToRequestImage } from '@/shared/infrastructure/service/imageService';
 import type { Sponsor } from '@/sponsor/domain/Sponsor';
 import type { SponsorTable } from '@/sponsor/domain/SponsorTable';
-import type {
-  ResponseSponsor,
-  ResponseSponsorFooterList,
-} from '@/sponsor/infrastructure/models/responses/ResponseSponsorFooter';
+import type { ResponseSponsor } from '@/sponsor/infrastructure/models/responses/ResponseSponsorFooter';
 import type { RequestSaveSponsor } from '../models/requests/RequestSaveSponsor';
 
-function mapResponseSponsorFooterListToSponsor(responseSpo: ResponseSponsor): Sponsor {
+export function mapResponseSponsorToSponsor(responseSpo: ResponseSponsor): Sponsor {
   return {
     id: responseSpo.id,
     logo: responseSpo.logo
@@ -23,10 +20,8 @@ function mapResponseSponsorFooterListToSponsor(responseSpo: ResponseSponsor): Sp
   };
 }
 
-export function createSponsorFooterListFromResponseSponsorFooterList(
-  response: ResponseSponsor[]
-): Sponsor[] {
-  return response.map(mapResponseSponsorFooterListToSponsor);
+export function createSponsorListFromResponseSponsorList(response: ResponseSponsor[]): Sponsor[] {
+  return response.map(mapResponseSponsorToSponsor);
 }
 
 export function mapSponsorToRequestSaveSponsor(sponsor: Sponsor): RequestSaveSponsor {
@@ -42,7 +37,7 @@ export function mapPageableSponsorResponseToSponsorTable(
   response: PageableResponse<ResponseSponsor>
 ): SponsorTable {
   return {
-    content: createSponsorFooterListFromResponseSponsorFooterList(response.content),
+    content: createSponsorListFromResponseSponsorList(response.content),
     totalRecords: response.totalElements,
   };
 }

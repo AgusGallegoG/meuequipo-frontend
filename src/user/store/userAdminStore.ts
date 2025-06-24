@@ -50,5 +50,8 @@ export const useUserAdminStore = defineStore('userAdmin', {
         this.data.tableFilters.sortOrder = null;
       }
     },
+    cleanFilters() {
+      this.data.tableFilters = UtilBase.cloneVueProxy(pageableDefault);
+    },
   },
 });

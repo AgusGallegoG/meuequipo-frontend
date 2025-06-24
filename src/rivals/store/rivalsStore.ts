@@ -50,5 +50,8 @@ export const useRivalsAdminStore = defineStore('rivalsAdmin', {
         this.data.tableFilters.pageParams.sortOrder = null;
       }
     },
+    cleanFilters() {
+      this.data.tableFilters = UtilBase.cloneVueProxy(defaultRivalFilters);
+    },
   },
 });
