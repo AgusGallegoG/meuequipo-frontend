@@ -5,11 +5,7 @@ import responsePlayersMock from '@/shared/infrastructure/mocks/responsePlayersMo
 import type { ResponseSelect } from '@/shared/infrastructure/models/responses/ResponseSelect';
 
 async function Api(teamId: number): Promise<ResponseSelect[]> {
-  const response = await api.get<ResponseSelect[]>('/players/team', {
-    params: {
-      idTeam: teamId,
-    },
-  });
+  const response = await api.get<ResponseSelect[]>(`/team/${teamId}/players`);
 
   return response.data;
 }
