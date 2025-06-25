@@ -44,8 +44,7 @@ const {
   reset,
 } = useZodValidation(defaultMatch, matchSchema);
 
-const localOurs = ref<boolean>(true); // por defecto nos marcamos como locales
-const visitorOurs = ref<boolean>(false);
+const local = ref<boolean>(true); // por defecto nos marcamos como locales
 
 const ourTeams = ref<MatchTeam[]>([]);
 const rivalTeams = ref<MatchTeam[]>([]);
@@ -59,8 +58,7 @@ watch(visible, (newVal) => {
 watch(editionCalendar, (newVal) => {
   if (newVal) {
     form.value = cloneMatch(newVal);
-    localOurs.value = form.value.localTeam?.isOurTeam ?? false;
-    visitorOurs.value = form.value.visitorTeam?.isOurTeam ?? false;
+    local.value = form.value.localTeam?.isOurTeam ?? false;
   } else {
     form.value = UtilBase.cloneVueProxy(defaultMatch);
   }
@@ -74,6 +72,15 @@ watch(
       if (newVal !== oldVal) {
         (form.value.localTeam = null), (form.value.visitorTeam = null);
       }
+    }
+  }
+);
+
+watch(
+  () => local.value,
+  (newVal, oldVal) => {
+    if (newVal !== oldVal) {
+      (form.value.localTeam = null), (form.value.visitorTeam = null);
     }
   }
 );
@@ -165,14 +172,14 @@ function cloneMatch(match: Match): Match {
             :invalid="!!formErrors.state"
             :errorMessage="formErrors.state ?? undefined" />
         </div>
+        <div class="row my-3">
+          <BaseCheckBox v-model="local" :label="t('matches.fields.local_match')"></BaseCheckBox>
+        </div>
         <div class="row row-cols-1 row-cols-md-2 my-3 align-items-start">
           <div class="col">
             <div class="container g-3">
               <div class="row row-cols-1 text-center">
                 <span class="fw-bold text-uppercase"> {{ t('matches.fields.local') }}</span>
-                <BaseCheckBox
-                  v-model="localOurs"
-                  :label="t('matches.fields.club_team')"></BaseCheckBox>
                 <div class="col">
                   <div class="py-3 mb-2">
                     <div id="team-container" class="w-100">
@@ -180,7 +187,7 @@ function cloneMatch(match: Match): Match {
                         <Select
                           id="over_label_local"
                           v-model="form.localTeam"
-                          :options="localOurs ? ourTeams : rivalTeams"
+                          :options="local ? ourTeams : rivalTeams"
                           optionLabel="name"
                           :loading="loadingOptions.value"
                           :class="{ 'p-invalid': !!formErrors.localTeam }"
@@ -213,9 +220,6 @@ function cloneMatch(match: Match): Match {
             <div class="container g-3">
               <div class="row row-cols-1 text-center">
                 <span class="fw-bold text-uppercase"> {{ t('matches.fields.visitor') }}</span>
-                <BaseCheckBox
-                  v-model="visitorOurs"
-                  :label="t('matches.fields.club_team')"></BaseCheckBox>
                 <div class="col">
                   <div class="py-3 mb-2">
                     <div id="team-container" class="w-100">
@@ -223,7 +227,7 @@ function cloneMatch(match: Match): Match {
                         <Select
                           id="over_label_visitor"
                           v-model="form.visitorTeam"
-                          :options="visitorOurs ? ourTeams : rivalTeams"
+                          :options="local ? rivalTeams : ourTeams"
                           optionLabel="name"
                           :loading="loadingOptions.value"
                           :class="{ 'p-invalid': !!formErrors.visitorTeam }"

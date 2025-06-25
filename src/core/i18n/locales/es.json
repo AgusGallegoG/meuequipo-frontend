@@ -308,8 +308,7 @@
     "no_date": "Sin fecha",
     "fields": {
       "local": "Local",
-      "club_team": "Equipo del club",
-      "visitor": "Visitante",
+      "local_match": "Partido como local",
       "category": "Categoría",
       "location": "Localización",
       "match_date": "Fecha del partido",

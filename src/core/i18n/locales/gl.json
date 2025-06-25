@@ -310,7 +310,7 @@
     "no_date": "Sen data",
     "fields": {
       "local": "Equipo local",
-      "club_team": "Equipo do club",
+      "local_match": "Partido como local",
       "visitor": "Equipo visitante",
       "category": "Categoría",
       "location": "Localización",
