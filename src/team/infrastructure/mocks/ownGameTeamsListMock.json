@@ -49,6 +49,16 @@
         "id": 2005
       },
       "isOurTeam": true
+    },
+    {
+      "id": 104,
+      "name": "Cóndores del Oeste",
+      "logo": {
+        "name": "condores.png",
+        "url": "https://th.bing.com/th/id/OIP.AhJZQUAb68AY_3oi1vfSXwHaHa?w=172&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+        "id": 1004
+      },
+      "isOurTeam": true
     }
   ]
 }

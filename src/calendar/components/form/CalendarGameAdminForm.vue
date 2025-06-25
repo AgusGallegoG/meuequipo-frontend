@@ -45,6 +45,7 @@ const {
 } = useZodValidation(defaultGame, gameSchema);
 
 const local = ref<boolean>(true); // por defecto nos marcamos como locales
+const loadingEdition = ref<boolean>(false);
 
 const ourTeams = ref<GameTeam[]>([]);
 const rivalTeams = ref<GameTeam[]>([]);
@@ -57,8 +58,12 @@ watch(visible, (newVal) => {
 
 watch(editionCalendar, (newVal) => {
   if (newVal) {
+    loadingEdition.value = true;
+
     form.value = cloneGame(newVal);
     local.value = form.value.localTeam?.isOurTeam ?? false;
+
+    loadingEdition.value = true;
   } else {
     form.value = UtilBase.cloneVueProxy(defaultGame);
   }
@@ -69,8 +74,9 @@ watch(
   async (newVal, oldVal) => {
     if (newVal) {
       await fetchTeamsOptions(newVal);
-      if (newVal !== oldVal) {
-        (form.value.localTeam = null), (form.value.visitorTeam = null);
+      if (newVal !== oldVal && !loadingEdition.value) {
+        form.value.localTeam = null;
+        form.value.visitorTeam = null;
       }
     }
   }
@@ -79,8 +85,10 @@ watch(
 watch(
   () => local.value,
   (newVal, oldVal) => {
-    if (newVal !== oldVal) {
-      (form.value.localTeam = null), (form.value.visitorTeam = null);
+    if (newVal !== oldVal && !loadingEdition.value) {
+      const tmp = form.value.localTeam;
+      form.value.localTeam = form.value.visitorTeam;
+      form.value.visitorTeam = tmp;
     }
   }
 );
