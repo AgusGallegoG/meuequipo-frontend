@@ -11,7 +11,7 @@ export function mapSquadToRequestSaveSquad(squad: Squad): RequestSaveSquad {
     location: squad.location,
     mailText: squad.mailText,
     date: squad.dateHour ? mapToLocaleDateTimeString(squad.dateHour) : '',
-    match: squad.match ?? -1,
+    game: squad.game ?? -1,
     team: squad.team ?? -1,
     players: [...squad.players],
     sendMail: squad.sendMail,

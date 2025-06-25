@@ -1,30 +1,30 @@
-import type { Match } from '@/shared/dominio/Match';
+import type { Game } from '@/shared/dominio/Game';
 import { defaultCalendarFilter, type CalendarFilter } from '../domain/CalendarFilters';
 
 export const useCalendarStore = defineStore('calendar', {
   state: () => {
     return {
       data: {
-        list: <Match[]>[],
+        list: <Game[]>[],
         filters: <CalendarFilter>{ ...defaultCalendarFilter },
-        selectedToEdit: <Match | null>null,
+        selectedToEdit: <Game | null>null,
       },
     };
   },
 
   getters: {
     isEdition: (state) => state.data.selectedToEdit !== null,
-    getEditionMatch: (state) => state.data.selectedToEdit,
+    getEditionGame: (state) => state.data.selectedToEdit,
     getList: (state) => state.data.list,
     getFilters: (state) => state.data.filters,
   },
 
   actions: {
-    setList(data: Match[]) {
+    setList(data: Game[]) {
       this.data.list = [...data];
     },
-    setSelectedToEdit(match: Match) {
-      this.data.selectedToEdit = { ...match };
+    setSelectedToEdit(game: Game) {
+      this.data.selectedToEdit = { ...game };
     },
     clearSelectedToEdit() {
       this.data.selectedToEdit = null;

@@ -2,34 +2,34 @@ import { imageViewSchema, type ImageView } from '@/shared/dominio/ImageView';
 import { viewSquadSchema, type ViewSquad } from '@/squad/domain/ViewSquad';
 import { z } from 'zod';
 
-export type Match = {
+export type Game = {
   id: number;
-  localTeam: MatchTeam | null;
+  localTeam: GameTeam | null;
   localPoints: number | null;
-  visitorTeam: MatchTeam | null;
+  visitorTeam: GameTeam | null;
   visitorPoints: number | null;
   category: number | null;
   location: string;
-  matchDate: Date | null;
+  gameDate: Date | null;
   state: number | null;
   squad: ViewSquad | null;
 };
 
-export type MatchTeam = {
+export type GameTeam = {
   id: number;
   name: string;
   logo: ImageView | null;
   isOurTeam: boolean;
 };
 
-export const defaultMatchTeam: MatchTeam = {
+export const defaultGameTeam: GameTeam = {
   id: -1,
   logo: null,
   name: '',
   isOurTeam: false,
 };
 
-export const defaultMatch: Match = {
+export const defaultGame: Game = {
   id: -1,
   category: null,
   localTeam: null,
@@ -37,19 +37,19 @@ export const defaultMatch: Match = {
   visitorTeam: null,
   visitorPoints: null,
   location: '',
-  matchDate: null,
+  gameDate: null,
   state: null,
   squad: null,
 };
 
-const matchTeamSchema = z.object({
+const gameTeamSchema = z.object({
   id: z.number(),
   logo: imageViewSchema.nullable(),
   name: z.string(),
   isOurTeam: z.boolean(),
-}) satisfies z.ZodType<MatchTeam>;
+}) satisfies z.ZodType<GameTeam>;
 
-export const matchSchema = z.object({
+export const gameSchema = z.object({
   id: z.number(),
   category: z
     .number()
@@ -61,23 +61,23 @@ export const matchSchema = z.object({
       },
       { message: 'playervalidation.category_required' }
     ),
-  localTeam: matchTeamSchema
+  localTeam: gameTeamSchema
     .nullable()
-    .refine((v) => v !== null, { message: 'matchvalidation.team_required' }),
+    .refine((v) => v !== null, { message: 'gamevalidation.team_required' }),
   localPoints: z.number().nullable(),
-  visitorTeam: matchTeamSchema
+  visitorTeam: gameTeamSchema
     .nullable()
-    .refine((v) => v !== null, { message: 'matchvalidation.team_required' }),
+    .refine((v) => v !== null, { message: 'gamevalidation.team_required' }),
   visitorPoints: z.number().nullable(),
-  location: z.string().min(1, { message: 'matchvalidation.location_required' }),
-  matchDate: z
+  location: z.string().min(1, { message: 'gamevalidation.location_required' }),
+  gameDate: z
     .date()
     .nullable()
-    .refine((v) => v !== null, { message: 'matchvalidation.date_required' }),
+    .refine((v) => v !== null, { message: 'gamevalidation.date_required' }),
   state: z
     .number()
-    .nonnegative({ message: 'matchvalidation.state_required' })
+    .nonnegative({ message: 'gamevalidation.state_required' })
     .nullable()
-    .refine((v) => v !== null, { message: 'matchvalidation.state_required' }),
+    .refine((v) => v !== null, { message: 'gamevalidation.state_required' }),
   squad: viewSquadSchema.nullable(),
-}) satisfies z.ZodType<Match>;
+}) satisfies z.ZodType<Game>;

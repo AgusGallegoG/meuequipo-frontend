@@ -1,10 +1,10 @@
 import type { CalendarFilter } from '@/calendar/domain/CalendarFilters';
-import responseMatchListMock from '@/calendar/infrastructure/mocks/responseMatchListMock.json';
+import responseGameListMock from '@/calendar/infrastructure/mocks/responseGameListMock.json';
 import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
-import type { Match } from '@/shared/dominio/Match';
-import type { ResponseMatch } from '@/shared/infrastructure/models/responses/ResponseMatch';
-import { mapResponseMatchListToMatchList } from '@/shared/infrastructure/service/matchService';
+import type { Game } from '@/shared/dominio/Game';
+import type { ResponseGame } from '@/shared/infrastructure/models/responses/ResponseGame';
+import { mapResponseGameListToGameList } from '@/shared/infrastructure/service/gameService';
 import type { RequestCalendarFilters } from '../models/RequestCalendarFilters';
 
 /**\
@@ -19,9 +19,9 @@ async function Api(
   filters: RequestCalendarFilters,
   isAdmin: boolean,
   isSquad: boolean
-): Promise<ResponseMatch[]> {
+): Promise<ResponseGame[]> {
   const url = isAdmin ? '/calendars/admin' : '/calendars/public';
-  const repsonse = await api.get<ResponseMatch[]>(url, {
+  const repsonse = await api.get<ResponseGame[]>(url, {
     params: {
       filters,
       isSquad: isSquad,
@@ -31,25 +31,25 @@ async function Api(
   return repsonse.data;
 }
 
-async function InMemory(): Promise<ResponseMatch[]> {
+async function InMemory(): Promise<ResponseGame[]> {
   await UtilBase.wait(500);
-  return responseMatchListMock as ResponseMatch[];
+  return responseGameListMock as ResponseGame[];
 }
 
-async function getMatchesList(
+async function getGamesList(
   filters: RequestCalendarFilters,
   isAdmin: boolean,
   isSquad: boolean
-): Promise<Match[]> {
+): Promise<Game[]> {
   try {
     const response = UtilBase.checkEnvironment()
       ? await InMemory()
       : await Api(filters, isAdmin, isSquad);
 
-    return mapResponseMatchListToMatchList(response);
+    return mapResponseGameListToGameList(response);
   } catch (error) {
-    throw new Error(`Error fetching matches between dates or by teamId`);
+    throw new Error(`Error fetching games between dates or by teamId`);
   }
 }
 
-export { getMatchesList };
+export { getGamesList };

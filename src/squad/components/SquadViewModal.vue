@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatShowMatchDateTime } from '@/core/utilities/UtilDate';
+import { formatShowGameDateTime } from '@/core/utilities/UtilDate';
 import type { ViewSquad } from '@/squad/domain/ViewSquad';
 import Dialog, { type DialogBreakpoints } from 'primevue/dialog';
 import { useI18n } from 'vue-i18n';
@@ -43,7 +43,7 @@ const dialogBreakpoints: DialogBreakpoints = {
         <div class="row d-flex justify-content-center">
           <div class="col-12">
             <h3>{{ t('squads.fields.date') }}</h3>
-            <span>{{ props.squad ? formatShowMatchDateTime(props.squad.date) : '' }}</span>
+            <span>{{ props.squad ? formatShowGameDateTime(props.squad.date) : '' }}</span>
           </div>
         </div>
         <div class="row d-flex justify-content-center">

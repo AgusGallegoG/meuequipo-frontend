@@ -1,16 +1,16 @@
-export interface RequestMatch {
+export interface RequestGame {
   id: number | null;
-  matchDate: string;
+  gameDate: string;
   category: number | null;
   location: string;
-  localTeam: RequestMatchTeam;
+  localTeam: RequestGameTeam;
   localPoints: number | null;
-  visitorTeam: RequestMatchTeam;
+  visitorTeam: RequestGameTeam;
   visitorPoints: number | null;
   state: number | null;
 }
 
-export interface RequestMatchTeam {
+export interface RequestGameTeam {
   id: number | null;
   isOurTeam: boolean;
 }

@@ -33,7 +33,7 @@ const table = computed(() => signinAdminStore.getTable);
 const totalOfRecords = computed(() => signinAdminStore.getTotalElements);
 const rows = computed(() => signinAdminStore.getRows);
 const expandedRows = ref<SigninItem[]>([]);
-const filters = ref<SigninFilters>({ ...defaultSigninFilters });
+const filters = ref<SigninFilters>(UtilBase.cloneVueProxy(defaultSigninFilters));
 
 onMounted(async () => {
   await doFetchTableItems();
@@ -130,7 +130,7 @@ async function cleanFilters() {
               icon="pi pi-eraser"
               severity="secondary"
               class="mx-2"
-              @clic="cleanFilters"></Button>
+              @click="cleanFilters"></Button>
           </div>
         </div>
       </div>

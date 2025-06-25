@@ -1,12 +1,12 @@
 <script lang="ts" setup>
-import { useGetMatchesList } from '@/calendar/application/useGetMatchesList';
+import { useGetGamesList } from '@/calendar/application/useGetGamesList';
 import CalendarFilter from '@/calendar/components/CalendarFilter.vue';
-import CalendarMatchAdminForm from '@/calendar/components/form/CalendarMatchAdminForm.vue';
-import MatchItem from '@/calendar/components/item/MatchItem.vue';
+import CalendarGameAdminForm from '@/calendar/components/form/CalendarGameAdminForm.vue';
+import GameItem from '@/calendar/components/item/GameItem.vue';
 import type { CalendarFilter as CalendarFilterType } from '@/calendar/domain/CalendarFilters';
 import { useCalendarStore } from '@/calendar/store/calendarStore';
 import { getWeekRangeFromOffset } from '@/core/utilities/UtilDate';
-import type { Match } from '@/shared/dominio/Match';
+import type { Game } from '@/shared/dominio/Game';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import Button from 'primevue/button';
 import Card from 'primevue/card';
@@ -24,12 +24,12 @@ const props = withDefaults(defineProps<Props>(), {
   isSquad: false,
 });
 
-const emits = defineEmits<{ (e: 'selected', value: Match): void }>();
+const emits = defineEmits<{ (e: 'selected', value: Game): void }>();
 
 const { t } = useI18n();
 const calendarStore = useCalendarStore();
 const sharedEnumsStore = useSharedEnumsStore();
-const { refetch: getMatches, loading } = useGetMatchesList();
+const { refetch: getGames, loading } = useGetGamesList();
 
 const list = computed(() => calendarStore.getList);
 
@@ -37,14 +37,14 @@ const visible = ref<boolean>(false);
 
 onMounted(async () => {
   initializeCalendarFilters();
-  await doGetMatches();
+  await doGetGames();
   await sharedEnumsStore.fetchAll();
 });
 
 watch(
   () => calendarStore.getFilters,
   async () => {
-    await doGetMatches();
+    await doGetGames();
   }
 );
 
@@ -69,8 +69,8 @@ watch(
   }
 );
 
-async function doGetMatches() {
-  calendarStore.setList(await getMatches(calendarStore.getFilters, props.isSquad ?? false));
+async function doGetGames() {
+  calendarStore.setList(await getGames(calendarStore.getFilters, props.isSquad ?? false));
 }
 
 function initializeCalendarFilters() {
@@ -88,7 +88,7 @@ function toggleVisible() {
   visible.value = !visible.value;
 }
 
-function onSelectMatch(index: number) {
+function onSelectGame(index: number) {
   if (props.isSquad) {
     emits('selected', list.value[index]);
   } else if (props.isAdmin) {
@@ -99,15 +99,15 @@ function onSelectMatch(index: number) {
 }
 </script>
 <template>
-  <CalendarMatchAdminForm
+  <CalendarGameAdminForm
     v-if="isAdmin"
     v-model="visible"
-    @saved="doGetMatches"></CalendarMatchAdminForm>
+    @saved="doGetGames"></CalendarGameAdminForm>
   <Card :class="teamId ? 'h-50 everflow-y-scroll w-80' : 'h-100'">
     <template #header>
       <div class="w-100 flex-column">
         <div class="d-flex justify-content-center">
-          <h3 class="pt-3 px-4">{{ t('matches.table_title') }}</h3>
+          <h3 class="pt-3 px-4">{{ t('games.table_title') }}</h3>
         </div>
 
         <div class="d-flex justify-content-center mb-3">
@@ -129,11 +129,11 @@ function onSelectMatch(index: number) {
       </div>
       <div v-else>
         <div
-          v-for="(match, index) in list"
-          :key="match.id"
+          v-for="(game, index) in list"
+          :key="game.id"
           class="d-flex justify-content-center"
-          @click="onSelectMatch(index)">
-          <MatchItem :isAdmin="isAdmin" :match="match" :showSquad="isAdmin && !isSquad"></MatchItem>
+          @click="onSelectGame(index)">
+          <GameItem :isAdmin="isAdmin" :game="game" :showSquad="isAdmin && !isSquad"></GameItem>
         </div>
       </div>
     </template>

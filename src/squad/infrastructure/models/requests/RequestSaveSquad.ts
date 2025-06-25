@@ -1,6 +1,6 @@
 export interface RequestSaveSquad {
   team: number;
-  match: number;
+  game: number;
   players: number[];
   location: string;
   date: string;

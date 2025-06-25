@@ -2,10 +2,10 @@ import { useMeToast } from '@/core/hooks/useMeToast';
 import { withLoading } from '@/shared/utils/withLoading';
 import type { Squad } from '@/squad/domain/Squad';
 import { mapSquadToRequestSaveSquad } from '@/squad/infrastructure/services/squadService';
-import { saveSquadToMatch } from '@/squad/infrastructure/useCases/saveSquadToMatch';
+import { saveSquadToGame } from '@/squad/infrastructure/useCases/saveSquadToGame';
 import { useI18n } from 'vue-i18n';
 
-export function useSaveSquadToMatch() {
+export function useSaveSquadToGame() {
   const { t } = useI18n();
   const { showToast } = useMeToast();
   const loading = ref<boolean>(false);
@@ -14,7 +14,7 @@ export function useSaveSquadToMatch() {
     loading.value = true;
     try {
       const response = await withLoading(
-        async () => await saveSquadToMatch(mapSquadToRequestSaveSquad(squad)),
+        async () => await saveSquadToGame(mapSquadToRequestSaveSquad(squad)),
         t('core.states.saving')
       );
 

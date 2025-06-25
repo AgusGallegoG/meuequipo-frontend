@@ -34,6 +34,6 @@ export function getFormattedWeekFromOffset(offset: number = 0): string {
   return `${dayjs(from).format('DD/MM/YYYY')} - ${dayjs(to).format('DD/MM/YYYY')}`;
 }
 
-export function formatShowMatchDateTime(date: Date): string {
+export function formatShowGameDateTime(date: Date): string {
   return dayjs(date).format('DD/MM/YYYY HH:mm');
 }

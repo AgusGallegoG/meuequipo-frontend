@@ -23,6 +23,7 @@
       "loading": "Cargando...",
       "quering": "Consultando...",
       "loginin": "Iniciando sesión...",
+      "saving": "Gardando...",
       "adding": "Añadiendo...",
       "deleting": "Borrando...",
       "processing": "Procesando...",
@@ -300,7 +301,7 @@
       "image": "Imagen de equipo"
     }
   },
-  "matches": {
+  "games": {
     "title": "Partido",
     "table_title": "Partidos",
     "form_title_new": "Crear nuevo partido",
@@ -308,10 +309,10 @@
     "no_date": "Sin fecha",
     "fields": {
       "local": "Local",
-      "local_match": "Partido como local",
+      "local_game": "Partido como local",
       "category": "Categoría",
       "location": "Localización",
-      "match_date": "Fecha del partido",
+      "game_date": "Fecha del partido",
       "state": "Estado",
       "points": "Puntos",
       "team": "Equipo",
@@ -321,7 +322,7 @@
   "squads": {
     "title": "Convocatoria",
     "stepper": {
-      "match": "Partido y equipo",
+      "game": "Partido y equipo",
       "players": "Jugadores convocados",
       "notification": "Notificación"
     },
@@ -331,7 +332,7 @@
     "fields": {
       "category": "Categoría",
       "team": "Equipo",
-      "match": "Partido",
+      "game": "Partido",
       "all_players": "Jugadores del equipo",
       "squad_players": "Jugadores convocados",
       "location": "Punto de reunión",
@@ -339,7 +340,7 @@
       "send_mail": "Enviar notificación",
       "notification": "Contenido del email"
     },
-    "match_info": "Fecha del partido: {0} - Lugar: {1} - Rival: {2}",
+    "game_info": "Fecha del partido: {0} - Lugar: {1} - Rival: {2}",
     "complete": "{completar}",
     "confirm_no_send": "¿Seguro que quiere continuar? Esta acción no se podrá deshacer",
     "confirm_send": "¿Seguro que quiere continuar? Se enviará un email a los datos de contacto de los jugadores y esta acción non se podrá deshacer"
@@ -377,7 +378,7 @@
     "title_required": "El título es obligatorio",
     "body_required": "El cuerpo de la publicación es obligatorio"
   },
-  "matchvalidation": {
+  "gamevalidation": {
     "state_required": "El estado es obligatorio",
     "date_required": "Debe indicar la fecha del partido",
     "team_required": "Debe escoger un equipo",

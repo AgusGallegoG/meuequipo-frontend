@@ -1,7 +1,7 @@
 <script setup lang="ts">
-import { useSaveSquadToMatch } from '@/squad/application/useSaveSquadToMatch';
+import { useSaveSquadToGame } from '@/squad/application/useSaveSquadToGame';
 import SquadViewModal from '@/squad/components/SquadViewModal.vue';
-import SquadMatchSelectionStep from '@/squad/components/steps/SquadMatchSelectionStep.vue';
+import SquadGameSelectionStep from '@/squad/components/steps/SquadGameSelectionStep.vue';
 import SquadNotificationBuildStep from '@/squad/components/steps/SquadNotificationBuildStep.vue';
 import SquadPlayersSelectionStep from '@/squad/components/steps/SquadPlayersSelectionStep.vue';
 import type { Squad } from '@/squad/domain/Squad';
@@ -17,7 +17,7 @@ import { useI18n } from 'vue-i18n';
 const { t } = useI18n();
 const router = useRouter();
 const stepperStore = useSquadStepperAdminStore();
-const { refetch: saveSquad } = useSaveSquadToMatch();
+const { refetch: saveSquad } = useSaveSquadToGame();
 
 const step = ref<string>('1');
 const visibleSummary = ref<boolean>(false);
@@ -67,12 +67,12 @@ async function doSaveSquad(squad: Squad): Promise<ViewSquad | null> {
       <Stepper :value="step" :linear="true">
         <StepItem value="1">
           <Step #default>
-            <h2 class="text-break">{{ t('squads.stepper.match') }}</h2>
+            <h2 class="text-break">{{ t('squads.stepper.game') }}</h2>
           </Step>
           <StepPanel v-slot="{ activateCallback }">
-            <SquadMatchSelectionStep
+            <SquadGameSelectionStep
               @next="activateCallback('2')"
-              @prev="goBack"></SquadMatchSelectionStep>
+              @prev="goBack"></SquadGameSelectionStep>
           </StepPanel>
         </StepItem>
         <StepItem value="2">

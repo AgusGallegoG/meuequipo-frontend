@@ -2,11 +2,11 @@ import { Roles } from '@/auth/domain/Roles';
 import { useAuthStore } from '@/auth/store/authStore';
 import type { CalendarFilter } from '@/calendar/domain/CalendarFilters';
 import { mapCalendarFiltersToRequestCalendarFilters } from '@/calendar/infrastructure/services/calendarService';
-import { getMatchesList } from '@/calendar/infrastructure/useCases/getMatchesList';
+import { getGamesList } from '@/calendar/infrastructure/useCases/getGamesList';
 import { useMeToast } from '@/core/hooks/useMeToast';
 import { useI18n } from 'vue-i18n';
 
-export function useGetMatchesList() {
+export function useGetGamesList() {
   const loading = ref<boolean>(false);
   const authStore = useAuthStore();
   const { t } = useI18n();
@@ -15,7 +15,7 @@ export function useGetMatchesList() {
   async function refetch(filters: CalendarFilter, isSquad: boolean) {
     loading.value = true;
     try {
-      return await getMatchesList(
+      return await getGamesList(
         mapCalendarFiltersToRequestCalendarFilters(filters),
         authStore.hasRole(Roles.ADMIN),
         isSquad
@@ -23,8 +23,8 @@ export function useGetMatchesList() {
     } catch (error) {
       if (authStore.hasRole(Roles.ADMIN)) {
         showToast({
-          title: t('matches.title'),
-          message: t('toast.messages.errors.fetch_error', [t('matches.title')]),
+          title: t('games.title'),
+          message: t('toast.messages.errors.fetch_error', [t('games.title')]),
           severity: 'warn',
         });
       }

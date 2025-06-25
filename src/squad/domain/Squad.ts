@@ -1,7 +1,7 @@
 export type Squad = {
   //step1
   team: number | null;
-  match: number | null;
+  game: number | null;
   //step2
   players: number[];
   //step3

@@ -1,17 +1,17 @@
 <script lang="ts" setup>
-import { useSaveMatch } from '@/calendar/application/useSaveMatch';
+import { useSaveGame } from '@/calendar/application/useSaveGame';
 import { useCalendarStore } from '@/calendar/store/calendarStore';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import { useZodValidation } from '@/core/utilities/UtilZodValidations';
-import { useGetRivalMatchTeamsByCategory } from '@/rivals/application/useGetRivalMatchTeamsByCategory';
+import { useGetRivalGameTeamsByCategory } from '@/rivals/application/useGetRivalGameTeamsByCategory';
 import BaseCheckBox from '@/shared/components/BaseCheckBox.vue';
 import BaseDatePicker from '@/shared/components/BaseDatePicker.vue';
 import BaseInputGroupNumber from '@/shared/components/BaseInputGroupNumber.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import BaseSelect from '@/shared/components/BaseSelect.vue';
-import { defaultMatch, matchSchema, type Match, type MatchTeam } from '@/shared/dominio/Match';
+import { defaultGame, gameSchema, type Game, type GameTeam } from '@/shared/dominio/Game';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
-import { useGetOwnMatchTeamsByCategory } from '@/team/application/useGetOwnMatchTeamsByCategory';
+import { useGetOwnGameTeamsByCategory } from '@/team/application/useGetOwnGameTeamsByCategory';
 import Button from 'primevue/button';
 import Drawer from 'primevue/drawer';
 import FloatLabel from 'primevue/floatlabel';
@@ -22,15 +22,15 @@ import { useI18n } from 'vue-i18n';
 const visible = defineModel<boolean>();
 
 const { t } = useI18n();
-const { refetch: saveMatch, loading: loading } = useSaveMatch();
-const { refetch: findClubTeams, loading: loadingClubTeams } = useGetOwnMatchTeamsByCategory();
-const { refetch: findRivalTeams, loading: loadingRivalTeams } = useGetRivalMatchTeamsByCategory();
+const { refetch: saveGame, loading: loading } = useSaveGame();
+const { refetch: findClubTeams, loading: loadingClubTeams } = useGetOwnGameTeamsByCategory();
+const { refetch: findRivalTeams, loading: loadingRivalTeams } = useGetRivalGameTeamsByCategory();
 const calendarStore = useCalendarStore();
 const sharedEnumStore = useSharedEnumsStore();
 
 // const isLocal = ref<boolean>(true);
 const isEdit = computed(() => calendarStore.isEdition);
-const editionCalendar = computed(() => calendarStore.getEditionMatch);
+const editionCalendar = computed(() => calendarStore.getEditionGame);
 const loadingOptions = computed(() => loadingClubTeams || loadingRivalTeams);
 
 const emit = defineEmits<{ (e: 'saved'): void }>();
@@ -42,12 +42,12 @@ const {
   isFormValid,
   validate,
   reset,
-} = useZodValidation(defaultMatch, matchSchema);
+} = useZodValidation(defaultGame, gameSchema);
 
 const local = ref<boolean>(true); // por defecto nos marcamos como locales
 
-const ourTeams = ref<MatchTeam[]>([]);
-const rivalTeams = ref<MatchTeam[]>([]);
+const ourTeams = ref<GameTeam[]>([]);
+const rivalTeams = ref<GameTeam[]>([]);
 
 watch(visible, (newVal) => {
   if (!newVal) {
@@ -57,10 +57,10 @@ watch(visible, (newVal) => {
 
 watch(editionCalendar, (newVal) => {
   if (newVal) {
-    form.value = cloneMatch(newVal);
+    form.value = cloneGame(newVal);
     local.value = form.value.localTeam?.isOurTeam ?? false;
   } else {
-    form.value = UtilBase.cloneVueProxy(defaultMatch);
+    form.value = UtilBase.cloneVueProxy(defaultGame);
   }
 });
 
@@ -97,7 +97,7 @@ async function onSubmitForm() {
   submitted.value = true;
 
   if (!validate()) return;
-  const response = await saveMatch(form.value);
+  const response = await saveGame(form.value);
   if (response) {
     emit('saved');
   }
@@ -109,22 +109,22 @@ async function fetchTeamsOptions(categoryid: number) {
   rivalTeams.value = await findRivalTeams(categoryid);
 }
 
-function cloneMatch(match: Match): Match {
+function cloneGame(game: Game): Game {
   return {
-    id: match.id,
-    category: match.category,
-    state: match.state,
-    location: match.location,
-    matchDate: match.matchDate ? new Date(match.matchDate) : null,
-    localPoints: match.localPoints,
-    visitorPoints: match.visitorPoints,
-    localTeam: match.localTeam
-      ? { ...match.localTeam, logo: match.localTeam.logo ? { ...match.localTeam.logo } : null }
+    id: game.id,
+    category: game.category,
+    state: game.state,
+    location: game.location,
+    gameDate: game.gameDate ? new Date(game.gameDate) : null,
+    localPoints: game.localPoints,
+    visitorPoints: game.visitorPoints,
+    localTeam: game.localTeam
+      ? { ...game.localTeam, logo: game.localTeam.logo ? { ...game.localTeam.logo } : null }
       : null,
-    visitorTeam: match.visitorTeam
+    visitorTeam: game.visitorTeam
       ? {
-          ...match.visitorTeam,
-          logo: match.visitorTeam.logo ? { ...match.visitorTeam.logo } : null,
+          ...game.visitorTeam,
+          logo: game.visitorTeam.logo ? { ...game.visitorTeam.logo } : null,
         }
       : null,
     squad: null,
@@ -135,7 +135,7 @@ function cloneMatch(match: Match): Match {
   <Drawer position="top" v-model:visible="visible" class="h-75">
     <template #header>
       <h3 class="mt-2">
-        {{ isEdit ? t('matches.form_title_edit') : t('matches.form_title_new') }}
+        {{ isEdit ? t('games.form_title_edit') : t('games.form_title_new') }}
       </h3>
     </template>
     <template #default>
@@ -145,41 +145,41 @@ function cloneMatch(match: Match): Match {
             class="col"
             v-model="form.category"
             :options="sharedEnumStore.getCategories"
-            :label="t('matches.fields.category')"
+            :label="t('games.fields.category')"
             :invalid="!!formErrors.category"
             :errorMessage="formErrors.category ?? undefined" />
 
           <BaseDatePicker
             class="col"
-            v-model="form.matchDate"
+            v-model="form.gameDate"
             showTime
-            :label="t('matches.fields.match_date')"
-            :invalid="!!formErrors.matchDate"
-            :errorMessage="formErrors.matchDate ?? undefined" />
+            :label="t('games.fields.game_date')"
+            :invalid="!!formErrors.gameDate"
+            :errorMessage="formErrors.gameDate ?? undefined" />
 
           <BaseInputGroupText
             class="col"
             v-model="form.location"
-            :label="t('matches.fields.location')"
+            :label="t('games.fields.location')"
             :invalid="!!formErrors.location"
             :errorMessage="formErrors.location ?? undefined" />
 
           <BaseSelect
             class="col"
             v-model="form.state"
-            :options="sharedEnumStore.getMatchStates"
-            :label="t('matches.fields.state')"
+            :options="sharedEnumStore.getGameStates"
+            :label="t('games.fields.state')"
             :invalid="!!formErrors.state"
             :errorMessage="formErrors.state ?? undefined" />
         </div>
         <div class="row my-3">
-          <BaseCheckBox v-model="local" :label="t('matches.fields.local_match')"></BaseCheckBox>
+          <BaseCheckBox v-model="local" :label="t('games.fields.local_game')"></BaseCheckBox>
         </div>
         <div class="row row-cols-1 row-cols-md-2 my-3 align-items-start">
           <div class="col">
             <div class="container g-3">
               <div class="row row-cols-1 text-center">
-                <span class="fw-bold text-uppercase"> {{ t('matches.fields.local') }}</span>
+                <span class="fw-bold text-uppercase"> {{ t('games.fields.local') }}</span>
                 <div class="col">
                   <div class="py-3 mb-2">
                     <div id="team-container" class="w-100">
@@ -194,7 +194,7 @@ function cloneMatch(match: Match): Match {
                           filter
                           class="w-100" />
                         <label for="over_label_local">
-                          {{ t('matches.fields.team') }}
+                          {{ t('games.fields.team') }}
                         </label>
                       </FloatLabel>
                       <Message
@@ -210,7 +210,7 @@ function cloneMatch(match: Match): Match {
                 <BaseInputGroupNumber
                   class="col mx-auto mb-2"
                   v-model="form.localPoints"
-                  :label="t('matches.fields.points')"
+                  :label="t('games.fields.points')"
                   :invalid="!!formErrors.localPoints"
                   :errorMessage="formErrors.localPoints ?? undefined"></BaseInputGroupNumber>
               </div>
@@ -219,7 +219,7 @@ function cloneMatch(match: Match): Match {
           <div class="col">
             <div class="container g-3">
               <div class="row row-cols-1 text-center">
-                <span class="fw-bold text-uppercase"> {{ t('matches.fields.visitor') }}</span>
+                <span class="fw-bold text-uppercase"> {{ t('games.fields.visitor') }}</span>
                 <div class="col">
                   <div class="py-3 mb-2">
                     <div id="team-container" class="w-100">
@@ -234,7 +234,7 @@ function cloneMatch(match: Match): Match {
                           filter
                           class="w-100" />
                         <label for="over_label_visitor">
-                          {{ t('matches.fields.team') }}
+                          {{ t('games.fields.team') }}
                         </label>
                       </FloatLabel>
                       <Message
@@ -250,7 +250,7 @@ function cloneMatch(match: Match): Match {
                 <BaseInputGroupNumber
                   class="col mx-auto mb-2"
                   v-model="form.visitorPoints"
-                  :label="t('matches.fields.points')"
+                  :label="t('games.fields.points')"
                   :invalid="!!formErrors.visitorPoints"
                   :errorMessage="formErrors.visitorPoints ?? undefined"></BaseInputGroupNumber>
               </div>

@@ -34,8 +34,8 @@
     "gte": "Maior ou igual a",
     "lt": "Menor que",
     "lte": "Menor ou igual a",
-    "matchAll": "Coincidir todo",
-    "matchAny": "Coincidir con cualquera",
+    "gameAll": "Coincidir todo",
+    "gameAny": "Coincidir con cualquera",
     "medium": "Medio",
     "monthNames": [
       "Xaneiro",

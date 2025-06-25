@@ -1,20 +1,20 @@
 import type { ResponseImage } from '@/shared/infrastructure/models/responses/ResponseImage';
 import type { ResponseViewSquad } from '@/squad/infrastructure/models/responses/ResponseViewSquad';
 
-export interface ResponseMatch {
+export interface ResponseGame {
   id: number;
-  localTeam: ResponseMatchTeam;
-  visitorTeam: ResponseMatchTeam;
+  localTeam: ResponseGameTeam;
+  visitorTeam: ResponseGameTeam;
   localPoints: number | null;
   visitorPoints: number | null;
   category: number;
-  matchDate: string;
+  gameDate: string;
   location: string;
   state: number;
   squad?: ResponseViewSquad;
 }
 
-export interface ResponseMatchTeam {
+export interface ResponseGameTeam {
   id: number;
   name: string;
   logo: ResponseImage | null;

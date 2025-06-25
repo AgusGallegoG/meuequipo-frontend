@@ -1,8 +1,8 @@
 import { useMeToast } from '@/core/hooks/useMeToast';
 import { useI18n } from 'vue-i18n';
-import { getRivalMatchTeamsByCategory } from '../infrastructure/useCases/getRivalMatchTeamsByCategory';
+import { getRivalGameTeamsByCategory } from '../infrastructure/useCases/getRivalGameTeamsByCategory';
 
-export function useGetRivalMatchTeamsByCategory() {
+export function useGetRivalGameTeamsByCategory() {
   const loading = ref<boolean>(false);
   const { showToast } = useMeToast();
   const { t } = useI18n();
@@ -10,13 +10,11 @@ export function useGetRivalMatchTeamsByCategory() {
   async function refetch(categoryId: number) {
     loading.value = true;
     try {
-      return getRivalMatchTeamsByCategory(categoryId);
+      return getRivalGameTeamsByCategory(categoryId);
     } catch (error) {
       showToast({
-        title: t('matches.fields.visitor'),
-        message: t('toast.messages.errors.fetch_error', [
-          t('matches.fields.visitor').toLowerCase(),
-        ]),
+        title: t('games.fields.visitor'),
+        message: t('toast.messages.errors.fetch_error', [t('games.fields.visitor').toLowerCase()]),
         severity: 'warn',
       });
       return [];

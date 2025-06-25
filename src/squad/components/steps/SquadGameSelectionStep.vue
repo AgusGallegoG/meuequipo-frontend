@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import CalendarView from '@/calendar/components/CalendarView.vue';
-import MatchItem from '@/calendar/components/item/MatchItem.vue';
+import GameItem from '@/calendar/components/item/GameItem.vue';
 import BaseSelect from '@/shared/components/BaseSelect.vue';
-import { type Match, type MatchTeam } from '@/shared/dominio/Match';
+import { type Game, type GameTeam } from '@/shared/dominio/Game';
 import { useSharedEnumsStore } from '@/shared/store/sharedEnumsStore';
 import { useSquadStepperAdminStore } from '@/squad/store/squadStepperAdminStore';
-import { useGetOwnMatchTeamsByCategory } from '@/team/application/useGetOwnMatchTeamsByCategory';
+import { useGetOwnGameTeamsByCategory } from '@/team/application/useGetOwnGameTeamsByCategory';
 import Button from 'primevue/button';
 import FloatLabel from 'primevue/floatlabel';
 import Select from 'primevue/select';
@@ -16,13 +16,13 @@ const emits = defineEmits<{
   (e: 'prev'): void;
 }>();
 
-const teamsOptions = ref<MatchTeam[]>([]);
+const teamsOptions = ref<GameTeam[]>([]);
 const category = ref<number | null>(null);
 const team = ref<number | null>(null);
-const match = ref<Match | null>(null);
+const game = ref<Game | null>(null);
 
 const { t } = useI18n();
-const { refetch: findClubTeams, loading: loadingClubTeams } = useGetOwnMatchTeamsByCategory();
+const { refetch: findClubTeams, loading: loadingClubTeams } = useGetOwnGameTeamsByCategory();
 const sharedEnumStore = useSharedEnumsStore();
 const squadStepperStore = useSquadStepperAdminStore();
 
@@ -43,7 +43,7 @@ watch(
   () => team.value,
   (newVal, oldVal) => {
     if (newVal !== oldVal) {
-      match.value = null;
+      game.value = null;
     }
   }
 );
@@ -54,8 +54,8 @@ async function fetchTeamsOptions(categoryid: number) {
 
 function submitPartial() {
   //emitir next
-  if (match.value && team.value) {
-    squadStepperStore.setDataStepOne(match.value, team.value);
+  if (game.value && team.value) {
+    squadStepperStore.setDataStepOne(game.value, team.value);
     emits('next');
   }
 }
@@ -68,7 +68,7 @@ function goBack() {
 }
 
 function cleanStep() {
-  match.value = null;
+  game.value = null;
   team.value = null;
 }
 </script>
@@ -79,7 +79,7 @@ function cleanStep() {
         class="col"
         v-model="category"
         :options="sharedEnumStore.getCategories"
-        :label="t('matches.fields.category')" />
+        :label="t('games.fields.category')" />
 
       <div class="col">
         <div class="py-3 mb-2">
@@ -94,32 +94,32 @@ function cleanStep() {
               filter
               class="w-100" />
             <label for="over_label_local">
-              {{ t('matches.fields.team') }}
+              {{ t('games.fields.team') }}
             </label>
           </FloatLabel>
         </div>
       </div>
       <div class="col">
         <CalendarView
-          v-if="team && !match"
+          v-if="team && !game"
           :isAdmin="true"
           :teamId="team"
           :isSquad="true"
-          @selected="match = $event"></CalendarView>
+          @selected="game = $event"></CalendarView>
       </div>
 
       <div class="col col-12 col-md-6 col-lg-4 d-flex justify-content-center">
         <Button
-          v-if="match"
+          v-if="game"
           class="w-100"
           :label="t('squads.clean_selection')"
           icon="pi pi-times"
           iconPos="left"
-          @click="match = null"></Button>
+          @click="game = null"></Button>
       </div>
 
       <div class="col d-flex justify-content-center">
-        <MatchItem v-if="match" :match="match" :isAdmin="false" :showSquad="false"></MatchItem>
+        <GameItem v-if="game" :game="game" :isAdmin="false" :showSquad="false"></GameItem>
       </div>
     </div>
     <div class="row">
@@ -135,7 +135,7 @@ function cleanStep() {
           class="w-100 my-3"
           :label="t('squads.next')"
           @click="submitPartial()"
-          :disabled="!match && !team"></Button>
+          :disabled="!game && !team"></Button>
       </div>
     </div>
   </div>

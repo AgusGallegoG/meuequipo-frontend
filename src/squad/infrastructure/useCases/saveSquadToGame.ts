@@ -7,7 +7,7 @@ import type { ResponseViewSquad } from '@/squad/infrastructure/models/responses/
 import { mapResponseViewSquadToViewSquad } from '@/squad/infrastructure/services/squadService';
 
 async function Api(req: RequestSaveSquad): Promise<ResponseViewSquad> {
-  const response = await api.post<ResponseViewSquad>('calendars/match/squad', req);
+  const response = await api.post<ResponseViewSquad>('calendars/game/squad', req);
   return response.data;
 }
 
@@ -17,7 +17,7 @@ async function InMemory(): Promise<ResponseViewSquad> {
   // return {} as ResponseViewSquad;
 }
 
-async function saveSquadToMatch(req: RequestSaveSquad): Promise<ViewSquad> {
+async function saveSquadToGame(req: RequestSaveSquad): Promise<ViewSquad> {
   try {
     const response = UtilBase.checkEnvironment() ? await InMemory() : await Api(req);
 
@@ -27,4 +27,4 @@ async function saveSquadToMatch(req: RequestSaveSquad): Promise<ViewSquad> {
   }
 }
 
-export { saveSquadToMatch };
+export { saveSquadToGame };

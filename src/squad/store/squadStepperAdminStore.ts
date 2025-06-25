@@ -1,5 +1,5 @@
 import { UtilBase } from '@/core/utilities/UtilBase';
-import { defaultMatch, defaultMatchTeam, type Match, type MatchTeam } from '@/shared/dominio/Match';
+import { defaultGame, defaultGameTeam, type Game, type GameTeam } from '@/shared/dominio/Game';
 import type { Squad } from '../domain/Squad';
 
 export const useSquadStepperAdminStore = defineStore('squadStepperAdmin', {
@@ -7,7 +7,7 @@ export const useSquadStepperAdminStore = defineStore('squadStepperAdmin', {
     return {
       data: {
         team: <number>-1,
-        match: <Match>{ ...defaultMatch },
+        game: <Game>{ ...defaultGame },
         players: <number[]>[],
         location: <string>'',
         date: <Date | null>null,
@@ -20,7 +20,7 @@ export const useSquadStepperAdminStore = defineStore('squadStepperAdmin', {
     squad(state): Squad {
       return {
         team: state.data.team,
-        match: state.data.match.id,
+        game: state.data.game.id,
         players: state.data.players,
         location: state.data.location,
         dateHour: state.data.date,
@@ -31,34 +31,34 @@ export const useSquadStepperAdminStore = defineStore('squadStepperAdmin', {
     team(state): number {
       return state.data.team;
     },
-    matchInfo:
+    gameInfo:
       (state) =>
       (idTeam: number = state.data.team) => {
         const bothOurs =
-          state.data.match.localTeam?.isOurTeam && state.data.match.visitorTeam?.isOurTeam;
+          state.data.game.localTeam?.isOurTeam && state.data.game.visitorTeam?.isOurTeam;
 
         var rivalTeamName: string | null = null;
         if (!bothOurs) {
-          rivalTeamName = state.data.match.localTeam?.isOurTeam
-            ? (state.data.match.visitorTeam?.name ?? null)
-            : (state.data.match.localTeam?.name ?? null);
+          rivalTeamName = state.data.game.localTeam?.isOurTeam
+            ? (state.data.game.visitorTeam?.name ?? null)
+            : (state.data.game.localTeam?.name ?? null);
         } else {
           rivalTeamName =
-            state.data.match.localTeam?.id === idTeam
-              ? (state.data.match.visitorTeam?.name ?? null)
-              : (state.data.match.localTeam?.name ?? null);
+            state.data.game.localTeam?.id === idTeam
+              ? (state.data.game.visitorTeam?.name ?? null)
+              : (state.data.game.localTeam?.name ?? null);
         }
         return {
-          matchDate: state.data.match.matchDate,
-          location: state.data.match.location,
+          gameDate: state.data.game.gameDate,
+          location: state.data.game.location,
           rival: rivalTeamName,
         };
       },
   },
   actions: {
-    setDataStepOne(match: Match, team: number) {
+    setDataStepOne(game: Game, team: number) {
       this.data.team = team;
-      this.data.match = { ...match };
+      this.data.game = { ...game };
     },
     setDataStepTwo(players: number[]) {
       this.data.players = [...players];
@@ -72,7 +72,7 @@ export const useSquadStepperAdminStore = defineStore('squadStepperAdmin', {
     resetData() {
       this.data = {
         team: -1,
-        match: UtilBase.cloneVueProxy(defaultMatch),
+        game: UtilBase.cloneVueProxy(defaultGame),
         date: null,
         location: '',
         notification: '',

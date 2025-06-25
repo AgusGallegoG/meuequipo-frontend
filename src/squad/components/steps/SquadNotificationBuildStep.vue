@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { formatShowMatchDateTime } from '@/core/utilities/UtilDate';
+import { formatShowGameDateTime } from '@/core/utilities/UtilDate';
 import BaseCheckBox from '@/shared/components/BaseCheckBox.vue';
 import BaseDatePicker from '@/shared/components/BaseDatePicker.vue';
 import BaseEditor from '@/shared/components/BaseEditor.vue';
@@ -22,10 +22,10 @@ const sendMail = ref<boolean>(true);
 const mail = ref('');
 
 const message = computed(() => {
-  const { matchDate, location, rival } = squadStepperStore.matchInfo();
+  const { gameDate, location, rival } = squadStepperStore.gameInfo();
 
-  return t('squads.match_info', [
-    matchDate ? formatShowMatchDateTime(matchDate) : t('squads.complete'),
+  return t('squads.game_info', [
+    gameDate ? formatShowGameDateTime(gameDate) : t('squads.complete'),
     location,
     rival ?? t('squads.complete'),
   ]);

@@ -2,7 +2,7 @@ import api from '@/core/network';
 import { UtilBase } from '@/core/utilities/UtilBase';
 import type { Select } from '@/shared/dominio/Select';
 import categorySelectMock from '@/shared/infrastructure/mocks/categorySelectMock.json';
-import matchStatesMock from '@/shared/infrastructure/mocks/matchStatesMock.json';
+import gameStatesMock from '@/shared/infrastructure/mocks/gameStatesMock.json';
 import sexOptionsMock from '@/shared/infrastructure/mocks/sexOptionsMock.json';
 import signinStatesMock from '@/shared/infrastructure/mocks/signinStatesMock.json';
 import { type ResponseSelect } from '../infrastructure/models/responses/ResponseSelect';
@@ -17,7 +17,7 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
         sexOptions: <Select[]>[],
         sexPlayersOptions: <Select[]>[],
         signinStates: <Select[]>[],
-        matchStates: <Select[]>[],
+        gameStates: <Select[]>[],
       },
     };
   },
@@ -84,11 +84,11 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
         return stateOp ? stateOp.name : '';
       },
 
-    getMatchStates: (state) => state.data.matchStates,
-    getMatchStatesName:
+    getGameStates: (state) => state.data.gameStates,
+    getGameStatesName:
       (state) =>
       (id: number): string => {
-        const stateOp = state.data.matchStates.find((c) => c.id === id);
+        const stateOp = state.data.gameStates.find((c) => c.id === id);
         return stateOp ? stateOp.name : '';
       },
   },
@@ -99,7 +99,7 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
       await this.fetchCategories();
       await this.fetchSexOptions();
       await this.fetchSigninStateOptions();
-      await this.fetchMatchStatesOptions();
+      await this.fetchGameStatesOptions();
       await this.fetchSexPlayersOptions();
     },
     async fetchCategories() {
@@ -150,16 +150,16 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
       this.data.signinStates = res;
     },
 
-    async fetchMatchStatesOptions() {
+    async fetchGameStatesOptions() {
       var res: Select[] = [];
       if (UtilBase.checkEnvironment()) {
         await UtilBase.wait(100);
-        res = matchStatesMock.content as ResponseSelect[];
+        res = gameStatesMock.content as ResponseSelect[];
       } else {
-        const partial = await api.get<ResponseSelect[]>('/enums/matchStates');
+        const partial = await api.get<ResponseSelect[]>('/enums/gameStates');
         res = partial.data;
       }
-      this.data.matchStates = res;
+      this.data.gameStates = res;
     },
   },
 });
