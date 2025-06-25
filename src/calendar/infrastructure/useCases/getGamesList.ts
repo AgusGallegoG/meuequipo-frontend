@@ -23,7 +23,9 @@ async function Api(
   const url = isAdmin ? '/calendars/admin' : '/calendars/public';
   const repsonse = await api.get<ResponseGame[]>(url, {
     params: {
-      filters,
+      from: filters.from,
+      to: filters.to,
+      team: filters.team,
       isSquad: isSquad,
     },
   });
