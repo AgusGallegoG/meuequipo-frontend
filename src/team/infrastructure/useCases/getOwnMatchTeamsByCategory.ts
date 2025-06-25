@@ -6,7 +6,7 @@ import { mapResponseMatchTeamListToMatchTeamList } from '@/shared/infrastructure
 import matchTeamsListMock from '@/team/infrastructure/mocks/ownMatchTeamsListMock.json';
 
 async function Api(categoryId: number): Promise<ResponseMatchTeam[]> {
-  const response = await api.get<ResponseMatchTeam[]>('/teams/matchTeam', {
+  const response = await api.get<ResponseMatchTeam[]>('/teams/match-team', {
     params: { categoryId: categoryId },
   });
 

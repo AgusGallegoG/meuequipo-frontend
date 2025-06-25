@@ -6,7 +6,7 @@ import { mapResponseTeamMenuItemToMenuItemList } from '@/team/infrastructure/ser
 import type { MenuItem } from 'primevue/menuitem';
 
 async function Api(): Promise<ResponseTeamMenuItem[]> {
-  const response = await api.get<ResponseTeamMenuItem[]>('teams/menu');
+  const response = await api.get<ResponseTeamMenuItem[]>('teams/public/menu');
 
   return response.data;
 }

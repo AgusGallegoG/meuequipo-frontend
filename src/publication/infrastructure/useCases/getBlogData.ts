@@ -8,7 +8,7 @@ import type { ResponsePublication } from '@/publication/infrastructure/models/re
 import { mapResponsePageableToPublicationNews } from '@/publication/infrastructure/services/publicationService';
 
 async function Api(filters: FilterParams): Promise<PageableResponse<ResponsePublication>> {
-  const response = await api.get<PageableResponse<ResponsePublication>>('/blog', {
+  const response = await api.get<PageableResponse<ResponsePublication>>('/blog/public', {
     params: filters,
   });
 

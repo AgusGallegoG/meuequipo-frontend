@@ -3,7 +3,7 @@ import { UtilBase } from '@/core/utilities/UtilBase';
 import type { RequestSignin } from '@/signin/infrastructure/models/requests/RequestSignin';
 
 async function Api(signin: RequestSignin): Promise<void> {
-  await api.post('/signin', signin);
+  await api.post('/signin/public', signin);
 }
 
 async function InMemory(): Promise<void> {

@@ -6,7 +6,7 @@ import { mapResponseTeamPublicToTeamPublic } from '@/team/infrastructure/service
 import type { ResponseTeamPublic } from '../models/responses/ResponseTeamPublic';
 
 async function Api(id: number): Promise<ResponseTeamPublic> {
-  const response = await api.get<ResponseTeamPublic>(`/teams/${id}/public`);
+  const response = await api.get<ResponseTeamPublic>(`/teams/public/${id}`);
 
   return response.data;
 }

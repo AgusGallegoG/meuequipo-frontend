@@ -6,7 +6,7 @@ import type { ResponsePublication } from '@/publication/infrastructure/models/re
 import { createPublicationListFromResponsePublicationList } from '@/publication/infrastructure/services/publicationService';
 
 async function Api(): Promise<ResponsePublication[]> {
-  const response = await api.get<ResponsePublication[]>('/blog/init');
+  const response = await api.get<ResponsePublication[]>('/blog/public/init');
 
   return response.data;
 }
