@@ -20,7 +20,7 @@ async function Api(
   isAdmin: boolean,
   isSquad: boolean
 ): Promise<ResponseMatch[]> {
-  const url = isAdmin ? '/calendars/admin' : '/calendars';
+  const url = isAdmin ? '/calendars/admin' : '/calendars/public';
   const repsonse = await api.get<ResponseMatch[]>(url, {
     params: {
       filters,
