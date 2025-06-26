@@ -109,7 +109,7 @@ router.beforeEach(async (to, from, next) => {
   // Nos aseguramos que cualquier ruta cuyo padre sea admin se considere que necesita auth
 
   //Validamos el token de inicio de sesion por si esta cacheado una vez:
-  if (!isTokenValidated) {
+  if (!isTokenValidated && requiresAuth) {
     try {
       await authStore.validateToken();
     } catch (error) {
