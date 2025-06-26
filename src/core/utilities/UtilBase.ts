@@ -71,7 +71,8 @@ export class UtilBase {
    *
    * @param mode Desarrollo/ produccion /pruebas
    */
-  public static checkEnvironment(mode = 'development'): boolean {
+  public static checkEnvironment(mode = 'live'): boolean {
+    console.log('mode: ' + import.meta.env.MODE);
     return import.meta.env.MODE === mode;
   }
 
