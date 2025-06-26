@@ -2,12 +2,12 @@
   "name": "meuequipo",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
-    "local": "vite --host --mode live",
+    "dev:api": "vite --host --mode api",
+    "dev:local": "vite --host --mode live",
+    "dev:aws": "vite --host --mode aws",
     "build": "vue-tsc --noEmit && vite build --mode production",
-    "build:local": "vite build --mode local",
-    "preview": "vite preview",
-    "build-only": "vite build",
+    "build:local": "vue-tsc --noEmit && vite build --mode local",
+    "build:aws": "vue-tsc --noEmit && vite build --mode aws",
     "type-check": "vue-tsc --build --force",
     "lint": "eslint . --fix",
     "format": "prettier --write src/"
