@@ -1,9 +1,9 @@
 export interface LoginRequest {
-  name: string;
+  email: string;
   password: string;
 }
 
 export const defaultLoginRequest: LoginRequest = {
-  name: '',
+  email: '',
   password: '',
 };
