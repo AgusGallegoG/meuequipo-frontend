@@ -49,11 +49,11 @@ async function doLogin() {
           <BaseInputGroupText
             :id="'username'"
             :class="'row'"
-            v-model="form.name"
+            v-model="form.email"
             :label="t('admin.login.username')"
             :icon="'pi pi-user'"
-            :invalid="!!formErrors.name"
-            :errorMessage="formErrors.name ?? undefined" />
+            :invalid="!!formErrors.email"
+            :errorMessage="formErrors.email ?? undefined" />
           <BaseInputGroupText
             :id="'username'"
             :class="'row'"

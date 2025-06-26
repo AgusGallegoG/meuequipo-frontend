@@ -1,16 +1,16 @@
 import { z } from 'zod';
 
 export type LoginForm = {
-  name: string;
+  email: string;
   password: string;
 };
 
 export const defaultLoginForm: LoginForm = {
-  name: '',
+  email: '',
   password: '',
 };
 
 export const loginFormSchema = z.object({
-  name: z.string().min(1, { message: 'loginvalidation.name_mandatory' }),
+  email: z.string().min(1, { message: 'loginvalidation.name_mandatory' }),
   password: z.string().min(1, { message: 'loginvalidation.password_required' }),
 }) satisfies z.ZodType<LoginForm>;
