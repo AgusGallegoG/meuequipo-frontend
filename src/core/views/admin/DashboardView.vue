@@ -18,7 +18,7 @@ const modules = [
     title: 'admin.dashboard.modules_titles.team',
     description: 'admin.dashboard.modules_desc.team',
     goToModule: 'TeamAdmin',
-    icon: 'pi pi-users',
+    icon: 'pi pi-shield',
   },
   {
     //
@@ -39,6 +39,12 @@ const modules = [
     description: 'admin.dashboard.modules_desc.squads',
     goToModule: 'SquadAdmin',
     icon: 'pi pi-list-check',
+  },
+  {
+    title: 'admin.dashboard.modules_titles.players',
+    description: 'admin.dashboard.modules_desc.players',
+    goToModule: 'PlayerAdmin',
+    icon: 'pi pi-users',
   },
   {
     title: 'admin.dashboard.modules_titles.signings',

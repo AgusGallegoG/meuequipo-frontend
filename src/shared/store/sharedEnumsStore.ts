@@ -69,10 +69,10 @@ export const useSharedEnumsStore = defineStore('sharedEnums', {
 
         const name = sex.name.toUpperCase();
 
-        if (name === 'HOME') {
+        if (name === 'HOME' || name === 'MASCULINO') {
           return 'info';
         }
-        if (name === 'MULLER') return 'warn';
+        if (name === 'MULLER' || name === 'FEMININO' || name === 'FEMENINO') return 'warn';
 
         return '';
       },

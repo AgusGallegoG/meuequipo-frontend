@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { UtilBase } from '@/core/utilities/UtilBase';
 import { useZodValidation } from '@/core/utilities/UtilZodValidations';
-import { useGetFreePlayersByCategory } from '@/shared/application/useGetPlayersByCategory';
+import { useGetFreePlayersByCategory } from '@/player/application/useGetFreePlayersByCategory';
 import BaseImageUpload from '@/shared/components/BaseImageUpload.vue';
 import BaseInputGroupText from '@/shared/components/BaseInputGroupText.vue';
 import BasePickList from '@/shared/components/BasePickList.vue';

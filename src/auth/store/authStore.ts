@@ -1,6 +1,7 @@
 import type { Roles } from '@/auth/domain/Roles';
 import type { User } from '@/auth/domain/User';
 import api from '@/core/network';
+import { UtilBase } from '@/core/utilities/UtilBase';
 import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('auth', {
@@ -38,7 +39,7 @@ export const useAuthStore = defineStore('auth', {
     },
 
     async validateToken() {
-      return await api.get('auth/validate');
+      return UtilBase.checkEnvironment() ? true : await api.get('auth/validate');
     },
   },
 
