@@ -8,11 +8,3 @@ export const signinRouterAdmin: RouteRecordRaw[] = [
     component: () => import('@/signin/views/SigninAdmin.vue'),
   },
 ];
-
-export const signinRouter: RouteRecordRaw[] = [
-  {
-    path: '/inscripcion',
-    name: 'Signin',
-    component: () => import('@/signin/views/SigninFormView.vue'),
-  },
-];
