@@ -1,5 +1,6 @@
 import type { Roles } from '@/auth/domain/Roles';
 import type { User } from '@/auth/domain/User';
+import api from '@/core/network';
 import { defineStore } from 'pinia';
 
 export const useAuthStore = defineStore('auth', {
@@ -35,6 +36,11 @@ export const useAuthStore = defineStore('auth', {
       this.data.authorities = [];
       this.data.token = '';
     },
+
+    async validateToken() {
+      return await api.get('auth/validate');
+    },
   },
+
   persist: true,
 });

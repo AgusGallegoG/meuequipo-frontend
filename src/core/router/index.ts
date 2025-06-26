@@ -84,6 +84,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const history = createWebHistory(import.meta.env.BASE_URL);
+const isTokenValidated = false;
 
 const router = createRouter({
   history: history,
@@ -97,7 +98,7 @@ const router = createRouter({
   },
 });
 
-router.beforeEach((to, from, next) => {
+router.beforeEach(async (to, from, next) => {
   const authStore = useAuthStore();
 
   const token = Cookies.get('token');
@@ -106,6 +107,15 @@ router.beforeEach((to, from, next) => {
 
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
   // Nos aseguramos que cualquier ruta cuyo padre sea admin se considere que necesita auth
+
+  //Validamos el token de inicio de sesion por si esta cacheado una vez:
+  if (!isTokenValidated) {
+    try {
+      await authStore.validateToken();
+    } catch (error) {
+      next({ name: 'AdminLogin' });
+    }
+  }
 
   if (requiresAuth && !isAuthenticated) {
     next({ name: 'AdminLogin' }); // Redirect to login if not authenticated
