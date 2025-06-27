@@ -8,7 +8,7 @@ import { mapResponseSigninToResponseSigninData } from '../service/signinService'
 async function Api(file: File): Promise<ResponseSigninPeriod> {
   const formData: FormData = new FormData();
   formData.append('file', file);
-  const response = await api.post<ResponseSigninPeriod>('/signin/template', formData, {
+  const response = await api.post<ResponseSigninPeriod>('/signin/form', formData, {
     headers: {
       'Content-Type': 'multipart/form-data',
     },
