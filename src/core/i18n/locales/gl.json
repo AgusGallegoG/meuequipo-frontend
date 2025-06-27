@@ -10,6 +10,7 @@
     "buttons": {
       "clear": "Limpar",
       "cancel": "Cancelar",
+      "update": "Actualizar",
       "save": "Gardar",
       "add": "Engadir",
       "back": "Voltar"
@@ -95,6 +96,7 @@
       "inicio": "Inicio",
       "changepass": "Cambio de contrsinal",
       "dashboard": "Dashboard",
+      "player": "Xogadores",
       "rivals": "Rivais",
       "signin": "Inscripcións",
       "calendar": "Calendario",
@@ -124,6 +126,7 @@
         "season": "Xestión de tempadas",
         "team": "Xestión de equipos",
         "news": "Xestión do blog",
+        "players": "Xestion de xogadores",
         "calendar": "Xestión do calendario",
         "signings": "Xestión das inscripcións",
         "sponsors": "Xestión de patrocinadores",
@@ -134,15 +137,16 @@
       },
       "modules_desc": {
         "season": "Permite adminstrar a tempada activa, así como crear novas",
-        "team": "Permite realizar xestións sobre os equipos e categorias do club",
-        "news": "Permite crear, eliminar e administrar as novas do blog",
-        "calendar": "Permite engadir novos partidos, eventos e xestionar os existentes",
-        "signings": "Permite a xestión do formulario de inscripcions, e administralas",
-        "sponsors": "Permite xestionar os patrocinadores do club",
-        "squads": "Permite xerar convocatorias para os partidos",
+        "team": "Permite realizar xestións sobre os equipos e categorias do club na tempada actual",
+        "players": "Permite engadir/editar xogadores na tempada actual",
+        "news": "Permite crear, e administrar as novas do blog",
+        "calendar": "Permite engadir novos partidos e xestionar os existentes na tempada actual",
+        "signings": "Permite a xestión do formulario de inscripcions, e administrar o periodo de inscripcions",
+        "sponsors": "Permite xestionar os patrocinadores do club na tempada actual",
+        "squads": "Permite xerar convocatorias para os partidos da tempada actual",
         "users": "Permite xestionar os usuarios do aplicativo",
-        "category": "Permite xestionar as categorias que existen no clube e no aplicativo",
-        "rivals": "Permite engadir/eliminar clubes rivais"
+        "category": "Permite xestionar as categorias que existen no clube para a tempada actual",
+        "rivals": "Permite engadir/editar clubes rivais"
       },
       "season": {
         "title": "Tempada",
@@ -252,37 +256,19 @@
       "no_images": "Sen imaxes"
     }
   },
-  "signin": {
-    "title": "Inscripción",
-    "season_connector": " para a ",
-    "table_title": "Inscripcións na aplicación",
-    "form_title_new": "Crear nova inscripción",
-    "form_title_edit": "Editar inscripción",
-    "parent_info": "Información do pai/nai/titor",
+  "player": {
+    "title": "Xogadores",
+    "table_title": "Xogadores na aplicación",
+    "form_title_new": "Crear novo xogador",
+    "form_title_edit": "Editar xogador",
     "player_info": "Información do xogador/a",
-    "contact_info": "Información de contacto",
-    "sign_other": "Inscribir outro xogador",
     "go_back": "Volver a inicio",
     "fields": {
-      "player_complete_name": "Nome completo do xogador",
-      "parent_complete_name": "Nome completo do pai/nai/titor: ",
-      "player_name": "Nome do xogador",
-      "parent_name": "Nome do pai/nai/titor",
-      "player_surnames": "Apelidos do xogador",
-      "parent_surnames": "Apelidos do pai/nai/titor",
-      "phone": "Teléfono",
-      "phone_exp": "Teléfono: ",
-      "email": "Email",
-      "email_exp": "Email: ",
+      "name": "Nome",
+      "surnames": "Apelidos",
       "sex": "Sexo",
-      "state": "Estado",
       "birth_date": "Data de nacemento",
       "category": "Categoría"
-    },
-    "success": {
-      "title": "Inscripción",
-      "message": "A solicitude procesouse correctamente. Revise a sua bandexa de correo",
-      "panel": "A solicitude de inscripción de <strong>{0}</strong> recibiuse correctamente e xerouse un ficheiro para completar cos datos restantes.<br>Pode revisar a bandexa de correo do email: <strong>{1}</strong> onde recibirá nuns minutos un PDF que deberá ser entregado no Pavillón de Deportes xunto cunha foto tamaño carné do xogador, así como un xustificante do abono da taxa da inscripción"
     }
   },
   "teams": {
@@ -348,6 +334,32 @@
     "confirm_no_send": "¿Seguro que quere continuar? Esta acción non se poderá desfacer",
     "confirm_send": "¿Seguro que quere continuar? Enviarase un email aos datos de contacto dos xogadores e esta acción non se poderá desfacer"
   },
+  "signin_period": {
+    "title": "Inscipcións",
+    "period_name": "Axustes do periodo de inscripcions",
+    "doc_settings": "Actualizacion e consulta do formulario",
+    "open_period": "O periodo de inscripcións atopase aberto nestes momentos",
+    "closed_period": "O periodo de inscripcións está pechado",
+    "upload_form": "Engadir formulario",
+    "update_form": "Actualizar formulario",
+    "download_form": "Descargar formulario actual",
+    "downloading": "Descagando formulario de inscipción",
+    "update": "Actualizar periodo",
+    "badge_d": "O formulario leva: {0} descargas",
+    "badge_no_d": "Non hai formulario para este periodo de inscripcións",
+    "fields": {
+      "date_init": "Data de inicio",
+      "date_end": "Data de fin"
+    },
+    "toast": {
+      "err": "Non se puido cargar a informacion do periodo de inscripcions",
+      "p_update_success": "Actualizouse o periodo correctamente",
+      "p_update_error": "Ocorreu un erro ao actualizar o periodo",
+      "d_update_success": "Actualizouse o formualrio correctamente",
+      "d_update_error": "Ocorreu un erro ao actualizar o formulario",
+      "d_download_error": "Ocooreu un erro ao desacargar o formulario"
+    }
+  },
   "loginvalidation": {
     "name_mandatory": "Debe indicar nome de usuario",
     "password_required": "Debe introducir contrasinal"
@@ -398,5 +410,10 @@
     "format": "O contrasinal debe ter polo menos 1 maiúscula, 1 número, 1 minúscula",
     "confirm_required": "volva a introducir o novo contrasinal",
     "pass_missmatch": "Os contrasinais deben coincidir"
+  },
+  "periodvalidation": {
+    "datestart_required": "Debe indicar a data de inicio do periodo de inscripcións",
+    "dateend_required": "Debe indicar a data de fin do periodo de inscripcións",
+    "end_date_later": "Debe ser posterior a data de inicio"
   }
 }

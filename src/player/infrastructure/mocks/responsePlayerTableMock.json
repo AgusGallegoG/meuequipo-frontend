@@ -1,0 +1,85 @@
+{
+  "content": [
+    {
+      "id": 1,
+      "name": "Sara",
+      "surnames": "Martín Fernández",
+      "birthDate": "2000-10-04T08:37:50.000Z",
+      "sex": 2,
+      "category": 2
+    },
+    {
+      "id": 2,
+      "name": "Sofía",
+      "surnames": "Jiménez Fernández",
+      "birthDate": "2000-12-07T06:44:53.000Z",
+      "sex": 2,
+      "category": 1
+    },
+    {
+      "id": 3,
+      "name": "Sergio",
+      "surnames": "Sánchez García",
+      "birthDate": "2003-11-24T04:46:38.000Z",
+      "sex": 1,
+      "category": 4
+    },
+    {
+      "id": 4,
+      "name": "Carla",
+      "surnames": "Ruiz Sánchez",
+      "birthDate": "1990-01-08T23:20:44.000Z",
+      "sex": 2,
+      "category": 4
+    },
+    {
+      "id": 5,
+      "name": "Laura",
+      "surnames": "García Hernández",
+      "birthDate": "1994-09-24T14:03:05.000Z",
+      "sex": 2,
+      "category": 3
+    },
+    {
+      "id": 6,
+      "name": "José",
+      "surnames": "Ruiz Pérez",
+      "birthDate": "1991-02-01T13:23:42.000Z",
+      "sex": 1,
+      "category": 1
+    },
+    {
+      "id": 7,
+      "name": "Sara",
+      "surnames": "Hernández Hernández",
+      "birthDate": "1994-03-23T18:49:07.000Z",
+      "sex": 2,
+      "category": 2
+    }
+  ],
+  "totalElements": 7,
+  "totalPages": 1,
+  "size": 10,
+  "number": 0,
+  "first": true,
+  "last": false,
+  "numberOfElements": 7,
+  "empty": false,
+  "sort": {
+    "sorted": true,
+    "unsorted": false,
+    "empty": false
+  },
+  "pageable": {
+    "sort": {
+      "sorted": true,
+      "unsorted": false,
+      "empty": false
+    },
+    "offset": 0,
+    "pageSize": 10,
+    "pageNumber": 0,
+    "paged": true,
+    "unpaged": false
+  }
+}
