@@ -14,7 +14,7 @@ const breadCrumbsItems = computed(() => {
       return {
         label: r.meta.breadcrumbLabel ? t(r.meta.breadcrumbLabel) : '',
         command: () => {
-          router.push({ name: r.name, params: route.params ? route.params : undefined });
+          router.push({ name: r.name }).catch((err) => console.log(err));
         },
       };
     });

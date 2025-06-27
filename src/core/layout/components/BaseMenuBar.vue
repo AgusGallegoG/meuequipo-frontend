@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { useCheckSigninPeriod } from '@/core/application/useCheckSigninPeriod';
+import { useGetSigninForm } from '@/signinPeriod/application/useGetSigninForm';
 import { useGetTeamMenuItems } from '@/team/application/useGetTeamMenuItems';
 import { Menubar } from 'primevue';
 import type { MenuItem } from 'primevue/menuitem';
@@ -11,6 +12,7 @@ const { t } = useI18n();
 const router = useRouter();
 const { refetch: getTeamItems } = useGetTeamMenuItems();
 const { refetch: checkSigninPeriod } = useCheckSigninPeriod();
+const { refetch: downloadSignin } = useGetSigninForm();
 const isSigninPeriodActive = ref(true);
 
 const teamsItems = ref<MenuItem>({
@@ -75,7 +77,7 @@ async function doGetTeamItems() {
 }
 
 async function fetchSigninForm() {
-  //TODO -> on Signin directory
+  await downloadSignin();
 }
 
 async function doCheckSigninPeriod() {

@@ -1,6 +1,6 @@
 import type { RouteRecordRaw } from 'vue-router';
 
-export const signinRouterAdmin: RouteRecordRaw[] = [
+export const playerRouterAdmin: RouteRecordRaw[] = [
   {
     path: 'dashboard/xogadores',
     name: 'PlayerAdmin',

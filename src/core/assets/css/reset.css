@@ -57,6 +57,18 @@
   }
 }
 
+.p-datatable-header {
+  h1 {
+    color: var(--p-primary-color) !important;
+  }
+  h2 {
+    color: var(--p-primary-color) !important;
+  }
+  h3 {
+    color: var(--p-primary-color) !important;
+  }
+}
+
 .p-galleria {
   border-style: none !important;
 }

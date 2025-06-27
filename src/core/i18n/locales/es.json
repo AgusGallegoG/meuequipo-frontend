@@ -136,14 +136,14 @@
         "season": "Permite adminstrar la temporada activa, así como crear nuevas",
         "team": "Permite realizar gestiones sobre los equipos y categoriías del club en la temporada actual",
         "players": "Permite añadir/editar jugadores en la temporada actual",
-        "news": "Permite crear, eliminar y administrar el blog",
+        "news": "Permite crear, y administrar el blog",
         "calendar": "Permite añadir nuevos partidos, eventos y gestionar los existentes en la temporada actual",
         "signings": "Permite la gestión del formulario de inscripciones,  y administrar el periodo de inscripciones",
         "sponsors": "Permite gestionar los patrocinadores del club en la temporada actual",
         "squads": "Permite generar convocatorias para los partidos de la temporada actual",
         "users": "Permite gestionar los usuarios del aplicativo",
         "category": "Permite xestionar as categorias que existen en el club para la temporada actual",
-        "rivals": "Permite añadir/eliminar clubes rivales."
+        "rivals": "Permite añadir/editar clubes rivales."
       },
       "season": {
         "title": "Temporada",
@@ -253,7 +253,7 @@
       "no_images": "Sin imágenes"
     }
   },
-  "signin": {
+  "player": {
     "title": "Jugador",
     "table_title": "Jugadores en la aplicación",
     "form_title_new": "Crear nuevo jugador",

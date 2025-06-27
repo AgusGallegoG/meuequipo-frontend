@@ -2,9 +2,10 @@ import { useAuthStore } from '@/auth/store/authStore';
 import { calendarRouter, calendarRouterAdmin } from '@/calendar/router/calendar.routes';
 import { categoryRouterAdmin } from '@/category/router/category.routes';
 import { UtilBase } from '@/core/utilities/UtilBase';
-import { signinRouterAdmin } from '@/player/router/player.routes';
+import { playerRouterAdmin } from '@/player/router/player.routes';
 import { publicationRouter, publicationRouterAdmin } from '@/publication/router/publication.routes';
 import { rivalsRouterAdmin } from '@/rivals/router/rivals.routes';
+import { signinPeriodRouterAdmin } from '@/signinPeriod/router/signinPeriod.routes';
 import { sponsorRouterAdmin } from '@/sponsor/router/sponsor.routes';
 import { squadRouterAdmin } from '@/squad/router/squad.routes';
 import { teamRouter, teamRouterAdmin } from '@/team/router/team.routes';
@@ -67,7 +68,8 @@ const routes: RouteRecordRaw[] = [
       ...teamRouterAdmin,
       ...publicationRouterAdmin,
       ...calendarRouterAdmin,
-      ...signinRouterAdmin,
+      ...playerRouterAdmin,
+      ...signinPeriodRouterAdmin,
       ...rivalsRouterAdmin,
       ...categoryRouterAdmin,
       ...userRouterAdmin,
@@ -83,7 +85,7 @@ const routes: RouteRecordRaw[] = [
 ];
 
 const history = createWebHistory(import.meta.env.BASE_URL);
-const isTokenValidated = false;
+let isTokenValidated = false;
 
 const router = createRouter({
   history: history,
@@ -98,28 +100,47 @@ const router = createRouter({
 });
 
 router.beforeEach(async (to, from, next) => {
-  const authStore = useAuthStore();
-
-  const token = Cookies.get('token');
-  const storeToken = authStore.getToken;
-  const isAuthenticated = UtilBase.exist(token) && token === storeToken;
-
+  const authStore = useAuthStore(); // Esto se llama en cada navegación
   const requiresAuth = to.matched.some((record) => record.meta.requiresAuth);
-  // Nos aseguramos que cualquier ruta cuyo padre sea admin se considere que necesita auth
 
-  //Validamos el token de inicio de sesion por si esta cacheado una vez:
-  if (!isTokenValidated && requiresAuth) {
-    try {
-      await authStore.validateToken();
-    } catch (error) {
-      next({ name: 'AdminLogin' });
+  // Lógica de validación de token principal
+  if (requiresAuth) {
+    const token = Cookies.get('token');
+    const storeToken = authStore.getToken;
+    const isAuthenticated = UtilBase.exist(token) && token === storeToken;
+
+    if (!isAuthenticated && token && !isTokenValidated) {
+      try {
+        await authStore.validateToken(); // Llamada a la API
+        isTokenValidated = true;
+        const updatedToken = Cookies.get('token');
+        const updatedStoreToken = authStore.getToken;
+        const fullyAuthenticated =
+          UtilBase.exist(updatedToken) && updatedToken === updatedStoreToken;
+
+        if (fullyAuthenticated) {
+          if (to.name === 'AdminLogin') {
+            return next({ name: 'Dashboard' });
+          }
+          return next();
+        } else {
+          // Token no válido, redirige a login
+          isTokenValidated = false;
+          return next({ name: 'AdminLogin' });
+        }
+      } catch (error) {
+        isTokenValidated = false;
+        return next({ name: 'AdminLogin' });
+      }
+    } else if (isAuthenticated) {
+      if (to.name === 'AdminLogin') {
+        return next({ name: 'Dashboard' });
+      }
+      return next();
+    } else {
+      // No está autenticado y no tiene un token para validar o ya falló la validación
+      return next({ name: 'AdminLogin' });
     }
-  }
-
-  if (requiresAuth && !isAuthenticated) {
-    next({ name: 'AdminLogin' }); // Redirect to login if not authenticated
-  } else if (to.name === 'AdminLogin' && isAuthenticated) {
-    next({ name: 'Dashboard' }); // Prevent logged-in users from seeing login
   } else {
     next();
   }
