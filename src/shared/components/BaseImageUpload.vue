@@ -34,7 +34,7 @@ function deleteImage() {
   <div class="py-3">
     <div v-if="model" class="d-flex justify-content-center mb-3">
       <div class="d-inline-block position-relative">
-        <Image :src="model.url" :alt="model.name" id="preview-image" />
+        <Image :src="model.url" :alt="model.name" id="preview-image" crossorigin="anonymous" />
         <Button
           severity="secondary"
           @click="deleteImage"

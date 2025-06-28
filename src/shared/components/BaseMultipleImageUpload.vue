@@ -45,7 +45,7 @@ function deleteImage(index: number) {
   <div class="py-3">
     <div v-if="model" class="position-relative mb-3 overflow-x-scroll w-100 text-nowrap">
       <div v-for="(image, index) in model" key="id" class="d-inline-block mx-5 position-relative">
-        <Image :src="image.url" :alt="image.name" id="preview-image" />
+        <Image :src="image.url" :alt="image.name" id="preview-image" crossorigin="anonymous" />
         <Button
           severity="secondary"
           @click="deleteImage(index)"

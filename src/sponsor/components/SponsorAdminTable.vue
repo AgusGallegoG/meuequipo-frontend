@@ -112,7 +112,11 @@ function goTo(url: string) {
 
         <Column field="logo" :header="t('sponsors.fields.logo')" style="width: 25%">
           <template #body="slotProps">
-            <img :src="slotProps.data.logo.url" class="sponsor-admin-table-logo" loading="lazy" />
+            <img
+              :src="slotProps.data.logo.url"
+              class="sponsor-admin-table-logo"
+              loading="lazy"
+              crossorigin="anonymous" />
           </template>
         </Column>
 

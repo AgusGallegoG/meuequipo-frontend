@@ -62,6 +62,7 @@ const responsiveOptions = ref([
                 :src="slotProps.item.url"
                 :alt="slotProps.item.name"
                 class="carousel-image"
+                crossorigin="anonymous"
                 loading="lazy" />
               <!-- Por defecto as imaxes redimensionanse para ter un ancho máximo de 25-->
             </div>

@@ -118,7 +118,8 @@ async function onPage(event: DataTablePageEvent) {
               v-if="slotProps.data.images && slotProps.data.images.length > 0"
               :src="slotProps.data.images[0].url"
               :alt="slotProps.data.images[0].name"
-              id="preview-image"></Image>
+              id="preview-image"
+              crossorigin="anonymous"></Image>
             <span v-else>{{ t('blog.fields.no_images') }}</span>
           </template>
         </Column>
