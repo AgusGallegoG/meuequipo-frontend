@@ -63,11 +63,7 @@ const { t } = useI18n();
               <p v-html="t('about_page.a3')"></p>
             </div>
             <div class="col-12 col-xl-4 d-flex justify-content-center">
-              <img
-                class="img-fluid"
-                loading="lazy"
-                src="https://scontent-mad1-1.xx.fbcdn.net/v/t39.30808-6/473998340_927661872831221_5420454710426080210_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=cc71e4&_nc_ohc=7plQ_HwYHkAQ7kNvwFLBYDq&_nc_oc=Adn6BZPSDLWmcEuw1CYnHD8sp4HB34egaOkKEs_wSmtQxg2kuWapkYDIYEevnxr2avU&_nc_zt=23&_nc_ht=scontent-mad1-1.xx&_nc_gid=9UY71FM_YfdEbCiktzY-mw&oh=00_AfNCV8RY9FvtYmd8LE6DDB_TdmROuyWhT7P9DM4fRHGyNA&oe=685D2025"
-                alt="CB Xuventude Verin" />
+              <img class="img-fluid" loading="lazy" :src="about2" alt="CB Xuventude Verin" />
             </div>
           </div>
         </div>
