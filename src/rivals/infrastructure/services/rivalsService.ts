@@ -1,6 +1,9 @@
 import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
 import type { Rival, RivalItem, RivalTable } from '@/rivals/domain/RivalTable';
-import { mapImageViewToRequestImage } from '@/shared/infrastructure/service/imageService';
+import {
+  mapImageViewToRequestImage,
+  mapResponseImageToImageView,
+} from '@/shared/infrastructure/service/imageService';
 import type { RequestSaveRival } from '../models/requests/RequestSaveRival';
 import type { ResponseRival } from '../models/responses/ResponseRival';
 import type { ResponseRivalItem } from '../models/responses/ResponseRivalTable';
@@ -10,7 +13,7 @@ export function mapPageableResponseToRivalsTable(
 ): RivalTable {
   return {
     content: mapResponseRivalItem(response.content),
-    totalRecords: response.totalElements,
+    totalRecords: response.page.totalElements,
   };
 }
 function mapResponseRivalItem(content: ResponseRivalItem[]): RivalItem[] {
@@ -20,13 +23,7 @@ function mapResponseRivalItem(content: ResponseRivalItem[]): RivalItem[] {
 export function mapResponseRivalItemToRivalItem(item: ResponseRivalItem): RivalItem {
   return {
     id: item.id,
-    logo: item.logo
-      ? {
-          name: item.logo.name,
-          url: item.logo.url,
-          id: item.logo.id,
-        }
-      : null,
+    logo: item.logo ? mapResponseImageToImageView(item.logo) : null,
     name: item.name,
     tlf: item.tlf,
     responsible: item.responsible ?? '',
@@ -50,9 +47,7 @@ export function mapResponseRivalToRival(response: ResponseRival): Rival {
     id: response.id,
     categories: response.categories,
     email: response.email,
-    logo: response.logo
-      ? { name: response.logo.url, url: response.logo.name, id: response.logo.id }
-      : null,
+    logo: response.logo ? mapResponseImageToImageView(response.logo) : null,
     name: response.name,
     responsible: response.responsible ?? '',
     tlf: response.tlf,

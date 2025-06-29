@@ -1,6 +1,7 @@
 import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
 import router from '@/core/router';
 import type { ResponseSelect } from '@/shared/infrastructure/models/responses/ResponseSelect';
+import { mapResponseImageToImageView } from '@/shared/infrastructure/service/imageService';
 import type { Team, TeamForm } from '@/team/domain/Team';
 import type { TeamPublic } from '@/team/domain/TeamPublic';
 import type { TeamItem, TeamTable } from '@/team/domain/TeamTable';
@@ -18,7 +19,7 @@ export function mapResponseTeamFormToTeamForm(resp: ResponseTeamForm): TeamForm 
     id: resp.id,
     name: resp.name,
     players: resp.players ?? [],
-    teamImage: resp.teamImage ? resp.teamImage : null,
+    teamImage: resp.teamImage ? mapResponseImageToImageView(resp.teamImage) : null,
     trainer: resp.trainer,
     trainerContact: resp.trainerContact ?? '',
   };
@@ -30,7 +31,7 @@ export function mapResponseTeamPublicToTeamPublic(resp: ResponseTeamPublic): Tea
     sex: resp.sex,
     id: resp.id,
     name: resp.name,
-    teamImage: resp.teamImage ? resp.teamImage : null,
+    teamImage: resp.teamImage ? mapResponseImageToImageView(resp.teamImage) : null,
   };
 }
 
@@ -40,7 +41,7 @@ export function mapResponseTeamToTeam(resp: ResponseTeam): Team {
     id: resp.id,
     sex: resp.sex,
     name: resp.name,
-    teamImage: resp.teamImage ? resp.teamImage : null,
+    teamImage: resp.teamImage ? mapResponseImageToImageView(resp.teamImage) : null,
     trainer: resp.trainer,
   };
 }
@@ -78,7 +79,7 @@ export function mapPageableResponseToTeamTable(
 ): TeamTable {
   return {
     content: mapResponseTeamItemListToTeamItemList(response.content),
-    totalRecords: response.totalElements,
+    totalRecords: response.page.totalElements,
   };
 }
 

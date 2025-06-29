@@ -21,29 +21,10 @@
       "images": []
     }
   ],
-  "totalElements": 50,
-  "totalPages": 5,
-  "size": 10,
-  "number": 0,
-  "first": true,
-  "last": false,
-  "numberOfElements": 3,
-  "empty": false,
-  "sort": {
-    "sorted": true,
-    "unsorted": false,
-    "empty": false
-  },
-  "pageable": {
-    "sort": {
-      "sorted": true,
-      "unsorted": false,
-      "empty": false
-    },
-    "offset": 0,
-    "pageSize": 10,
-    "pageNumber": 0,
-    "paged": true,
-    "unpaged": false
+  "page": {
+    "size": 10,
+    "number": 1,
+    "totalElements": 20,
+    "totalPages": 2
   }
 }

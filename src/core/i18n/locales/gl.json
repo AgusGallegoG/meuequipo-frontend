@@ -290,6 +290,7 @@
     }
   },
   "games": {
+    "no_games": " Esta semana non hai partidos programados",
     "title": "Encontro",
     "table_title": "Encontros",
     "form_title_new": "Crear novo encontro",

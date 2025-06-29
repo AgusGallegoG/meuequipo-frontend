@@ -1,4 +1,5 @@
 import type { PageableResponse } from '@/core/infrastructure/models/PageableResponse';
+import { parseBackendDate } from '@/core/utilities/UtilDate';
 import type { BlogAdminTable } from '@/publication/domain/BlogAdminTable';
 import type { Publication, PublicationNews } from '@/publication/domain/Publication';
 import type { RequestSavePublication } from '@/publication/infrastructure/models/requests/RequestSavePublication';
@@ -21,7 +22,7 @@ export function mapResponsePublicationToPublication(responsePub: ResponsePublica
     id: responsePub.id,
     title: responsePub.title,
     body: responsePub.body,
-    creationDate: responsePub.creationDate,
+    creationDate: parseBackendDate(responsePub.creationDate),
     images: responsePub.images ? mapResponseImagesToImages(responsePub.images) : null,
   };
 }
@@ -38,7 +39,7 @@ export function mapPageableResponseToBlogAdminTable(
 ): BlogAdminTable {
   return {
     content: createPublicationListFromResponsePublicationList(response.content),
-    totalRecords: response.totalElements,
+    totalRecords: response.page.totalElements,
   };
 }
 
@@ -62,6 +63,6 @@ export function mapResponsePageableToPublicationNews(
 ): PublicationNews {
   return {
     content: createPublicationListFromResponsePublicationList(response.content),
-    totalRecords: response.totalElements,
+    totalRecords: response.page.totalElements,
   };
 }

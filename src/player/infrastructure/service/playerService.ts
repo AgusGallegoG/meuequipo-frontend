@@ -33,6 +33,6 @@ export function mapPageableResponseToPlayer(
 ): PlayerTable {
   return {
     content: response.content.map(mapResponsePlayerToPlayer),
-    totalRecords: response.totalElements,
+    totalRecords: response.page.totalElements,
   };
 }

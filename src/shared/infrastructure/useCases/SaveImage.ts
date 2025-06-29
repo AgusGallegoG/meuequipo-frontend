@@ -29,7 +29,6 @@ async function InMemory(image: ImageUpload): Promise<ResponseImage> {
   return {
     id: Date.now(),
     name: file.name,
-    url: URL.createObjectURL(file),
   };
 }
 

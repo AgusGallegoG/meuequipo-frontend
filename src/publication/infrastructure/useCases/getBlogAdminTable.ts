@@ -9,7 +9,7 @@ import type { ResponsePublication } from '@/publication/infrastructure/models/re
 import { mapPageableResponseToBlogAdminTable } from '../services/publicationService';
 
 const keysMap = {
-  creationDate: 'creationDate',
+  creationDate: 'createdDate',
 };
 
 async function Api(filter: Pageable): Promise<PageableResponse<ResponsePublication>> {

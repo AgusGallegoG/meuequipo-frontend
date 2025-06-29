@@ -127,13 +127,18 @@ function onSelectGame(index: number) {
         style="min-height: 50vh">
         <ProgressSpinner style="width: 40px; height: 40px" strokeWidth="4" />
       </div>
-      <div v-else>
+      <div class="h-50" v-else>
         <div
+          v-if="list.length > 0"
           v-for="(game, index) in list"
           :key="game.id"
           class="d-flex justify-content-center"
           @click="onSelectGame(index)">
           <GameItem :isAdmin="isAdmin" :game="game" :showSquad="isAdmin && !isSquad"></GameItem>
+        </div>
+
+        <div class="h-100 w-100 d-flex justify-content-center align-middle">
+          <p>{{ t('games.no_games') }}</p>
         </div>
       </div>
     </template>

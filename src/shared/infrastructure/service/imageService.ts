@@ -16,6 +16,5 @@ export function mapImageViewToRequestImage(image: ImageView): RequestImage {
   return {
     id: image.id,
     name: image.name,
-    url: image.url,
   };
 }

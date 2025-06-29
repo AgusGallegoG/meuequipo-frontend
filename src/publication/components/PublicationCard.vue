@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { formatShowGameDateTime } from '@/core/utilities/UtilDate';
 import type { Publication } from '@/publication/domain/Publication';
 import Card from 'primevue/card';
 import Galleria from 'primevue/galleria';
@@ -75,7 +76,13 @@ const responsiveOptions = ref([
     </template>
     <template #subtitle>
       <div class="text-center m-0">
-        <small> {{ props.publication.creationDate }} </small>
+        <small>
+          {{
+            props.publication.creationDate
+              ? formatShowGameDateTime(props.publication.creationDate)
+              : ''
+          }}
+        </small>
       </div>
     </template>
     <template #content>

@@ -8,7 +8,7 @@ export function mapPageableResponseToUserTable(
 ): UserTable {
   return {
     content: mapResponseUserListToUserItemList(response.content),
-    totalRecords: response.totalElements,
+    totalRecords: response.page.totalElements,
   };
 }
 function mapResponseUserListToUserItemList(content: ResponseUser[]): UserItem[] {
