@@ -9,12 +9,10 @@ import type { ResponseViewSquad } from '../models/responses/ResponseViewSquad';
 export function mapSquadToRequestSaveSquad(squad: Squad): RequestSaveSquad {
   return {
     location: squad.location,
-    mailText: squad.mailText,
     date: squad.dateHour ? mapToLocaleDateTimeString(squad.dateHour) : '',
     game: squad.game ?? -1,
     team: squad.team ?? -1,
     players: [...squad.players],
-    sendMail: squad.sendMail,
   };
 }
 

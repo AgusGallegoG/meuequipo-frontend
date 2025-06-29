@@ -36,16 +36,12 @@ const { t } = useI18n();
 const confirm = useConfirm();
 
 const canGoNext = computed(() => {
-  return (
-    dateHour.value !== null &&
-    location.value !== null &&
-    (!sendMail.value || (sendMail.value && mail.value !== ''))
-  );
+  return dateHour.value !== null && location.value !== null;
 });
 
 function confirmSubmit() {
   confirm.require({
-    message: sendMail.value ? t('squads.confirm_send') : t('squads.confirm_no_send'),
+    message: t('squads.confirm_no_send'),
     header: t('squads.title'),
     icon: 'pi pi-exclamation-triangle',
     accept: () => {
@@ -57,7 +53,7 @@ function confirmSubmit() {
 function submitPartial() {
   //emitir next
   if (canGoNext) {
-    squadStepperStore.setDataStepThree(location.value, dateHour.value, mail.value, sendMail.value);
+    squadStepperStore.setDataStepThree(location.value, dateHour.value);
     emits('next');
   }
 }
@@ -82,7 +78,7 @@ function cleanStep() {
       <Message severity="info" icon="pi pi-info-circle">{{ message }}</Message>
     </div>
     <div class="row">
-      <div class="col-12 col-lg-5">
+      <div class="col-12 col-lg-6">
         <BaseInputGroupText
           id="location"
           v-model="location"
@@ -90,21 +86,12 @@ function cleanStep() {
           icon="pi pi-map-marker">
         </BaseInputGroupText>
       </div>
-      <div class="col-12 col-lg-5">
+      <div class="col-12 col-lg-6">
         <BaseDatePicker id="date-hour" v-model="dateHour" showTime :label="t('squads.fields.date')">
         </BaseDatePicker>
       </div>
-      <div class="col-12 col-lg-2">
-        <BaseCheckBox v-model="sendMail" :label="t('squads.fields.send_mail')"></BaseCheckBox>
-      </div>
     </div>
-    <div class="row">
-      <BaseEditor
-        v-if="sendMail"
-        id="editor-mail"
-        v-model="mail"
-        :label="t('squads.fields.notification')"></BaseEditor>
-    </div>
+
     <div class="row">
       <div class="col col-6 col-md-4 col-lg-2">
         <Button
@@ -117,7 +104,7 @@ function cleanStep() {
         <Button
           class="w-100 my-3"
           :label="t('squads.next')"
-          @click="submitPartial()"
+          @click="confirmSubmit()"
           :disabled="!canGoNext"></Button>
       </div>
     </div>

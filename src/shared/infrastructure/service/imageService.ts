@@ -8,7 +8,7 @@ export function mapResponseImageToImageView(resp: ResponseImage): ImageView {
   return {
     id: resp.id,
     name: resp.name,
-    url: BASE_IMAGE_SERVE_URL + resp.url,
+    url: BASE_IMAGE_SERVE_URL + resp.id,
   };
 }
 

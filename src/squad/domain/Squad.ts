@@ -7,6 +7,4 @@ export type Squad = {
   //step3
   dateHour: Date | null;
   location: string;
-  sendMail: boolean;
-  mailText: string;
 };

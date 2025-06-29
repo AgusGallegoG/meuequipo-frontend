@@ -52,7 +52,7 @@ const responsiveOptions = ref([
           indicatorsPosition="bottom"
           showIndicatorsOnItem
           autoPlay
-          :transitionInterval="5000"
+          :transitionInterval="10000"
           :showThumbnails="false"
           container-class="galleria-blog-class"
           class="my-3 mx-1 w-50">

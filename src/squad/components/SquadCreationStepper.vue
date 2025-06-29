@@ -45,11 +45,7 @@ function goBack() {
 
   summarySquad.value = null;
 
-  if (window.history.length > 1) {
-    router.go(-1);
-  } else {
-    router.push({ name: 'Dashboard' });
-  }
+  router.push({ name: 'Dashboard' });
 }
 
 async function doSaveSquad(squad: Squad): Promise<ViewSquad | null> {

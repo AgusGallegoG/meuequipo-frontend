@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { useGetFreePlayersByTeam } from '@/player/application/useGetPlayersByTeam';
+import { useGetPlayersByTeam } from '@/player/application/useGetPlayersByTeam';
 import BasePickList from '@/shared/components/BasePickList.vue';
 import type { Select } from '@/shared/dominio/Select';
 import { useSquadStepperAdminStore } from '@/squad/store/squadStepperAdminStore';
@@ -18,7 +18,7 @@ const teamId = computed(() => {
 });
 
 const { t } = useI18n();
-const { loading, refetch: getPlayers } = useGetFreePlayersByTeam();
+const { loading, refetch: getPlayers } = useGetPlayersByTeam();
 const squadStepperStore = useSquadStepperAdminStore();
 
 onMounted(async () => {

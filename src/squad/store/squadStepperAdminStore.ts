@@ -11,8 +11,6 @@ export const useSquadStepperAdminStore = defineStore('squadStepperAdmin', {
         players: <number[]>[],
         location: <string>'',
         date: <Date | null>null,
-        notification: <string>'',
-        sendMail: <boolean>true,
       },
     };
   },
@@ -24,8 +22,6 @@ export const useSquadStepperAdminStore = defineStore('squadStepperAdmin', {
         players: state.data.players,
         location: state.data.location,
         dateHour: state.data.date,
-        sendMail: state.data.sendMail,
-        mailText: state.data.notification,
       };
     },
     team(state): number {
@@ -63,11 +59,9 @@ export const useSquadStepperAdminStore = defineStore('squadStepperAdmin', {
     setDataStepTwo(players: number[]) {
       this.data.players = [...players];
     },
-    setDataStepThree(location: string, date: Date | null, notification: string, send: boolean) {
+    setDataStepThree(location: string, date: Date | null) {
       this.data.date = date;
       this.data.location = location;
-      this.data.notification = notification;
-      this.data.sendMail = send;
     },
     resetData() {
       this.data = {
@@ -75,9 +69,7 @@ export const useSquadStepperAdminStore = defineStore('squadStepperAdmin', {
         game: UtilBase.cloneVueProxy(defaultGame),
         date: null,
         location: '',
-        notification: '',
         players: [],
-        sendMail: true,
       };
     },
   },
