@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { formatShowGameDateTime } from '@/core/utilities/UtilDate';
 import { useGetBlogAdminTable } from '@/publication/application/useGetBlogAdminTable';
 import BlogAdminForm from '@/publication/components/BlogAdminForm.vue';
 import { type Publication } from '@/publication/domain/Publication';
@@ -7,7 +8,6 @@ import Button from 'primevue/button';
 import Card from 'primevue/card';
 import Column from 'primevue/column';
 import DataTable, { type DataTablePageEvent, type DataTableSortEvent } from 'primevue/datatable';
-import Image from 'primevue/image';
 import { useI18n } from 'vue-i18n';
 
 const { t } = useI18n();
@@ -100,12 +100,13 @@ async function onPage(event: DataTablePageEvent) {
         </template>
 
         <Column field="title" :header="t('blog.fields.title')" style="width: 20%"></Column>
-        <Column field="body" :header="t('blog.fields.body')" style="width: 55%"></Column>
+        <Column field="body" :header="t('blog.fields.body')" style="width: 55%"><template #body="slotProps"><p v-html="slotProps.data.body"></p></template></Column>
         <Column
           field="creationDate"
           :header="t('blog.fields.creation_date')"
           sortable
-          style="width: 15%"></Column>
+          style="width: 15%">
+        <template #body="slotProps"><span>{{ formatShowGameDateTime(slotProps.data.creationDate) }}</span></template></Column>
         <Column field="images" style="width: 10%">
           <template #header>
             <Button
@@ -114,12 +115,12 @@ async function onPage(event: DataTablePageEvent) {
               @click="toggleVisible"></Button>
           </template>
           <template #body="slotProps">
-            <Image
+            <img
               v-if="slotProps.data.images && slotProps.data.images.length > 0"
               :src="slotProps.data.images[0].url"
               :alt="slotProps.data.images[0].name"
               id="preview-image"
-              crossorigin="anonymous"></Image>
+              crossorigin="anonymous"></img>
             <span v-else>{{ t('blog.fields.no_images') }}</span>
           </template>
         </Column>
