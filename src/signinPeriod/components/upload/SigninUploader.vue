@@ -6,6 +6,8 @@ import FileUpload, { type FileUploadUploaderEvent } from 'primevue/fileupload';
 const { refetch: saveInscription, loading } = useSaveSigninForm();
 const signinPeriodStore = useSigninPeriodStore();
 
+const emits = defineEmits<{ (e: 'uploaded'): void }>();
+
 interface Props {
   label: string;
 }
@@ -13,8 +15,10 @@ interface Props {
 const props = defineProps<Props>();
 
 async function customUploadHandler(event: FileUploadUploaderEvent) {
-  const file: File = { ...event.files[0] };
-  signinPeriodStore.setData(await saveInscription(file));
+  const file: File = event.files[0];
+  debugger;
+  await saveInscription(file);
+  emits('uploaded');
 }
 </script>
 

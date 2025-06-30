@@ -79,7 +79,7 @@ async function onSubmitForm() {
     <template #default>
       <div class="container g-3">
         <!-- Parent contact-info -->
-        <div class="row align-items-start">
+        <div class="row align-items-start py-3">
           <BaseInputGroupText
             class="col-12 col-xl-5 mb-3"
             v-model="form.name"

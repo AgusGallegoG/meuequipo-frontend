@@ -21,9 +21,12 @@ const { t } = useI18n();
 const { loading, refetch: getPlayers } = useGetPlayersByTeam();
 const squadStepperStore = useSquadStepperAdminStore();
 
-onMounted(async () => {
-  await getTeamPlayers();
-});
+watch(
+  () => teamId.value,
+  async () => {
+    await getTeamPlayers();
+  }
+);
 
 function submitPartial() {
   //emitir next

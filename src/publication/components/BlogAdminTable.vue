@@ -100,7 +100,7 @@ async function onPage(event: DataTablePageEvent) {
         </template>
 
         <Column field="title" :header="t('blog.fields.title')" style="width: 20%"></Column>
-        <Column field="body" :header="t('blog.fields.body')" style="width: 55%"><template #body="slotProps"><p v-html="slotProps.data.body"></p></template></Column>
+        <Column field="body" :header="t('blog.fields.body')" style="width: 55%"><template #body="slotProps"><p v-html="slotProps.data.body" class="text-truncate" style="max-height: 3rem;"></p></template></Column>
         <Column
           field="creationDate"
           :header="t('blog.fields.creation_date')"

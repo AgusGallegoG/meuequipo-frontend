@@ -31,7 +31,7 @@ watch(visibleSummary, (newVal) => {
 
 async function submit() {
   const squad = stepperStore.squad;
-
+  debugger;
   const response = await doSaveSquad(squad);
 
   if (response) {

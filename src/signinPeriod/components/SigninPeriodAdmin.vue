@@ -144,7 +144,10 @@ watch(
           </div>
           <div class="row pb-3">
             <div class="col-12 col-lg-6 justify-content-center">
-              <SigninUploader class="w-100 my-3" :label="t('signin_period.upload_form')" />
+              <SigninUploader
+                class="w-100 my-3"
+                :label="t('signin_period.upload_form')"
+                @uploaded="getPeriodInfo" />
             </div>
             <div class="col-12 col-lg-6 d-flex justify-content-center">
               <Button

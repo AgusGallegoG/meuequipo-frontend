@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-const passwordRegex = /^((?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9]).{8,})\S$/;
+const passwordRegex = /^(?=\S*?[A-Z])(?=\S*?[a-z])(?=\S*?[0-9])\S{8,}$/;
 
 export type ChangePass = {
   oldPass: string;
@@ -25,7 +25,7 @@ export const changePassSchema = z
   })
   .refine(
     (data) => {
-      return data.newPass === data.oldPass;
+      return data.newPass === data.confirmNewPass;
     },
     {
       path: ['confirmNewPass'],

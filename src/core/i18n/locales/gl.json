@@ -358,7 +358,7 @@
       "p_update_error": "Ocorreu un erro ao actualizar o periodo",
       "d_update_success": "Actualizouse o formualrio correctamente",
       "d_update_error": "Ocorreu un erro ao actualizar o formulario",
-      "d_download_error": "Ocooreu un erro ao desacargar o formulario"
+      "d_download_error": "Ocorreu un erro ao desacargar o formulario"
     }
   },
   "loginvalidation": {
@@ -408,7 +408,7 @@
   "changepassvalidation": {
     "old_required": "Debe introducir o contrasinal actual",
     "min_length": "O contrasinal debe ter un mínimo de 8 caracteres",
-    "format": "O contrasinal debe ter polo menos 1 maiúscula, 1 número, 1 minúscula",
+    "format": "O contrasinal debe ter polo menos 1 maiúscula, 1 número, 1 minúscula e un mínimo de 8 caracteres",
     "confirm_required": "volva a introducir o novo contrasinal",
     "pass_missmatch": "Os contrasinais deben coincidir"
   },

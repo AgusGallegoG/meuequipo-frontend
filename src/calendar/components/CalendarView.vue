@@ -70,14 +70,18 @@ watch(
 );
 
 async function doGetGames() {
+  // debugger;
+  // if (calendarStore.getFilters.from == null || calendarStore.getFilters.to == null) {
+  //   initializeCalendarFilters();
+  // }
   calendarStore.setList(await getGames(calendarStore.getFilters, props.isSquad ?? false));
 }
 
 function initializeCalendarFilters() {
   const { from, to } = getWeekRangeFromOffset();
   const filters: CalendarFilterType = {
-    from: props.teamId ? null : from,
-    to: props.teamId ? null : to,
+    from: from,
+    to: to,
     team: props.teamId ?? null,
   };
 
@@ -127,18 +131,20 @@ function onSelectGame(index: number) {
         style="min-height: 50vh">
         <ProgressSpinner style="width: 40px; height: 40px" strokeWidth="4" />
       </div>
-      <div class="h-50" v-else>
-        <div
-          v-if="list.length > 0"
-          v-for="(game, index) in list"
-          :key="game.id"
-          class="d-flex justify-content-center"
-          @click="onSelectGame(index)">
-          <GameItem :isAdmin="isAdmin" :game="game" :showSquad="isAdmin && !isSquad"></GameItem>
-        </div>
+      <div v-else>
+        <div clas="h-50">
+          <div
+            v-if="list.length > 0"
+            v-for="(game, index) in list"
+            :key="game.id"
+            class="d-flex justify-content-center"
+            @click="onSelectGame(index)">
+            <GameItem :isAdmin="isAdmin" :game="game" :showSquad="isAdmin && !isSquad"></GameItem>
+          </div>
 
-        <div class="h-100 w-100 d-flex justify-content-center align-middle">
-          <p>{{ t('games.no_games') }}</p>
+          <div v-else class="h-100 w-100 d-flex justify-content-center align-middle">
+            <h2>{{ t('games.no_games') }}</h2>
+          </div>
         </div>
       </div>
     </template>

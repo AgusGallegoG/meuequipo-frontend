@@ -46,19 +46,38 @@ function visibleSquad() {
     </template>
     <template #default>
       <div class="container">
-        <div
-          class="d-flex flex-column flex-xxl-row align-items-center justify-content-center gap-2 gap-xl-3 mb-3 text-center">
-          <span class="m-2">{{ game.localTeam?.name }}</span>
-          <Avatar
-            class="m-2 avatar-responsive"
-            :image="game.localTeam?.logo ? game.localTeam.logo.url : defaultShield"></Avatar>
-          <div class="fw-bold fs-5 m-2">{{ game.localPoints ?? '' }}</div>
-          <div class="fs-4 fw-bold m-2">-</div>
-          <div class="fw-bold fs-5 m-2">{{ game.visitorPoints ?? '' }}</div>
-          <Avatar
-            class="m-2 avatar-responsive"
-            :image="game.visitorTeam?.logo ? game.visitorTeam.logo.url : defaultShield"></Avatar>
-          <span class="m-2">{{ game.visitorTeam?.name }}</span>
+        <div class="row align-items-center justify-content-center mb-3 text-center">
+          <div class="col-12 col-xl-2 text-end d-flex justify-content-end align-items-center">
+            <span class="m-0 text-truncate" v-tooltip.top="game.localTeam?.name">{{
+              game.localTeam?.name
+            }}</span>
+          </div>
+
+          <div class="col-12 col-xl-3 d-flex justify-content-center align-items-center">
+            <Avatar
+              class="m-0 avatar-responsive"
+              :image="game.localTeam?.logo ? game.localTeam.logo.url : defaultShield"></Avatar>
+          </div>
+
+          <div class="col-12 col-xl-1 d-flex justify-content-center align-items-center">
+            <div class="fw-bold fs-5 m-0">{{ game.localPoints ?? '' }}</div>
+          </div>
+
+          <div class="col-12 col-xl-1 d-flex justify-content-center align-items-center">
+            <div class="fw-bold fs-5 m-0">{{ game.visitorPoints ?? '' }}</div>
+          </div>
+
+          <div class="col-12 col-md-3 d-flex justify-content-center align-items-center">
+            <Avatar
+              class="m-0 avatar-responsive"
+              :image="game.visitorTeam?.logo ? game.visitorTeam.logo.url : defaultShield"></Avatar>
+          </div>
+
+          <div class="col-12 col-md-2 text-start d-flex justify-content-start align-items-center">
+            <span class="m-0 text-truncate" v-tooltip.top="game.visitorTeam?.name">{{
+              game.visitorTeam?.name
+            }}</span>
+          </div>
         </div>
 
         <div class="row">
