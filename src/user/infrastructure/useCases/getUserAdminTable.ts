@@ -9,7 +9,7 @@ import type { ResponseUser } from '@/user/infrastructure/models/response/Respons
 import { mapPageableResponseToUserTable } from '@/user/infrastructure/services/usersService';
 
 const keysMap = {
-  active: 'active',
+  active: 'isActive',
   name: 'name',
   surnames: 'surnames',
   email: 'email',
