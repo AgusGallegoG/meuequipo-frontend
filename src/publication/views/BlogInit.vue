@@ -37,7 +37,7 @@ async function getInitialData() {
         style="min-height: 50vh">
         <ProgressSpinner style="width: 40px; height: 40px" strokeWidth="4" />
       </div>
-      <Carousel v-else circular :value="data">
+      <Carousel v-else :value="data">
         <template #item="slotProps"> <PublicationCard :publication="slotProps.data" /></template>
       </Carousel>
     </template>

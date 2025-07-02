@@ -18,6 +18,7 @@ const responsiveOptions = ref([
       props.publication.images?.length && props.publication.images.length > 3
         ? 1
         : props.publication.images?.length || 0,
+    numScroll: 1,
   },
   {
     breakpoint: '1199px',
@@ -25,6 +26,7 @@ const responsiveOptions = ref([
       props.publication.images?.length && props.publication.images.length > 3
         ? 1
         : props.publication.images?.length || 0,
+    numScroll: 1,
   },
   {
     breakpoint: '767px',
@@ -32,10 +34,12 @@ const responsiveOptions = ref([
       props.publication.images?.length && props.publication.images.length > 2
         ? 1
         : props.publication.images?.length || 0,
+    numScroll: 1,
   },
   {
     breakpoint: '575px',
     numVisible: 1,
+    numScroll: 1,
   },
 ]);
 </script>
@@ -72,7 +76,7 @@ const responsiveOptions = ref([
       </div>
     </template>
     <template #title>
-      <h1 class="m-1 text-center">{{ props.publication.title }}</h1>
+      <h1 class="m-1 text-center text-break">{{ props.publication.title }}</h1>
     </template>
     <template #subtitle>
       <div class="text-center m-0">
@@ -86,8 +90,8 @@ const responsiveOptions = ref([
       </div>
     </template>
     <template #content>
-      <div class="mx-2 my-0 scroll-overflow">
-        <p text-break v-html="props.publication.body"></p>
+      <div class="mx-auto my-0 scroll-overflow">
+        <p class="text-break" v-html="props.publication.body"></p>
       </div>
     </template>
   </Card>
