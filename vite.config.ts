@@ -6,7 +6,7 @@ import { defineConfig } from 'vite';
 
 // https://vite.dev/config/
 
-const BASE = '/cbxuventude/';
+const BASE = '/';
 export default defineConfig(({ mode }) => ({
   base: BASE,
   build: {
