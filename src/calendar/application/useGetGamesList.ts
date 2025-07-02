@@ -12,12 +12,12 @@ export function useGetGamesList() {
   const { t } = useI18n();
   const { showToast } = useMeToast();
 
-  async function refetch(filters: CalendarFilter, isSquad: boolean) {
+  async function refetch(filters: CalendarFilter, isAdmin: boolean, isSquad: boolean) {
     loading.value = true;
     try {
       return await getGamesList(
         mapCalendarFiltersToRequestCalendarFilters(filters),
-        authStore.hasRole(Roles.ADMIN),
+        isAdmin,
         isSquad
       );
     } catch (error) {

@@ -74,7 +74,9 @@ async function doGetGames() {
   // if (calendarStore.getFilters.from == null || calendarStore.getFilters.to == null) {
   //   initializeCalendarFilters();
   // }
-  calendarStore.setList(await getGames(calendarStore.getFilters, props.isSquad ?? false));
+  calendarStore.setList(
+    await getGames(calendarStore.getFilters, props.isAdmin, props.isSquad ?? false)
+  );
 }
 
 function initializeCalendarFilters() {
