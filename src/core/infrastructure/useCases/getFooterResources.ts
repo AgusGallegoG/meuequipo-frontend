@@ -2,7 +2,7 @@ import type { FooterInfo } from '@/core/dominio/FooterInfo';
 import type { ResponseFooterResourcesList } from '@/core/infrastructure/models/ResponseFooterResourcesList';
 
 async function Load(): Promise<ResponseFooterResourcesList> {
-  const result = await fetch('/cbxuventude/footer/resources.json');
+  const result = await fetch('/footer/resources.json');
   return await result.json();
 }
 
